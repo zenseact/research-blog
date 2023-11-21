@@ -11,6 +11,7 @@ authors:
 code:
 arxiv: https://arxiv.org/abs/2301.08965
 usemathjax: true
+n_equal_contrib: 1
 ---
 
 # Abstract

@@ -10,6 +10,7 @@ authors:
   - Felsberg
 code:
 arxiv: https://arxiv.org/abs/2301.08965
+n_equal_contrib: 1
 usemathjax: true
 ---
 

@@ -4,24 +4,14 @@ permalink: /publications/temporal-ensambles/
 title: You can have your ensemble and run it too-Deep Ensembles Spread Over Time
 venue: Scandinavian Conference on Image Analysis (SCIA), 2023
 authors:
-  - william:
-    name: William Ljungbergh
-    org: Zenseact, Linköping University
-    scholar: RXEPFo0AAAAJ
-  - joakim:
-    name: Joakim Johnander
-    org: Zenseact, Linköping University
-    scholar: 5sUDSxQAAAAJ
-  - christoffer:
-    name: Christoffer Petersson
-    org: Zenseact, Chalmers University of Technolgy
-    scholar: SeRMUJwAAAAJ
-  - michael:
-    name: Michael Felsberg
-    org: Linköping University
-    scholar: lkWfR08AAAAJ
-code:
+  - Meding
+  - Bodin
+  - Tonderski
+  - Petersson
+  - Svensson
 arxiv: https://arxiv.org/abs/2301.08965
+n_equal_contrib: 2
+
 usemathjax: true
 ---
 

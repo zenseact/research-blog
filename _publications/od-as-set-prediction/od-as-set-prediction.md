@@ -10,6 +10,7 @@ authors:
 code: https://github.com/georghess/pmb-nll
 arxiv: https://arxiv.org/abs/2301.08965
 usemathjax: true
+n_equal_contrib: 1
 ---
 
 # Abstract

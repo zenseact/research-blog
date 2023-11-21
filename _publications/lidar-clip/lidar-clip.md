@@ -11,6 +11,8 @@ authors:
 code: https://github.com/atonderski/lidarclip
 arxiv: https://arxiv.org/abs/2212.06858
 usemathjax: true
+n_equal_contrib: 2
+
 ---
 
 # Abstract

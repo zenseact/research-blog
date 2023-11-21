@@ -1,14 +1,16 @@
 ---
 layout: publication
 permalink: /publications/voxel-mae/
-title: Voxel MAE
+title: "Voxel-MAE: Masked Autoencoder for Self-Supervised Pre-Training on Lidar Point Clouds"
 venue: Scandinavian Conference on Image Analysis (SCIA), 2023
 authors:
-  - Meding
-  - Bodin
-  - Tonderski
+  - Hess
+  - Jaxing
+  - EliasSvensson
+  - Hagerman
   - Petersson
   - Svensson
+n_equal_contrib: 1
 code:
 arxiv: https://arxiv.org/abs/2301.08965
 usemathjax: true
