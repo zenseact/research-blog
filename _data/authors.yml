@@ -1,0 +1,125 @@
+---
+Alibeigi:
+  - firstname: ["Mina", "M.", "M. A.", "Mina Alibeigi"]
+    github: alibeigi
+    linkedin: mina-alibeigi-2b47739a
+    org: Zenseact
+    picture: assets/images/profiles/mina_alibeigi.jpg
+    scholar: gJA_rJYAAAAJ
+    title: Researcher, Supervisor
+    url: null
+Astrom:
+  - firstname: ["Kalle", "K.", "K. Å.", "Kalle Åstrom"]
+    org: Lund University
+    picture: assets/images/profile_placeholder.jpg
+    scholar: YIzs6eoAAAAJ
+    title: Professor, Supervisor
+    url: null
+Bodin:
+  - firstname: ["Alexander", "A.", "A. B.", "Alexander Bodin"]
+    org: Zenseact
+    picture: assets/images/profile_placeholder.jpg
+    scholar: null
+    title: Intern
+    url: null
+Fatemi:
+  - firstname: ["Maryam", "M.", "M. F.", "Maryam Fatemi"]
+    org: Zenseact
+    picture: assets/images/profile_placeholder.jpg
+    title: Researcher, Supervisor
+    url: null
+Felsberg:
+  - firstname: ["Michael", "M.", "M. F.", "Michael Felsberg"]
+    org: Linköping University
+    picture: assets/images/profile_placeholder.jpg
+    scholar: lkWfR08AAAAJ
+    title: Professor, Supervisor
+    url: null
+Fu:
+  - firstname: ["Junsheng", "J.", "J. F.", "Junsheng Fu"]
+    github: JunshengFu
+    linkedin: junshengfu
+    org: Zenseact
+    picture: assets/images/profiles/junsheng_fu.jpg
+    scholar: z3lud1UAAAAJ
+    title: Researcher, Supervisor
+    url: https://junshengfu.github.io
+Hess:
+  - firstname: ["Georg", "G.", "G. H.", "Georg Hess"]
+    github: georghess
+    linkedin: georghess
+    org: [Zenseact, Chalmers University of Technology]
+    picture: assets/images/profiles/georg_hess.jpg
+    scholar: ZvUoV2EAAAAJ
+    title: PhD Student
+    url: https://georghess.github.io/
+Johnander:
+  - firstname: ["Joakim", "J.", "J. J.", "Joakim Johnander"]
+    org: Zenseact
+    picture: assets/images/profile_placeholder.jpg
+    scholar: 5sUDSxQAAAAJ
+    title: Researcher
+    url: null
+Lilja:
+  - firstname: ["Adam", "A.", "A. L.", "Adam Lilja"]
+    github: LiljaAdam
+    linkedin: adamlilja
+    org: [Zenseact, Chalmers University of Technology]
+    picture: assets/images/profiles/adam_lilja.jpg
+    scholar: zYn4o0AAAAAJ
+    title: PhD Student
+    url: null
+Lindstrom:
+  - firstname: ["Carl", "C.", "C. L.", "Carl Lindström"]
+    github: carlinds
+    linkedin: carl-lindstr%C3%B6m-184b8a149
+    org: [Zenseact, Chalmers University of Technology]
+    picture: assets/images/profiles/carl_lindstrom.jpg
+    scholar: ufjSqs0AAAAJ
+    title: PhD Student
+    url: null
+Ljungbergh:
+  - firstname: ["William", "W.", "W. L.", "William Ljungbergh"]
+    github: wljungbergh
+    linkedin: william-ljungbergh
+    org: [Zenseact, Linköping University]
+    picture: assets/images/profiles/william_ljungbergh.jpg
+    scholar: RXEPFo0AAAAJ
+    title: PhD Student
+    url: https://ljungbergh.com
+Meding:
+  - firstname: ["Isak", "I.", "I. M.", "Isak Meding"]
+    org: Zenseact
+    picture: assets/images/profile_placeholder.jpg
+    scholar: null
+    title: Intern
+    url: null
+Petersson:
+  - firstname: ["Christoffer", "C.", "C. P.", "Christoffer Petersson"]
+    org: [Zenseact, Chalmers University of Technology]
+    picture: assets/images/profiles/christoffer_petersson.jpg
+    scholar: SeRMUJwAAAAJ
+    title: Researcher, Supervisor
+    url: null
+Rafidashti:
+  - firstname: ["Mahan", "M.", "M. R.", "Mahan Rafidashti"]
+    org: [Zenseact, Chalmers University of Technology]
+    picture: assets/images/profile_placeholder.jpg
+    title: PhD Student
+    url: null
+Svensson:
+  - firstname: ["Lennart", "L.", "L. S.", "Lennart Svensson"]
+    org: Chalmers University of Technology
+    picture: assets/images/profile_placeholder.jpg
+    scholar: AMM9vE4AAAAJ
+    title: Professor, Supervisor
+    url: null
+Tonderski:
+  - firstname: ["Adam", "A.", "A. T.", "Adam Tonderski"]
+    github: adaton
+    linkedin: adamtonderski
+    org: [Zenseact, Lund University]
+    picture: assets/images/profiles/adam_tonderski.jpg
+    scholar: 2R5ZLp0AAAAJ
+    title: PhD Student
+    url: null

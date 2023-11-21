@@ -1,0 +1,13 @@
+---
+ECCV22:
+  - name: European Conference on Computer Vision
+  - url: https://eccv2022.ecva.net
+ICCV23:
+  - name: International Conference on Computer Vision
+  - url: https://iccv2023.thecvf.com
+WACV23:
+  - name: Winter Conference on Applications of Computer Vision
+  - url: https://wacv2023.thecvf.com
+WACV24:
+  - name: Winter Conference on Applications of Computer Vision
+  - url: https://wacv2024.thecvf.com

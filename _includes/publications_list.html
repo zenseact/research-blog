@@ -1,0 +1,44 @@
+<!--Get all the publications on the page-->
+{% assign publications = site.publications | sort: 'date' | reverse %}
+
+<!--List all publications-->
+<ul>
+    {% for publication in publications %}
+    <li>
+        <a href="{{ publication.url | relative_url }}">{{ publication.title }}</a>
+        <br>
+        <span class="pub-authors">
+            {% for author in publication.authors %}
+            {% if forloop.last %}
+            {{ author.name }}
+            {% else %}
+            {{ author.name }},
+            {% endif %}
+            {% endfor %}
+        </span>
+        <br>
+        <span class="pub-venue">
+            {{ publication.venue }}
+        </span>
+        <br>
+        <span class="pub-year">
+            {{ publication.date | date: "%Y" }}
+        </span>
+        <br>
+        <span class="pub-abstract">
+            {{ publication.abstract }}
+        </span>
+        <br>
+        <span class="pub-pdf">
+            {% if publication.pdf %}
+            <a href="{{ publication.pdf | relative_url }}">[PDF]</a>
+            {% endif %}
+        </span>
+        <span class="pub-code">
+            {% if publication.code %}
+            <a href="{{ publication.code | relative_url }}">[Code]</a>
+            {% endif %}
+        </span>
+    </li>
+    {% endfor %}
+</ul>

@@ -1,0 +1,46 @@
+title: Zenseact Research
+
+name: Zenseact
+
+url: zenseact.github.io
+baseurl: /
+
+# Build settings
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+
+plugins:
+  - jekyll-include-cache
+
+minimal_mistakes_skin: "zenseact_beige"
+
+include:
+  - _data
+  - _pages
+  - _publications
+
+defaults:
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: splash
+      author_profile: true
+      analytics: true
+collections:
+  posts:
+    output: true
+  publications:
+    output: true
+
+logo: "/assets/images/horizontal_logo.png"
+
+atom_feed:
+  hide: true
+
+# Google Analytics
+# analytics:
+#   provider: "google-gtag"
+#   google:
+#     tracking_id: "G-J92YMVMQGH"
+#     anonymize_ip: false # default

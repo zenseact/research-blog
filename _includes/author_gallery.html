@@ -1,0 +1,41 @@
+{% if include.id %}
+{% assign gallery = page[include.id] %}
+{% else %}
+{% assign gallery = page.gallery %}
+{% endif %}
+
+
+
+<figure class="author__figure">
+  {% for img in gallery %}
+  <div class="author__container">
+    {% if img.url %}
+    <a class="author__image__link" href="{{ img.url | relative_url }}">
+      <img class="author__image" src="{{ img.image_path | relative_url }}" alt="Profile Pictire">
+    </a>
+    {% else %}
+    <img class="author__image" src="{{ img.image_path | relative_url }}" alt="Profile Picture">
+    {% endif %}
+
+    <h5 class="author__name">{{ img.title }}</h5>
+    <p class="author__affil">{{ img.position }}</p>
+    <div class="author__icons__container">
+      {% if img.github %}
+      <a href="{{ img.github }}" class="author__icons"><i class="fab fa-fw fa-github"></i></a>
+      {% endif %}
+      {% if img.scholar %}
+      <a href="{{ img.scholar }}" class="author__icons"><i class="fab fa fa-graduation-cap"></i></a>
+      {% endif %}
+      {% if img.linkedin %}
+      <a href="{{ img.linkedin }}" class="author__icons"><i class="fab fa-fw fa-linkedin"></i></a>
+      {% endif %}
+      {% if img.website %}
+      <a href="{{ img.website }}" class="author__icons"><i class="fab fa fa-address-card"></i></a>
+      {% endif %}
+
+    </div>
+
+  </div>
+  {% endfor %}
+
+</figure>
