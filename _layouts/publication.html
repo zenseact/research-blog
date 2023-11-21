@@ -2,12 +2,46 @@
 layout: default
 ---
 
+
+
+
 <div id="main" role="main">
   <article class="splash" itemscope itemtype="https://schema.org/CreativeWork">
-    {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-    {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-    {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
-    {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
+    <div id="publication__spacer" style="height: 5em;"></div>
+      <section class="publication__head">
+          <h1>{{ page.title }}</h1>
+          <div class="publication__author_list">
+            {% for authorkey in page.authors %}
+                {% assign author = site.data.authors[authorkey] %}
+                <span class="publication__author" itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    {% if author.url %}
+                        <a href="{{ author.url }}" itemprop="url">
+                    {% endif %}
+
+                    <span itemprop="name">{{ author.firstname[3] }}</span>
+                    <!--check loop index is larger that n_equal_contrib-->
+                    {% if page.n_equal_contrib > 1 %}
+                        {% if forloop.index0 < page.n_equal_contrib %}
+                            <sup>&dagger;</sup>
+                        {% endif %}
+                    {% endif %}
+
+
+                    {% if author.url %}
+                        </a>
+                    {% endif %}
+                </span>
+            {% endfor %}
+            {% if page.n_equal_contrib > 1 %}
+                    <br>
+                    <sup>&dagger;</sup>Equal contribution
+            {% endif %}
+          </div>
+      </section>
+
+
+    <hr class="publication__hline" />
+
 
     <section class="page__content" itemprop="text">
       {{ content }}
