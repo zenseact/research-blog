@@ -1,7 +1,7 @@
 ---
 layout: publication
 permalink: /publications/temporal-ensambles/
-title: You can have your ensemble and run it too-Deep Ensembles Spread Over Time
+title: You can have your ensemble and run it too  <code>&#8212;</code> Deep Ensembles Spread Over Time
 venue: Scandinavian Conference on Image Analysis (SCIA), 2023
 authors:
   - Meding
