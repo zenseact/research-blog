@@ -8,9 +8,9 @@ authors:
   - Stenborg
   - Fu
   - Hammarstrand
+date: 2023-09-22 00:00:00 +00:00
 code: null
 arxiv: null
-usemathjax: true
 n_equal_contrib: 1
 ---
 

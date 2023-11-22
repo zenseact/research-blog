@@ -8,9 +8,9 @@ authors:
   - Tonderski
   - Petersson
   - Svensson
+date: 2022-12-13 00:00:00 +00:00
 code: https://github.com/atonderski/lidarclip
 arxiv: https://arxiv.org/abs/2212.06858
-usemathjax: true
 n_equal_contrib: 2
 
 ---

@@ -2,7 +2,7 @@
 title: "Zenseact Open Dataset: A large-scale and diverse multimodal dataset for autonomous driving"
 layout: splash
 permalink: /publications/zod/
-date: 2023-03-09 09:45:47 +07:00
+date: 2023-05-03 00:00:00 +00:00
 venue: ICCV23
 selected: 1
 authors:

@@ -2,14 +2,15 @@
 layout: publication
 permalink: /publications/temporal-ensambles/
 title: "You can have your ensemble and run it too &#8212; Deep Ensembles Spread Over Time"
-venue: ARXIV
+venue: ICCV23
+date: 2023-09-20 00:00:00 +00:00
 authors:
   - Meding
   - Bodin
   - Tonderski
   - Petersson
   - Svensson
-arxiv: https://arxiv.org/abs/2301.08965
+arxiv: https://arxiv.org/abs/2309.11333
 n_equal_contrib: 2
 usemathjax: true
 ---

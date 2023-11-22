@@ -11,8 +11,8 @@ authors:
   - Petersson
   - Svensson
 code: https://github.com/georghess/neurad
+date: 2023-09-23 00:00:00 +00:00
 arxiv: null
-usemathjax: true
 n_equal_contrib: 3
 ---
 

@@ -3,6 +3,7 @@ layout: publication
 permalink: /publications/voxel-mae/
 title: "Voxel-MAE: Masked Autoencoder for Self-Supervised Pre-Training on Lidar Point Clouds"
 venue: WACV23
+date: 2022-07-01 00:00:00 +00:00
 authors:
   - Hess
   - Jaxing
@@ -12,8 +13,7 @@ authors:
   - Svensson
 n_equal_contrib: 1
 code:
-arxiv: https://arxiv.org/abs/2301.08965
-usemathjax: true
+arxiv: https://arxiv.org/abs/2207.00531
 ---
 
 # Abstract

@@ -8,8 +8,8 @@ authors:
   - Petersson
   - Svensson
 code: https://github.com/georghess/pmb-nll
-arxiv: https://arxiv.org/abs/2301.08965
-usemathjax: true
+arxiv: http://arxiv.org/abs/2203.07980
+date: 2022-03-15 00:00:00 +00:00
 n_equal_contrib: 1
 ---
 
