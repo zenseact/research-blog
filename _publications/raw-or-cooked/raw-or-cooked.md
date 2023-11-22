@@ -11,7 +11,7 @@ authors:
 code:
 arxiv: https://arxiv.org/abs/2301.08965
 n_equal_contrib: 1
-usemathjax: true
+date: 2023-01-21 00:00:00 +0000
 ---
 
 # TL;DR
@@ -20,7 +20,7 @@ We propose doing **object detection from RAW images**, rather than from RGB imag
 # Basic idea
 Generally, when working with computer vision, and deep neural networks, in particular, we start from the familiar RGB image. This is what people tend to consider to be the raw camera data, however, this is somewhat incorrect. To obtain the RGB image, the RAW camera data has undergone **several handcrafted image signal processing (ISP)** operations, all of which have been optimized to produce visually pleasing images. What we investigate in this work **is whether this intermediate representation, the visually pleasing RGB image, is the best representation for the task at hand**. Intuitively, the idea that a handcrafted representation is sub-optimal and that we can **obtain superior performance by letting the optimization of the representation be guided by the end** task seems reasonable. In summary, we want to replace the traditional pipeline, with a learnable pipeline defined by a learnable operation \\(F(\mathbf{x})\\).
 <figure>
-  <img style="width: 50%; margin: 0 auto;" src="raw-or-cooked_thumbnail.jpg"/>
+  <img style="width: 50%; margin: 0 auto;" src="raw-or-cooked_thumbnail.png"/>
   <figcaption>Fig 1. Traditional and proposed object detection pipeline. We replace the handcrafted ISP pipeline (left) with a learnable module (right).</figcaption>
 </figure>
 
@@ -30,7 +30,7 @@ As I mentioned above, the very familiar RGB image **is actually not the RAW came
 
 In the ISP pipeline, the RAW data is processed sequentially by handcrafted operations. Even though an ISP can comprise any combination of operations, a common set of operations include demosaicing, denoising, white balancing, and tone mapping. An overview of a common ISP pipeline is shown in Figure 2.
 <figure>
-  <img src="isp-pipeline.jpg"/>
+  <img src="isppipeline.png"/>
   <figcaption>Fig 2. Overview of a traditional ISP pipeline. Starting with the RAW camera data on the left and the RGB image on the right.</figcaption>
 </figure>
 
@@ -88,7 +88,7 @@ In Table 1 we present the quantitative results for each of our learnable operati
 
 
 <figure>
-  <img src="qualitative.jpg"/>
+  <img src="qualitative.png"/>
   <figcaption>Fig 4. Qualitative results on the PASCALRAW dataset.</figcaption>
 </figure>
 
