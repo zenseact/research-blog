@@ -5,6 +5,9 @@ ARXIV:
 ECCV22:
   name: European Conference on Computer Vision (ECCV), 2022
   url: https://eccv2022.ecva.net
+ECCV22W:
+  name: European Conference on Computer Vision -- Workshop (ECCV), 2022
+  url: https://eccv2022.ecva.net
 ICCV23:
   name: International Conference on Computer Vision (ICCV), 2023
   url: https://iccv2023.thecvf.com
