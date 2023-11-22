@@ -58,6 +58,14 @@ Hagerman:
   scholar: null
   title: Intern
   url: null
+# Lars
+Hammarstrand:
+  firstname: ["Lars", "L.", "L. H.", "Lars Hammarstrand"]
+  org: Chalmers University of Technology
+  picture: assets/images/profile_placeholder.jpg
+  scholar: null
+  title: Professor, Supervisor
+  url: null
 Hess:
   firstname: ["Georg", "G.", "G. H.", "Georg Hess"]
   github: georghess
@@ -115,6 +123,8 @@ Meding:
   scholar: null
   title: Intern
   url: null
+Motorniuk:
+  firstname: ["Daria", "D.", "D. M.", "Daria Motorniuk"]
 Petersson:
   firstname: ["Christoffer", "C.", "C. P.", "Christoffer Petersson"]
   org: [Zenseact, Chalmers University of Technology]
@@ -127,6 +137,13 @@ Rafidashti:
   org: [Zenseact, Chalmers University of Technology]
   picture: assets/images/profile_placeholder.jpg
   title: PhD Student
+  url: null
+Stenborg:
+  firstname: ["Erik", "E.", "E. S.", "Erik Stenborg"]
+  org: Zenseact
+  picture: assets/images/profile_placeholder.jpg
+  scholar: null
+  title: Researcher
   url: null
 Svensson:
   firstname: ["Lennart", "L.", "L. S.", "Lennart Svensson"]
@@ -144,3 +161,5 @@ Tonderski:
   scholar: 2R5ZLp0AAAAJ
   title: PhD Student
   url: null
+Widahl:
+  firstname: ["Jenny", "J.", "J.W.", "Jenny Widahl"]

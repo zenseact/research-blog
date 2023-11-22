@@ -1,13 +1,19 @@
 ---
+ARXIV:
+  name: arXiv
+  url: https://arxiv.org
 ECCV22:
-  - name: European Conference on Computer Vision
-  - url: https://eccv2022.ecva.net
+  name: European Conference on Computer Vision (ECCV), 2022
+  url: https://eccv2022.ecva.net
 ICCV23:
-  - name: International Conference on Computer Vision
-  - url: https://iccv2023.thecvf.com
+  name: International Conference on Computer Vision (ICCV), 2023
+  url: https://iccv2023.thecvf.com
+SCIA23:
+  name: Scandinavian Conference on Image Analysis (SCIA), 2023
+  url: https://sites.google.com/view/scia2023
 WACV23:
-  - name: Winter Conference on Applications of Computer Vision
-  - url: https://wacv2023.thecvf.com
+  name: Winter Conference on Applications of Computer Vision (WACV), 2023
+  url: https://wacv2023.thecvf.com
 WACV24:
-  - name: Winter Conference on Applications of Computer Vision
-  - url: https://wacv2024.thecvf.com
+  name: Winter Conference on Applications of Computer Vision (WACV), 2024
+  url: https://wacv2024.thecvf.com
