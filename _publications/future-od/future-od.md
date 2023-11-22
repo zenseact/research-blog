@@ -2,7 +2,7 @@
 layout: publication
 permalink: /publications/future-od/
 title: Future Object Detection with Spatiotemporal Transformers
-venue:
+venue: ARXIV
 authors:
   - Tonderski
   - Johnander

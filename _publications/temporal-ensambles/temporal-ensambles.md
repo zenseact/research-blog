@@ -1,8 +1,8 @@
 ---
 layout: publication
 permalink: /publications/temporal-ensambles/
-title: You can have your ensemble and run it too  <code>&#8212;</code> Deep Ensembles Spread Over Time
-venue: Scandinavian Conference on Image Analysis (SCIA), 2023
+title: "You can have your ensemble and run it too &#8212; Deep Ensembles Spread Over Time"
+venue: ARXIV
 authors:
   - Meding
   - Bodin
@@ -11,7 +11,6 @@ authors:
   - Svensson
 arxiv: https://arxiv.org/abs/2301.08965
 n_equal_contrib: 2
-
 usemathjax: true
 ---
 
