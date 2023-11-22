@@ -6,12 +6,12 @@ date: 2023-03-09 09:45:47 +07:00
 venue: ICCV23
 selected: 1
 authors:
-  - Alibeige
+  - Alibeigi
   - Ljungbergh
   - Tonderski
   - Hess
   - Lilja
-  - Lindström
+  - Lindstrom
   - Motorniuk
   - Fu
   - Widahl
