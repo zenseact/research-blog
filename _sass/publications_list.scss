@@ -1,0 +1,35 @@
+.publications__list {
+    list-style-type: none;
+
+
+    li {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid $border-color;
+
+        &:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .pub-title {
+            color: $text-color,;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-size: 1.2rem;
+        }
+
+        .pub-authors {
+            font-size: 0.75rem;
+            color: $muted-text-color;
+            margin-bottom: 0.5rem;
+        }
+
+        .pub-venue {
+            font-size: 0.75rem;
+            color: $muted-text-color;
+            margin-bottom: 0.5rem;
+        }
+    }
+}
