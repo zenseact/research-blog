@@ -2,7 +2,7 @@
 layout: publication
 permalink: /publications/raw-or-cooked/
 title: Raw or Cooked? Object detection on RAW images
-venue: Scandinavian Conference on Image Analysis (SCIA), 2023
+venue: SCIA23
 authors:
   - Ljungbergh
   - Johnander
@@ -20,7 +20,7 @@ We propose doing **object detection from RAW images**, rather than from RGB imag
 # Basic idea
 Generally, when working with computer vision, and deep neural networks, in particular, we start from the familiar RGB image. This is what people tend to consider to be the raw camera data, however, this is somewhat incorrect. To obtain the RGB image, the RAW camera data has undergone **several handcrafted image signal processing (ISP)** operations, all of which have been optimized to produce visually pleasing images. What we investigate in this work **is whether this intermediate representation, the visually pleasing RGB image, is the best representation for the task at hand**. Intuitively, the idea that a handcrafted representation is sub-optimal and that we can **obtain superior performance by letting the optimization of the representation be guided by the end** task seems reasonable. In summary, we want to replace the traditional pipeline, with a learnable pipeline defined by a learnable operation \\(F(\mathbf{x})\\).
 <figure>
-  <img src="/assets/img/publications/raw-or-cooked_thumbnail.jpg"/>
+  <img style="width: 50%; margin: 0 auto;" src="raw-or-cooked_thumbnail.jpg"/>
   <figcaption>Fig 1. Traditional and proposed object detection pipeline. We replace the handcrafted ISP pipeline (left) with a learnable module (right).</figcaption>
 </figure>
 
