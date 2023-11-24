@@ -6,42 +6,29 @@ Alibeigi:
   org: Zenseact
   picture: /assets/images/profiles/mina_alibeigi.jpg
   scholar: gJA_rJYAAAAJ
-  title: Researcher, Supervisor
-  url: null
+  title: Researcher
 Astrom:
   firstname: ["Kalle", "K.", "K. Å.", "Kalle Åstrom"]
   org: Lund University
-  picture: /assets/images/profile_placeholder.jpg
   scholar: YIzs6eoAAAAJ
-  title: Professor, Supervisor
-  url: null
+  title: Professor
 Bodin:
   firstname: ["Alexander", "A.", "A. B.", "Alexander Bodin"]
   org: Zenseact
-  picture: /assets/images/profile_placeholder.jpg
-  scholar: null
   title: Intern
-  url: null
 EliasSvensson:
   firstname: ["Elias", "E.", "E. S.", "Elias Svensson"]
   org: Zenseact
-  picture: /assets/images/profile_placeholder.jpg
-  scholar: null
   title: Intern
-  url: null
 Fatemi:
   firstname: ["Maryam", "M.", "M. F.", "Maryam Fatemi"]
   org: Zenseact
-  picture: /assets/images/profile_placeholder.jpg
-  title: Researcher, Supervisor
-  url: null
+  title: Researcher
 Felsberg:
   firstname: ["Michael", "M.", "M. F.", "Michael Felsberg"]
   org: Linköping University
-  picture: /assets/images/profile_placeholder.jpg
   scholar: lkWfR08AAAAJ
-  title: Professor, Supervisor
-  url: null
+  title: Professor
 Fu:
   firstname: ["Junsheng", "J.", "J. F.", "Junsheng Fu"]
   github: JunshengFu
@@ -49,23 +36,16 @@ Fu:
   org: Zenseact
   picture: /assets/images/profiles/junsheng_fu.jpg
   scholar: z3lud1UAAAAJ
-  title: Researcher, Supervisor
+  title: Researcher
   url: https://junshengfu.github.io
 Hagerman:
   firstname: ["David", "D.", "D. H.", "David Hagerman"]
   org: Zenseact
-  picture: /assets/images/profile_placeholder.jpg
-  scholar: null
   title: Intern
-  url: null
-# Lars
 Hammarstrand:
   firstname: ["Lars", "L.", "L. H.", "Lars Hammarstrand"]
   org: Chalmers University of Technology
-  picture: /assets/images/profile_placeholder.jpg
-  scholar: null
-  title: Professor, Supervisor
-  url: null
+  title: Professor
 Hess:
   firstname: ["Georg", "G.", "G. H.", "Georg Hess"]
   github: georghess
@@ -78,17 +58,12 @@ Hess:
 Jaxing:
   firstname: ["Johan", "J.", "J. X.", "Johan Jaxing"]
   org: Zenseact
-  picture: /assets/images/profile_placeholder.jpg
-  scholar: null
   title: Intern
-  url: null
 Johnander:
   firstname: ["Joakim", "J.", "J. J.", "Joakim Johnander"]
   org: Zenseact
-  picture: /assets/images/profile_placeholder.jpg
   scholar: 5sUDSxQAAAAJ
   title: Researcher
-  url: null
 Lilja:
   firstname: ["Adam", "A.", "A. L.", "Adam Lilja"]
   github: LiljaAdam
@@ -97,7 +72,6 @@ Lilja:
   picture: /assets/images/profiles/adam_lilja.jpg
   scholar: zYn4o0AAAAAJ
   title: PhD Student
-  url: null
 Lindstrom:
   firstname: ["Carl", "C.", "C. L.", "Carl Lindström"]
   github: carlinds
@@ -106,7 +80,6 @@ Lindstrom:
   picture: /assets/images/profiles/carl_lindstrom.jpg
   scholar: ufjSqs0AAAAJ
   title: PhD Student
-  url: null
 Ljungbergh:
   firstname: ["William", "W.", "W. L.", "William Ljungbergh"]
   github: wljungbergh
@@ -119,10 +92,7 @@ Ljungbergh:
 Meding:
   firstname: ["Isak", "I.", "I. M.", "Isak Meding"]
   org: Zenseact
-  picture: /assets/images/profile_placeholder.jpg
-  scholar: null
   title: Intern
-  url: null
 Motorniuk:
   firstname: ["Daria", "D.", "D. M.", "Daria Motorniuk"]
 Petersson:
@@ -130,28 +100,20 @@ Petersson:
   org: [Zenseact, Chalmers University of Technology]
   picture: /assets/images/profiles/christoffer_petersson.jpg
   scholar: SeRMUJwAAAAJ
-  title: Researcher, Supervisor
-  url: null
+  title: Researcher
 Rafidashti:
   firstname: ["Mahan", "M.", "M. R.", "Mahan Rafidashti"]
   org: [Zenseact, Chalmers University of Technology]
-  picture: /assets/images/profile_placeholder.jpg
   title: PhD Student
-  url: null
 Stenborg:
   firstname: ["Erik", "E.", "E. S.", "Erik Stenborg"]
   org: Zenseact
-  picture: /assets/images/profile_placeholder.jpg
-  scholar: null
   title: Researcher
-  url: null
 Svensson:
   firstname: ["Lennart", "L.", "L. S.", "Lennart Svensson"]
   org: Chalmers University of Technology
-  picture: /assets/images/profile_placeholder.jpg
   scholar: AMM9vE4AAAAJ
-  title: Professor, Supervisor
-  url: null
+  title: Professor
 Tonderski:
   firstname: ["Adam", "A.", "A. T.", "Adam Tonderski"]
   github: adaton
@@ -160,6 +122,6 @@ Tonderski:
   picture: /assets/images/profiles/adam_tonderski.jpg
   scholar: 2R5ZLp0AAAAJ
   title: PhD Student
-  url: null
 Widahl:
   firstname: ["Jenny", "J.", "J.W.", "Jenny Widahl"]
+  org: Zenseact

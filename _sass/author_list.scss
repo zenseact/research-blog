@@ -1,0 +1,83 @@
+.author__list {
+    list-style-type: none;
+
+    padding-left: 0;
+
+    li {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid $border-color;
+        display: flex;
+        width: 100%;
+
+
+
+        &:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .author-title {
+            color: $text-color,;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .author-authors {
+            font-size: 0.75rem;
+            color: $muted-text-color;
+            margin-bottom: 0.5rem;
+        }
+
+        .author-venue {
+            font-size: 0.75rem;
+            color: $muted-text-color;
+            margin-bottom: 0.5rem;
+        }
+
+        .author__icons__container {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            min-height: 1rem;
+            width: 100%;
+            a {
+                margin-right: 0.2rem;
+
+            }
+            i:hover {
+                color: $warning-color;
+            }
+        }
+
+        .author__picture__container {
+            height: 4rem;
+            width: 4rem;
+            margin-right: 1rem;
+            margin-left: auto;
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+                object-position: center;
+                border-radius: 50%;
+                box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+                margin: 0;
+            }
+
+            a img:hover {
+                box-shadow: rgba(0, 0, 0, 0.75) 0px 5px 15px;
+            }
+
+        }
+
+
+    }
+
+}

@@ -1,0 +1,71 @@
+
+<!--Create argument for inlcude-->
+{% if include.titles %}
+    {% if include.titles contains "," %}
+        {% assign titles = include.titles | split: "," %}
+        {% assign authors = site.data.authors | where_exp: "item", "titles contains item.title" %}
+    {% else %}
+        {% assign authors = site.data.authors | where: "title", include.titles%}
+    {% endif %}
+
+{% else %}
+    {% assign authors = site.data.authors %}
+{% endif %}
+
+
+
+<!--List all publications-->
+<ul class="author__list">
+    {% for author in authors %}
+    <li>
+        <div class="author__info__container">
+        <p class="author-title">{{ author.firstname[3] }}</p>
+        <span class="author-authors">
+            {% for org in author.org %}
+            {% if forloop.last %}
+                {{ org }}
+            {% else %}
+                {{ org }},&nbsp;
+            {% endif %}
+            {% endfor %}
+        </span>
+        <br>
+        <span class="author-venue">
+            {% assign venue = site.data.venues[publication.venue] %}
+            {{ venue.name }}
+        </span>
+        {% if author.github or author.scholar or author.linkedin or author.url %}
+        <div class="author__icons__container">
+                {% if author.github %}
+                <a href="{{ author.github }}" class="author__icons"><i class="fab fa-fw fa-github"></i></a>
+                {% endif %}
+                {% if author.scholar %}
+                <a href="{{ author.scholar }}" class="author__icons"><i class="fab fa fa-graduation-cap"></i></a>
+                {% endif %}
+                {% if author.linkedin %}
+                <a href="{{ author.linkedin }}" class="author__icons"><i class="fab fa-fw fa-linkedin"></i></a>
+                {% endif %}
+                {% if author.url %}
+                <a href="{{ author.url }}" class="author__icons"><i class="fab fa fa-address-card"></i></a>
+                {% endif %}
+            </div>
+        {% endif %}
+        </div>
+        {% if author.picture %}
+        <div class="author__picture__container">
+            {% if author.url %}
+                <a class="author__image__link" href="{{ author.url | relative_url }}">
+                <img class="author__image" src="{{ author.picture | relative_url }}" alt="{{ author.firstname[3] }}">
+                </a>
+            {% else %}
+                <img class="author__image" src="{{ author.picture | relative_url }}" alt="{{ author.firstname[3] }}">
+            {% endif %}
+        </div>
+        {% endif %}
+
+
+
+
+    </li>
+    {% endfor %}
+</ul>
