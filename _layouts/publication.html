@@ -22,12 +22,12 @@ layout: default
                                 <a href="{{ author.url }}" itemprop="author" itemscope
                                     itemtype="https://schema.org/Person">
                                     {% endif %}
-                                    <span itemprop="name">{{ author.firstname[3] }}
-                                        {% if page.n_equal_contrib > 1 %}
-                                        {% if forloop.index0 < page.n_equal_contrib %}<sup>&dagger;</sup>
-                                            {% endif %}
-                                            {% endif %}
-                                    </span>
+                                    {% if page.n_equal_contrib > 1 and forloop.index0 < page.n_equal_contrib %}
+                                    <span itemprop="name">{{ author.firstname[3] }}<sup>&dagger;</sup></span>
+                                        {% else %}
+                                        <span itemprop="name">{{ author.firstname[3] }}</span>
+                                    {% endif %}
+
                                 {% if author.url %}
                                 </a>
                                 {% endif %}
