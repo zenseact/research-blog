@@ -14,6 +14,7 @@ authors:
 n_equal_contrib: 1
 code:
 arxiv: https://arxiv.org/abs/2207.00531
+thumbnail-img: thumbnail.png
 ---
 
 # Abstract

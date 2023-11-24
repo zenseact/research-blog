@@ -15,11 +15,11 @@ authors:
   - Fu
   - Widahl
   - Petersson
-thumbnail: /assets/img/publications/zod_thumbnail.jpg
 website: https://zod.zenseact.com
 code: https://github.com/zenseact/zod
 arxiv: https://arxiv.org/abs/2305.02008
 n_equal_contrib: 3
+thumbnail-img: zod_thumbnail.jpg
 
 ---
 
