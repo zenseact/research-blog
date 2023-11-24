@@ -1,6 +1,6 @@
 ---
 layout: publication
-permalink: /publications/neuRAD/
+permalink: /publications/localization-is-all-you-evaluate/
 title: "Localization Is All You Evaluate: Data Leakage in Online Mapping Datasets and How to Fix It"
 venue: ARXIV
 authors:

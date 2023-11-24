@@ -12,6 +12,7 @@ code:
 arxiv: https://arxiv.org/abs/2301.08965
 n_equal_contrib: 1
 date: 2023-01-21 00:00:00 +0000
+thumbnail-img: raw-or-cooked_thumbnail.png
 ---
 
 # TL;DR

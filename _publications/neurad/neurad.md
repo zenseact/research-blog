@@ -1,6 +1,6 @@
 ---
 layout: publication
-permalink: /publications/neuRAD/
+permalink: /publications/neurad/
 title: "NeuRAD: Neural Rendering for Autonomous Driving"
 venue: ARXIV
 authors:
@@ -14,6 +14,7 @@ code: https://github.com/georghess/neurad
 date: 2023-09-23 00:00:00 +00:00
 arxiv: null
 n_equal_contrib: 3
+thumbnail-img: frontfig.png
 ---
 
 # Abstract
