@@ -4,12 +4,16 @@ layout: single
 
 ---
 <br>
+# The Zenseact Research Team.
+{: .text-center}
 
-# PhD Students
+<br>
+
+## PhD Students
 {% include author_list.html titles="PhD Student" %}
 ---
 <br>
-# Researchers & Supervisors
+## Researchers & Supervisors
 {% include author_list.html titles="Researcher,Supervisor,Professor" %}
 
 ---

@@ -4,7 +4,7 @@ title:  "Publications"
 ---
 <br>
 
-# Publications
+# Publications.
 {: .text-center}
 
 <br>
