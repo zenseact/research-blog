@@ -6,45 +6,86 @@ layout: default
 
 
 <div id="main" role="main">
-  <article class="splash" itemscope itemtype="https://schema.org/CreativeWork">
-    <div id="publication__spacer" style="height: 5em;"></div>
-      <section class="publication__head">
-          <h1>{{ page.title }}</h1>
-          <div class="publication__author_list">
-            {% for authorkey in page.authors %}
-                {% assign author = site.data.authors[authorkey] %}
-                <span class="publication__author" itemprop="author" itemscope itemtype="https://schema.org/Person">
-                    {% if author.url %}
-                        <a href="{{ author.url }}" itemprop="url">
-                    {% endif %}
+    <article class="splash" itemscope itemtype="https://schema.org/CreativeWork">
+        <div id="publication__spacer" style="height: 5em;"></div>
+        <section class="publication__head__container">
+            <div class="publication__head__title">
+                <h1 class="page-title">{{ page.title }}</h1>
+                <div class="publication__author_list_container">
+                    <ul class="publication__author_list">
+                        {% for authorkey in page.authors %}
+                        {% assign author = site.data.authors[authorkey] %}
 
-                    <span itemprop="name">{{ author.firstname[3] }}</span>
-                    <!--check loop index is larger that n_equal_contrib-->
+                        <li class="publication__author_list_item">
+                            <span class="publication__author_name">
+                                {% if author.url %}
+                                <a href="{{ author.url }}" itemprop="author" itemscope
+                                    itemtype="https://schema.org/Person">
+                                    {% endif %}
+                                    <span itemprop="name">{{ author.firstname[3] }}
+                                        {% if page.n_equal_contrib > 1 %}
+                                        {% if forloop.index0 < page.n_equal_contrib %}<sup>&dagger;</sup>
+                                            {% endif %}
+                                            {% endif %}
+                                    </span>
+                                {% if author.url %}
+                                </a>
+                                {% endif %}
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
                     {% if page.n_equal_contrib > 1 %}
-                        {% if forloop.index0 < page.n_equal_contrib %}
-                            <sup>&dagger;</sup>
-                        {% endif %}
+                    <p><sup>&dagger;</sup>Denotes equal contribution</p>
                     {% endif %}
-
-
-                    {% if author.url %}
+                    {% assign venue = site.data.venues[page.venue] %}
+                    {% if venue.name != "arXiv" %}
+                    <p class="publication__venue">
+                        {% if venue.url %}
+                        Published in:
+                        <a href="{{ venue.url }}" itemprop="isPartOf" itemscope
+                            itemtype="https://schema.org/Periodical">
+                            {% endif %}
+                            <span itemprop="name">{{ venue.name }}</span>
+                            {% if venue.url %}
                         </a>
+                        {% endif %}
+                    </p>
                     {% endif %}
-                </span>
-            {% endfor %}
-            {% if page.n_equal_contrib > 1 %}
-                    <br>
-                    <sup>&dagger;</sup>Equal contribution
+                </div>
+            </div>
+            <div class="publication__head__thumbnail">
+                {% if page.thumbnail-img %}
+                <img src="{{ page.thumbnail-img }}" alt="{{ page.title }}" />
+                {% elsif page.thumbnail-gif %}
+                <img src="{{ page.thumbnail-gif }}" alt="{{ page.title }}" />
+                {% elsif page.thumbnail-video %}
+                <video autoplay loop muted playsinline>
+                    <source src="{{ page.thumbnail-video }}" type="video/webm">
+                    <source src="{{ page.thumbnail-video }}" type="video/mp4">
+                </video>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="publication__social__links__container">
+            {% if page.arxiv %}
             {% endif %}
-          </div>
-      </section>
+
+            {% if page.code %}
+            {% endif %}
+
+            {% if page.website %}
+            {% endif %}
 
 
-    <hr class="publication__hline" />
+        </section>
+
+        <hr class="publication__hline" />
 
 
-    <section class="page__content" itemprop="text">
-      {{ content }}
-    </section>
-  </article>
+        <section class="page__content" itemprop="text">
+            {{ content }}
+        </section>
+    </article>
 </div>

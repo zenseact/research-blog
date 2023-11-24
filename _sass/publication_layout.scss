@@ -1,0 +1,53 @@
+.publication__head__container {
+    display: grid;
+    grid-template-columns: 5fr 3fr;
+    @media (max-width: $medium) {
+        grid-template-columns: 1fr;
+        // center the content
+        justify-items: center;
+    }
+}
+
+.publication__head__title {
+    width: 100%;
+    font-size: 1.5rem;
+
+    p {
+        font-size: 0.6rem;
+        margin-top: 0;
+    }
+
+    .publication__venue {
+        font-size: 0.8rem;
+    }
+
+
+}
+
+.publication__author_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 0;
+    padding-left: 0;
+
+    li {
+        list-style-type: none;
+        font-size:1rem;
+    }
+
+    @media (max-width: $medium) {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+.publication__head__thumbnail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img, video {
+        max-height: 300px;
+
+    }
+
+}
