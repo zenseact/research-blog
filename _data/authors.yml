@@ -3,6 +3,7 @@ Alibeigi:
   firstname: ["Mina", "M.", "M. A.", "Mina Alibeigi"]
   github: alibeigi
   linkedin: mina-alibeigi-2b47739a
+  mail: mina.alibeigi@zenseact.com
   org: Zenseact
   picture: /assets/images/profiles/mina_alibeigi.jpg
   scholar: gJA_rJYAAAAJ
@@ -22,7 +23,9 @@ EliasSvensson:
   title: Intern
 Fatemi:
   firstname: ["Maryam", "M.", "M. F.", "Maryam Fatemi"]
+  mail: maryam.fatemi@zenseact.com
   org: Zenseact
+  scholar: GpcBXmoAAAAJ
   title: Researcher
 Felsberg:
   firstname: ["Michael", "M.", "M. F.", "Michael Felsberg"]
@@ -33,6 +36,7 @@ Fu:
   firstname: ["Junsheng", "J.", "J. F.", "Junsheng Fu"]
   github: JunshengFu
   linkedin: junshengfu
+  mail: junsheng.fu@zenseact.com
   org: Zenseact
   picture: /assets/images/profiles/junsheng_fu.jpg
   scholar: z3lud1UAAAAJ
@@ -45,11 +49,13 @@ Hagerman:
 Hammarstrand:
   firstname: ["Lars", "L.", "L. H.", "Lars Hammarstrand"]
   org: Chalmers University of Technology
+  scholar: 8fZalZUAAAAJ
   title: Professor
 Hess:
   firstname: ["Georg", "G.", "G. H.", "Georg Hess"]
   github: georghess
   linkedin: georghess
+  mail: georg.hess@zenseact.com
   org: [Zenseact, Chalmers University of Technology]
   picture: /assets/images/profiles/georg_hess.jpg
   scholar: ZvUoV2EAAAAJ
@@ -61,6 +67,7 @@ Jaxing:
   title: Intern
 Johnander:
   firstname: ["Joakim", "J.", "J. J.", "Joakim Johnander"]
+  mail: joakim.johnander@zenseact.com
   org: Zenseact
   scholar: 5sUDSxQAAAAJ
   title: Researcher
@@ -68,6 +75,7 @@ Lilja:
   firstname: ["Adam", "A.", "A. L.", "Adam Lilja"]
   github: LiljaAdam
   linkedin: adamlilja
+  mail: adam.lilja@zenseact.com
   org: [Zenseact, Chalmers University of Technology]
   picture: /assets/images/profiles/adam_lilja.jpg
   scholar: zYn4o0AAAAAJ
@@ -76,6 +84,7 @@ Lindstrom:
   firstname: ["Carl", "C.", "C. L.", "Carl Lindström"]
   github: carlinds
   linkedin: carl-lindstr%C3%B6m-184b8a149
+  mail: carl.lindstrom@zenseact.com
   org: [Zenseact, Chalmers University of Technology]
   picture: /assets/images/profiles/carl_lindstrom.jpg
   scholar: ufjSqs0AAAAJ
@@ -84,6 +93,7 @@ Ljungbergh:
   firstname: ["William", "W.", "W. L.", "William Ljungbergh"]
   github: wljungbergh
   linkedin: william-ljungbergh
+  mail: william.ljungbergh@zenseact.com
   org: [Zenseact, Linköping University]
   picture: /assets/images/profiles/william_ljungbergh.jpg
   scholar: RXEPFo0AAAAJ
@@ -95,19 +105,25 @@ Meding:
   title: Intern
 Motorniuk:
   firstname: ["Daria", "D.", "D. M.", "Daria Motorniuk"]
+  org: Zenseact
 Petersson:
   firstname: ["Christoffer", "C.", "C. P.", "Christoffer Petersson"]
+  mail: christoffer.petersson@zenseact.com
   org: [Zenseact, Chalmers University of Technology]
   picture: /assets/images/profiles/christoffer_petersson.jpg
   scholar: SeRMUJwAAAAJ
   title: Researcher
 Rafidashti:
   firstname: ["Mahan", "M.", "M. R.", "Mahan Rafidashti"]
+  linkedin: mahandokht-rafidashti-906785192
+  mail: mahan.rafidashti@zenseact.com
   org: [Zenseact, Chalmers University of Technology]
   title: PhD Student
 Stenborg:
   firstname: ["Erik", "E.", "E. S.", "Erik Stenborg"]
+  mail: erik.stenberg@zenseact.com
   org: Zenseact
+  scholar: J5Kkp58AAAAJ
   title: Researcher
 Svensson:
   firstname: ["Lennart", "L.", "L. S.", "Lennart Svensson"]
@@ -118,6 +134,7 @@ Tonderski:
   firstname: ["Adam", "A.", "A. T.", "Adam Tonderski"]
   github: adaton
   linkedin: adamtonderski
+  mail: adam.tonderski@zenseact.com
   org: [Zenseact, Lund University]
   picture: /assets/images/profiles/adam_tonderski.jpg
   scholar: 2R5ZLp0AAAAJ

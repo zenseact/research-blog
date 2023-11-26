@@ -19,7 +19,7 @@
     {% for author in authors %}
     <li>
         <div class="author__info__container">
-        <p class="author-title">{{ author.firstname[3] }}</p>
+        <h3 class="author-title" id="{{ author.firstname[3] }}">{{ author.firstname[3] }}</h3>
         <span class="author-authors">
             {% for org in author.org %}
             {% if forloop.last %}
@@ -37,16 +37,19 @@
         {% if author.github or author.scholar or author.linkedin or author.url %}
         <div class="author__icons__container">
                 {% if author.github %}
-                <a href="{{ author.github }}" class="author__icons"><i class="fab fa-fw fa-github"></i></a>
+                <a href="https://github.com/{{ author.github }}" class="author__icons"><i class="fab fa-fw fa-github"></i></a>
                 {% endif %}
                 {% if author.scholar %}
-                <a href="{{ author.scholar }}" class="author__icons"><i class="fab fa fa-graduation-cap"></i></a>
+                <a href="https://scholar.google.com/citations?user={{ author.scholar }}" class="author__icons"><i class="fab fa fa-graduation-cap"></i></a>
                 {% endif %}
                 {% if author.linkedin %}
-                <a href="{{ author.linkedin }}" class="author__icons"><i class="fab fa-fw fa-linkedin"></i></a>
+                <a href="https://linkedin.com/in/{{ author.linkedin }}" class="author__icons"><i class="fab fa-fw fa-linkedin"></i></a>
                 {% endif %}
                 {% if author.url %}
                 <a href="{{ author.url }}" class="author__icons"><i class="fab fa fa-address-card"></i></a>
+                {% endif %}
+                {% if author.mail %}
+                <a href="mailto:{{ author.mail }}" class="author__icons"><i class="fas fa-fw fa-envelope"></i></a>
                 {% endif %}
             </div>
         {% endif %}
