@@ -41,7 +41,7 @@ In the ISP pipeline, the RAW data is processed sequentially by handcrafted opera
 We study several different learnable operations \\(F(\mathbf{x})\\) that can be applied to the RAW image before it is fed to the object detector, all of which are outlined in slight detail below.
 
 **Learnable gamma correction.**
-Previous works [1, 2] have shown that [demosaicing](https://en.wikipedia.org/wiki/Demosaicing) and [tone mapping](https://en.wikipedia.org/wiki/Tone_mapping) are the most important operations in a traditional ISP pipeline. We, therefore, start by investigating a learnable gamma correction (which is one of the most common tone mapping techniques) operations, defined as
+Previous works {% cite buckler2017reconfiguring olli2021end %} have shown that [demosaicing](https://en.wikipedia.org/wiki/Demosaicing) and [tone mapping](https://en.wikipedia.org/wiki/Tone_mapping) are the most important operations in a traditional ISP pipeline. We, therefore, start by investigating a learnable gamma correction (which is one of the most common tone mapping techniques) operations, defined as
 
 $$
 F_{\text{d}}(\mathbf{x}) = \mathbf{x_d}^{\gamma},
@@ -59,7 +59,7 @@ $$
 where \\(\mu\\) and \\(\sigma\\) are learnable parameters optimized during training.
 
 **Learnable Yeo-Johnson transformation.**
-Lastly, by observing that the RAW data was far from normally distributed and knowing the fact that this is a characteristic that tends to improve the performance of deep neural networks, we sought to find a transformation that would make the RAW data more normally distributed. To this end, we adopt the [Yeo-Johnson transformation](https://en.wikipedia.org/wiki/Power_transform#Yeo%E2%80%93Johnson_transformation) [3] and define a  learnable version of it as
+Lastly, by observing that the RAW data was far from normally distributed and knowing the fact that this is a characteristic that tends to improve the performance of deep neural networks, we sought to find a transformation that would make the RAW data more normally distributed. To this end, we adopt the [Yeo-Johnson transformation](https://en.wikipedia.org/wiki/Power_transform#Yeo%E2%80%93Johnson_transformation) {% cite yeo2000new %} and define a  learnable version of it as
 
 $$
 F_{\text{YJ}}(\mathbf{x}) = \frac{(\mathbf{x} + 1)^\lambda - 1}{\lambda},
@@ -72,7 +72,7 @@ where \\(\lambda\\) is a learnable parameter optimized during training.
 
 To evaluate the effect our proposed learnable operations have on downstream computer vision tasks, we employ an object detection setting. Here, we make use of the [PASCALRAW dataset](https://searchworks.stanford.edu/view/hq050zr7488), which comprises RAW and RGB images, as well as 2D bounding box annotations for *cars*, *pedestrians*, and *bicycles*.
 
-We adopt a [Faster R-CNN](https://arxiv.org/abs/1506.01497) [4] object detector, coupled with a [Feature Pyramid Network](https://arxiv.org/abs/1612.03144) [5], and use a [ResNet-50](https://arxiv.org/abs/1512.03385) [6] backbone. We train each of our proposed learnable operations end-to-end with their respective network, and evaluate their performance according to the mean average precision (AP) metric, as defined in the COCO evaluation protocol [7].
+We adopt a [Faster R-CNN](https://arxiv.org/abs/1506.01497) {% cite ren2015faster %} object detector, coupled with a [Feature Pyramid Network](https://arxiv.org/abs/1612.03144) {% cite lin2017feature %}, and use a [ResNet-50](https://arxiv.org/abs/1512.03385) {% cite he2016deep %} backbone. We train each of our proposed learnable operations end-to-end with their respective network, and evaluate their performance according to the mean average precision (AP) metric, as defined in the COCO evaluation protocol {% cite lin2014microsoft %}.
 
 **Qualitative results.** We evaluated our three pipelines separately, and compared them to two baselines:
 1. RGB baseline. This is the traditional object detection pipeline, where we feed the RGB image directly into the object detector.
@@ -97,24 +97,4 @@ In Table 1 we present the quantitative results for each of our learnable operati
 # Concluding remarks
 Motivated by the observation that camera ISP pipelines are typically optimized toward producing visually pleasing images for the human eye, we have in this work experimented with object detection on RAW images. While naïvely feeding RAW images directly into the object detection backbone led to poor performance, we proposed three simple, learnable operations that all led to good performance. Two of these operators, the *Learnable Gamma* and *Learnable Yeo-Johnson*, led to superior performance compared to the RGB baseline detector. Based on qualitative comparison, the RAW detector performs better in low-light conditions compared to the RGB detector.
 
-
-
-
 ---
-
-**References**
-
-[1] Buckler, M., Jayasuriya, S., Sampson, A.: [Reconfiguring the imaging pipeline for computer vision](https://arxiv.org/abs/1705.04352). Proceedings of the IEEE International Conference on Computer Vision. pp. 975–984 (2017)
-
-[2] Olli Blom, M., Johansen, T.: ["End-to-end object detection on raw camera data"](https://odr.chalmers.se/handle/20.500.12380/302196). (2021)
-
-[3] Yeo, I.K., Johnson, R.A.: ["A new family of power transformations to improve normality or symmetry"](https://www.jstor.org/stable/2673623). Biometrika 87(4), 954–959 (2000)
-
-[4] Ren, S., He, K., Girshick, R., Sun, J.: [Faster r-cnn: Towards real-time object detection with region proposal networks](https://arxiv.org/abs/1506.01497). Advances in neural information processing systems 28 (2015)
-
-[5] Lin, T.Y., Dollár, P., Girshick, R., He, K., Hariharan, B., Belongie, S.: [Feature pyramid networks for object detection](https://arxiv.org/abs/1612.03144). Proceedings of the IEEE conference on computer vision and pattern recognition. pp. 2117–2125 (2017)
-
-[6] He, K., Zhang, X., Ren, S., Sun, J.: [Deep residual learning for image recognition](https://arxiv.org/abs/1512.03385). Proceedings of the IEEE conference on computer vision and pattern recognition.
-pp. 770–778 (2016)
-
-[7] Lin, T.Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollár, P., Zitnick, C.L.: [Microsoft coco: Common objects in context](https://arxiv.org/abs/1405.0312). European conference on computer vision. pp. 740–755. Springer (2014)

@@ -24,13 +24,11 @@ minimal_mistakes_skin: zenseact_beige
 name: Zenseact
 plugins:
   - jekyll-include-cache
+  - jekyll-scholar
 # Build settings
 remote_theme: mmistakes/minimal-mistakes@4.24.0
 title: Zenseact Research
 url: zenseact.github.io
-# Google Analytics
-# analytics:
-#   provider: "google-gtag"
-#   google:
-#     tracking_id: "G-J92YMVMQGH"
-#     anonymize_ip: false # default
+
+scholar:
+  style: ieee
