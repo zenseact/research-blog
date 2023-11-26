@@ -97,4 +97,17 @@ In Table 1 we present the quantitative results for each of our learnable operati
 # Concluding remarks
 Motivated by the observation that camera ISP pipelines are typically optimized toward producing visually pleasing images for the human eye, we have in this work experimented with object detection on RAW images. While naïvely feeding RAW images directly into the object detection backbone led to poor performance, we proposed three simple, learnable operations that all led to good performance. Two of these operators, the *Learnable Gamma* and *Learnable Yeo-Johnson*, led to superior performance compared to the RGB baseline detector. Based on qualitative comparison, the RAW detector performs better in low-light conditions compared to the RGB detector.
 
+
+# BibTeX
+```bibtex
+@inproceedings{ljungbergh2023raw,
+  title        = {Raw or cooked? Object detection on RAW images},
+  author       = {Ljungbergh, William and Johnander, Joakim and Petersson, Christoffer and Felsberg, Michael},
+  booktitle    = {Scandinavian Conference on Image Analysis},
+  pages        = {374--385},
+  year         = {2023},
+  organization = {Springer}
+}
+```
+
 ---
