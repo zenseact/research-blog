@@ -34,7 +34,7 @@ Note here that you have to ensure two things:
 Follow the convention in each of these files to add new authors and venues.
 
 ### Step 3
-Add the abstract of your paper to the `raw-or-cooked.md` file. **Note** that you are of course free to add more content to the blog post, such as figures, videos, etc. However, the abstract is the only thing that is required. **Note** that you can include LaTeX equations in the blog post by using the correct syntax. See [this link](https://singyuan.github.io/posts/mathjax/add_tex/) for more information.
+Add the abstract of your paper to the `raw-or-cooked.md` file. **Note** that you are of course free to add more content to the blog post, such as figures, videos, etc. However, the abstract is the only thing that is required. **Note** that you can include LaTeX equations in the blog post by using the correct syntax. See [this link](https://singyuan.github.io/posts/mathjax/add_tex/) for more information. You can also include citations in the blog post by using the correct syntax. See the `raw-or-cooked.md` file for an example, where the corresponding bibtex entries should be placed in `_bibliography/references.bib`.
 
 ### Step 4
 Make a pull-request to this repository. Once the pull-request is merged, the blog post will be automatically published at [research.zenseact.com](https://research.zenseact.com).
