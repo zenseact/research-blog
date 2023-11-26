@@ -53,6 +53,74 @@ layout: default
                     </p>
                     {% endif %}
                 </div>
+                <section class="publication__social__links__container">
+                    <div class="link-container">
+                    <!-- sharing links, i.e., facebook, linkedin, twitter -->
+                    <p class="publication__social__links__title">Share</p>
+                    <ul class="publication__social__links publication__sharing_links">
+                        <li class="publication__social__link">
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url }}"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="publication__social__link">
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url }}&title={{ page.title }}&summary=&source="
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                        </li>
+                        <li class="publication__social__link">
+                            <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ page.url | absolute_url }}"
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {% if page.arxiv or page.code or page.website or page.video %}
+                    <div class="link-container">
+                        <!-- extra links, i.e., pdf, arxiv, code, website, video -->
+                        <p class="publication__social__links__title">Links</p>
+                        <ul class="publication__social__links publication__extra_links">
+                            {% if page.arxiv %}
+                            <li class="publication__social__link">
+                                <a href="{{ page.arxiv }}" target="_blank" rel="noopener noreferrer">
+                                    <i class="far fa-file-pdf"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            {% if page.code %}
+                            <li class="publication__social__link">
+                                <a href="{{ page.code }}" target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-fw fa-github"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+
+                            {% if page.website %}
+                            <li class="publication__social__link">
+                                <a href="{{ page.website }}" target="_blank" rel="noopener noreferrer">
+                                    <i class="fas fa-globe"></i>
+                                </a>
+                            </li>
+                            {% endif %}
+
+                                {% if page.video %}
+                                <li class="publication__social__link">
+                                    <a href="{{ page.video }}" target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-youtube"></i>
+                                        <span>Video</span>
+                                    </a>
+                                </li>
+                                {% endif %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+
+                </section>
             </div>
             <div class="publication__head__thumbnail">
                 {% if page.thumbnail-img %}
@@ -67,23 +135,7 @@ layout: default
                 {% endif %}
             </div>
         </section>
-
-        <section class="publication__social__links__container">
-            {% if page.arxiv %}
-            {% endif %}
-
-            {% if page.code %}
-            {% endif %}
-
-            {% if page.website %}
-            {% endif %}
-
-
-        </section>
-
         <hr class="publication__hline" />
-
-
         <section class="page__content" itemprop="text">
             {{ content }}
         </section>
