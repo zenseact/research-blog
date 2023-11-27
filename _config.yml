@@ -1,7 +1,7 @@
 ---
 atom_feed:
   hide: true
-baseurl: /research-blog
+baseurl: /
 collections:
   posts:
     output: true
