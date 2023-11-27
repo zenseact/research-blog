@@ -1,0 +1,126 @@
+$slider-max-width: 1123px;
+$slider-height: 50vw;
+$slider-max-height: 750px;
+$slider-width: 75vw;
+
+.slider__container {
+    height: $slider-height;
+    width: $slider-width;
+    max-height: $slider-max-height;
+    max-width: $slider-max-width;
+    overflow: hidden;
+    margin: 0 auto;
+
+    .slider__img__bg {
+        background-image: none;
+        background-size: cover;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+    }
+
+    .slider__img__bg__overlay {
+        background-image: none;
+        background-size: cover;
+        position: absolute;
+        overflow: hidden;
+        height: 100%;
+        width: 50%;
+
+        border-style: hidden solid hidden hidden;
+        border-color: rgb(0, 0, 0);
+    }
+
+    .slider__input {
+        position: absolute;
+        top: calc(50% - 13px);
+        left: -3px;
+        width: 100%;
+        appearance: none;
+        background: none;
+        padding: 0;
+
+        // remove box-shadow
+        box-shadow: none;
+
+        &:active,
+        &:focus,
+        &:hover,
+        &:visited,
+        &:focus-within,
+        &:focus-visible {
+            box-shadow: none;
+        }
+
+
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            height: 26px;
+            width: 26px;
+        }
+
+        &::-moz-range-thumb {
+            background: none;
+            border: none;
+            cursor: pointer;
+            height: 26px;
+            width: 26px;
+        }
+    }
+
+    .slider__button {
+        pointer-events: none;
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: rgb(0, 0, 0);
+
+        left: calc(50% - 15px);
+        top: calc(50% - 15px);
+        padding: 0;
+        line-height: 30px;
+        position: relative;
+
+        &:after {
+            content: '';
+            display: inline-block;
+            border: solid #ffffff;
+            border-width: 0 3px 3px 0;
+            width: 5px;
+            height: 5px;
+            position: absolute;
+            top: calc(50% - 3px);
+            left: calc(50% - 1px);
+            transform: rotate(-45deg);
+        }
+
+        &:before {
+            content: '';
+            display: inline-block;
+
+            border: solid #ffffff;
+            border-width: 0 3px 3px 0;
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            top: calc(50% - 3px);
+            left: calc(50% - 6px);
+            transform: rotate(135deg);
+        }
+    }
+
+
+
+}
+
+.slider__caption {
+    margin: 0 auto;
+    width: $slider-width;
+    max-width: $slider-max-width;
+}
