@@ -1,6 +1,6 @@
 ---
 main:
   - title: Publications
-    url: /publications/
+    url: /publications
   - title: Team
-    url: /team/
+    url: /team

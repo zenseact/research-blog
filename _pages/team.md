@@ -1,5 +1,5 @@
 ---
-permalink: /team/
+permalink: /team
 layout: single
 
 ---
