@@ -26,6 +26,7 @@ plugins:
   - jekyll-include-cache
   - jekyll-scholar
 # Build settings
+repository: zenseact/research-blog
 remote_theme: mmistakes/minimal-mistakes@4.24.0
 title: Zenseact Research
 url: zenseact.github.io
