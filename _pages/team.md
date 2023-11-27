@@ -14,6 +14,6 @@ layout: single
 ---
 <br>
 ## Researchers & Supervisors
-{% include author_list.html titles="Researcher,Supervisor,Professor" %}
+{% include author_list.html titles="Researcher,Supervisor" %}
 
 ---
