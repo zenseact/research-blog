@@ -2,7 +2,7 @@
 main:
   - title: Publications
     url: /publications
-  - title: Dataset
-    url: https://zod.zenseact.com
   - title: Team
     url: /team
+  - title: Dataset<sup><span style="font-size:0.5rem">&UpperRightArrow;</span></sup>
+    url: https://zod.zenseact.com
