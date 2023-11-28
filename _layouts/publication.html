@@ -17,9 +17,13 @@ layout: default
                         {% assign author = site.data.authors[authorkey] %}
 
                         <li class="publication__author_list_item">
+
                             <span class="publication__author_name">
-                                {% if author.title != "Intern" %}
-                                    <a href="/team#{{ author.firstname[3] }}" target="_blank" rel="noopener noreferrer" itemprop="author" itemscope
+                                {% if author.url %}
+                                    <a href="{{ author.url }}" target="_blank" rel="noopener noreferrer" itemprop="author" itemscope
+                                    itemtype="https://schema.org/Person">
+                                {% elsif author.scholar %}
+                                    <a href="https://scholar.google.com/citations?user={{ author.scholar }}" target="_blank" rel="noopener noreferrer" itemprop="author" itemscope
                                         itemtype="https://schema.org/Person">
                                 {% endif %}
                                 {% if page.n_equal_contrib > 1 and forloop.index0 < page.n_equal_contrib %}
@@ -28,7 +32,7 @@ layout: default
                                     <span itemprop="name">{{ author.firstname[3] }}</span>
                                 {% endif %}
 
-                                {% if author.title != "Intern" %}
+                                {% if author.url or author.scholar %}
                                 </a>
                                 {% endif %}
                             </span>
