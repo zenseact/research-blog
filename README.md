@@ -37,7 +37,7 @@ Follow the convention in each of these files to add new authors and venues.
 Add the abstract of your paper to the `raw-or-cooked.md` file. **Note** that you are of course free to add more content to the blog post, such as figures, videos, etc. However, the abstract is the only thing that is required. **Note** that you can include LaTeX equations in the blog post by using the correct syntax. See [this link](https://singyuan.github.io/posts/mathjax/add_tex/) for more information. You can also include citations in the blog post by using the correct syntax. See the `raw-or-cooked.md` file for an example, where the corresponding bibtex entries should be placed in `_bibliography/references.bib`.
 
 ### Step 4
-You can preview your changes by running the site locally. To do this, simply change `baseurl` in `_config.yml` to the working directory of the repository. Then, run the following to build the docker image and serve the site locally:
+You can preview your changes by running the site locally. To do this, simply run the following to build the docker image and serve the site locally:
 ```
 docker compose build
 docker compose up
