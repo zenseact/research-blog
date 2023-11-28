@@ -1,7 +1,7 @@
 ---
 permalink: /team
 layout: single
-
+author_profile: false
 ---
 <br>
 # The Zenseact Research Team.
