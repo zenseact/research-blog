@@ -2,18 +2,20 @@
 <!-- required arguments -->
 {% assign img_l = include.left_image %}
 {% assign img_r = include.right_image %}
+{% assign width = include.width %}
+{% assign height = include.height %}
 {% assign id = include.id %}
 <!-- optional arguments -->
 {% assign caption = include.caption %}
-<div class="slider__container">
-    <div class="slider__img__bg" style="background-image: url({{ img_r }});">
-        <div class="slider__img__bg__overlay" id="slider__overlay{{ id }}" style="background-image: url({{ img_l }});">
+<div>
+    <div class="slider__container" style="height: {{ height }}vw; width: {{ width }}vw;">
+        <div class="slider__img__bg" style="background-image: url({{ img_r }});">
+            <div class="slider__img__bg__overlay" id="slider__overlay{{ id }}" style="background-image: url({{ img_l }});">
+            </div>
+            <div class="slider__button" id="slider__button{{ id }}"></div>
+            <input type="range" min="0" max="100" value="50" step="0.1" class="slider__input" id="slider__input{{ id }}" oninput="moveDivisor({{ id }})">
         </div>
-        <div class="slider__button" id="slider__button{{ id }}"></div>
-        <input type="range" min="0" max="100" value="50" step="0.1" class="slider__input" id="slider__input{{ id }}" oninput="moveDivisor({{ id }})">
+
     </div>
-
+    <figcaption class="slider__caption"> {{ caption }} </figcaption>
 </div>
-<figcaption class="slider__caption"> {{ caption }} </figcaption>
-
-

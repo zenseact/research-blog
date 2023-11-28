@@ -153,4 +153,10 @@ layout: default
         fg.style['width'] = slider.value+"%";
         slider_bt.style['left'] = "calc("+slider.value+"% - 18px)";
     }
+
+    function moveImageSlider(img_folder, id) {
+        slider = document.getElementById("slider__input" + id);
+        img = document.getElementById("slider__img" + id);
+        img.src = String(img_folder) + "/" + slider.value + ".jpg";
+    }
 </script>
