@@ -89,6 +89,7 @@ Lindstrom:
   picture: /assets/images/profiles/carl_lindstrom.jpg
   scholar: ufjSqs0AAAAJ
   title: PhD Student
+  url: https://carlinds.github.io/
 Ljungbergh:
   firstname: ["William", "W.", "W. L.", "William Ljungbergh"]
   github: wljungbergh
@@ -139,6 +140,7 @@ Tonderski:
   picture: /assets/images/profiles/adam_tonderski.jpg
   scholar: 2R5ZLp0AAAAJ
   title: PhD Student
+  url: https://atonderski.github.io/
 Widahl:
   firstname: ["Jenny", "J.", "J.W.", "Jenny Widahl"]
   org: Zenseact
