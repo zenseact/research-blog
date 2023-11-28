@@ -1,0 +1,21 @@
+
+<!-- required arguments -->
+{% assign img_folder = include.image_folder %}
+{% assign n_imgs = include.number_of_images %}
+{% assign width = include.width %}
+{% assign height = include.height %}
+{% assign id = include.id %}
+<!-- optional arguments -->
+{% assign caption = include.caption %}
+<div style="height: {{ height }}vw; width: {{ width }}vw;">
+    <div style="display: flex; justify-content: center;">
+        <img src="{{ img_folder }}/0.jpg" id="slider__img{{ id }}" style="max-height: {{ height }}vw; max-width: {{ width }}vw;">
+    </div>
+    <div style="width: 100%">
+        <input type="range" min="0" max="{{ n_imgs }}" value="0" step="1" id="slider__input{{ id }}" oninput="moveImageSlider('{{ img_folder }}', {{ id }})">
+    </div>
+
+    <figcaption class="slider__caption"> {{ caption }} </figcaption>
+</div>
+
+

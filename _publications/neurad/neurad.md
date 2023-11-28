@@ -12,7 +12,7 @@ authors:
   - Svensson
 code: https://github.com/georghess/neurad
 date: 2023-09-23 00:00:00 +00:00
-arxiv: null
+arxiv: https://arxiv.org/abs/2311.15260
 n_equal_contrib: 3
 thumbnail-img: frontfig.png
 ---
