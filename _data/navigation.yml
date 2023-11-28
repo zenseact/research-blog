@@ -1,6 +1,8 @@
 ---
 main:
   - title: Publications
-    url: /publications/
+    url: /publications
+  - title: Dataset
+    url: https://zod.zenseact.com
   - title: Team
-    url: /team/
+    url: /team

@@ -1,7 +1,7 @@
 ---
 atom_feed:
   hide: true
-baseurl: /
+baseurl: /research-blog
 collections:
   posts:
     output: true
@@ -29,7 +29,7 @@ plugins:
 repository: zenseact/research-blog
 remote_theme: mmistakes/minimal-mistakes@4.24.0
 title: Zenseact Research
-url: zenseact.github.io
+url: https://zenseact.github.io
 
 scholar:
   style: ieee
