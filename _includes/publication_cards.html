@@ -9,14 +9,14 @@
 {% for pub in pubs limit:num_shown %}
 
 <div class="publication__card">
-        <a href="{{site.baseurl}}/{{pub.permalink}}" class="publication__card__link">
+        <a href="{{pub.permalink}}" class="publication__card__link">
         <div class="publication__card__thumbnail">
             {% if pub.thumbnail-img %}
-                <img src="{{site.baseurl}}/{{pub.permalink}}{{ pub.thumbnail-img }}" alt="{{ pub.title }}" />
+                <img src="{{pub.permalink}}{{ pub.thumbnail-img }}" alt="{{ pub.title }}" />
             {% elsif pub.thumbnail-gif %}
-                <img src="{{site.baseurl}}/{{pub.permalink}}{{ pub.thumbnail-gif }}" alt="{{ pub.title }}" />
+                <img src="{{pub.permalink}}{{ pub.thumbnail-gif }}" alt="{{ pub.title }}" />
             {% elsif pub.thumbnail-video %}
-                <video src="{{site.baseurl}}/{{pub.permalink}}{{ pub.thumbnail-video }}" alt="{{ pub.title }}" autoplay loop muted playsinline></video>
+                <video src="{{pub.permalink}}{{ pub.thumbnail-video }}" alt="{{ pub.title }}" autoplay loop muted playsinline></video>
             {% endif %}
         </div>
         <div class="publication__card__info">
