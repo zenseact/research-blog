@@ -1,4 +1,6 @@
 ---
+Ali:
+  firstname: ["Mohammad", "M.", "M. A.", "Mohammad Ali"]
 Alibeigi:
   firstname: ["Mina", "M.", "M. A.", "Mina Alibeigi"]
   github: alibeigi
@@ -13,14 +15,26 @@ Astrom:
   org: Lund University
   scholar: YIzs6eoAAAAJ
   title: Professor
+Basu:
+  firstname: ["Debabrota", "D.", "D. B.", "Debabrota Basu"]
+  scholar: e26Maa4AAAAJ
+Batkovic:
+  firstname: ["Ivo", "I.", "I. B.", "Ivo Batkovic"]
+  scholar: 7X_8eVEAAAAJ
 Bodin:
   firstname: ["Alexander", "A.", "A. B.", "Alexander Bodin"]
   org: Zenseact
   title: Intern
+Dimitrakakis:
+  firstname: ["Christos", "C.", "C. D.", "Christos Dimitrakakis"]
+  scholar: 9Kw4t_kAAAAJ
 EliasSvensson:
   firstname: ["Elias", "E.", "E. S.", "Elias Svensson"]
   org: Zenseact
   title: Intern
+Eriksson:
+  firstname: ["Hannes", "H.", "H. E.", "Hannes Eriksson"]
+  scholar: KyX9dfEAAAAJ
 Fatemi:
   firstname: ["Maryam", "M.", "M. F.", "Maryam Fatemi"]
   mail: maryam.fatemi@zenseact.com
@@ -42,10 +56,12 @@ Fu:
   scholar: z3lud1UAAAAJ
   title: Researcher
   url: https://junshengfu.github.io
+Gronberg:
+  firstname: ["Robin", "R.", "R. G.", "Robin Grönberg"]
 Hagerman:
   firstname: ["David", "D.", "D. H.", "David Hagerman"]
-  org: Zenseact
-  title: Intern
+  org: Chalmers University of Technology
+  scholar: VRDfJPAAAAAJ
 Hammarstrand:
   firstname: ["Lars", "L.", "L. H.", "Lars Hammarstrand"]
   org: Chalmers University of Technology
@@ -61,6 +77,11 @@ Hess:
   scholar: ZvUoV2EAAAAJ
   title: PhD Student
   url: https://georghess.github.io/
+Hoel:
+  firstname: ["Carl-Johan", "C.", "C. H.", "Carl-Johan Hoel"]
+  scholar: f7ewwIsAAAAJ
+Jansson:
+  firstname: ["Anton", "A.", "A. J.", "Anton Jansson"]
 Jaxing:
   firstname: ["Johan", "J.", "J. X.", "Johan Jaxing"]
   org: Zenseact
@@ -120,6 +141,9 @@ Rafidashti:
   mail: mahan.rafidashti@zenseact.com
   org: [Zenseact, Chalmers University of Technology]
   title: PhD Student
+Sjoberg:
+  firstname: ["Jonas", "J.", "J. S.", "Jonas Sjöberg"]
+  scholar: s0Qakg77XTYC
 Stenborg:
   firstname: ["Erik", "E.", "E. S.", "Erik Stenborg"]
   mail: erik.stenberg@zenseact.com
@@ -141,6 +165,11 @@ Tonderski:
   scholar: 2R5ZLp0AAAAJ
   title: PhD Student
   url: https://atonderski.github.io/
+Tram:
+  firstname: ["Tommy", "T.", "T. T.", "Tommy Tram"]
+  org: Zenseact
+  scholar: m_O_xjIAAAA
+  title: null
 Widahl:
   firstname: ["Jenny", "J.", "J.W.", "Jenny Widahl"]
   org: Zenseact
