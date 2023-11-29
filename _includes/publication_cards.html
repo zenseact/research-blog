@@ -1,0 +1,43 @@
+
+
+{% assign num_shown = include.limit | default: 3 %}
+{% assign pubs = site.publications | sort: 'date' | reverse %}
+{% assign pubs = pubs | where_exp: "item", "item.thumbnail-img" or "item.thumbnail-gif" or "item.thumbnail-video" %}
+
+
+<section class="publication__cards__container">
+{% for pub in pubs limit:num_shown %}
+
+<div class="publication__card">
+        <a href="{{site.baseurl}}/{{pub.permalink}}" class="publication__card__link">
+        <div class="publication__card__thumbnail">
+            {% if pub.thumbnail-img %}
+                <img src="{{site.baseurl}}/{{pub.permalink}}{{ pub.thumbnail-img }}" alt="{{ pub.title }}" />
+            {% elsif pub.thumbnail-gif %}
+                <img src="{{site.baseurl}}/{{pub.permalink}}{{ pub.thumbnail-gif }}" alt="{{ pub.title }}" />
+            {% elsif pub.thumbnail-video %}
+                <video src="{{site.baseurl}}/{{pub.permalink}}{{ pub.thumbnail-video }}" alt="{{ pub.title }}" autoplay loop muted playsinline></video>
+            {% endif %}
+        </div>
+        <div class="publication__card__info">
+            <h4 class="publication__card__title">{{ pub.title }}</h4>
+
+            <p class="publication__card__authors">
+                {% for key in pub.authors %}
+                {% assign author = site.data.authors[key] %}
+                    {% if forloop.last %}
+                        {{ author.firstname[3] }}
+                    {% else %}
+                        {% if forloop.index0 < pub.n_equal_contrib and pub.n_equal_contrib > 1 %}
+                        {{ author.firstname[3] }}<sup>&ast;</sup>,&nbsp;
+                        {% else %}
+                        {{ author.firstname[3] }},&nbsp;
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+    </a>
+    </div>
+{% endfor %}
+</section>
