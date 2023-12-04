@@ -1,12 +1,10 @@
 $slider-max-width: 1123px;
 $slider-height: 50vw;
 $slider-max-height: 750px;
-$slider-width: 75vw;
 
 .slider__container {
     height: $slider-height;
-    width: $slider-width;
-    max-height: $slider-max-height;
+    width: auto;
     max-width: $slider-max-width;
     overflow: hidden;
     margin: 0 auto;

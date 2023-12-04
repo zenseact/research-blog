@@ -33,16 +33,14 @@ Neural radiance fields (NeRFs) have gained popularity in the autonomous driving 
 {% include two_image_slider.html 
   left_image="norolling_rgb.jpg"
   right_image="withrolling_rgb.jpg"
-  width="25"
-  height="20"
+  height="25"
   id="1"
   caption="Rendering without and with modeling of rolling shutter" 
 %}
 {% include two_image_slider.html
   left_image="norolling_depth.jpg"
   right_image="withrolling_depth.jpg"
-  width="25"
-  height="20"
+  height="25"
   id="2"
   caption="Depth map without and with modeling of rolling shutter"
 %}
@@ -53,7 +51,6 @@ Neural radiance fields (NeRFs) have gained popularity in the autonomous driving 
 {% include two_image_slider.html
   left_image="without_appemb.jpg"
   right_image="with_appemb.jpg"
-  width="50"
   height="30"
   id="3"
   caption="Rendering without and with sensor embedding"
