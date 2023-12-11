@@ -28,16 +28,16 @@ thumbnail-video: laneshift_compressed.mp4
 # Abstract
 Neural radiance fields (NeRFs) have gained popularity in the autonomous driving (AD) community. Recent methods show NeRFs' potential for closed-loop simulation, enabling testing of AD systems, and as an advanced training data augmentation technique. However, existing methods often require long training times, dense semantic supervision, or lack generalizability. This, in turn, hinders the application of NeRFs for AD at scale. In this paper, we propose NeuRAD, a robust novel view synthesis method tailored to dynamic AD data. Our method features simple network design, extensive sensor modeling for both camera and lidar --- including rolling shutter, beam divergence and ray dropping --- and is applicable to multiple datasets out of the box. We verify its performance on five popular AD datasets, achieving state-of-the-art performance across the board. To encourage further development, we openly release the NeuRAD source code.
 
-<figure>
-  <img style="width: 100%; margin: 0 auto;" src="frontfig.png"/>
+<figure class="figure__background">
+  <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="frontfig.png"/>
 </figure>
 
 ---
 
 # Method
 
-<figure>
-  <img style="width: 100%; margin: 0 auto;" src="MethodOverview.png"/>
+<figure class="figure__background">
+  <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="MethodOverview.png"/>
 </figure>
 
 The core of NeuRAD is a Neural Feature Field (NFF), a generalization of NeRFs and similar approaches. The NFF is a function \\(F(\mathbf{x}, t, \mathbf{d})\\) that maps a 4D point \\(\mathbf{x_i}, t_i\\), and a direction \\(\mathbf{d_i}\\) to a geometry descriptor \\(s_i\\) and a feature vector \\(\mathbf{f_i}\\). We then use volume rendering to generate per-ray features \\(\mathbf{f}\\) and expected depth. For lidar rays we use a small MLP to predict the probability that the ray did not return (ray drop), as well as the intensity of the return. For camera rays, we arrange features into a patch, and use a small ConvNet to predict the RGB color of the patch.
@@ -54,7 +54,7 @@ To compensate for this effect we explicitly assign individual timestamps to each
 {% include two_image_slider.html
   left_image="norolling_rgb.jpg"
   right_image="withrolling_rgb.jpg"
-  width="25"
+  width="35"
   id="1"
   linkid="2"
   caption="Effect of rolling shutter on RGB"
@@ -62,7 +62,7 @@ To compensate for this effect we explicitly assign individual timestamps to each
 {% include two_image_slider.html
   left_image="norolling_depth.jpg"
   right_image="withrolling_depth.jpg"
-  width="25"
+  width="35"
   id="2"
   linkid="1"
   caption="Effect of rolling shutter on depth"
@@ -83,7 +83,7 @@ An autonomous vehicle typically records the scene using multiple cameras, that c
 {% include two_image_slider.html
   left_image="without_appemb.jpg"
   right_image="with_appemb.jpg"
-  width="40"
+  width="45"
   id="3"
   caption="Rendering without and with sensor embedding"
 %}
