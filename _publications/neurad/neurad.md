@@ -11,7 +11,7 @@ authors:
   - Petersson
   - Svensson
 code: https://github.com/georghess/neurad
-date: 2023-09-23 00:00:00 +00:00
+date: 2023-11-26 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2311.15260
 n_equal_contrib: 3
 thumbnail-video: laneshift_compressed.mp4
@@ -54,7 +54,8 @@ To compensate for this effect we explicitly assign individual timestamps to each
 {% include two_image_slider.html
   left_image="norolling_rgb.jpg"
   right_image="withrolling_rgb.jpg"
-  width="35"
+  width="30"
+  max-width="600px"
   id="1"
   linkid="2"
   caption="Effect of rolling shutter on RGB"
@@ -62,7 +63,8 @@ To compensate for this effect we explicitly assign individual timestamps to each
 {% include two_image_slider.html
   left_image="norolling_depth.jpg"
   right_image="withrolling_depth.jpg"
-  width="35"
+  width="30"
+  max-width="600px"
   id="2"
   linkid="1"
   caption="Effect of rolling shutter on depth"
@@ -71,7 +73,7 @@ To compensate for this effect we explicitly assign individual timestamps to each
 
 ## Ray divergence
 
-Recent work has shown that NeRFs suffer from aliasing artifacts when objects in the scene are viewed at different distances. This is especially problematic in automotive scenes, where the sensors (ego vehicle) moves through the scene, and the distance to the objects in the scene changes. Inspired by recent work {% cite Barron_2023_ICCV }, we model the beam divergence of the lidar sensor, and the size of individual pixels, by reweighting the iNGP hashgrid features. Specifically, for a given ray sample, we compare the volume of the frustum it represents, with the volume of a voxel at each resolution of the hashgrid. We then downweight features for scales that are much smaller than the considered frustum.
+Recent work has shown that NeRFs suffer from aliasing artifacts when objects in the scene are viewed at different distances. This is especially problematic in automotive scenes, where the sensors (ego vehicle) moves through the scene, and the distance to the objects in the scene changes. Inspired by recent work {% cite Barron_2023_ICCV %}, we model the beam divergence of the lidar sensor, and the size of individual pixels, by reweighting the iNGP hashgrid features. Specifically, for a given ray sample, we compare the volume of the frustum it represents, with the volume of a voxel at each resolution of the hashgrid. We then downweight features for scales that are much smaller than the considered frustum.
 
 Note that this formulation is different from prior work, where the downweighting is based on Gaussians, and the hashgrid is sampled multiple time, incurring a significant computational overhead. In contrast, our formulation is simpler and faster, but expressive. Still, we find that it significantly improves the rendering quality, and especially the depth estimation.
 
