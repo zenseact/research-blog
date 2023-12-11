@@ -8,5 +8,7 @@ title:  "Home"
 <br>
 
 ---
-{% include publications_list.html %}
+### Latest Publications
+
+{% include publication_cards.html limit=3 %}
 

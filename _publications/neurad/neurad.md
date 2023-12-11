@@ -18,7 +18,7 @@ thumbnail-video: laneshift_compressed.mp4
 ---
 
 <div style="display: flex; align-items: center; justify-content: center;">
-  <video controls autoplay loop muted playsinline style="width: 600px;">
+  <video controls autoplay loop muted playsinline style="width: 70vw;">
     <source src="suppvideo.webm" type="video/webm">
   </video>
 </div>
@@ -27,6 +27,10 @@ thumbnail-video: laneshift_compressed.mp4
 
 # Abstract
 Neural radiance fields (NeRFs) have gained popularity in the autonomous driving (AD) community. Recent methods show NeRFs' potential for closed-loop simulation, enabling testing of AD systems, and as an advanced training data augmentation technique. However, existing methods often require long training times, dense semantic supervision, or lack generalizability. This, in turn, hinders the application of NeRFs for AD at scale. In this paper, we propose NeuRAD, a robust novel view synthesis method tailored to dynamic AD data. Our method features simple network design, extensive sensor modeling for both camera and lidar --- including rolling shutter, beam divergence and ray dropping --- and is applicable to multiple datasets out of the box. We verify its performance on five popular AD datasets, achieving state-of-the-art performance across the board. To encourage further development, we openly release the NeuRAD source code.
+
+<figure>
+  <img style="width: 100%; margin: 0 auto;" src="frontfig.png"/>
+</figure>
 
 ---
 
