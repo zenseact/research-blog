@@ -50,15 +50,17 @@ To compensate for this effect we explicitly assign individual timestamps to each
 {% include two_image_slider.html
   left_image="norolling_rgb.jpg"
   right_image="withrolling_rgb.jpg"
-  height="25"
+  width="25"
   id="1"
+  linkid="2"
   caption="Effect of rolling shutter on RGB"
 %}
 {% include two_image_slider.html
   left_image="norolling_depth.jpg"
   right_image="withrolling_depth.jpg"
-  height="25"
+  width="25"
   id="2"
+  linkid="1"
   caption="Effect of rolling shutter on depth"
 %}
 </div>
@@ -73,11 +75,11 @@ Note that this formulation is different from prior work, where the downweighting
 
 An autonomous vehicle typically records the scene using multiple cameras, that can differ quite a bit. Sometimes they are entirely different models, and sometimes they are the same model, but with different settings. Even with all settings being equal dynamic adjustments of the sensor parameters, such as exposure time, can cause the same camera to capture the same scene differently. This results in inconsistencies in the data, which is highly problematic for the RGB reconstruction loss. To address this, we concanetate a learnable sensor embedding to the rendered feature \\(\mathbf{f}\\), before modality decoders. This allows the network to learn to compensate for the differences in the sensors, and results in a more consistent reconstruction, as is illustrated below:
 
-<div style="display: flex; justify-content: space-around;">
+<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em;">
 {% include two_image_slider.html
   left_image="without_appemb.jpg"
   right_image="with_appemb.jpg"
-  height="30"
+  width="40"
   id="3"
   caption="Rendering without and with sensor embedding"
 %}

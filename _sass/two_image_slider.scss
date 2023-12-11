@@ -25,6 +25,7 @@ $slider-max-height: 750px;
         overflow: hidden;
         height: 100%;
         width: 50%;
+        box-sizing: content-box;
 
         border-style: hidden solid hidden hidden;
         border-color: rgb(0, 0, 0);
