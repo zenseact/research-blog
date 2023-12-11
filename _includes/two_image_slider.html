@@ -9,12 +9,12 @@
 {% assign caption = include.caption %}
 
 <div>
-    <div class="slider__container" style="width: {{width}}vw;">
-        <div class="slider__img__bg" id="slider__background{{id}}" style="background-image: url({{img_r}});">
-            <div class="slider__img__bg__overlay" id="slider__overlay{{id}}" style="background-image: url({{img_l}});">
+    <div class="slider__container" style="width: {{ width }}vw;">
+        <div class="slider__img__bg" id="slider__background{{ id }}" style="background-image: url({{ img_r }});">
+            <div class="slider__img__bg__overlay" id="slider__overlay{{ id }}" style="background-image: url({{ img_l }});">
             </div>
-            <div class="slider__button" id="slider__button{{id}}"></div>
-            <input type="range" min="0" max="100" value="50" step="0.1" class="slider__input" id="slider__input{{id}}" oninput="moveDivisor({{ id }}, {{ linkid }})">
+            <div class="slider__button" id="slider__button{{ id }}"></div>
+            <input type="range" min="0" max="100" value="50" step="0.1" class="slider__input" id="slider__input{{ id }}" oninput="moveDivisor({{ id }}, {{ linkid }})">
         </div>
     </div>
     <figcaption class="slider__caption"> <b>Fig. {{ id }}:</b> {{ caption }} </figcaption>
@@ -29,5 +29,5 @@
         };
         img.src = img_div.style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
     }
-    adjustAspectRatio(document.getElementById("slider__background{{id}}"), {{ width }});
+    adjustAspectRatio(document.getElementById("slider__background{{ id }}"), {{ width }});
 </script>
