@@ -10,15 +10,15 @@
 
 .publication__head__title {
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
 
     p {
-        font-size: 0.6rem;
+        font-size: 0.5rem;
         margin-top: 0;
     }
 
     .publication__venue {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 
 
@@ -32,7 +32,7 @@
 
     li {
         list-style-type: none;
-        font-size:1rem;
+        font-size:0.75rem;
     }
 
     @media (max-width: $medium) {
@@ -83,5 +83,23 @@
             color: $warning-color;
 
         }
+    }
+}
+
+.page__content {
+    p {
+        font-size: 0.7rem;
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    h3 {
+        font-size: 0.8rem;
     }
 }

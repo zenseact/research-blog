@@ -1,7 +1,7 @@
 .home__header_container {
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
 
     @media (max-width: $medium) {
         grid-template-columns: 1fr;
