@@ -92,3 +92,5 @@ An autonomous vehicle typically records the scene using multiple cameras, which 
 </div>
 
 Note that this is inspired by recent work on NeRFs in the wild {% cite martin2021nerf %}, with two key differences. First, we only learn a single embedding per sensor, not per image, improving generalizaiton to novel views. Second, we apply the sensor embedding after the volume rendering, reducing the computational overhead. This is not possible in the original work, as they directly render RGB, whereas we render high-level features.
+
+---

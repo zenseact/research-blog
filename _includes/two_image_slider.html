@@ -3,14 +3,14 @@
 {% assign img_l = include.left_image %}
 {% assign img_r = include.right_image %}
 {% assign width = include.width %}
-{% assign max-width = include.max-width %}
+{% assign max-width = include.max-width | default: "1000px" %}
 {% assign id = include.id %}
 {% assign linkid = include.linkid %}
 <!-- optional arguments -->
 {% assign caption = include.caption %}
 
 <div>
-    <div class="slider__container" style="width: {{ width }}vw; {% if max-width %}max-width: {{ max-width }};{% endif %}">
+    <div class="slider__container" style="width: {{ width }}vw; max-width: {{ max-width }};">
         <div class="slider__img__bg" id="slider__background{{ id }}" style="background-image: url({{ img_r }});">
             <div class="slider__img__bg__overlay" id="slider__overlay{{ id }}" style="background-image: url({{ img_l }});">
             </div>
