@@ -149,13 +149,20 @@ layout: default
 
 <script>
     var fg, slider, slider_bt;
-    function moveDivisor(id) {
+    function moveDivisor(id, linkid) {
+        console.log("moveDivisor", id, linkid);
+        if (linkid != null) {
+            linked_slider = document.getElementById("slider__input" + linkid);
+            linked_slider.value = document.getElementById("slider__input" + id).value;
+            moveDivisor(linkid, null);
+        }
+
         slider = document.getElementById("slider__input" + id);
         slider_bt = document.getElementById("slider__button" + id);
         fg = document.getElementById("slider__overlay" + id);
 
         fg.style['width'] = slider.value+"%";
-        slider_bt.style['left'] = "calc("+slider.value+"% - 18px)";
+        slider_bt.style['left'] = "calc("+slider.value+"% - 15px)";
     }
 
     function moveImageSlider(img_folder, id) {

@@ -3,19 +3,33 @@
 {% assign img_l = include.left_image %}
 {% assign img_r = include.right_image %}
 {% assign width = include.width %}
-{% assign height = include.height %}
+{% assign max-width = include.max-width | default: "1000px" %}
 {% assign id = include.id %}
+{% assign linkid = include.linkid %}
 <!-- optional arguments -->
 {% assign caption = include.caption %}
+
 <div>
-    <div class="slider__container" style="height: {{ height }}vw; width: {{ width }}vw;">
-        <div class="slider__img__bg" style="background-image: url({{ img_r }});">
+    <div class="slider__container" style="width: {{ width }}vw; max-width: {{ max-width }};">
+        <div class="slider__img__bg" id="slider__background{{ id }}" style="background-image: url({{ img_r }});">
             <div class="slider__img__bg__overlay" id="slider__overlay{{ id }}" style="background-image: url({{ img_l }});">
             </div>
             <div class="slider__button" id="slider__button{{ id }}"></div>
-            <input type="range" min="0" max="100" value="50" step="0.1" class="slider__input" id="slider__input{{ id }}" oninput="moveDivisor({{ id }})">
+            <input type="range" min="0" max="100" value="50" step="0.1" class="slider__input" id="slider__input{{ id }}" oninput="moveDivisor({{ id }}, {{ linkid }})">
         </div>
-
     </div>
     <figcaption class="slider__caption"> <b>Fig. {{ id }}:</b> {{ caption }} </figcaption>
 </div>
+
+<script>
+    function adjustAspectRatio(img_div, widthVw) {
+        var img = new Image();
+        img.onload = function() {
+            var aspectRatio = this.naturalHeight / this.naturalWidth;
+            img_div.parentElement.style.height = `${widthVw * aspectRatio}vw`;
+            img_div.parentElement.style.maxHeight = `${img_div.parentElement.style.maxWidth * aspectRatio}px`;
+        };
+        img.src = img_div.style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
+    }
+    adjustAspectRatio(document.getElementById("slider__background{{ id }}"), {{ width }});
+</script>
