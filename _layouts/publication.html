@@ -143,9 +143,12 @@ layout: default
         <section class="page__content" itemprop="text">
             {{ content }}
         </section>
-        {% bibliography --cited %}
+        <d-citation-list></d-citation-list>
+        <d-bibliography src="references.bib"></d-bibliography>
     </article>
 </div>
+
+{% include scripts/bootstrap.html %}
 
 <script>
     var fg, slider, slider_bt;

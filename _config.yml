@@ -30,6 +30,3 @@ repository: zenseact/research-blog
 remote_theme: mmistakes/minimal-mistakes@4.24.0
 title: Zenseact Research
 url: https://zenseact.github.io
-
-scholar:
-  style: ieee
