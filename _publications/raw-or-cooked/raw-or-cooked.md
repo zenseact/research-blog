@@ -41,7 +41,7 @@ In the ISP pipeline, the RAW data is processed sequentially by handcrafted opera
 We study several different learnable operations \\(F(\mathbf{x})\\) that can be applied to the RAW image before it is fed to the object detector, all of which are outlined in slight detail below.
 
 **Learnable gamma correction.**
-Previous works {% cite buckler2017reconfiguring olli2021end %} have shown that [demosaicing](https://en.wikipedia.org/wiki/Demosaicing) and [tone mapping](https://en.wikipedia.org/wiki/Tone_mapping) are the most important operations in a traditional ISP pipeline. We, therefore, start by investigating a learnable gamma correction (which is one of the most common tone mapping techniques) operations, defined as
+Previous works <d-cite key="buckler2017reconfiguring,olli2021end"></d-cite> have shown that [demosaicing](https://en.wikipedia.org/wiki/Demosaicing) and [tone mapping](https://en.wikipedia.org/wiki/Tone_mapping) are the most important operations in a traditional ISP pipeline. We, therefore, start by investigating a learnable gamma correction (which is one of the most common tone mapping techniques) operations, defined as
 
 $$
 F_{\text{d}}(\mathbf{x}) = \mathbf{x_d}^{\gamma},
@@ -59,7 +59,7 @@ $$
 where \\(\mu\\) and \\(\sigma\\) are learnable parameters optimized during training.
 
 **Learnable Yeo-Johnson transformation.**
-Lastly, by observing that the RAW data was far from normally distributed and knowing the fact that this is a characteristic that tends to improve the performance of deep neural networks, we sought to find a transformation that would make the RAW data more normally distributed. To this end, we adopt the [Yeo-Johnson transformation](https://en.wikipedia.org/wiki/Power_transform#Yeo%E2%80%93Johnson_transformation) {% cite yeo2000new %} and define a  learnable version of it as
+Lastly, by observing that the RAW data was far from normally distributed and knowing the fact that this is a characteristic that tends to improve the performance of deep neural networks, we sought to find a transformation that would make the RAW data more normally distributed. To this end, we adopt the [Yeo-Johnson transformation](https://en.wikipedia.org/wiki/Power_transform#Yeo%E2%80%93Johnson_transformation) <d-cite key="yeo2000new"></d-cite> and define a  learnable version of it as
 
 $$
 F_{\text{YJ}}(\mathbf{x}) = \frac{(\mathbf{x} + 1)^\lambda - 1}{\lambda},
@@ -72,7 +72,7 @@ where \\(\lambda\\) is a learnable parameter optimized during training.
 
 To evaluate the effect our proposed learnable operations have on downstream computer vision tasks, we employ an object detection setting. Here, we make use of the [PASCALRAW dataset](https://searchworks.stanford.edu/view/hq050zr7488), which comprises RAW and RGB images, as well as 2D bounding box annotations for *cars*, *pedestrians*, and *bicycles*.
 
-We adopt a [Faster R-CNN](https://arxiv.org/abs/1506.01497) {% cite ren2015faster %} object detector, coupled with a [Feature Pyramid Network](https://arxiv.org/abs/1612.03144) {% cite lin2017feature %}, and use a [ResNet-50](https://arxiv.org/abs/1512.03385) {% cite he2016deep %} backbone. We train each of our proposed learnable operations end-to-end with their respective network, and evaluate their performance according to the mean average precision (AP) metric, as defined in the COCO evaluation protocol {% cite lin2014microsoft %}.
+We adopt a [Faster R-CNN](https://arxiv.org/abs/1506.01497) <d-cite key="ren2015faster"></d-cite> object detector, coupled with a [Feature Pyramid Network](https://arxiv.org/abs/1612.03144) <d-cite key="lin2017feature"></d-cite>, and use a [ResNet-50](https://arxiv.org/abs/1512.03385) <d-cite key="he2016deep"></d-cite> backbone. We train each of our proposed learnable operations end-to-end with their respective network, and evaluate their performance according to the mean average precision (AP) metric, as defined in the COCO evaluation protocol <d-cite key="lin2014microsoft"></d-cite>.
 
 **Qualitative results.** We evaluated our three pipelines separately, and compared them to two baselines:
 1. RGB baseline. This is the traditional object detection pipeline, where we feed the RGB image directly into the object detector.

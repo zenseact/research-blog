@@ -73,7 +73,7 @@ To compensate for this effect we explicitly assign individual timestamps to each
 
 ## Ray divergence
 
-Recent work has shown that NeRFs suffer from aliasing artifacts when objects in the scene are viewed at different distances. This is especially problematic in automotive scenes, where the sensors (ego vehicle) moves through the scene, and the distance to the objects in the scene changes. Inspired by recent work {% cite Barron_2023_ICCV %}, we model the beam divergence of the lidar sensor, and the size of individual pixels, by reweighting the iNGP hashgrid features. Specifically, for a given ray sample, we compare the volume of the frustum it represents, with the volume of a voxel at each resolution of the hashgrid. We then downweight features for scales that are much smaller than the considered frustum.
+Recent work has shown that NeRFs suffer from aliasing artifacts when objects in the scene are viewed at different distances. This is especially problematic in automotive scenes, where the sensors (ego vehicle) moves through the scene, and the distance to the objects in the scene changes. Inspired by recent work <d-cite key="Barron_2023_ICCV"></d-cite>, we model the beam divergence of the lidar sensor, and the size of individual pixels, by reweighting the iNGP hashgrid features. Specifically, for a given ray sample, we compare the volume of the frustum it represents, with the volume of a voxel at each resolution of the hashgrid. We then downweight features for scales that are much smaller than the considered frustum.
 
 Note that this formulation is different from prior work, where the downweighting is based on Gaussians, and the hashgrid is sampled multiple time, incurring a significant computational overhead. In contrast, our formulation is simpler and faster, but expressive. Still, we find that it significantly improves the rendering quality, and especially the depth estimation.
 
@@ -91,6 +91,6 @@ An autonomous vehicle typically records the scene using multiple cameras, which 
 %}
 </div>
 
-Note that this is inspired by recent work on NeRFs in the wild {% cite martin2021nerf %}, with two key differences. First, we only learn a single embedding per sensor, not per image, improving generalizaiton to novel views. Second, we apply the sensor embedding after the volume rendering, reducing the computational overhead. This is not possible in the original work, as they directly render RGB, whereas we render high-level features.
+Note that this is inspired by recent work on NeRFs in the wild <d-cite key="martin2021nerf"></d-cite>, with two key differences. First, we only learn a single embedding per sensor, not per image, improving generalizaiton to novel views. Second, we apply the sensor embedding after the volume rendering, reducing the computational overhead. This is not possible in the original work, as they directly render RGB, whereas we render high-level features.
 
 ---
