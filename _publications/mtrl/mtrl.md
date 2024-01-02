@@ -8,7 +8,7 @@ authors:
   - Basu
   - Tram
   - Alibeigi
-  - Dimtrakakis
+  - Dimitrakakis
 date: 2023-02-18 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2302.09273
 n_equal_contrib: 1
