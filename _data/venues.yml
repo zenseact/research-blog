@@ -2,6 +2,12 @@
 ARXIV:
   name: arXiv
   url: https://arxiv.org
+AAMAS2024:
+  name: The 23rd International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2024
+  url: https://www.aamas2024-conference.auckland.ac.nz/
+AISTATS2023:
+  name: The 26th International Conference on Artificial Intelligence and Statistics (AISTATS), 2023
+  url: http://aistats.org/aistats2023/
 ECCV22:
   name: European Conference on Computer Vision (ECCV), 2022
   url: https://eccv2022.ecva.net
@@ -29,3 +35,6 @@ ITSC19:
 ITSC18:
   name: 2018 21st International Conference on Intelligent Transportation Systems (ITSC)
   url: https://ieee-itsc.org/2018/
+UAI2022:
+  name: The 38th Conference on Uncertainty in Artificial Intelligence (UAI), 2022
+  url: https://www.auai.org/uai2022/

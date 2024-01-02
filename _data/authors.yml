@@ -25,6 +25,10 @@ Bodin:
   firstname: ["Alexander", "A.", "A. B.", "Alexander Bodin"]
   org: Zenseact
   title: Intern
+Buening:
+  firstname: ["Thomas", "T.", "T.B", "Thomas Buening"]
+  org: Oslo University
+  scholar: 1VT2sBgAAAAJ
 Dimitrakakis:
   firstname: ["Christos", "C.", "C. D.", "Christos Dimitrakakis"]
   scholar: 9Kw4t_kAAAAJ
@@ -58,6 +62,10 @@ Fu:
   url: https://junshengfu.github.io
 Gronberg:
   firstname: ["Robin", "R.", "R. G.", "Robin Grönberg"]
+Grover:
+  firstname: ["Divya", "D.", "D.G.", "Divya Grover"]
+  org: Chalmers University
+  scholar: gxlPOTcAAAAJ 
 Hagerman:
   firstname: ["David", "D.", "D. H.", "David Hagerman"]
   org: Chalmers University of Technology
@@ -92,6 +100,10 @@ Johnander:
   org: Zenseact
   scholar: 5sUDSxQAAAAJ
   title: Researcher
+Jorge:
+  firstname: ["Emilio", "E.", "E.J.", "Emilio Jorge"]
+  org: Chalmers University
+  scholar: Tn0Mk_wAAAAJ
 Lilja:
   firstname: ["Adam", "A.", "A. L.", "Adam Lilja"]
   github: LiljaAdam

@@ -2,7 +2,7 @@
 layout: publication
 permalink: /publications/mtrl/
 title: "Reinforcement Learning in the Wild with Maximum Likelihood-based Model Transfer"
-venue: ARXIV
+venue: AAMAS2024
 authors:
   - Eriksson
   - Basu
@@ -10,7 +10,7 @@ authors:
   - Alibeigi
   - Dimtrakakis
 date: 2023-02-18 00:00:00 +00:00
-arxiv: https://arxiv.org/pdf/2302.09273.pdf
+arxiv: https://arxiv.org/abs/2302.09273
 n_equal_contrib: 1
 ---
 
