@@ -1,6 +1,6 @@
 ---
 permalink: /publications/sentinel-uncertainty/
-title: SENTINEL: Taming Uncertainty with Ensemble based Distributional Reinforcement Learning
+title: SENTINEL Taming Uncertainty with Ensemble based Distributional Reinforcement Learning
 venue: UAI22
 authors:
   - Eriksson
