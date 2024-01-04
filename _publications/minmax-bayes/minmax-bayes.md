@@ -1,4 +1,5 @@
 ---
+layout: publication
 permalink: /publications/minmax-bayes/
 title: Minimax-Bayes Reinforcement Learning
 venue: AISTATS2023
