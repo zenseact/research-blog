@@ -11,7 +11,11 @@
             {% for authorkey in publication.authors %}
             {% assign author = site.data.authors[authorkey] %}
             {% if forloop.last %}
+                {% if forloop.index0 < publication.n_equal_contrib and publication.n_equal_contrib > 1 %}
+                {{ author.firstname[3] }}<sup>&ast;</sup>
+                {% else %}
                 {{ author.firstname[3] }}
+                {% endif %}
             {% else %}
                 {% if forloop.index0 < publication.n_equal_contrib and publication.n_equal_contrib > 1 %}
                 {{ author.firstname[3] }}<sup>&ast;</sup>,&nbsp;
