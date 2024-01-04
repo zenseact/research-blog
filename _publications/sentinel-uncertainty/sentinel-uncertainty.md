@@ -1,4 +1,5 @@
 ---
+layout: publication
 permalink: /publications/sentinel-uncertainty/
 title: SENTINEL Taming Uncertainty with Ensemble based Distributional Reinforcement Learning
 venue: UAI22
