@@ -62,6 +62,7 @@ Ljungbergh: # this is the idientifier. should be unique.
   scholar: RXEPFo0AAAAJ # This is the authors Google Scholar ID. (optional)
   title: PhD Student # This is the authors title. [Phd Student, Researcher, Professor, Supervisor] (optional)
   url: https://ljungbergh.com # This is the authors personal website (optional)
+  orcid: 0000-0002-0194-6346 # The Open Researcher and Contributor ID (optional)
 ```
 
 
