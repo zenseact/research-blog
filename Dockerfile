@@ -20,7 +20,7 @@ ENV LANG=en_US.UTF-8 \
     JEKYLL_ENV=production
 
 # install jekyll and dependencies
-RUN gem update --system
+RUN gem i rubygems-update -v '<3.5.0' && update_rubygems
 RUN gem install sass-embedded -v 1.63.6
 RUN gem install jekyll bundler
 
