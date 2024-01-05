@@ -8,6 +8,9 @@ AAMAS2024:
 AISTATS2023:
   name: The 26th International Conference on Artificial Intelligence and Statistics (AISTATS), 2023
   url: http://aistats.org/aistats2023/
+Automatica:
+  name: Automatica
+  url: https://www.sciencedirect.com/journal/automatica
 ECCV22:
   name: European Conference on Computer Vision (ECCV), 2022
   url: https://eccv2022.ecva.net
