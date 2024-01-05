@@ -35,6 +35,11 @@ layout: default
                                 {% if author.url or author.scholar %}
                                 </a>
                                 {% endif %}
+                                {% if author.orcid %}
+                                    <a href="https://orcid.org/{{ author.orcid }}" target="_blank" rel="noopener noreferrer">
+                                        <i class="ai ai-orcid"></i>
+                                    </a>
+                                {% endif %}
                             </span>
                         </li>
                         {% endfor %}
