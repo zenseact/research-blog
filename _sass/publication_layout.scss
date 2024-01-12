@@ -49,6 +49,10 @@
         max-height: 400px;
         max-width: 95%;
     }
+    img[src$=".svg"] {
+        height: 100%;
+        width: 100%;
+    }
 
 }
 
