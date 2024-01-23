@@ -8,6 +8,9 @@ AAMAS2024:
 AISTATS2023:
   name: The 26th International Conference on Artificial Intelligence and Statistics (AISTATS), 2023
   url: http://aistats.org/aistats2023/
+Automatica:
+  name: Automatica
+  url: https://www.sciencedirect.com/journal/automatica
 ECCV22:
   name: European Conference on Computer Vision (ECCV), 2022
   url: https://eccv2022.ecva.net
@@ -27,13 +30,13 @@ WACV24:
   name: Winter Conference on Applications of Computer Vision (WACV), 2024
   url: https://wacv2024.thecvf.com
 ITSC20:
-  name: 2020 IEEE 23rd international conference on intelligent transportation systems (ITSC)
+  name: IEEE 23rd International Conference on Intelligent Transportation Systems (ITSC), 2020
   url: https://www.ieee-itsc2020.org/
 ITSC19:
-  name: 2019 IEEE Intelligent Transportation Systems Conference (ITSC)
+  name: IEEE 22nd International Conference on Intelligent Transportation Systems (ITSC), 2019
   url: https://ieee-itsc.org/2019/www.itsc2019.org/index.html
 ITSC18:
-  name: 2018 21st International Conference on Intelligent Transportation Systems (ITSC)
+  name: IEEE 21st International Conference on Intelligent Transportation Systems (ITSC), 2018
   url: https://ieee-itsc.org/2018/
 UAI2022:
   name: The 38th Conference on Uncertainty in Artificial Intelligence (UAI), 2022

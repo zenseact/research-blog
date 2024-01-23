@@ -13,6 +13,7 @@ Create a new folder in `_publications` with the a name related to the paper. For
 Create a new file in the folder called `raw-or-cooked.md`. This file could contain the following front matter (i.e, the metadata at the top of the markdown file):
 ```yaml
 ---
+layout: publication
 permalink: /publications/raw-or-cooked/ # This is the permalink to the blog post. It should be the same as the name of the folder.
 title: Raw or Cooked? Object detection on RAW images # This is the title of the paper
 venue: SCIA23 # This is the venue of the paper. It must have a corresponding entry in `_data/venues.yml`.
@@ -22,6 +23,7 @@ authors:
   - Petersson
   - Felsberg
 code: <link-to-potential-github-code>
+doi: <digital object identifier> # This is the DOI, without protocol and domain, e.g., 10.1016/j.automatica.2023.111394
 arxiv: https://arxiv.org/abs/2301.08965 # This is the arXiv link to the paper.
 n_equal_contrib: 1 # This can be used if you have several authors that contributed equally to the paper. In this case, the first n authors listed in the `authors` field will be marked as equal contributors.
 date: 2023-01-21 00:00:00 +0000 # This is the date of the paper submission

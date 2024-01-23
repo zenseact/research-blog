@@ -39,6 +39,9 @@ EliasSvensson:
 Eriksson:
   firstname: ["Hannes", "H.", "H. E.", "Hannes Eriksson"]
   scholar: KyX9dfEAAAAJ
+Fabian:
+  firstname: ["Martin", "M.", "M. F.", "Martin fabian"]
+  org: Chalmers University of Technology
 Fatemi:
   firstname: ["Maryam", "M.", "M. F.", "Maryam Fatemi"]
   mail: maryam.fatemi@zenseact.com
@@ -104,6 +107,12 @@ Jorge:
   firstname: ["Emilio", "E.", "E.J.", "Emilio Jorge"]
   org: Chalmers University
   scholar: Tn0Mk_wAAAAJ
+Krook:
+  firstname: ["Jonas", "J.", "J. K.", "Jonas Krook"]
+  mail: jonas.krook@zenseact.com
+  org: Zenseact
+  scholar: JHCD0BsAAAAJ
+  orcid: 0000-0002-9810-4697
 Lilja:
   firstname: ["Adam", "A.", "A. L.", "Adam Lilja"]
   github: LiljaAdam
@@ -133,11 +142,16 @@ Ljungbergh:
   scholar: RXEPFo0AAAAJ
   title: PhD Student
   url: https://ljungbergh.com
-  orcid: 0000-0002-0194-6346
+Malik:
+  firstname: ["Robi", "R.", "R. M.", "Robi Malik"]
+  org: The University of Waikato
 Meding:
   firstname: ["Isak", "I.", "I. M.", "Isak Meding"]
   org: Zenseact
   title: Intern
+Mohajerani:
+  firstname: ["Sahar", "S.", "S. M.", "Sahar Mohajerani"]
+  org: Mathworks
 Motorniuk:
   firstname: ["Daria", "D.", "D. M.", "Daria Motorniuk"]
   org: Zenseact
