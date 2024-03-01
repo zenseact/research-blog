@@ -2,7 +2,7 @@
 layout: publication
 permalink: /publications/neurad/
 title: "NeuRAD: Neural Rendering for Autonomous Driving"
-venue: ARXIV
+venue: CVPR24
 authors:
   - Tonderski
   - Lindstrom

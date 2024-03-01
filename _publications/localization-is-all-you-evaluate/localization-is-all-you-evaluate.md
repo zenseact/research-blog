@@ -2,7 +2,7 @@
 layout: publication
 permalink: /publications/localization-is-all-you-evaluate/
 title: "Localization Is All You Evaluate: Data Leakage in Online Mapping Datasets and How to Fix It"
-venue: ARXIV
+venue: CVPR24
 authors:
   - Lilja
   - Stenborg
