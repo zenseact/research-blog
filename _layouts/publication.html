@@ -63,19 +63,19 @@ layout: default
                     <p class="publication__social__links__title">Share</p>
                     <ul class="publication__social__links publication__sharing_links">
                         <li class="publication__social__link">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url }}"
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.hosted_url }}{{ page.url }}"
                                 target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-facebook"></i>
                             </a>
                         </li>
                         <li class="publication__social__link">
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url }}&title={{ page.title }}&summary=&source="
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.hosted_url }}{{ page.url }}&title={{ page.title }}&summary=&source="
                                 target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-linkedin"></i>
                             </a>
                         </li>
                         <li class="publication__social__link">
-                            <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ page.url | absolute_url }}"
+                            <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.hosted_url }}{{ page.url }}"
                                 target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-twitter"></i>
                             </a>
