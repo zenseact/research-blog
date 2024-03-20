@@ -21,14 +21,31 @@ Basu:
 Batkovic:
   firstname: ["Ivo", "I.", "I. B.", "Ivo Batkovic"]
   scholar: 7X_8eVEAAAAJ
+Bergenhem:
+  firstname: ["Carl", "C.", "C. B.", "Carl Bergenhem"]
+  org: Qamcom
+  scholar: JN3MbzYAAAAJ
 Bodin:
   firstname: ["Alexander", "A.", "A. B.", "Alexander Bodin"]
   org: Zenseact
   title: Intern
+Brannstrom:
+  firstname: ["Mattias", "M.", "M. B.", "Mattias Brännström"]
+  org: Zenseact AB
+  scholar: rM9mOFAAAAAJ
 Buening:
   firstname: ["Thomas", "T.", "T.B", "Thomas Buening"]
   org: Oslo University
   scholar: 1VT2sBgAAAAJ
+Campos:
+  firstname: ["Gabriel", "G.", "G. C.", "Gabriel Rodrigues de Campos"]
+  org: Zenseact AB
+  url: http://www.gabrieldecampos.com
+  scholar: wK-DQL0AAAAJ
+Chen:
+   firstname: ["DeJiu", "D.", "D. C.", "DeJiu Chen"]
+   org: KTH Royal Institute of Technology
+   scholar: SE9ruMUAAAAJ
 Dimitrakakis:
   firstname: ["Christos", "C.", "C. D.", "Christos Dimitrakakis"]
   scholar: 9Kw4t_kAAAAJ
@@ -48,6 +65,9 @@ Fatemi:
   org: Zenseact
   scholar: GpcBXmoAAAAJ
   title: Researcher
+Feilbinger:
+  firstname: ["Hermann", "H.", "H. F.", "Hermann Feilbinger"]
+  org: AVL List
 Felsberg:
   firstname: ["Michael", "M.", "M. F.", "Michael Felsberg"]
   org: Linköping University
@@ -63,12 +83,25 @@ Fu:
   scholar: z3lud1UAAAAJ
   title: Researcher
   url: https://junshengfu.github.io
+Gaspar:
+  firstname: ["José Manuel Gaspar", "JMG.", "JMG. S.", "José Manuel Gaspar Sanchez"]
+  org: KTH Royal Institute of Technology
+  scholar: EEGDis0AAAAJ
 Gronberg:
   firstname: ["Robin", "R.", "R. G.", "Robin Grönberg"]
 Grover:
   firstname: ["Divya", "D.", "D.G.", "Divya Grover"]
   org: Chalmers University
   scholar: gxlPOTcAAAAJ
+Gyllenhammar:
+  firstname: ["Magnus", "M.", "M. G.", "Magnus Gyllenhammar"]
+  org: [Zenseact, KTH Royal Institute of Technology]
+  github: maggyl
+  linkedin: maggyl
+  picture: /assets/images/profiles/maggyl.jpg
+  title: PhD Student
+  url: https://maggyl.github.io
+  scholar: 2NAVPBMAAAAJ
 Hagerman:
   firstname: ["David", "D.", "D. H.", "David Hagerman"]
   org: Chalmers University of Technology
@@ -88,6 +121,10 @@ Hess:
   scholar: ZvUoV2EAAAAJ
   title: PhD Student
   url: https://georghess.github.io/
+Heyn:
+   firstname: ["Hans-Martin", "H.", "H. H.", "Hans-Martin Heyn"]
+   org: Volvo Technology AB
+   scholar: Pd5pmvQAAAAJ
 Hoel:
   firstname: ["Carl-Johan", "C.", "C. H.", "Carl-Johan Hoel"]
   scholar: f7ewwIsAAAAJ
@@ -97,6 +134,14 @@ Jaxing:
   firstname: ["Johan", "J.", "J. X.", "Johan Jaxing"]
   org: Zenseact
   title: Intern
+Jianbotao:
+  firstname: ["Jianbo", "J.", "J. T.", "Jianbo Tao"]
+  org: AVL List
+  scholar: UKUtWucAAAAJ
+Johansson:
+  firstname: ["Rolf", "R.", "R. J.", "Rolf Johansson"]
+  org: Astus AB
+  scholar: qceJ6hwAAAAJ
 Johnander:
   firstname: ["Joakim", "J.", "J. J.", "Joakim Johnander"]
   mail: joakim.johnander@zenseact.com
@@ -152,9 +197,16 @@ Meding:
 Mohajerani:
   firstname: ["Sahar", "S.", "S. M.", "Sahar Mohajerani"]
   org: Mathworks
+Mohan:
+  firstname: ["Naveen", "N.", "N. M.", "Naveen Mohan"]
+  org: KTH Royal Institute of Technology
+  scholar: bSJ8lQoAAAAJ
 Motorniuk:
   firstname: ["Daria", "D.", "D. M.", "Daria Motorniuk"]
   org: Zenseact
+Nica:
+  firstname: ["Mihai", "M.", "M. N.", "Mihai Nica"]
+  org: AVL List
 Petersson:
   firstname: ["Christoffer", "C.", "C. P.", "Christoffer Petersson"]
   mail: christoffer.petersson@zenseact.com
@@ -168,9 +220,25 @@ Rafidashti:
   mail: mahan.rafidashti@zenseact.com
   org: [Zenseact, Chalmers University of Technology]
   title: PhD Student
+Rusyadi:
+  firstname: ["Muhammad Rusyadi", "MR.", "MR. R.", "Muhammad Rusyadi Ramli"]
+  org: KTH Royal Institute of Technology
+  scholar: 6toSX0YAAAAJ
+Sandblom:
+  firstname: ["Fredrik", "F.", "F. S.", "Fredrik Sandblom"]
+  org: Zenseact AB
+Sanfridson:
+  firstname: ["Martin", "M.", "M. S.", "Martin Sanfridson"]
+  org: Volvo Technology AB
+Sivencrona:
+  firstname: ["Håkan", "H.", "H. S.", "Håkan Sivencrona"]
+  org: Zenseact AB
 Sjoberg:
   firstname: ["Jonas", "J.", "J. S.", "Jonas Sjöberg"]
   scholar: s0Qakg77XTYC
+Skoglund:
+  firstname: ["Martin", "M.", "M. S.", "Martin Skoglund"]
+  org: RISE Research Institutes of Sweden
 Stenborg:
   firstname: ["Erik", "E.", "E. S.", "Erik Stenborg"]
   mail: erik.stenberg@zenseact.com
@@ -182,6 +250,18 @@ Svensson:
   org: Chalmers University of Technology
   scholar: AMM9vE4AAAAJ
   title: Professor
+Soderberg:
+   firstname: ["Jan", "J.", "J. S.", "Jan Söderberg"]
+   org: Systemite AB
+   url: https://www.researchgate.net/profile/Jan-Soderberg
+Tan:
+  firstname: ["Kaige", "K.", "K. T.", "Jianbo Tan"]
+  org: KTH Royal Institute of Technology
+  scholar: qA2Xb_MAAAAJ
+Thorsen:
+  firstname: ["Anders", "A.", "A. T.", "Anders Thorsén"]
+  org: RISE Research Institutes of Sweden
+  url: https://www.ri.se/sv/person/anders-thorsen
 Tonderski:
   firstname: ["Adam", "A.", "A. T.", "Adam Tonderski"]
   github: atonderski
@@ -197,9 +277,38 @@ Tram:
   org: Zenseact
   scholar: m_O_xjIAAAAJ
   title: null
+Torngren:
+  firstname: ["Martin", "M.", "M. T.", "Martin Törngren"]
+  org: KTH Royal Institute of Technology
+  url: https://www.kth.se/profile/martint
+  scholar: -F-KArEAAAAJ
+Ursing:
+  firstname: ["Stig", "S.", "S. U.", "Stig Ursing"]
+  org: Semcon Sweden AB
+  url: https://www.researchgate.net/profile/Stig-Ursing
+Warg:
+  firstname: ["Fredrik", "F.", "F. W.", "Fredrik Warg"]
+  org: RISE Research Institutes of Sweden
+  url: https://warg.org
+  scholar: H4hiOCMAAAAJ
 Widahl:
   firstname: ["Jenny", "J.", "J.W.", "Jenny Widahl"]
   org: Zenseact
+Wotawa:
+  firstname: ["Franz", "F.", "F. W.", "Franz Wotawa"]
+  org: Graz University of Technology
+  scholar: Z27gH2wAAAAJ
+Xintao:
+  firstname: ["Xin", "X.", "X. T.", "Xin Tao"]
+  org: KTH Royal Institute of Technology
+  scholar: h405hiwAAAAJ
+Xinhai:
+  firstname: ["Xinhai", "X.", "X. Z.", "Xinhai Zhang"]
+  org: KTH Royal Institute of Technology
+  scholar: hANonS0AAAAJ
+Zanden:
+  firstname: ["Carl", "C.", "C. Z.", "Carl Zandén"]
+  org: Zenuity AB
 Carlsson:
   firstname: ["Oscar", "O.", "O.C.", "Oscar Carlsson"]
   org: Chalmers University of Technology

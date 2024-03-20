@@ -44,3 +44,20 @@ ITSC18:
 UAI2022:
   name: The 38th Conference on Uncertainty in Artificial Intelligence (UAI), 2022
   url: https://www.auai.org/uai2022/
+IV22:
+  name: 33rd IEEE Intelligent Vehicles Symposium
+  url: https://iv2022.com
+CARS21:
+  name: CARS 2021 - 6th International Workshop on Critical Automotive Applications - Robustness and Safety
+  url: http://cars2021.astus.se
+ERTS20:
+  name: 10th European Congress on Embedded Real Time Systems, 2020
+  url: https://www.erts2020.org
+SAEWCX20:
+  name: SAE World Congress Experience 2020
+  url: https://www.sae.org/attend/wcx/2020
+TSE:
+  name: IEEE Transactions on Software Engineering
+  url: https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=32
+DSNW20:
+  name: 50th Annual IEEE/IFIP International Conference on Dependable Systems and Networks Workshops (DSN-W)
