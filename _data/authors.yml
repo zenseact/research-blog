@@ -68,7 +68,7 @@ Gronberg:
 Grover:
   firstname: ["Divya", "D.", "D.G.", "Divya Grover"]
   org: Chalmers University
-  scholar: gxlPOTcAAAAJ 
+  scholar: gxlPOTcAAAAJ
 Hagerman:
   firstname: ["David", "D.", "D. H.", "David Hagerman"]
   org: Chalmers University of Technology
@@ -200,3 +200,21 @@ Tram:
 Widahl:
   firstname: ["Jenny", "J.", "J.W.", "Jenny Widahl"]
   org: Zenseact
+Carlsson:
+  firstname: ["Oscar", "O.", "O.C.", "Oscar Carlsson"]
+  org: Chalmers University of Technology
+Gerken:
+  firstname: ["Jan E.", "J.E.", "J.E.G.", "Jan E. Gerken"]
+  org: Chalmers University of Technology
+Linander:
+  firstname: ["Hampus", "H.", "H. L.", "Hampus Linander"]
+  org: Chalmers University of Technology
+Spiess:
+  firstname: ["Heiner", "H.", "H. S.", "Heiner Spieß"]
+  org: Technical University Berlin
+Ohlsson:
+  firstname: ["Fredrik", "F.", "F. O.", "Fredrik Ohlsson"]
+  org: Umeå University
+Persson:
+  firstname: ["Daniel", "D.", "D. P.", "Daniel Persson"]
+  org: Chalmers University of Technology
