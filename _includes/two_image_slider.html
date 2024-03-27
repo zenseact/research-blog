@@ -4,13 +4,14 @@
 {% assign img_r = include.right_image %}
 {% assign width = include.width %}
 {% assign max-width = include.max-width | default: "1000px" %}
+{% assign max-height = include.max-height | default: "1000px" %}
 {% assign id = include.id %}
 {% assign linkid = include.linkid %}
 <!-- optional arguments -->
 {% assign caption = include.caption %}
 
 <div>
-    <div class="slider__container" style="width: {{ width }}vw; max-width: {{ max-width }};">
+    <div class="slider__container" style="width: {{ width }}vw; max-width: {{ max-width }}; max-height: {{ max-height }};">
         <div class="slider__img__bg" id="slider__background{{ id }}" style="background-image: url({{ img_r }});">
             <div class="slider__img__bg__overlay" id="slider__overlay{{ id }}" style="background-image: url({{ img_l }});">
             </div>
@@ -18,7 +19,9 @@
             <input type="range" min="0" max="100" value="50" step="0.1" class="slider__input" id="slider__input{{ id }}" oninput="moveDivisor({{ id }}, {{ linkid }})">
         </div>
     </div>
-    <figcaption class="slider__caption"> <b>Fig. {{ id }}:</b> {{ caption }} </figcaption>
+    {% if caption %}
+        <figcaption class="slider__caption" style="width: {{ width }}vw; max-width: {{ max-width }};" > <b>Fig. {{ id }}:</b> {{ caption }} </figcaption>
+    {% endif %}
 </div>
 
 <script>

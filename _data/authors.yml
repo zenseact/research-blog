@@ -29,6 +29,10 @@ Buening:
   firstname: ["Thomas", "T.", "T.B", "Thomas Buening"]
   org: Oslo University
   scholar: 1VT2sBgAAAAJ
+Caesar:
+  firstname: ["Holger", "H.", "H. C.", "Holger Caesar"]
+  org: TU Delft
+  scholar: 373LKEYAAAAJ
 Dimitrakakis:
   firstname: ["Christos", "C.", "C. D.", "Christos Dimitrakakis"]
   scholar: 9Kw4t_kAAAAJ
@@ -68,7 +72,7 @@ Gronberg:
 Grover:
   firstname: ["Divya", "D.", "D.G.", "Divya Grover"]
   org: Chalmers University
-  scholar: gxlPOTcAAAAJ 
+  scholar: gxlPOTcAAAAJ
 Hagerman:
   firstname: ["David", "D.", "D. H.", "David Hagerman"]
   org: Chalmers University of Technology

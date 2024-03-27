@@ -21,3 +21,33 @@ search: false
 .masthead__menu {
     font-size: 0.8rem;
 }
+
+.col-2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .col-2__left {
+        width: 50%;
+    }
+    .col-2__right {
+        width: 50%;
+    }
+
+
+
+    @media (max-width: $small) {
+        flex-direction: column;
+        justify-content: center;
+
+        .col-2__left {
+            width: 100%;
+        }
+        .col-2__right {
+            width: 100%;
+        }
+
+    }
+
+}
