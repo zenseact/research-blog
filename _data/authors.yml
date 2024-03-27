@@ -37,6 +37,11 @@ Buening:
   firstname: ["Thomas", "T.", "T.B", "Thomas Buening"]
   org: Oslo University
   scholar: 1VT2sBgAAAAJ
+
+Caesar:
+  firstname: ["Holger", "H.", "H. C.", "Holger Caesar"]
+  org: TU Delft
+  scholar: 373LKEYAAAAJ
 Campos:
   firstname: ["Gabriel", "G.", "G. C.", "Gabriel Rodrigues de Campos"]
   org: Zenseact AB
