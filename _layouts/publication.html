@@ -19,22 +19,20 @@ layout: default
                         <li class="publication__author_list_item">
 
                             <span class="publication__author_name">
-                                {% if author.url %}
-                                    <a href="{{ author.url }}" target="_blank" rel="noopener noreferrer" itemprop="author" itemscope
+                                <span itemprop="name">
+                                {%- if author.url or author.scholar -%}
+                                    <a href="{% if author.url %}{{ author.url }}{% elsif author.scholar %}https://scholar.google.com/citations?user={{ author.scholar }}{% endif %}"
+                                    target="_blank" rel="noopener noreferrer" itemprop="author" itemscope
                                     itemtype="https://schema.org/Person">
-                                {% elsif author.scholar %}
-                                    <a href="https://scholar.google.com/citations?user={{ author.scholar }}" target="_blank" rel="noopener noreferrer" itemprop="author" itemscope
-                                        itemtype="https://schema.org/Person">
-                                {% endif %}
-                                {% if page.n_equal_contrib > 1 and forloop.index0 < page.n_equal_contrib %}
-                                    <span itemprop="name">{{ author.firstname[3] }}<sup>&ast;</sup></span>
-                                {% else %}
-                                    <span itemprop="name">{{ author.firstname[3] }}</span>
-                                {% endif %}
-
-                                {% if author.url or author.scholar %}
+                                {%- endif -%}
+                                {{ author.firstname[3] }}
+                                {%- if author.url or author.scholar -%}
                                 </a>
-                                {% endif %}
+                                {%- endif -%}
+                                {%- if page.n_equal_contrib > 1 and forloop.index0 < page.n_equal_contrib -%}
+                                    <sup>&ast;</sup>
+                                {%- endif -%}
+                                </span>
                                 {% if author.orcid %}
                                     <a href="https://orcid.org/{{ author.orcid }}" target="_blank" rel="noopener noreferrer">
                                         <i class="ai ai-orcid"></i>
@@ -68,19 +66,19 @@ layout: default
                     <p class="publication__social__links__title">Share</p>
                     <ul class="publication__social__links publication__sharing_links">
                         <li class="publication__social__link">
-                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url }}"
+                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.hosted_url }}{{ page.url }}"
                                 target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-facebook"></i>
                             </a>
                         </li>
                         <li class="publication__social__link">
-                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url }}&title={{ page.title }}&summary=&source="
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.hosted_url }}{{ page.url }}&title={{ page.title }}&summary=&source="
                                 target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-linkedin"></i>
                             </a>
                         </li>
                         <li class="publication__social__link">
-                            <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ page.url | absolute_url }}"
+                            <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.hosted_url }}{{ page.url }}"
                                 target="_blank" rel="noopener noreferrer">
                                 <i class="fab fa-twitter"></i>
                             </a>
