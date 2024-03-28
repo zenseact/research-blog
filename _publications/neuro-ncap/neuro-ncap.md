@@ -21,7 +21,7 @@ n_equal_contrib: 2
 
 
 # Core idea
-The core idea in NeuroNCAP is to **leverage NeRFs** for autonomous driving <d-cite key="tonderski2023neurad"></d-cite> **to realistically simulate safety-critical scenarios** from a sequence of real-world data **and evaluate entire AD systems in closed-loop**. To this end, we release an **open-source framework**, and evaluate two state-of-the-art end-to-end planners, UniAD <d-cite key="hu2023planning"></d-cite> and VAD <d-cite key="jiang2023vad"></d-cite>, in our safety-critical NeuroNCAP scenarios. We find that they **fail to avoid collisions**, even though they accurately perceive the safety-critical actor. We hope that NeuroNCAP will be used as a **benchmark for evaluating the safety of autonomous driving models**.
+The core idea in NeuroNCAP is to **leverage NeRFs** for autonomous driving <d-cite key="tonderski2023neurad"></d-cite> **to realistically simulate safety-critical scenarios** from a sequence of real-world data **and evaluate end-to-end AD systems in closed-loop**. To this end, we release an **open-source framework**, and evaluate two state-of-the-art end-to-end planners, UniAD <d-cite key="hu2023planning"></d-cite> and VAD <d-cite key="jiang2023vad"></d-cite>, on our safety-critical NeuroNCAP scenarios. We find that they **fail to avoid collisions**, even though they accurately perceive the safety-critical actor. We hope that NeuroNCAP will be used as a **benchmark for evaluating the safety of autonomous driving models**.
 
 <div style="display: flex; align-items: center; justify-content: center;">
   <video controls loop muted playsinline style="width: 70%;" poster="assets/neuro-ncap-logo.png">
