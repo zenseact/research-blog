@@ -44,7 +44,7 @@ To reduce the real2sim gap, we propose to make perception models more robust tow
 
 # Results
 
-We evaluate three 3D object detectors <d-cite key="wang2021fcos3d"></d-cite><d-cite key="liu2022petr"></d-cite><d-cite key="li2022bevformer"></d-cite> and an online mapping model <d-cite key="liao2023maptrv2"> on both real and NeRF data. We find that without fine-tuning, the models perform significantly worse on NeRF data compared to real data. However, after fine-tuning, all models improve notably on the NeRF data, and in some cases even increase in performance on real data. This indicates that the models have become more robust toward NeRF artifacts. We also find that the img2img method is the most effective augmentation method, followed by NeRF-data and image augmentation.
+We evaluate three 3D object detectors <d-cite key="wang2021fcos3d"></d-cite><d-cite key="liu2022petr"></d-cite><d-cite key="li2022bevformer"></d-cite> and an online mapping model <d-cite key="liao2023maptrv2"></d-cite> on both real and NeRF data. We find that without fine-tuning, the models perform significantly worse on NeRF data compared to real data. However, after fine-tuning, all models improve notably on the NeRF data, and in some cases even increase in performance on real data. This indicates that the models have become more robust toward NeRF artifacts. We also find that the img2img method is the most effective augmentation method, followed by NeRF-data and image augmentation.
 
 ## 3D Object Detection
 
