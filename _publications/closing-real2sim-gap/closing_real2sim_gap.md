@@ -60,7 +60,7 @@ Below, we show nuScenes detection score (NDS) for the 3D object detectors traine
 The video below shows the performance of the online mapping model on real data, NeRF-data from the same view point, and NeRF-data when rotating the ego-vehicle by different amounts (ccw=counterclockwise, cw=clockwise). The left video shows how predictions degrade as the rotation increases, even though the model has been fine-tuned with NeRF data. While the poor performance to some degree can be attributed to worse rendering quality, we also theorize that these types of scenes, with a large attack angle toward lane-markers, are rare in the perception model training data. Thus, we further fine-tune the model with rotated images (right), which significantly improves the performance on rotated NeRF data.
 
 <div style="display: flex; align-items: center; justify-content: center;">
-  <video controls autoplay loop muted playsinline style="width: 70vw;">
+  <video controls autoplay loop muted playsinline style="width: 100%;">
     <source src="stacked.webm" type="video/webm">
   </video>
 </div>
