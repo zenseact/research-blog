@@ -56,6 +56,21 @@ Once a scenario has been instantiated, we can run an entire AD system in closed-
 
 ---
 
+# Closed-loop Simulator
+
+Our closed-loop simulator repeatedly performs four steps (illustrated below):
+1. The **Neural Renderer** generates high-quality sensor data. The renderer is trained on a sequence of real-world driving data.
+2. The **AD Model** predicts a future ego-vehicle trajectory given the rendered camera input and the ego-vehicle state.
+3. The **Controller** converts the planned trajectory to a set of acceleration and steering signals.
+4. The **Vehicle Model** propagates the ego-state forward in time, based on the control inputs.
+
+<figure class="figure__background">
+  <img style="width: 60%; margin: 0 auto; mix-blend-mode: multiply; filter: brightness(1.05);" src="assets/animated_overview.gif"/>
+</figure>
+
+
+---
+
 # NeuroNCAP Evaluation Protocol
 In contrast to common evaluation practices – i.e., averaging performance across large-scale datasets – NeuroNCAP instead **focuses on a small set of carefully designed safety-critical scenarios**, designed such that any model that cannot successfully handle all of them, should be considered unsafe.
 ### Creating safety-critical scenarios
