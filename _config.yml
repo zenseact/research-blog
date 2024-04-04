@@ -29,5 +29,5 @@ plugins:
 repository: zenseact/research-blog
 remote_theme: mmistakes/minimal-mistakes@4.24.0
 title: Zenseact Research
-url: https://zenseact.github.io
+url: https://research.zenseact.com
 hosted_url: https://research.zenseact.com
