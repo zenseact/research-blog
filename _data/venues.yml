@@ -5,6 +5,9 @@ ARXIV:
 CVPR24:
   name: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2024
   url: https://cvpr2024.thecvf.com
+CVPRW24:
+  name: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024
+  url: https://cvpr2024.thecvf.com
 AAMAS2024:
   name: The 23rd International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2024
   url: https://www.aamas2024-conference.auckland.ac.nz/

@@ -2,7 +2,7 @@
 layout: publication
 permalink: /publications/closing-real2sim-gap/
 title: "Are NeRFs ready for autonomous driving? Towards closing the real-to-simulation gap"
-venue: ARXIV
+venue: CVPRW24
 authors:
   - Lindstrom
   - Hess
