@@ -12,11 +12,10 @@ authors:
   - Felsberg
   - Petersson
 code: https://github.com/wljungbergh/NeuroNCAP
-date: 2024-03-07 00:00:00 +00:00
-#arxiv: https://arxiv.org/abs/2311.20260
+date: 2024-04-12 00:00:00 +00:00
+arxiv: https://arxiv.org/abs/2404.07762
 n_equal_contrib: 2
-# uncomment this to add a thumbnail video once we officially release the paper
-# thumbnail-video: assets/videos/stationary-103-compressed-run1.mp4
+thumbnail-video: assets/videos/stationary-103-compressed-run1.mp4
 ---
 
 
