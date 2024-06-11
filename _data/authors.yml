@@ -332,3 +332,18 @@ Ohlsson:
 Persson:
   firstname: ["Daniel", "D.", "D. P.", "Daniel Persson"]
   org: Chalmers University of Technology
+Yuchuan:
+  firstname: ["Yuchuan", "Y.", "Y. J.", "Yuchuan Jin"]
+  org: Zenseact
+Theodor:
+  firstname: ["Theodor", "T.", "T. S.", "Theodor Stenhammar"]
+  org: Zenseact
+David:
+  firstname: ["David", "D.", "D. B.", "David Bejmer"]
+  org: Zenseact
+Axel:
+  firstname: ["Axel", "A.", "A. B.", "Axel Beauvisage"]
+  org: Zenseact
+Yuxuan:
+  firstname: ["Yuxuan", "Y.", "Y. X.", "Yuxuan Xia"]
+  org: Zenseact

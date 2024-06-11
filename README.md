@@ -44,7 +44,7 @@ You can preview your changes by running the site locally. To do this, simply run
 docker compose build
 docker compose up
 ```
-Note that you only have to build the docker image once. After that, you can simply run `docker compose up` to serve the site locally. You can then preview the site at [http://http://0.0.0.0:8080/\<your-local-repo-dir>](http://http://0.0.0.0:8080/<your-local-repo-dir>).
+Note that you only have to build the docker image once. After that, you can simply run `docker compose up` to serve the site locally. You can then preview the site at [http://0.0.0.0:8080/\<your-local-repo-dir>](http://0.0.0.0:8080/<your-local-repo-dir>).
 
 ### Step 5
 Make a pull-request to this repository. Once the pull-request is merged, the blog post will be automatically published at [research.zenseact.com](https://research.zenseact.com).
