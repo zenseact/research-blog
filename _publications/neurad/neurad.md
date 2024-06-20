@@ -93,4 +93,30 @@ An autonomous vehicle typically records the scene using multiple cameras, which 
 
 Note that this is inspired by recent work on NeRFs in the wild <d-cite key="martin2021nerf"></d-cite>, with two key differences. First, we only learn a single embedding per sensor, not per image, improving generalizaiton to novel views. Second, we apply the sensor embedding after the volume rendering, reducing the computational overhead. This is not possible in the original work, as they directly render RGB, whereas we render high-level features.
 
+# Closed-loop simulation 
+
+With NeuRAD, we can take non-eventful collected sensor data,
+
+<div style="display: flex; align-items: center; justify-content: center;">
+  <video controls autoplay loop muted playsinline style="width: 70vw;">
+    <source src="original.mp4" type="video/mp4">
+  </video>
+</div>
+
+and turn them into safety-critical scenarios for training and testing our AD systems
+
+<div style="display: flex; align-items: center; justify-content: center;">
+  <video controls autoplay loop muted playsinline style="width: 70vw;">
+    <source src="critical_1.mp4" type="video/mp4">
+  </video>
+</div>
+
+with different variations
+
+<div style="display: flex; align-items: center; justify-content: center;">
+  <video controls autoplay loop muted playsinline style="width: 70vw;">
+    <source src="critical_2.mp4" type="video/mp4">
+  </video>
+</div>
+
 ---
