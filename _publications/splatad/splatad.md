@@ -35,6 +35,78 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
   <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="methodoverview.png"/>
 </figure>
 
+SplatAD can render both sensor-realistic lidar and camera data from the same 3D Gaussian representation. For lidar rendering, we:
+<ol>
+<li>Project the 3D Gaussians to spherical coordinates.</li>
+<li>Intersect Gaussians with non-equdistant tiles, matching to the lidar beam distribution.</li>
+<li>Rasterize depth and features for a non-linear grid of points, with rolling shutter compensation.</li>
+<li>Decode features to lidar intensity and lidar ray drop probability.</li>
+</ol> 
+For efficiency, we implement these operations using custom CUDA kernels. 
+
+For the camera rendering, we modify the standard 3DGS pipeline:
+<ul>
+<li>Rasterize RGB and features, which are decoded to view-dependent colors using a small CNN.</li>
+<li>Apply rolling shutter compensation.</li>
+</ul>
+
+# Comparisons
+
+<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em;">
+  {% include two_image_slider.html
+    left_image="pandaset_016_front_splatad.jpg"
+    right_image="pandaset_016_front_neurad.jpg"
+    width="50"
+    id="2"
+    max-width="1920px"
+    max-height="1080px"
+    caption="SplatAD vs NeuRAD NVS rendering on the PandaSet dataset."
+  %}
+</div>
+
+<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em;">
+  {% include two_image_slider.html
+    left_image="argoverse2_front_splatad.jpg"
+    right_image="argoverse2_front_streetgs.jpg"
+    width="25"
+    id="3"
+    linkid="4"
+    max-width="1550px"
+    max-height="1798px"
+    caption="SplatAD vs Street Gaussians NVS rendering on the Argoverse2 dataset."
+  %}
+    {% include two_image_slider.html
+    left_image="argoverse2_front_2_splatad.jpg"
+    right_image="argoverse2_front_2_neurad.jpg"
+    width="25"
+    id="4"
+    linkid="3"
+    max-width="1550px"
+    max-height="1798px"
+    caption="SplatAD vs NeuRAD NVS rendering on the Argoverse2 dataset."
+  %}
+</div>
+
+<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em;">
+  {% include two_image_slider.html
+    left_image="nuscenes_front_splatad.jpg"
+    right_image="nuscenes_front_streetgs.jpg"
+    width="50"
+    id="5"
+    max-width="1600px"
+    max-height="900px"
+    caption="SplatAD vs Street Gaussians NVS rendering on the nuScenes dataset."
+  %}
+</div>
+
+<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em;">
+<figure class="figure__background">
+  <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="qualitative-comparison.jpg"/>
+  <figcaption><b>Fig 6.:</b> SplatAD learns both sharp and accurate geometries, in constrast to NeuRADs oversmoothed results, and Steet Gaussians cutting through objects due to erroneous line-of-sight. </figcaption>
+</figure>
+</div>
+
+---
 
 # BibTeX
 ```bibtex
