@@ -20,6 +20,9 @@ Automatica:
 ECCV22:
   name: European Conference on Computer Vision (ECCV), 2022
   url: https://eccv2022.ecva.net
+ECCV24:
+  name: European Conference on Computer Vision (ECCV), 2024
+  url: https://eccv.ecva.net/Conferences/2024
 ECCV22W:
   name: What is Motion for? A ECCV Workshop, 2022
   url: https://what-is-motion-for.github.io/
