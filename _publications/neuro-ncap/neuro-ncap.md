@@ -2,7 +2,7 @@
 layout: publication
 permalink: /publications/neuro-ncap/
 title: "NeuroNCAP: Photorealistic Closed-loop Safety Testing for Autonomous Driving"
-venue: ARXIV
+venue: ECCV24
 authors:
   - Ljungbergh
   - Tonderski
@@ -188,3 +188,16 @@ In the figure below we show a qualitative example of this. In this side-scenario
 </div>
 
 ---
+
+# BibTeX
+```bibtex
+@inproceedings{ljungbergh2024neuroncap,
+author="Ljungbergh, William and Tonderski, Adam and Johnander, Joakim and Caesar, Holger and {\AA}st{\"o}m, Kalle and Felsberg, Michael and Petersson, Christoffer",
+title="NeuroNCAP: Photorealistic Closed-Loop Safety Testing for Autonomous Driving",
+booktitle={European Conference on Computer Vision},
+year="2025",
+pages="161--177",
+isbn="978-3-031-73404-5",
+organization = {Springer}
+}
+```
