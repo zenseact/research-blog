@@ -30,6 +30,38 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
 
 ---
 
+# Videos
+
+## Image and lidar rendering
+<div class="video-grid-1" style="display: grid; grid-template-columns: 7fr 4fr; grid-template-rows: 1fr; gap: 10px; width: 100%;">
+  <video controls autoplay loop muted style="width: 100%;">
+    <source src="videos/multi/rgb.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <video controls autoplay loop muted style="width: 100%;">
+    <source src="videos/multi/pc_bev.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+<div class="video-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; gap: 10px; width: 100%;">
+  <video controls autoplay loop muted style="width: 100%;">
+    <source src="videos/multi/pc_overlay_range.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <video controls autoplay loop muted style="width: 100%;">
+    <source src="videos/multi/pc_overlay_intensity.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+## Sequence browser
+<div id="dataset-controls" style="margin-top: 20px; text-align: center;">
+  <div class="buttons is-centered">
+    <button class="button is-medium is-rounded dataset-btn active" data-dataset="pandaset">pandaset</button>
+    <button class="button is-medium is-rounded dataset-btn" data-dataset="argoverse2">argoverse2</button>
+    <button class="button is-medium is-rounded dataset-btn" data-dataset="nuscenes">nuscenes</button>
+  </div>
+</div>
 <div id="scene-controls" style="margin-top: 20px; text-align: center;">
   <div class="buttons is-centered">
     <!-- Buttons will be dynamically added here -->
@@ -44,11 +76,17 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const video = document.getElementById('dataset-scene-browser-video');
+    const dataset_controls = document.getElementById('dataset-controls');
     const scene_controls = document.getElementById('scene-controls');
-    const scenes = ['028', '011', '016', '001', '053', '106', '011_compressed', '053_compressed'];
-    const videoPath = 'videos/panda/';
+    let activeDataset = 'pandaset';
+    const dataset_scene_map = {
+      'pandaset': ['028', '011', '016', '001', '053', '106', '011_compressed', '053_compressed'],
+      'argoverse2': ['0b86f508', '2f2321d2', '3bffdcff', '280269f9'],
+      'nuscenes': ['0104', '69'],
+    };
+    let scenes = dataset_scene_map[activeDataset];
     let activeScene = scenes[0];
-  
+
     function preloadImage(url) {
       return new Promise((resolve, reject) => {
         const img = new Image();
@@ -61,7 +99,7 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
     // Create buttons
     scenes.forEach(scene => {
       const button = document.createElement('button');
-      button.className = 'button is-medium is-rounded dataset-btn';
+      button.className = 'button is-medium is-rounded scene-btn';
       button.textContent = scene;
       button.dataset.scene = scene;
       scene_controls.querySelector('.buttons').appendChild(button);
@@ -70,7 +108,7 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
     // Set initial active button
     scene_controls.querySelector(`button[data-scene="${activeScene}"]`).classList.add('active');
   
-    // Button click handler
+    // Scene button click handler
     scene_controls.addEventListener('click', (e) => {
       if (e.target.matches('button')) {
         scene_controls.querySelector('.active').classList.remove('active');
@@ -79,11 +117,40 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
         updateVideo();
       }
     });
+
+    // Dataset button click handler
+    dataset_controls.addEventListener('click', (e) => {
+      if (e.target.matches('button')) {
+        dataset_controls.querySelector('.active').classList.remove('active');
+        e.target.classList.add('active');
+        activeDataset = e.target.textContent;
+        activeScene = dataset_scene_map[activeDataset][0];
+        updateButtons(); 
+        updateVideo();
+      }
+    });
   
+    async function updateButtons() {
+      const buttonDiv = document.getElementById('scene-controls');
+      const buttons = buttonDiv.querySelectorAll('button');
+      buttons.forEach(button => button.remove());
+
+      scenes = dataset_scene_map[activeDataset];
+      scenes.forEach(scene => {
+        const button = document.createElement('button');
+        button.className = 'button is-medium is-rounded scene-btn';
+        button.textContent = scene;
+        button.dataset.scene = scene;
+        scene_controls.querySelector('.buttons').appendChild(button);
+      });
+
+      // Set initial active button
+      scene_controls.querySelector(`button[data-scene="${activeScene}"]`).classList.add('active');
+    }
+
     async function updateVideo() {
-      const videoSrc = `${videoPath}${activeScene}.mp4`;
+      const videoSrc = `videos/${activeDataset}/${activeScene}.mp4`;
       const posterSrc = `hessian.png`;
-      console.log(videoSrc);
       try {
         await preloadImage(posterSrc);
   
@@ -103,6 +170,8 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
     updateVideo();
   });
 </script>
+
+---
 
 # Method
 <div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em; width=100%">
@@ -125,6 +194,8 @@ For the camera rendering, we modify the standard 3DGS pipeline:
 <li>Rasterize RGB and features, which are decoded to view-dependent colors using a small CNN.</li>
 <li>Apply rolling shutter compensation.</li>
 </ul>
+
+---
 
 # Comparisons
 
