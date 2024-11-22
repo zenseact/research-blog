@@ -15,11 +15,12 @@ arxiv: https://arxiv.org/abs/2411.XXXXX
 n_equal_contrib: 2
 thumbnail-video: 
 ---
-
+<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em; width=100%">
 <figure class="figure__background">
-  <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="frontfig.png"/>
+  <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="front-fig-stacked.jpg"/>
   <figcaption><b>Fig 1.:</b> SplatAD is the first method capable of realistic camera and lidar rendering using 3D Gaussian Splatting. It enables real-time, high-quality rendering, and can reach competitive performance within minutes of training.</figcaption>
 </figure>
+</div>
 
 ---
 
@@ -30,10 +31,11 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
 ---
 
 # Method
-
+<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em; width=100%">
 <figure class="figure__background">
   <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="methodoverview.png"/>
 </figure>
+</div>
 
 SplatAD can render both sensor-realistic lidar and camera data from the same 3D Gaussian representation. For lidar rendering, we:
 <ol>
@@ -52,7 +54,7 @@ For the camera rendering, we modify the standard 3DGS pipeline:
 
 # Comparisons
 
-<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em;">
+<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em; width=100%">
   {% include two_image_slider.html
     left_image="pandaset_016_front_splatad.jpg"
     right_image="pandaset_016_front_neurad.jpg"
@@ -64,7 +66,7 @@ For the camera rendering, we modify the standard 3DGS pipeline:
   %}
 </div>
 
-<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em;">
+<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em; width=100%">
   {% include two_image_slider.html
     left_image="argoverse2_front_splatad.jpg"
     right_image="argoverse2_front_streetgs.jpg"
@@ -87,7 +89,7 @@ For the camera rendering, we modify the standard 3DGS pipeline:
   %}
 </div>
 
-<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em;">
+<div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em; width=100%">
   {% include two_image_slider.html
     left_image="nuscenes_front_splatad.jpg"
     right_image="nuscenes_front_streetgs.jpg"
