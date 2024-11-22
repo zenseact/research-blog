@@ -30,6 +30,80 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
 
 ---
 
+<div id="scene-controls" style="margin-top: 20px; text-align: center;">
+  <div class="buttons is-centered">
+    <!-- Buttons will be dynamically added here -->
+  </div>
+</div>
+<div class="video-container">
+  <video id="dataset-scene-browser-video" controls autoplay loop muted style="width: 100%;">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const video = document.getElementById('dataset-scene-browser-video');
+    const scene_controls = document.getElementById('scene-controls');
+    const scenes = ['028', '011', '016', '001', '053', '106', '011_compressed', '053_compressed'];
+    const videoPath = 'videos/panda/';
+    let activeScene = scenes[0];
+  
+    function preloadImage(url) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(url);
+        img.onerror = reject;
+        img.src = url;
+      });
+    }
+  
+    // Create buttons
+    scenes.forEach(scene => {
+      const button = document.createElement('button');
+      button.className = 'button is-medium is-rounded dataset-btn';
+      button.textContent = scene;
+      button.dataset.scene = scene;
+      scene_controls.querySelector('.buttons').appendChild(button);
+    });
+  
+    // Set initial active button
+    scene_controls.querySelector(`button[data-scene="${activeScene}"]`).classList.add('active');
+  
+    // Button click handler
+    scene_controls.addEventListener('click', (e) => {
+      if (e.target.matches('button')) {
+        scene_controls.querySelector('.active').classList.remove('active');
+        e.target.classList.add('active');
+        activeScene = e.target.dataset.scene;
+        updateVideo();
+      }
+    });
+  
+    async function updateVideo() {
+      const videoSrc = `${videoPath}${activeScene}.mp4`;
+      const posterSrc = `hessian.png`;
+      console.log(videoSrc);
+      try {
+        await preloadImage(posterSrc);
+  
+        video.poster = posterSrc;
+        video.src = videoSrc;
+        video.load();
+        video.play().catch(error => console.error('Error playing video:', error));
+      } catch (error) {
+        console.error('Error loading poster image:', error);
+        video.src = videoSrc;
+        video.load();
+        video.play().catch(error => console.error('Error playing video:', error));
+      }
+    }
+  
+    // Initialize video
+    updateVideo();
+  });
+</script>
+
 # Method
 <div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em; width=100%">
 <figure class="figure__background">
