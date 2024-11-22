@@ -11,13 +11,14 @@ authors:
   - Svensson
 code: https://github.com/carlinds/splatad
 date: 2024-11-30 00:00:00 +00:00
-arxiv: https://arxiv.org/abs/2311.15260
+arxiv: https://arxiv.org/abs/2411.XXXXX
 n_equal_contrib: 2
 thumbnail-video: 
 ---
 
 <figure class="figure__background">
   <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="frontfig.png"/>
+  <figcaption><b>Fig 1.:</b> SplatAD is the first method capable of realistic camera and lidar rendering using 3D Gaussian Splatting. It enables real-time, high-quality rendering, and can reach competitive performance within minutes of training.</figcaption>
 </figure>
 
 ---
@@ -33,3 +34,14 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
 <figure class="figure__background">
   <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="methodoverview.png"/>
 </figure>
+
+
+# BibTeX
+```bibtex
+@article{hess2024splatad,
+  title        = {SplatAD: Real-Time Lidar and Camera Rendering with 3D Gaussian Splatting for Autonomous Driving},
+  author       = {Hess, Georg and Lindstr{\"o}m, Carl and Fatemi, Maryam and Petersson, Christoffer and Svensson, Lennart},
+  journal      = {arXiv preprint arXiv:2411:XXXXX},
+  year         = {2024}
+}
+```
