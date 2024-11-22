@@ -79,11 +79,12 @@ We find that the real2sim gap (defined as detection agreement between prediction
 
 # BibTeX
 ```bibtex
-@article{lindstrom2024real2sim,
-  title     = {Are NeRFs ready for autonomous driving? Towards closing the real-to-simulation gap},
-  author    = {Carl Lindstr{\"o}m, Georg Hess, Adam Lilja, Maryam Fatemi, Lars Hammarstrand, Christoffer Petersson, Lennart Svensson},
-  journal   = {arXiv preprint arXiv:2403.16092},
-  year      = {2024}
+@inproceedings{lindstrom2024real2sim,
+  title={Are NeRFs ready for autonomous driving? Towards closing the real-to-simulation gap},
+  author={Lindstr{\"o}m, Carl and Hess, Georg and Lilja, Adam and Fatemi, Maryam and Hammarstrand, Lars and Petersson, Christoffer and Svensson, Lennart},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={4461--4471},
+  year={2024}
 }
 ```
 

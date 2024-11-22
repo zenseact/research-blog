@@ -20,11 +20,11 @@ Research connecting text and images has recently seen several breakthroughs, wit
 
 # BibTeX
 ```bibtex
-@article{hess2022lidarclip,
-  title   = {Lidarclip or: How i learned to talk to point clouds},
-  author  = {Hess, Georg and Tonderski, Adam and Petersson, Christoffer and
-             Svensson, Lennart and Åström, Kalle},
-  journal = {arXiv preprint arXiv:2212.06858},
-  year    = {2022}
+@inproceedings{hess2024lidarclip,
+  title={Lidarclip or: How i learned to talk to point clouds},
+  author={Hess, Georg and Tonderski, Adam and Petersson, Christoffer and {\AA}str{\"o}m, Kalle and Svensson, Lennart},
+  booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+  pages={7438--7447},
+  year={2024}
 }
 ```
