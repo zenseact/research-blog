@@ -120,3 +120,14 @@ with different variations
 </div>
 
 ---
+
+# BibTeX
+```bibtex
+@inproceedings{tonderski2024neurad,
+  title={Neurad: Neural rendering for autonomous driving},
+  author={Tonderski, Adam and Lindstr{\"o}m, Carl and Hess, Georg and Ljungbergh, William and Svensson, Lennart and Petersson, Christoffer},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={14895--14904},
+  year={2024}
+}
+```
