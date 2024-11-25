@@ -156,11 +156,7 @@ Note: Videos have been compressed to reduce file size.
 
     async function updateVideo() {
       const videoSrc = `videos/${activeDataset}/${activeScene}.mp4`;
-      const posterSrc = `hessian.png`;
       try {
-        await preloadImage(posterSrc);
-  
-        video.poster = posterSrc;
         video.src = videoSrc;
         video.load();
         video.play().catch(error => console.error('Error playing video:', error));
