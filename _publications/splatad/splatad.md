@@ -60,9 +60,9 @@ Note: Videos have been compressed to reduce file size.
 ## Sequence browser
 <div id="dataset-controls" style="margin-top: 20px; text-align: center;">
   <div class="buttons is-centered">
-    <button class="button is-medium is-rounded dataset-btn active" data-dataset="pandaset">pandaset</button>
-    <button class="button is-medium is-rounded dataset-btn" data-dataset="argoverse2">argoverse2</button>
-    <button class="button is-medium is-rounded dataset-btn" data-dataset="nuscenes">nuscenes</button>
+    <button class="button is-medium is-rounded dataset-btn active" data-dataset="pandaset">PandaSet</button>
+    <button class="button is-medium is-rounded dataset-btn" data-dataset="argoverse2">Argoverse2</button>
+    <button class="button is-medium is-rounded dataset-btn" data-dataset="nuscenes">nuScenes</button>
   </div>
 </div>
 <div id="scene-controls" style="margin-top: 20px; text-align: center;">
