@@ -33,6 +33,9 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
 # Videos
 
 ## Image and lidar rendering
+SplatAD can render both images and lidar point clouds. The videos demonstrate rendered images, bird's-eye views of the rendered point cloud, and point clouds overlaid on images, with points colored based on range and intensity.
+<br><br>
+Note: Videos have been compressed to reduce file size. 
 <div class="video-grid-1" style="display: grid; grid-template-columns: 7fr 4fr; grid-template-rows: 1fr; gap: 10px; width: 100%;">
   <video controls autoplay loop muted style="width: 100%;">
     <source src="videos/multi/rgb.mp4" type="video/mp4">
@@ -67,6 +70,9 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
     <!-- Buttons will be dynamically added here -->
   </div>
 </div>
+
+<br>
+Note: Videos have been compressed to reduce file size. 
 <div class="video-container">
   <video id="dataset-scene-browser-video" controls autoplay loop muted style="width: 100%;">
     Your browser does not support the video tag.
@@ -80,9 +86,9 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
     const scene_controls = document.getElementById('scene-controls');
     let activeDataset = 'pandaset';
     const dataset_scene_map = {
-      'pandaset': ['028', '011', '016', '001', '053', '106', '011_compressed', '053_compressed'],
+      'pandaset': ['001', '011', '016', '053', '106', '123', '158'],
       'argoverse2': ['0b86f508', '2f2321d2', '3bffdcff', '280269f9'],
-      'nuscenes': ['0104', '69'],
+      'nuscenes': ['0039', '0061', '0104', '0193'],
     };
     let scenes = dataset_scene_map[activeDataset];
     let activeScene = scenes[0];
@@ -170,6 +176,13 @@ Ensuring the safety of autonomous robots, such as self-driving vehicles, require
     updateVideo();
   });
 </script>
+
+## Trajectory editing
+Note: Videos have been compressed to reduce file size. 
+<video controls autoplay loop muted style="width: 100%;">
+  <source src="videos/edits/edits.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ---
 
