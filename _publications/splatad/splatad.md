@@ -13,7 +13,7 @@ code: https://github.com/carlinds/splatad
 date: 2024-11-30 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2411.XXXXX
 n_equal_contrib: 2
-thumbnail-video: 
+thumbnail-img: front-fig-stacked.jpg 
 ---
 <div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em; width=100%">
 <figure class="figure__background">
