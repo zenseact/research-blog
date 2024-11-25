@@ -60,9 +60,9 @@ Note: Videos have been compressed to reduce file size.
 ## Sequence browser
 <div id="dataset-controls" style="margin-top: 20px; text-align: center;">
   <div class="buttons is-centered">
-    <button class="button is-medium is-rounded dataset-btn active" data-dataset="pandaset">PandaSet</button>
-    <button class="button is-medium is-rounded dataset-btn" data-dataset="argoverse2">Argoverse2</button>
-    <button class="button is-medium is-rounded dataset-btn" data-dataset="nuscenes">nuScenes</button>
+    <button class="button is-medium is-rounded dataset-btn active" data-dataset="PandaSet">PandaSet</button>
+    <button class="button is-medium is-rounded dataset-btn" data-dataset="Argoverse2">Argoverse2</button>
+    <button class="button is-medium is-rounded dataset-btn" data-dataset="nuScenes">nuScenes</button>
   </div>
 </div>
 <div id="scene-controls" style="margin-top: 20px; text-align: center;">
@@ -84,11 +84,11 @@ Note: Videos have been compressed to reduce file size.
     const video = document.getElementById('dataset-scene-browser-video');
     const dataset_controls = document.getElementById('dataset-controls');
     const scene_controls = document.getElementById('scene-controls');
-    let activeDataset = 'pandaset';
+    let activeDataset = 'PandaSet';
     const dataset_scene_map = {
-      'pandaset': ['001', '011', '016', '053', '106', '123', '158'],
-      'argoverse2': ['0b86f508', '2f2321d2', '3bffdcff', '280269f9'],
-      'nuscenes': ['0039', '0061', '0104', '0193'],
+      'PandaSet': ['001', '011', '016', '053', '106', '123', '158'],
+      'Argoverse2': ['0b86f508', '2f2321d2', '3bffdcff', '280269f9'],
+      'nuScenes': ['0039', '0061', '0104', '0193'],
     };
     let scenes = dataset_scene_map[activeDataset];
     let activeScene = scenes[0];
