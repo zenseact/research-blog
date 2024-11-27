@@ -11,7 +11,7 @@ authors:
   - Svensson
 code: https://github.com/carlinds/splatad
 date: 2024-11-30 00:00:00 +00:00
-arxiv: https://arxiv.org/abs/2411.XXXXX
+arxiv: https://arxiv.org/abs/2411.16816
 n_equal_contrib: 2
 thumbnail-img: thumbnail.gif
 ---
@@ -269,7 +269,7 @@ For the camera rendering, we modify the standard 3DGS pipeline:
 @article{hess2024splatad,
   title        = {SplatAD: Real-Time Lidar and Camera Rendering with 3D Gaussian Splatting for Autonomous Driving},
   author       = {Hess, Georg and Lindstr{\"o}m, Carl and Fatemi, Maryam and Petersson, Christoffer and Svensson, Lennart},
-  journal      = {arXiv preprint arXiv:2411:XXXXX},
+  journal      = {arXiv preprint arXiv:2411.16816},
   year         = {2024}
 }
 ```
