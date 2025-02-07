@@ -1,4 +1,4 @@
-FROM ruby:2.7.0
+FROM ruby:3.1.0
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
