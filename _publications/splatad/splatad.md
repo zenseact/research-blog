@@ -2,7 +2,7 @@
 layout: publication
 permalink: /publications/splatad/
 title: "SplatAD: Real-Time Lidar and Camera Rendering with 3D Gaussian Splatting for Autonomous Driving"
-venue: ARXIV
+venue: CVPR25
 authors:
   - Hess
   - Lindstrom
