@@ -163,6 +163,13 @@ Krook:
   org: Zenseact
   scholar: JHCD0BsAAAAJ
   orcid: 0000-0002-9810-4697
+Laveno:
+  firstname: ["Arvid", "A.", "A. L. L.", "Arvid Laveno Ling"]
+  org: [Zenseact, Chalmers University of Technology]
+  github: Witdrew1917
+  scholar: BhAezqYAAAAJ
+  mail: arvid.laveno@zenseact.com
+  title: PhD Student
 Lilja:
   firstname: ["Adam", "A.", "A. L.", "Adam Lilja"]
   github: LiljaAdam
@@ -172,6 +179,7 @@ Lilja:
   picture: /assets/images/profiles/adam_lilja.jpg
   scholar: zYn4o0AAAAAJ
   title: PhD Student
+  url: https://adamlilja.com/
 Lindstrom:
   firstname: ["Carl", "C.", "C. L.", "Carl Lindström"]
   github: carlinds
@@ -291,6 +299,12 @@ Ursing:
   firstname: ["Stig", "S.", "S. U.", "Stig Ursing"]
   org: Semcon Sweden AB
   url: https://www.researchgate.net/profile/Stig-Ursing
+Verbeke:
+  firstname: ["Willem", "W.", "W. V.", "Willem Verbeke"]
+  org: Zenseact
+  github: wverbeke
+  mail: willem.verbeke@zenseact.com
+  url: https://www.linkedin.com/in/willem-verbeke-5a522a194/
 Warg:
   firstname: ["Fredrik", "F.", "F. W.", "Fredrik Warg"]
   org: RISE Research Institutes of Sweden
