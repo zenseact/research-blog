@@ -143,6 +143,12 @@ Jianbotao:
   firstname: ["Jianbo", "J.", "J. T.", "Jianbo Tao"]
   org: AVL List
   scholar: UKUtWucAAAAJ
+JiLan:
+  github: jxl152
+  mail: ji.lan@zenseact.com
+  firstname: ["Ji", "J.", "J. L.", "Ji Lan"]
+  org: [Zenseact, Chalmers University of Technology]
+  title: PhD Student
 Johansson:
   firstname: ["Rolf", "R.", "R. J.", "Rolf Johansson"]
   org: Astus AB
@@ -233,6 +239,7 @@ Rafidashti:
   mail: mahan.rafidashti@zenseact.com
   org: [Zenseact, Chalmers University of Technology]
   title: PhD Student
+  scholar: Et4NaUoAAAAJ
 Rusyadi:
   firstname: ["Muhammad Rusyadi", "MR.", "MR. R.", "Muhammad Rusyadi Ramli"]
   org: KTH Royal Institute of Technology
