@@ -1,0 +1,76 @@
+// Grid container for multi-image layouts
+.interactive-images-grid {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    // margin: 1rem 0;
+
+    .interactive-image-container {
+        flex: 1;
+    }
+
+    // Responsive: stack on mobile
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+
+    // For tablets, make 3+ column grids wrap appropriately
+    @media (max-width: 1024px) and (min-width: 769px) {
+
+        &.columns-3,
+        &.columns-4,
+        &.columns-5 {
+            flex-wrap: wrap;
+
+            .interactive-image-container {
+                flex-basis: calc(50% - 0.5rem);
+
+                // Last item in odd-numbered sets takes full width
+                &:nth-child(odd):last-child {
+                    flex-basis: 100%;
+                }
+            }
+        }
+    }
+}
+
+.interactive-image-container {
+    position: relative;
+    display: inline-block; // Or 'block' if you want it to take full width
+    cursor: pointer; // Indicate it's interactive
+    line-height: 0; // Prevent extra space below inline-block images if any
+
+    // Ensure the container takes the size of the default image
+    // and other images overlay it.
+    .interactive-image {
+        display: block; // Remove any default bottom space for images
+        max-width: 100%;
+        height: auto; // Maintain aspect ratio
+        transition: opacity 0.1s ease-in-out;
+
+        // All images except default are absolutely positioned to stack
+        &.image-hover,
+        &.image-click {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            pointer-events: none; // So they don't interfere with container events unless visible
+        }
+
+        // Default image is visible initially and defines dimensions
+        &.image-default {
+            position: relative; // Or static, just not absolute for this one
+            opacity: 1;
+        }
+    }
+
+    // Optional caption styling
+    figcaption {
+        line-height: 1.5; // Reset line-height for text
+        font-size: 0.9em;
+        color: #555;
+        text-align: center;
+        padding-top: 0.5em;
+    }
+}
