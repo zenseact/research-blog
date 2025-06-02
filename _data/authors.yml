@@ -371,3 +371,25 @@ Axel:
 Yuxuan:
   firstname: ["Yuxuan", "Y.", "Y. X.", "Yuxuan Xia"]
   org: Zenseact
+Zheng:
+  firstname: ["Zheng", "W.", "W. Z.", "Wenzhao Zheng"]
+  url: https://wzzheng.net/
+Peng:
+  firstname: ["Chensheng", "C.", "C. P.", "Chensheng Peng"]
+  url: https://pengchensheng.com/
+Kahl:
+  firstname: ["Fredrik", "F.", "F. K.", "Fredrik Kahl"]
+  org: Chalmers University of Technology
+  scholar: P_w6UgMAAAAJ
+Keutzer:
+  firstname: ["Kurt", "K.", "K. K.", "Kurt Keutzer"]
+  org: University of California, Berkeley
+  scholar: ID9QePIAAAAJ
+  title: Professor
+Tomizuka:
+  firstname: ["Masayoshi", "M.", "M. T.", "Masayoshi Tomizuka"]
+  org: University of California, Berkeley
+  scholar: 8m8taGEAAAAJ
+Zhan:
+  firstname: ["Wei", "W.", "W. Z.", "Wei Zhan"]
+  url: https://zhanwei.site/
