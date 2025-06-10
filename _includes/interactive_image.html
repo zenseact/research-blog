@@ -125,14 +125,13 @@ default2.jpg,hover2.jpg,click2.jpg,Alt 2,Caption 2
                 }
             });
 
-            // Basic touch support: tap and hold shows clickImg, release shows defaultImg
+            // Basic touch support: tap and hold shows hoverImg, release shows defaultImg
             // This is a simplified interaction for touch.
-            let touchTimeout;
             container.addEventListener('touchstart', (event) => {
                 event.preventDefault(); // Important to prevent scrolling while interacting
                 isMouseDown = true; // Use same flag for conceptual "pressed" state
-                if (hoverImg) hoverImg.style.opacity = '0'; // No hover on touch usually
-                if (clickImg) clickImg.style.opacity = '1';
+                if (hoverImg) hoverImg.style.opacity = '1';
+                if (clickImg) clickImg.style.opacity = '0';
             }, { passive: false }); // Need passive:false for preventDefault to work on touchstart
 
             container.addEventListener('touchend', () => {

@@ -39,6 +39,8 @@
     display: inline-block; // Or 'block' if you want it to take full width
     cursor: pointer; // Indicate it's interactive
     line-height: 0; // Prevent extra space below inline-block images if any
+    -webkit-touch-callout: none; // iOS Safari
+    user-select: none; // Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox
 
     // Ensure the container takes the size of the default image
     // and other images overlay it.
