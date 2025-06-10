@@ -271,6 +271,16 @@ Tan:
   firstname: ["Kaige", "K.", "K. T.", "Jianbo Tan"]
   org: KTH Royal Institute of Technology
   scholar: qA2Xb_MAAAAJ
+Taveira:
+  firstname: ["Bernardo", "B.", "B. T.", "Bernardo Taveira"]
+  github: bertaveira
+  linkedin: bernardo-taveira
+  mail: bernardo.taveira@zenseact.com
+  org: [Zenseact, Chalmers University of Technology]
+  picture: /assets/images/profiles/bernardo_taveira.jpg
+  scholar: bAeQFPsAAAAJ
+  title: PhD Student
+  url: https://bertaveira.github.io/
 Thorsen:
   firstname: ["Anders", "A.", "A. T.", "Anders Thorsén"]
   org: RISE Research Institutes of Sweden
@@ -361,3 +371,25 @@ Axel:
 Yuxuan:
   firstname: ["Yuxuan", "Y.", "Y. X.", "Yuxuan Xia"]
   org: Zenseact
+Zheng:
+  firstname: ["Zheng", "W.", "W. Z.", "Wenzhao Zheng"]
+  url: https://wzzheng.net/
+Peng:
+  firstname: ["Chensheng", "C.", "C. P.", "Chensheng Peng"]
+  url: https://pengchensheng.com/
+Kahl:
+  firstname: ["Fredrik", "F.", "F. K.", "Fredrik Kahl"]
+  org: Chalmers University of Technology
+  scholar: P_w6UgMAAAAJ
+Keutzer:
+  firstname: ["Kurt", "K.", "K. K.", "Kurt Keutzer"]
+  org: University of California, Berkeley
+  scholar: ID9QePIAAAAJ
+  title: Professor
+Tomizuka:
+  firstname: ["Masayoshi", "M.", "M. T.", "Masayoshi Tomizuka"]
+  org: University of California, Berkeley
+  scholar: 8m8taGEAAAAJ
+Zhan:
+  firstname: ["Wei", "W.", "W. Z.", "Wei Zhan"]
+  url: https://zhanwei.site/

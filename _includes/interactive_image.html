@@ -1,0 +1,155 @@
+{% comment %}
+Interactive Image Component
+Supports both single image and multi-image grid layouts
+
+Single image usage:
+{% include interactive_image.html
+img_default="path/to/default.jpg"
+img_hover="path/to/hover.jpg"
+img_click="path/to/click.jpg"
+alt_text="Alt text"
+caption="Caption"
+%}
+
+Multi-image grid usage:
+{% include interactive_image.html
+columns=2
+images="
+default1.jpg,hover1.jpg,click1.jpg,Alt 1,Caption 1|
+default2.jpg,hover2.jpg,click2.jpg,Alt 2,Caption 2
+"
+%}
+{% endcomment %}
+
+{% if include.columns and include.images %}
+{% comment %} Multi-image grid mode {% endcomment %}
+{% assign columns = include.columns | default: 2 %}
+{% assign images_data = include.images | strip | split: "|" %}
+
+<div class="interactive-images-grid columns-{{ columns }}" {% if include.id_suffix
+    %}id="interactive-images-{{ include.id_suffix }}" {% endif %}>
+    {% for image_set in images_data %}
+    {% assign image_parts = image_set | strip | split: "," %}
+    {% assign img_default = image_parts[0] | strip %}
+    {% assign img_hover = image_parts[1] | strip %}
+    {% assign img_click = image_parts[2] | strip %}
+    {% assign alt_text = image_parts[3] | strip | default: "Interactive image" %}
+    {% assign caption = image_parts[4] | strip %}
+
+    {% if img_default and img_hover and img_click %}
+    {% assign default_img_path = img_default | relative_url %}
+    {% assign hover_img_path = img_hover | relative_url %}
+    {% assign click_img_path = img_click | relative_url %}
+
+    <figure class="interactive-image-container" aria-label="{{ alt_text }}">
+        <img src="{{ default_img_path }}" class="interactive-image image-default" alt="{{ alt_text }} - Default View"
+            loading="lazy">
+        <img src="{{ hover_img_path }}" class="interactive-image image-hover" alt="{{ alt_text }} - Hover View"
+            loading="lazy" aria-hidden="true">
+        <img src="{{ click_img_path }}" class="interactive-image image-click" alt="{{ alt_text }} - Click View"
+            loading="lazy" aria-hidden="true">
+        {% if caption and caption != "" %}
+        <figcaption>{{ caption }}</figcaption>
+        {% endif %}
+    </figure>
+    {% endif %}
+    {% endfor %}
+</div>
+
+{% else %}
+{% comment %} Single image mode (backward compatibility) {% endcomment %}
+{% assign default_img_path = include.img_default | relative_url %}
+{% assign hover_img_path = include.img_hover | relative_url %}
+{% assign click_img_path = include.img_click | relative_url %}
+{% assign alt = include.alt_text | default: "Interactive image" %}
+
+<figure class="interactive-image-container" {% if include.id_suffix %}id="interactive-image-{{ include.id_suffix }}" {%
+    endif %} aria-label="{{ alt }}">
+    <img src="{{ default_img_path }}" class="interactive-image image-default" alt="{{ alt }} - Default View"
+        loading="lazy">
+    <img src="{{ hover_img_path }}" class="interactive-image image-hover" alt="{{ alt }} - Hover View (Edited/Unedited)"
+        loading="lazy" aria-hidden="true">
+    <img src="{{ click_img_path }}" class="interactive-image image-click" alt="{{ alt }} - Click View (Edited/Unedited)"
+        loading="lazy" aria-hidden="true">
+    {% if include.caption %}
+    <figcaption>{{ include.caption }}</figcaption>
+    {% endif %}
+</figure>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const containers = document.querySelectorAll('.interactive-image-container');
+
+        containers.forEach(container => {
+            const defaultImg = container.querySelector('.image-default');
+            const hoverImg = container.querySelector('.image-hover');
+            const clickImg = container.querySelector('.image-click');
+
+            let isMouseDown = false;
+
+            container.addEventListener('mouseenter', () => {
+                if (!isMouseDown) { // Only show hover if not currently clicking
+                    if (hoverImg) hoverImg.style.opacity = '1';
+                    if (clickImg) clickImg.style.opacity = '0';
+                }
+            });
+
+            container.addEventListener('mouseleave', () => {
+                isMouseDown = false; // Reset mouse down state on leave
+                if (hoverImg) hoverImg.style.opacity = '0';
+                if (clickImg) clickImg.style.opacity = '0';
+            });
+
+            container.addEventListener('mousedown', (event) => {
+                event.preventDefault(); // Prevent image drag or text selection
+                isMouseDown = true;
+                if (hoverImg) hoverImg.style.opacity = '0';
+                if (clickImg) clickImg.style.opacity = '1';
+            });
+
+            container.addEventListener('mouseup', () => {
+                isMouseDown = false;
+                // If mouse is still over the container, revert to hover state
+                // Check if the container itself is still being hovered.
+                // A simple way is to check if the mouse coordinates are within the element's bounds
+                // but a simpler check for this case might be `container.matches(':hover')`
+                if (container.matches(':hover')) {
+                    if (hoverImg) hoverImg.style.opacity = '1';
+                    if (clickImg) clickImg.style.opacity = '0';
+                } else {
+                    // If mouseup happened and cursor is outside, mouseleave should have handled it,
+                    // but as a fallback, revert to default.
+                    if (hoverImg) hoverImg.style.opacity = '0';
+                    if (clickImg) clickImg.style.opacity = '0';
+                }
+            });
+
+            // Basic touch support: tap and hold shows clickImg, release shows defaultImg
+            // This is a simplified interaction for touch.
+            let touchTimeout;
+            container.addEventListener('touchstart', (event) => {
+                event.preventDefault(); // Important to prevent scrolling while interacting
+                isMouseDown = true; // Use same flag for conceptual "pressed" state
+                if (hoverImg) hoverImg.style.opacity = '0'; // No hover on touch usually
+                if (clickImg) clickImg.style.opacity = '1';
+            }, { passive: false }); // Need passive:false for preventDefault to work on touchstart
+
+            container.addEventListener('touchend', () => {
+                isMouseDown = false;
+                // Revert to default on touchend.
+                // You could make it more complex (e.g., show hover if a "hover" concept exists)
+                // but for simplicity, default is fine.
+                if (hoverImg) hoverImg.style.opacity = '0';
+                if (clickImg) clickImg.style.opacity = '0';
+            });
+
+            container.addEventListener('touchcancel', () => { // Good practice
+                isMouseDown = false;
+                if (hoverImg) hoverImg.style.opacity = '0';
+                if (clickImg) clickImg.style.opacity = '0';
+            });
+
+        });
+    });
+</script>
