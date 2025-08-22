@@ -10,6 +10,10 @@ Alibeigi:
   picture: /assets/images/profiles/mina_alibeigi.jpg
   scholar: gJA_rJYAAAAJ
   title: Researcher
+Asljung:
+  firstname: ["Daniel", "D.", "D. Å.", "Daniel Åsljung"]
+  org: Zenseact
+  scholar: Gm_19aQAAAAJ
 Astrom:
   firstname: ["Kalle", "K.", "K. Å.", "Kalle Åstrom"]
   org: Lund University
@@ -316,6 +320,10 @@ Ursing:
   firstname: ["Stig", "S.", "S. U.", "Stig Ursing"]
   org: Semcon Sweden AB
   url: https://www.researchgate.net/profile/Stig-Ursing
+Vakilzadeh:
+  firstname: ["Majid", "M.", "M. K. V.", "Majid Khorsand Vakilzadeh"]
+  org: Zenseact
+  scholar: z8ubwx8AAAAJ
 Verbeke:
   firstname: ["Willem", "W.", "W. V.", "Willem Verbeke"]
   org: Zenseact
