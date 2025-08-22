@@ -11,8 +11,11 @@ authors:
   - Campos
 thumbnail-img: sus.png
 arxiv: https://maggyl.github.io/publications/sus-severity/
+<<<<<<< HEAD
 topics:
   - Verification & validation
+=======
+>>>>>>> eb7457a (Adding new publications and associated updates to authors and venue files)
 ---
 
 # Abstract

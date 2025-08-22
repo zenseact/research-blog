@@ -149,6 +149,7 @@ TSE:
   series: TSE
 TITS:
   name: IEEE Transactions on Intelligent Transportation Systems
+  url: https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=6979
   series: T-ITS
 DSNW20:
   name: 50th Annual IEEE/IFIP International Conference on Dependable Systems and Networks Workshops (DSN-W)
