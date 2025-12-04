@@ -15,6 +15,9 @@ date: 2023-11-26 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2311.15260
 n_equal_contrib: 3
 thumbnail-video: laneshift_compressed.mp4
+topics:
+  - Neural rendering
+  - Simulation
 ---
 
 <div style="display: flex; align-items: center; justify-content: center;">

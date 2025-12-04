@@ -15,6 +15,10 @@ date: 2024-03-26 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2403.16092
 n_equal_contrib: 2
 thumbnail-img: front_figure.png
+topics:
+  - Neural rendering
+  - Simulation
+  - Perception
 ---
 
 # Core idea

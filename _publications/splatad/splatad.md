@@ -14,6 +14,9 @@ date: 2024-11-30 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2411.16816
 n_equal_contrib: 2
 thumbnail-img: thumbnail.gif
+topics:
+  - Neural rendering
+  - Simulation
 ---
 <div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em; width=100%">
 <figure class="figure__background">
