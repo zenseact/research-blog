@@ -5,10 +5,10 @@
 Build filter option lists (venue, year, topic) from the publications collection.
 {%- endcomment -%}
 
-{%- assign venues = site.publications | map: 'venue' | uniq | sort -%}
-
 {%- assign years_string = '' -%}
 {%- assign topics_string = '' -%}
+{%- assign series_string = '' -%}
+{%- assign standalone_venues_string = '' -%}
 {%- for publication in site.publications -%}
   {%- assign pub_year = publication.date | date: '%Y' -%}
   {%- unless years_string contains pub_year -%}
@@ -22,13 +22,31 @@ Build filter option lists (venue, year, topic) from the publications collection.
       {%- endunless -%}
     {%- endfor -%}
   {%- endif -%}
+
+  {%- assign venue_data = site.data.venues[publication.venue] -%}
+  {%- if venue_data.series -%}
+    {%- unless series_string contains venue_data.series -%}
+      {%- assign series_string = series_string | append: venue_data.series | append: '|' -%}
+    {%- endunless -%}
+  {%- else -%}
+    {%- unless standalone_venues_string contains publication.venue -%}
+      {%- assign standalone_venues_string = standalone_venues_string | append: publication.venue | append: '|' -%}
+    {%- endunless -%}
+  {%- endif -%}
 {%- endfor -%}
 
 {%- assign years = years_string | split: '|' | sort | reverse -%}
 {%- assign topics = topics_string | split: '|' | sort -%}
+{%- assign series_list = series_string | split: '|' | sort -%}
+{%- assign standalone_venues = standalone_venues_string | split: '|' | sort -%}
 
 <!--Filters-->
 <div class="publications__filters">
+  <div class="publications__filters-group publications__search-group">
+    <label for="pub-search">Search</label>
+    <input type="text" id="pub-search" class="publications__search-input" placeholder="Search by title or author...">
+  </div>
+
   <div class="publications__filters-group">
     <label for="pub-filter-topic">Topic</label>
     <select id="pub-filter-topic" class="publications__filter-select">
@@ -57,9 +75,15 @@ Build filter option lists (venue, year, topic) from the publications collection.
     <label for="pub-filter-venue">Venue</label>
     <select id="pub-filter-venue" class="publications__filter-select">
       <option value="">All venues</option>
-      {%- for venue_key in venues -%}
+      {%- for series in series_list -%}
+        {%- if series and series != '' -%}
+          <option value="series:{{ series }}">{{ series }}</option>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for venue_key in standalone_venues -%}
         {%- if venue_key and venue_key != '' -%}
-          <option value="{{ venue_key }}">{{ venue_key }}</option>
+          {%- assign vdata = site.data.venues[venue_key] -%}
+          <option value="{{ venue_key }}">{% if vdata %}{{ vdata.name }}{% else %}{{ venue_key }}{% endif %}</option>
         {%- endif -%}
       {%- endfor -%}
     </select>
@@ -69,11 +93,15 @@ Build filter option lists (venue, year, topic) from the publications collection.
 <!--List all publications-->
 <ul class="publications__list" id="publications-list">
     {% for publication in publications %}
+    {%- assign pub_venue_data = site.data.venues[publication.venue] -%}
     <li
       class="publications__item"
       data-venue="{{ publication.venue }}"
+      data-venue-series="{% if pub_venue_data.series %}{{ pub_venue_data.series }}{% endif %}"
       data-year="{{ publication.date | date: '%Y' }}"
       data-topics="{% if publication.topics %}{{ publication.topics | join: ',' }}{% endif %}"
+      data-title="{{ publication.title | downcase }}"
+      data-authors="{% for authorkey in publication.authors %}{% assign author = site.data.authors[authorkey] %}{{ author.firstname[3] | downcase }} {% endfor %}"
     >
         <a class="pub-title" href="{{ publication.url | relative_url }}">{{ publication.title }}</a>
         <br>

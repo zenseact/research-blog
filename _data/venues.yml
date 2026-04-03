@@ -5,15 +5,19 @@ ARXIV:
 CVPR24:
   name: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2024
   url: https://cvpr.thecvf.com/Conferences/2024
+  series: CVPR
 CVPR25:
   name: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2025
   url: https://cvpr.thecvf.com/Conferences/2025
+  series: CVPR
 CVPRW24:
   name: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2024
   url: https://cvpr.thecvf.com/Conferences/2024
+  series: CVPR
 CVPRW25:
   name: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2025
   url: https://cvpr.thecvf.com/Conferences/2025
+  series: CVPR
 AAMAS2024:
   name: The 23rd International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2024
   url: https://www.aamas2024-conference.auckland.ac.nz/
@@ -26,33 +30,42 @@ Automatica:
 ECCV22:
   name: European Conference on Computer Vision (ECCV), 2022
   url: https://eccv2022.ecva.net
+  series: ECCV
 ECCV24:
   name: European Conference on Computer Vision (ECCV), 2024
   url: https://eccv.ecva.net/Conferences/2024
+  series: ECCV
 ECCV22W:
   name: What is Motion for? A ECCV Workshop, 2022
   url: https://what-is-motion-for.github.io/
+  series: ECCV
 ICCV23:
   name: International Conference on Computer Vision (ICCV), 2023
   url: https://iccv2023.thecvf.com
+  series: ICCV
 SCIA23:
   name: Scandinavian Conference on Image Analysis (SCIA), 2023
   url: https://sites.google.com/view/scia2023
 WACV23:
   name: Winter Conference on Applications of Computer Vision (WACV), 2023
   url: https://wacv2023.thecvf.com
+  series: WACV
 WACV24:
   name: Winter Conference on Applications of Computer Vision (WACV), 2024
   url: https://wacv2024.thecvf.com
+  series: WACV
 ITSC20:
   name: IEEE 23rd International Conference on Intelligent Transportation Systems (ITSC), 2020
   url: https://www.ieee-itsc2020.org/
+  series: ITSC
 ITSC19:
   name: IEEE 22nd International Conference on Intelligent Transportation Systems (ITSC), 2019
   url: https://ieee-itsc.org/2019/www.itsc2019.org/index.html
+  series: ITSC
 ITSC18:
   name: IEEE 21st International Conference on Intelligent Transportation Systems (ITSC), 2018
   url: https://ieee-itsc.org/2018/
+  series: ITSC
 UAI2022:
   name: The 38th Conference on Uncertainty in Artificial Intelligence (UAI), 2022
   url: https://www.auai.org/uai2022/
