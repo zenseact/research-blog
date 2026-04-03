@@ -42,6 +42,9 @@ Build filter option lists (venue, year, topic) from the publications collection.
 
 <div class="publications__layout">
   <!--Sidebar filters-->
+  <button class="publications__filter-toggle" id="filter-toggle" onclick="document.getElementById('publications-sidebar').classList.toggle('is-open'); this.classList.toggle('is-open');">
+    <i class="fas fa-sliders-h"></i> Filters
+  </button>
   <aside class="publications__sidebar" id="publications-sidebar">
     <div class="publications__sidebar-section">
       <input type="text" id="pub-search" class="publications__search-input" placeholder="Search by title or author...">
