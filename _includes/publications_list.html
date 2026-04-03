@@ -111,7 +111,14 @@ Build filter option lists (venue, year, topic) from the publications collection.
         data-title="{{ publication.title | downcase }}"
         data-authors="{% for authorkey in publication.authors %}{% assign author = site.data.authors[authorkey] %}{{ author.firstname[3] | downcase }} {% endfor %}"
       >
-          <a class="pub-title" href="{{ publication.url | relative_url }}">{{ publication.title }}</a>
+        <a class="publications__item-link{% if publication.thumbnail-img or publication.thumbnail-gif %} has-thumbnail{% endif %}" href="{{ publication.url | relative_url }}">
+          {% if publication.thumbnail-img or publication.thumbnail-gif %}
+          <div class="pub-thumbnail">
+            <img src="{{ publication.permalink | relative_url }}{{ publication.thumbnail-img | default: publication.thumbnail-gif }}" alt="" loading="lazy">
+          </div>
+          {% endif %}
+          <div class="pub-text">
+          <span class="pub-title">{{ publication.title }}</span>
           <br>
           <span class="pub-authors">
               {% for authorkey in publication.authors %}
@@ -146,6 +153,8 @@ Build filter option lists (venue, year, topic) from the publications collection.
                   {{ publication.venue }}
               {% endif %}
           </span>
+          </div>
+        </a>
       </li>
       {% endfor %}
     </ul>
