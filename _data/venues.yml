@@ -2,6 +2,7 @@
 ARXIV:
   name: arXiv
   url: https://arxiv.org
+  series: arXiv (preprint)
 CVPR24:
   name: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR), 2024
   url: https://cvpr.thecvf.com/Conferences/2024
@@ -21,12 +22,15 @@ CVPRW25:
 AAMAS2024:
   name: The 23rd International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2024
   url: https://www.aamas2024-conference.auckland.ac.nz/
+  series: AAMAS
 AISTATS2023:
   name: The 26th International Conference on Artificial Intelligence and Statistics (AISTATS), 2023
   url: http://aistats.org/aistats2023/
+  series: AISTATS
 Automatica:
   name: Automatica
   url: https://www.sciencedirect.com/journal/automatica
+  series: Automatica
 ECCV22:
   name: European Conference on Computer Vision (ECCV), 2022
   url: https://eccv2022.ecva.net
@@ -46,6 +50,7 @@ ICCV23:
 SCIA23:
   name: Scandinavian Conference on Image Analysis (SCIA), 2023
   url: https://sites.google.com/view/scia2023
+  series: SCIA
 WACV23:
   name: Winter Conference on Applications of Computer Vision (WACV), 2023
   url: https://wacv2023.thecvf.com
@@ -69,20 +74,27 @@ ITSC18:
 UAI2022:
   name: The 38th Conference on Uncertainty in Artificial Intelligence (UAI), 2022
   url: https://www.auai.org/uai2022/
+  series: UAI
 IV22:
-  name: 33rd IEEE Intelligent Vehicles Symposium
+  name: 33rd IEEE Intelligent Vehicles Symposium (IV), 2022
   url: https://iv2022.com
+  series: IV
 CARS21:
   name: CARS 2021 - 6th International Workshop on Critical Automotive Applications - Robustness and Safety
   url: http://cars2021.astus.se
+  series: CARS
 ERTS20:
-  name: 10th European Congress on Embedded Real Time Systems, 2020
+  name: 10th European Congress on Embedded Real Time Systems (ERTS), 2020
   url: https://www.erts2020.org
+  series: ERTS
 SAEWCX20:
-  name: SAE World Congress Experience 2020
+  name: SAE World Congress Experience (SAE WCX), 2020
   url: https://www.sae.org/attend/wcx/2020
+  series: SAE WCX
 TSE:
-  name: IEEE Transactions on Software Engineering
+  name: IEEE Transactions on Software Engineering (TSE)
   url: https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=32
+  series: TSE
 DSNW20:
   name: 50th Annual IEEE/IFIP International Conference on Dependable Systems and Networks Workshops (DSN-W)
+  series: DSN-W
