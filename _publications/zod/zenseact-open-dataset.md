@@ -20,6 +20,9 @@ code: https://github.com/zenseact/zod
 arxiv: https://arxiv.org/abs/2305.02008
 n_equal_contrib: 3
 thumbnail-img: zod_thumbnail.jpg
+topics:
+  - Datasets & benchmarks
+  - Perception & motion forecasting
 
 ---
 

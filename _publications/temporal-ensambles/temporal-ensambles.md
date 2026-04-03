@@ -13,6 +13,8 @@ authors:
 arxiv: https://arxiv.org/abs/2309.11333
 n_equal_contrib: 2
 usemathjax: true
+topics:
+  - Perception & motion forecasting
 ---
 
 # Abstract

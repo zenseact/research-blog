@@ -1,5 +1,7 @@
 ---
 main:
+  - title: Research
+    url: /research
   - title: Publications
     url: /publications
   - title: Dataset<sup><span style="font-size:0.5rem">&UpperRightArrow;</span></sup>

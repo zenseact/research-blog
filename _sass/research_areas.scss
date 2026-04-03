@@ -1,0 +1,57 @@
+.research-areas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.research-areas__card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  background-color: $background-color;
+  text-decoration: none;
+  color: $text-color;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.research-areas__icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+  color: $muted-text-color;
+}
+
+.research-areas__title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.research-areas__description {
+  font-size: 0.7rem;
+  color: $muted-text-color;
+  line-height: 1.5;
+  flex-grow: 1;
+  margin-bottom: 0.75rem;
+}
+
+.research-areas__count {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: $muted-text-color;
+}

@@ -12,6 +12,9 @@ date: 2022-12-13 00:00:00 +00:00
 code: https://github.com/atonderski/lidarclip
 arxiv: https://arxiv.org/abs/2212.06858
 n_equal_contrib: 2
+topics:
+  - Perception & motion forecasting
+  - Representation learning
 
 ---
 

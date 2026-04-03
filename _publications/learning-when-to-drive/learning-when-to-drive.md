@@ -11,6 +11,8 @@ authors:
 date: 2019-10-17 00:00:00 +00:00
 arxiv: https://ieeexplore.ieee.org/abstract/document/8916922
 n_equal_contrib: 1
+topics:
+  - Planning & decision-making
 ---
 
 # Abstract
