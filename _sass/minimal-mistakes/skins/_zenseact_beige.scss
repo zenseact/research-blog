@@ -2,20 +2,31 @@
    Zenseact beige skin
    ========================================================================== */
 
+/* Brand colors */
+$zenseact-red: #EF4136;
+$zenseact-red-dark: #D63A30;
+$zenseact-warm-gray: #E4E0D9;
+$zenseact-blue-gray: #6D8BA7;
+$zenseact-yellow: #FDB913;
+$zenseact-green: #396353;
+
 /* Colors */
-$background-color: #F2F2F2 !default;
-$text-color: #222831 !default;
-$muted-text-color: #393e46 !default;
-$primary-color: #B9B8B3 !default;
-$border-color: mix(#fff, #393e46, 75%) !default;
-$footer-background-color: $primary-color !default;
-$link-color: #393e46 !default;
+$background-color: #F7F6F3 !default;
+$text-color: #1A1A2E !default;
+$muted-text-color: #6B7280 !default;
+$zenseact-yellow-dark: #E5A811;
+$primary-color: $zenseact-yellow !default;
+$border-color: $zenseact-warm-gray !default;
+$footer-background-color: #1A1A2E !default;
+$link-color: $text-color !default;
+$link-color-hover: $zenseact-yellow-dark !default;
 $masthead-link-color: $text-color !default;
-$masthead-link-color-hover: $text-color !default;
+$masthead-link-color-hover: $zenseact-yellow-dark !default;
 $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
+$warning-color: $zenseact-yellow !default;
 
 .page__footer {
-    color: #222831 !important; // override
+    color: #F7F6F3 !important;
 }
 
 .page__footer-follow .social-icons .svg-inline--fa {

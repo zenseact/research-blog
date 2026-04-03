@@ -1,18 +1,27 @@
 .publications__filter-toggle {
     display: none;
     width: 100%;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.7rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: $text-color;
-    background-color: $background-color;
+    background-color: #fff;
     border: 1px solid $border-color;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     margin-bottom: 1rem;
+    transition: border-color 0.15s ease;
 
     i {
         margin-right: 0.4rem;
+    }
+
+    &:hover {
+        border-color: $primary-color;
+    }
+
+    &.is-open {
+        border-color: $primary-color;
     }
 
     @media (max-width: $medium) {
@@ -22,7 +31,7 @@
 
 .publications__layout {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
 
     @media (max-width: $medium) {
         flex-direction: column;
@@ -31,7 +40,7 @@
 
 .publications__sidebar {
     flex-shrink: 0;
-    width: 200px;
+    width: 220px;
     position: sticky;
     top: 4rem;
     align-self: flex-start;
@@ -51,7 +60,7 @@
 }
 
 .publications__sidebar-section {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
 }
 
 .publications__sidebar-heading {
@@ -68,11 +77,17 @@
     font-size: 0.65rem;
     color: $muted-text-color;
     cursor: pointer;
-    padding: 0.15rem 0;
+    padding: 0.2rem 0;
+    transition: color 0.15s ease;
+
+    &:hover {
+        color: $text-color;
+    }
 
     input[type="checkbox"] {
         margin: 0;
         flex-shrink: 0;
+        accent-color: $primary-color;
     }
 
     span {
@@ -82,13 +97,19 @@
 
 .publications__search-input {
     font-size: 0.7rem;
-    padding: 0.3rem 0.5rem;
-    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
     border: 1px solid $border-color;
-    background-color: $background-color;
+    background-color: #fff;
     color: $text-color;
     width: 100%;
     box-sizing: border-box;
+    transition: border-color 0.15s ease;
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+    }
 }
 
 .publications__content {
@@ -109,6 +130,7 @@
         margin-bottom: 1.5rem;
         padding-bottom: 1.5rem;
         border-bottom: 1px solid $border-color;
+        transition: background-color 0.15s ease;
 
         &:last-child {
             margin-bottom: 0;
@@ -119,8 +141,13 @@
         .pub-title {
             color: $text-color;
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: color 0.15s ease;
             font-size: 0.8rem;
+            font-weight: 500;
+
+            &:hover {
+                color: $primary-color;
+            }
         }
 
         .pub-authors {
@@ -130,7 +157,7 @@
         }
 
         .pub-topics {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             color: $muted-text-color;
             margin-bottom: 0.5rem;
         }

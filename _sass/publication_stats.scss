@@ -4,6 +4,8 @@
   gap: 3rem;
   margin: 1.5rem 0;
   padding: 1.5rem 0;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
 
   @media (max-width: 480px) {
     gap: 1.5rem;
@@ -19,12 +21,12 @@
 .publication-stats__number {
   font-size: 2rem;
   font-weight: 700;
-  color: $text-color;
+  color: $primary-color;
   line-height: 1;
 }
 
 .publication-stats__label {
   font-size: 0.7rem;
   color: $muted-text-color;
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
 }

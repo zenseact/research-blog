@@ -18,8 +18,16 @@ search: false
 @import "research_areas";
 @import "publication_stats";
 
+html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+
 .page .page__inner-wrap {
-    margin-top: 0;
+    margin-top: 1rem;
 }
 
 .masthead__menu {

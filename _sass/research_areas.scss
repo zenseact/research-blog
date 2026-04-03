@@ -19,21 +19,21 @@
   padding: 1.5rem;
   border: 1px solid $border-color;
   border-radius: 8px;
-  background-color: $background-color;
+  background-color: #fff;
   text-decoration: none;
   color: $text-color;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   }
 }
 
 .research-areas__icon {
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
-  color: $muted-text-color;
+  color: $primary-color;
 }
 
 .research-areas__title {
@@ -45,7 +45,7 @@
 .research-areas__description {
   font-size: 0.7rem;
   color: $muted-text-color;
-  line-height: 1.5;
+  line-height: 1.6;
   flex-grow: 1;
   margin-bottom: 0.75rem;
 }
@@ -53,5 +53,5 @@
 .research-areas__count {
   font-size: 0.65rem;
   font-weight: 600;
-  color: $muted-text-color;
+  color: $primary-color;
 }
