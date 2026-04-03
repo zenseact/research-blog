@@ -5,7 +5,8 @@ title:  "Home"
 <br>
 
 {% include home_header.html %}
-<br>
+
+{% include publication_stats.html %}
 
 ---
 ### Latest Publications
