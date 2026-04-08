@@ -4,7 +4,7 @@ title:  "Research"
 ---
 <br>
 
-# Research Areas.
+# Research Topics.
 {: .text-center}
 
 <br>

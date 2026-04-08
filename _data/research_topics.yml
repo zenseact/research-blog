@@ -3,6 +3,11 @@
   description: "Detection, segmentation, motion prediction, and sensor-based understanding of the driving environment."
   icon: fa-eye
 
+- name: Localization & Mapping
+  slug: Localization & mapping
+  description: "Determining vehicle position and building accurate maps of the driving environment."
+  icon: fa-map-marker-alt
+
 - name: Representation Learning
   slug: Representation learning
   description: "Self-supervised and foundation model pretraining for learning rich representations from unlabeled data."
@@ -18,10 +23,15 @@
   description: "Reinforcement learning and tactical decision-making policies for complex driving scenarios."
   icon: fa-route
 
-- name: Safety & Validation
-  slug: Safety & validation
-  description: "Safety argumentation, risk frameworks, and validation methods for autonomous driving systems."
+- name: Safety
+  slug: Safety
+  description: "Safety argumentation, risk frameworks, and operational design domain definition for autonomous driving systems."
   icon: fa-shield-alt
+
+- name: Verification & Validation
+  slug: Verification & validation
+  description: "Testing methodologies, scenario identification, and validation methods for autonomous driving systems."
+  icon: fa-clipboard-check
 
 - name: Datasets & Benchmarks
   slug: Datasets & benchmarks
