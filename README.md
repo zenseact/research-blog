@@ -28,11 +28,26 @@ arxiv: https://arxiv.org/abs/2301.08965 # This is the arXiv link to the paper.
 n_equal_contrib: 1 # This can be used if you have several authors that contributed equally to the paper. In this case, the first n authors listed in the `authors` field will be marked as equal contributors.
 date: 2023-01-21 00:00:00 +0000 # This is the date of the paper submission
 thumbnail-img: raw-or-cooked_thumbnail.png  # This is the thumbnail image that will be shown on the blog post. Next to the title.
+topics: # At least one research topic from `_data/research_topics.yml`. A paper can have multiple topics.
+  - Perception & motion forecasting
 ---
 ```
-Note here that you have to ensure two things:
+Note here that you have to ensure three things:
 1. All authors listed in the `authors` field must have a corresponding entry in `_data/authors.yml`.
 2. The venue listed in the `venue` field must have a corresponding entry in `_data/venues.yml`.
+3. At least one topic listed in the `topics` field must match a `slug` in `_data/research_topics.yml`. The available topics are:
+   - `Perception & motion forecasting`
+   - `Localization & mapping`
+   - `Representation learning`
+   - `Simulation`
+   - `Planning & decision-making`
+   - `Safety`
+   - `Verification & validation`
+   - `Datasets & benchmarks`
+   - `Theory & foundations`
+
+   If your paper does not fit any existing topic, propose a new one by adding an entry to `_data/research_topics.yml` in your pull request.
+
 Follow the convention in each of these files to add new authors and venues.
 
 ### Step 3
@@ -44,7 +59,7 @@ You can preview your changes by running the site locally. To do this, simply run
 docker compose build
 docker compose up
 ```
-Note that you only have to build the docker image once. After that, you can simply run `docker compose up` to serve the site locally. You can then preview the site at [http://0.0.0.0:8080/\<your-local-repo-dir>](http://0.0.0.0:8080/<your-local-repo-dir>).
+Note that you only have to build the docker image once. After that, you can simply run `docker compose up` to serve the site locally. You can then preview the site at [http://0.0.0.0:8080/research-blog](http://0.0.0.0:8080/research-blog).
 
 ### Step 5
 Make a pull-request to this repository. Once the pull-request is merged, the blog post will be automatically published at [research.zenseact.com](https://research.zenseact.com).
@@ -76,4 +91,9 @@ ICCV23: # identifier, should be unique
   name: International Conference on Computer Vision (ICCV), 2023
   # add the url to the conference (optional)
   url: https://iccv2023.thecvf.com
+  # add the conference series short name. This is what shows up in the venue filter on the
+  # publications page, and groups all instances of the same conference together (e.g., ICCV23
+  # and a future ICCV25 would both appear under "ICCV"). For one-off venues, use a short
+  # acronym or name. Required.
+  series: ICCV
 ```
