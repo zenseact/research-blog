@@ -15,6 +15,7 @@ n_equal_contrib: 1
 thumbnail-img: nuscenes_train_val_test.png
 topics:
   - Perception & motion forecasting
+  - Localization & mapping
   - Datasets & benchmarks
 ---
 

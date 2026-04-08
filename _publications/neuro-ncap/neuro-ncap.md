@@ -18,7 +18,8 @@ n_equal_contrib: 2
 thumbnail-video: assets/videos/stationary-103-compressed-run1.mp4
 topics:
   - Simulation
-  - Safety & validation
+  - Verification & validation
+  - Datasets & benchmarks
 ---
 
 

@@ -14,6 +14,7 @@ arxiv: https://arxiv.org/abs/2405.17270
 date: 2024-05-27 00:00:00 +0000
 topics:
   - Perception & motion forecasting
+  - Localization & mapping
 ---
 
 # Abstract
