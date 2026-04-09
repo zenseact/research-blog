@@ -41,14 +41,14 @@ To enable long-range supervision and reasoning under constant memory, we introdu
 </div>
 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; margin: 0 0 1em;">
   <div class="video-hover" style="aspect-ratio: 1422 / 1872;">
-    <video preload="auto" loop muted playsinline><source src="assets/videos/5af9c7f124d84e7e9ac729fafa40ea01.mp4" type="video/mp4"></video>
+    <video preload="auto" loop muted playsinline><source src="assets/videos/16e50a63b809463099cb4c378fe0641e.mp4" type="video/mp4"></video>
     <div class="video-hover__overlay"><span>▶</span></div>
   </div>
   <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-    <img style="width: 100%; display: block;" src="assets/5af9c7f124d84e7e9ac729fafa40ea01_cam.png"/>
-    <img style="width: 100%; display: block;" src="assets/3d_semantics_camera_views_5af9c7f124d84e7e9ac729fafa40ea01_0315_00.png"/>
+    <img style="width: 100%; display: block;" src="assets/16e50a63b809463099cb4c378fe0641e_cam.png"/>
+    <img style="width: 100%; display: block;" src="assets/3d_semantics_camera_views_16e50a63b809463099cb4c378fe0641e_0328_00.png"/>
     <div class="video-hover" style="aspect-ratio: 16 / 9;">
-      <video preload="auto" loop muted playsinline><source src="assets/videos/orbit_5af9c7f124d84e7e9ac729fafa40ea01_0315.mp4" type="video/mp4"></video>
+      <video preload="auto" loop muted playsinline><source src="assets/videos/orbit_16e50a63b809463099cb4c378fe0641e_0328.mp4" type="video/mp4"></video>
       <div class="video-hover__overlay"><span>▶</span></div>
     </div>
   </div>
