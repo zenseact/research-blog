@@ -23,6 +23,10 @@ CVPRW25:
   name: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2025
   url: https://cvpr.thecvf.com/Conferences/2025
   series: CVPR
+CVPRW26:
+  name: IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, 2026
+  url: https://cvpr.thecvf.com/Conferences/2026
+  series: CVPR
 AAMAS2024:
   name: The 23rd International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS), 2024
   url: https://www.aamas2024-conference.auckland.ac.nz/
@@ -62,6 +66,10 @@ WACV23:
 WACV24:
   name: Winter Conference on Applications of Computer Vision (WACV), 2024
   url: https://wacv2024.thecvf.com
+  series: WACV
+WACV26:
+  name: Winter Conference on Applications of Computer Vision (WACV), 2026
+  url: https://wacv2026.thecvf.com
   series: WACV
 ITSC20:
   name: IEEE 23rd International Conference on Intelligent Transportation Systems (ITSC), 2020
