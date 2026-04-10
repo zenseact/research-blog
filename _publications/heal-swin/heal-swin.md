@@ -17,6 +17,8 @@ code: https://github.com/JanEGerken/HEAL-SWIN
 arxiv: https://arxiv.org/abs/2307.07313
 n_equal_contrib: 2
 thumbnail-img: heal-swin.png
+topics:
+  - Perception & motion forecasting
 ---
 
 # Abstract

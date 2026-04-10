@@ -1,35 +1,76 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var venueSelect = document.getElementById("pub-filter-venue");
-  var yearSelect = document.getElementById("pub-filter-year");
-  var topicSelect = document.getElementById("pub-filter-topic");
+  var searchInput = document.getElementById("pub-search");
   var list = document.getElementById("publications-list");
+  var countEl = document.getElementById("publications-count");
 
-  if (!list || !venueSelect || !yearSelect || !topicSelect) {
-    return;
-  }
+  if (!list) return;
 
   var items = Array.prototype.slice.call(
     list.querySelectorAll(".publications__item")
   );
 
-  function matchesFilter(item, venue, year, topic) {
-    var itemVenue = item.getAttribute("data-venue") || "";
-    var itemYear = item.getAttribute("data-year") || "";
-    var itemTopics = (item.getAttribute("data-topics") || "").split(",");
+  var topicCheckboxes = Array.prototype.slice.call(
+    document.querySelectorAll(".pub-filter-topic")
+  );
+  var yearCheckboxes = Array.prototype.slice.call(
+    document.querySelectorAll(".pub-filter-year")
+  );
+  var venueCheckboxes = Array.prototype.slice.call(
+    document.querySelectorAll(".pub-filter-venue")
+  );
 
-    if (venue && itemVenue !== venue) {
-      return false;
-    }
+  // Pre-select topic filter from URL query params (for deep-linking from research areas page)
+  var urlParams = new URLSearchParams(window.location.search);
+  var topicParam = urlParams.get("topic");
+  if (topicParam) {
+    topicCheckboxes.forEach(function (cb) {
+      if (cb.value === topicParam) cb.checked = true;
+    });
+  }
 
-    if (year && itemYear !== year) {
-      return false;
-    }
+  function getCheckedValues(checkboxes) {
+    return checkboxes
+      .filter(function (cb) { return cb.checked; })
+      .map(function (cb) { return cb.value; });
+  }
 
-    if (topic) {
-      var hasTopic = itemTopics.some(function (t) {
-        return t && t.trim() === topic;
+  function matchesFilter(item, venues, years, topics, query) {
+    // Venue filter: match if any checked venue matches (OR logic)
+    if (venues.length > 0) {
+      var itemVenue = item.getAttribute("data-venue") || "";
+      var itemVenueSeries = item.getAttribute("data-venue-series") || "";
+      var venueMatch = venues.some(function (v) {
+        if (v.indexOf("series:") === 0) {
+          return itemVenueSeries === v.substring(7);
+        }
+        return itemVenue === v;
       });
-      if (!hasTopic) {
+      if (!venueMatch) return false;
+    }
+
+    // Year filter: match if any checked year matches (OR logic)
+    if (years.length > 0) {
+      var itemYear = item.getAttribute("data-year") || "";
+      if (years.indexOf(itemYear) === -1) return false;
+    }
+
+    // Topic filter: match if any checked topic matches (OR logic)
+    if (topics.length > 0) {
+      var itemTopics = (item.getAttribute("data-topics") || "").split(",").map(function (t) {
+        return t.trim();
+      });
+      var topicMatch = topics.some(function (t) {
+        return itemTopics.indexOf(t) !== -1;
+      });
+      if (!topicMatch) return false;
+    }
+
+    // Search query
+    if (query) {
+      var itemTitle = item.getAttribute("data-title") || "";
+      var itemAuthors = item.getAttribute("data-authors") || "";
+      var q = query.toLowerCase();
+      if (itemTitle.indexOf(q) === -1 && itemAuthors.indexOf(q) === -1) {
         return false;
       }
     }
@@ -38,22 +79,31 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function applyFilters() {
-    var selectedVenue = venueSelect.value;
-    var selectedYear = yearSelect.value;
-    var selectedTopic = topicSelect.value;
+    var selectedVenues = getCheckedValues(venueCheckboxes);
+    var selectedYears = getCheckedValues(yearCheckboxes);
+    var selectedTopics = getCheckedValues(topicCheckboxes);
+    var searchQuery = searchInput ? searchInput.value.trim() : "";
 
+    var visibleCount = 0;
     items.forEach(function (item) {
-      if (matchesFilter(item, selectedVenue, selectedYear, selectedTopic)) {
+      if (matchesFilter(item, selectedVenues, selectedYears, selectedTopics, searchQuery)) {
         item.style.display = "";
+        visibleCount++;
       } else {
         item.style.display = "none";
       }
     });
+
+    if (countEl) {
+      countEl.textContent = visibleCount + " of " + items.length + " publications";
+    }
   }
 
-  venueSelect.addEventListener("change", applyFilters);
-  yearSelect.addEventListener("change", applyFilters);
-  topicSelect.addEventListener("change", applyFilters);
+  topicCheckboxes.forEach(function (cb) { cb.addEventListener("change", applyFilters); });
+  yearCheckboxes.forEach(function (cb) { cb.addEventListener("change", applyFilters); });
+  venueCheckboxes.forEach(function (cb) { cb.addEventListener("change", applyFilters); });
+  if (searchInput) searchInput.addEventListener("input", applyFilters);
+
+  // Apply filters on load (handles URL query param pre-selection)
+  applyFilters();
 });
-
-

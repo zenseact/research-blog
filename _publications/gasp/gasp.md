@@ -20,8 +20,8 @@ arxiv: https://arxiv.org/abs/2503.15672
 n_equal_contrib: 2
 thumbnail-img: thumbnail.gif
 topics:
-  - Self-supervised learning
-  - Perception
+  - Representation learning
+  - Perception & motion forecasting
 ---
 <div style="text-align: center; margin-bottom: 1em;">
 <h1>TLDR</h1>

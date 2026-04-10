@@ -16,7 +16,7 @@ code:
 arxiv: https://arxiv.org/abs/2207.00531
 thumbnail-img: thumbnail.png
 topics:
-  - Self-supervised learning
+  - Representation learning
 ---
 
 # Abstract

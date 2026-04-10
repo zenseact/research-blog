@@ -12,6 +12,8 @@ arxiv: http://arxiv.org/abs/2203.07980
 date: 2022-03-15 00:00:00 +00:00
 n_equal_contrib: 1
 thumbnail-gif: pmb-square.gif
+topics:
+  - Perception & motion forecasting
 ---
 
 # Abstract

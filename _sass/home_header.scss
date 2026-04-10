@@ -2,12 +2,12 @@
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 2fr;
+    padding: 2rem 0;
 
     @media (max-width: $medium) {
         grid-template-columns: 1fr;
-        // center the content
         justify-items: center;
-
+        padding: 1rem 0;
     }
 
     .home__header_container__left {
@@ -16,22 +16,23 @@
         @media (max-width: $medium) {
             width: 80%;
         }
-
     }
 
     .home__header_container__right{
         width: 100%;
-        padding : 0 3rem;
+        padding: 0 3rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
 
         p {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            line-height: 1.6;
         }
 
         span, a {
-            color: $warning-color;
+            color: $primary-color;
+            font-weight: 600;
         }
 
         @media (max-width: $medium) {
@@ -43,8 +44,4 @@
             }
         }
     }
-
-
-
 }
-

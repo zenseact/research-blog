@@ -13,6 +13,8 @@ arxiv: https://arxiv.org/abs/2302.10831
 n_equal_contrib: 5
 date: 2023-02-21 00:00:00 +0000
 thumbnail-img: minmax-bayes.png
+topics:
+  - Theory & foundations
 ---
 
 # Abstract

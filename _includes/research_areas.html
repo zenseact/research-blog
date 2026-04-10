@@ -1,0 +1,23 @@
+<div class="research-areas">
+  {% for area in site.data.research_topics %}
+    {% assign pub_count = 0 %}
+    {% for pub in site.publications %}
+      {% if pub.topics %}
+        {% for topic in pub.topics %}
+          {% if topic == area.slug %}
+            {% assign pub_count = pub_count | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+
+    <a href="{{ '/publications' | relative_url }}?topic={{ area.slug | url_encode }}" class="research-areas__card">
+      <div class="research-areas__icon">
+        <i class="fas {{ area.icon }}"></i>
+      </div>
+      <h3 class="research-areas__title">{{ area.name }}</h3>
+      <p class="research-areas__description">{{ area.description }}</p>
+      <span class="research-areas__count">{{ pub_count }} publication{% if pub_count != 1 %}s{% endif %}</span>
+    </a>
+  {% endfor %}
+</div>

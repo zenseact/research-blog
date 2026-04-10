@@ -5,9 +5,9 @@ title:  "Home"
 <br>
 
 {% include home_header.html %}
-<br>
 
----
+{% include publication_stats.html %}
+
 ### Latest Publications
 
 {% include publication_cards.html limit=3 %}

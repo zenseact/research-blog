@@ -1,0 +1,14 @@
+<div class="publication-stats">
+  <div class="publication-stats__item">
+    <span class="publication-stats__number">{{ site.publications | size }}</span>
+    <span class="publication-stats__label">Publications</span>
+  </div>
+  <div class="publication-stats__item">
+    <span class="publication-stats__number">{{ site.publications | map: 'venue' | uniq | size }}</span>
+    <span class="publication-stats__label">Venues</span>
+  </div>
+  <div class="publication-stats__item">
+    <span class="publication-stats__number">{{ site.data.research_topics | size }}</span>
+    <span class="publication-stats__label">Research Topics</span>
+  </div>
+</div>

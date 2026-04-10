@@ -13,6 +13,10 @@ code: https://github.com/LiljaAdam/geographical-splits
 arxiv: https://arxiv.org/abs/2312.06420
 n_equal_contrib: 1
 thumbnail-img: nuscenes_train_val_test.png
+topics:
+  - Perception & motion forecasting
+  - Localization & mapping
+  - Datasets & benchmarks
 ---
 
 # Abstract

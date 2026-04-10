@@ -16,6 +16,8 @@ arxiv: https://arxiv.org/abs/2504.00859 # This is the arXiv link to the paper.
 n_equal_contrib: 2 # This can be used if you have several authors that contributed equally to the paper. In this case, the first n authors listed in the `authors` field will be marked as equal contributors.
 date: 2025-04-03 11:00:00 +0000 # This is the date of the paper submission
 thumbnail-img: assets/imgs/neuradar_thumbnail.png # This is the thumbnail image that will be shown on the blog post. Next to the title.
+topics:
+  - Simulation
 ---
 
 # Abstract
