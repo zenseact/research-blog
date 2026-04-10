@@ -1,0 +1,41 @@
+{% assign _images  = include.images | split: "|" %}
+{% assign _folder  = include.image_folder %}
+{% assign _id      = include.id %}
+{% assign _caption = include.caption %}
+{% assign _height  = include.scroll_height | default: "400vh" %}
+
+<div class="scroll-sequence" id="scroll-sequence-{{ _id }}" style="height: {{ _height }};">
+  <div class="scroll-sequence__sticky">
+    <figure class="scroll-sequence__figure">
+      <img class="scroll-sequence__img"
+           id="scroll-sequence-img-{{ _id }}"
+           src="{{ _folder }}/{{ _images[0] | strip }}"
+           alt="{% if _caption %}{{ _caption }}{% else %}Scroll image sequence{% endif %}">
+      {% if _caption %}<figcaption class="scroll-sequence__caption">{{ _caption }}</figcaption>{% endif %}
+    </figure>
+  </div>
+</div>
+
+<script>
+(function() {
+  var frames = [{% for _f in _images %}"{{ _folder }}/{{ _f | strip }}"{% unless forloop.last %},{% endunless %}{% endfor %}];
+
+  // Preload all frames
+  frames.forEach(function(src) { (new Image()).src = src; });
+
+  var wrapper    = document.getElementById("scroll-sequence-{{ _id }}");
+  var displayImg = document.getElementById("scroll-sequence-img-{{ _id }}");
+  var lastFrame  = -1;
+
+  function update() {
+    var rect      = wrapper.getBoundingClientRect();
+    var scrollable = wrapper.offsetHeight - window.innerHeight;
+    var progress  = scrollable > 0 ? Math.max(0, Math.min(1, -rect.top / scrollable)) : 0;
+    var idx       = Math.min(frames.length - 1, Math.floor(progress * frames.length));
+    if (idx !== lastFrame) { displayImg.src = frames[idx]; lastFrame = idx; }
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
