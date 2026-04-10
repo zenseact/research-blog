@@ -121,10 +121,11 @@ Lastly, lets look when GASP predicts the evolution of the environment into the f
 
 # BibTeX
 ```bibtex
-@article{ljungbergh2025gasp,
-  title        = {GASP: Unifying Geometric and Semantic Self-Supervised Pre-training for Autonomous Driving},
-  author       = {Ljungbergh, William and Lilja, Adam and Tonderski, Adam and Laveno Ling, Arvid and Lindstr{\"o}m, Carl and Verbeke, Willem and Fu, Junsheng and Petersson, Christoffer and Hammarstrand, Lars and Felsberg, Michael},
-  journal      = {arXiv preprint arXiv:2503.15672},
-  year         = {2025}
+@inproceedings{ljungbergh2026gasp,
+  title      = {Gasp: Unifying geometric and semantic self-supervised pre-training for autonomous driving},
+  author     = {Ljungbergh, William and Lilja, Adam and Tonderski, Adam and Ling, Arvid Laveno and Lindstr{\"o}m, Carl and Verbeke, Willem and Fu, Junsheng and Petersson, Christoffer and Hammarstrand, Lars and Felsberg, Michael},
+  booktitle  = {Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision},
+  pages      = {3077--3087},
+  year       = {2026}
 }
 ```
