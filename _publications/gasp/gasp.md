@@ -2,7 +2,7 @@
 layout: publication
 permalink: /publications/gasp/
 title: "GASP: Unifying Geometric and Semantic Self-Supervised Pre-training for Autonomous Driving"
-venue: ARXIV
+venue: WACV26
 authors:
   - Ljungbergh
   - Lilja
