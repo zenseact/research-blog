@@ -8,7 +8,6 @@ title:  "Home"
 
 {% include publication_stats.html %}
 
----
 ### Latest Publications
 
 {% include publication_cards.html limit=3 %}
