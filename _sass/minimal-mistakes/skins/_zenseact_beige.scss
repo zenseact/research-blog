@@ -17,7 +17,7 @@ $muted-text-color: #6B7280 !default;
 $zenseact-yellow-dark: #E5A811;
 $primary-color: $zenseact-yellow !default;
 $border-color: $zenseact-warm-gray !default;
-$footer-background-color: darken($zenseact-warm-gray, 10%);
+$footer-background-color: #0a0a0a;
 $link-color: $text-color !default;
 $link-color-hover: $zenseact-yellow-dark !default;
 $masthead-link-color: $text-color !default;
@@ -26,8 +26,8 @@ $navicon-link-color-hover: mix(#fff, $text-color, 80%) !default;
 $warning-color: $zenseact-yellow !default;
 
 .page__footer {
-    background-color: darken($zenseact-warm-gray, 10%) !important;
-    color: $text-color !important;
+    background-color: #0a0a0a !important;
+    color: #F7F6F3 !important;
 }
 
 .page__footer-follow .social-icons .svg-inline--fa {
