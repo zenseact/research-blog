@@ -11,6 +11,8 @@ authors:
   - Campos
 thumbnail-img: sus.png
 arxiv: https://maggyl.github.io/publications/sus-severity/
+topics:
+  - Verification & validation
 ---
 
 # Abstract

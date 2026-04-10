@@ -10,6 +10,8 @@ authors:
   - Torngren
 thumbnail-img: ads_saw.png
 arxiv: https://maggyl.github.io/publications/sassur25/
+topics:
+  - Safety
 ---
 
 # Abstract
