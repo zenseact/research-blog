@@ -14,6 +14,7 @@ arxiv: https://arxiv.org/abs/2302.09273
 n_equal_contrib: 1
 topics:
   - Theory & foundations
+  - Planning & decision-making
 ---
 
 # Abstract
