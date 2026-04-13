@@ -13,6 +13,7 @@ n_equal_contrib: 1
 date: 2021-02-22 00:00:00 +0000
 topics:
   - Theory & foundations
+  - Planning & decision-making
 ---
 
 # Abstract
