@@ -170,12 +170,18 @@ Jorge:
   firstname: ["Emilio", "E.", "E.J.", "Emilio Jorge"]
   org: Chalmers University
   scholar: Tn0Mk_wAAAAJ
+Kianfar:
+  firstname: ["Roozbeh", "R.", "R. K.", "Roozbeh Kianfar"]
+  org: Zenseact
 Krook:
   firstname: ["Jonas", "J.", "J. K.", "Jonas Krook"]
   mail: jonas.krook@zenseact.com
   org: Zenseact
   scholar: JHCD0BsAAAAJ
   orcid: 0000-0002-9810-4697
+LarsSvensson:
+  firstname: ["Lars", "L.", "L. S.", "Lars Svensson"]
+  org: KTH Royal Institute of Technology
 Laveno:
   firstname: ["Arvid", "A.", "A. L. L.", "Arvid Laveno Ling"]
   org: [Zenseact, Chalmers University of Technology]
@@ -183,6 +189,9 @@ Laveno:
   scholar: BhAezqYAAAAJ
   mail: arvid.laveno@zenseact.com
   title: PhD Student
+LeiFeng:
+  firstname: ["Lei", "L.", "L. F.", "Lei Feng"]
+  org: KTH Royal Institute of Technology
 Lilja:
   firstname: ["Adam", "A.", "A. L.", "Adam Lilja"]
   github: LiljaAdam
@@ -247,6 +256,9 @@ Rafidashti:
   org: [Zenseact, Chalmers University of Technology]
   title: PhD Student
   scholar: Et4NaUoAAAAJ
+Ramezani:
+  firstname: ["Zahra", "Z.", "Z. R.", "Zahra Ramezani"]
+  org: Chalmers University of Technology
 Rusyadi:
   firstname: ["Muhammad Rusyadi", "MR.", "MR. R.", "Muhammad Rusyadi Ramli"]
   org: KTH Royal Institute of Technology
@@ -355,9 +367,21 @@ Xinhai:
   firstname: ["Xinhai", "X.", "X. Z.", "Xinhai Zhang"]
   org: KTH Royal Institute of Technology
   scholar: hANonS0AAAAJ
+Yuchao:
+  firstname: ["Yuchao", "Y.", "Y. L.", "Yuchao Li"]
+  org: KTH Royal Institute of Technology
 Zanden:
   firstname: ["Carl", "C.", "C. Z.", "Carl Zandén"]
   org: Zenuity AB
+ZhennanFei:
+  firstname: ["Zhennan", "Z.", "Z. F.", "Zhennan Fei"]
+  org: Chalmers University of Technology
+Zita:
+  firstname: ["Anton", "A.", "A. Z.", "Anton Zita"]
+  org: Chalmers University of Technology
+Akesson:
+  firstname: ["Knut", "K.", "K. Å.", "Knut Åkesson"]
+  org: Chalmers University of Technology
 Carlsson:
   firstname: ["Oscar", "O.", "O.C.", "Oscar Carlsson"]
   org: Chalmers University of Technology

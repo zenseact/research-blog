@@ -39,6 +39,10 @@ Automatica:
   name: Automatica
   url: https://www.sciencedirect.com/journal/automatica
   series: Automatica
+ECC19:
+  name: 2019 18th European Control Conference (ECC)
+  url: https://ecc19.eu/
+  series: ECC
 ECCV22:
   name: European Conference on Computer Vision (ECCV), 2022
   url: https://eccv2022.ecva.net
@@ -59,6 +63,10 @@ ICFEM22:
   name: The 23rd International Conference on Formal Engineering Methods (ICFEM) 2022
   url: https://maude.ucm.es/ICFEM22/
   series: ICFEM
+ICRA19:
+  name: 2019 International Conference on Robotics and Automation (ICRA)
+  url: https://ewh.ieee.org/soc/ras/conf/fullysponsored/icra/ICRA2019/www.icra2019.org/index.html
+  series: ICRA
 JLAMP:
   name: Journal of Logical and Algebraic Methods in Programming
   url: https://www.sciencedirect.com/journal/journal-of-logical-and-algebraic-methods-in-programming
@@ -79,6 +87,14 @@ WACV26:
   name: Winter Conference on Applications of Computer Vision (WACV), 2026
   url: https://wacv2026.thecvf.com
   series: WACV
+WODES18:
+  name: 14th Workshop on Discrete Event Systems (Wodes) 2018
+  url: http://wodes2018.unisa.it/
+  series: WODES
+WODES20:
+  name: Workshop on Discrete Event Systems (Wodes) 2020
+  url: https://wodes2020.eventos.ufrj.br/
+  series: WODES
 ITSC20:
   name: IEEE 23rd International Conference on Intelligent Transportation Systems (ITSC), 2020
   url: https://www.ieee-itsc2020.org/
