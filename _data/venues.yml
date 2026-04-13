@@ -55,6 +55,14 @@ ICCV23:
   name: International Conference on Computer Vision (ICCV), 2023
   url: https://iccv2023.thecvf.com
   series: ICCV
+ICFEM22:
+  name: The 23rd International Conference on Formal Engineering Methods (ICFEM) 2022
+  url: https://maude.ucm.es/ICFEM22/
+  series: ICFEM
+JLAMP:
+  name: Journal of Logical and Algebraic Methods in Programming
+  url: https://www.sciencedirect.com/journal/journal-of-logical-and-algebraic-methods-in-programming
+  series: JLAMP
 SCIA23:
   name: Scandinavian Conference on Image Analysis (SCIA), 2023
   url: https://sites.google.com/view/scia2023

@@ -1,4 +1,11 @@
 ---
+Ahrendt:
+  firstname: ["Wolfgang", "W.", "W. A.", "Wolfgang Ahrendt"]
+  mail: ahrendt@chalmers.se
+  org: Chalmers University of Technology
+  title: Professor
+  scholar: rFuqP-8AAAAJ
+  orcid: 0000-0002-5671-2555
 Ali:
   firstname: ["Mohammad", "M.", "M. A.", "Mohammad Ali"]
 Alibeigi:
@@ -250,6 +257,12 @@ Sandblom:
 Sanfridson:
   firstname: ["Martin", "M.", "M. S.", "Martin Sanfridson"]
   org: Volvo Technology AB
+Selvaraj:
+  firstname: ["Yuvaraj", "Y.", "Y. S.", "Yuvaraj Selvaraj"]
+  mail: yuvaraj.selvaraj@zenseact.com
+  org: Zenseact
+  scholar: 4H0B9HYAAAAJ
+  orcid: 0000-0003-2184-3069
 Sivencrona:
   firstname: ["Håkan", "H.", "H. S.", "Håkan Sivencrona"]
   org: Zenseact AB
