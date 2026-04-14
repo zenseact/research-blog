@@ -15,6 +15,7 @@ date: 2023-02-21 00:00:00 +0000
 thumbnail-img: minmax-bayes.png
 topics:
   - Theory & foundations
+  - Planning & decision-making
 ---
 
 # Abstract
