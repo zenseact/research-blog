@@ -127,10 +127,21 @@ SAEWCX20:
   name: SAE World Congress Experience (SAE WCX), 2020
   url: https://www.sae.org/attend/wcx/2020
   series: SAE WCX
+SAFECOMP25:
+  name: SafeComp 2025 - The 44th International Conference on Computer Safety, Reliability and Security
+  url: https://safecomp2025.se
+  series: SafeComp
+SASSUR25:
+  name: SASSUR 2025 - 12th International Workshop on Next Generation of System Assurance Approaches for Critical Systems
+  url: https://sites.google.com/view/sassur2025
+  series: SASSUR
 TSE:
   name: IEEE Transactions on Software Engineering (TSE)
   url: https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=32
   series: TSE
+TITS:
+  name: IEEE Transactions on Intelligent Transportation Systems
+  series: T-ITS
 DSNW20:
   name: 50th Annual IEEE/IFIP International Conference on Dependable Systems and Networks Workshops (DSN-W)
   series: DSN-W
