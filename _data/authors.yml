@@ -242,6 +242,10 @@ Motorniuk:
 Nica:
   firstname: ["Mihai", "M.", "M. N.", "Mihai Nica"]
   org: AVL List
+Oswald:
+  firstname: ["Martin R.", "M. R.", "M. R. O.", "Martin R. Oswald"]
+  org: University of Amsterdam
+  scholar: biytQP8AAAAJ
 Petersson:
   firstname: ["Christoffer", "C.", "C. P.", "Christoffer Petersson"]
   mail: christoffer.petersson@zenseact.com
