@@ -27,7 +27,7 @@ topics:
 <div style="display: flex; justify-content: space-around; margin-bottom: 1em; margin-top: 0.5em; width=100%">
 <figure class="figure__background">
   <img style="width: 100%; margin: 0 auto;" src="system_overview.jpg"/>
-  <figcaption><b>Fig 1.:</b> System overview of {% raw %}$B^2F${% endraw %}-Map pipeline, including three modules: on-vehicle localization, on-vehicle mapping, and on-cloud localization and mapping. Note that traffic signs in the local maps are represented as semantic points and lane lines are represented by B-splines. With B-splines continuous over time, it is bandwidth efficient when uploading the control points to the cloud. On the cloud, after optimization to eliminate positioning errors in the estimated lane lines, the Bayesian B-spline fusion algorithm performs map fusion while maintaining the same B-spline representations.</figcaption>
+  <figcaption><b>Fig 1.:</b> System overview of the proposed pipeline, including three modules: on-vehicle localization, on-vehicle mapping, and on-cloud localization and mapping. Note that traffic signs in the local maps are represented as semantic points and lane lines are represented by B-splines. With B-splines continuous over time, it is bandwidth efficient when uploading the control points to the cloud. On the cloud, after optimization to eliminate positioning errors in the estimated lane lines, the Bayesian B-spline fusion algorithm performs map fusion while maintaining the same B-spline representations.</figcaption>
 </figure>
 </div>
 
