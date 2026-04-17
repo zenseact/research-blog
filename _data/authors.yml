@@ -437,3 +437,19 @@ Tomizuka:
 Zhan:
   firstname: ["Wei", "W.", "W. Z.", "Wei Zhan"]
   url: https://zhanwei.site/
+Yiping:
+  firstname: ["Yiping", "Y.", "Y. X.", "Yiping Xie"]
+  org: [Zenseact, Linköping University]
+  linkedin: yiping-xie
+  scholar: Dd8xb1IAAAAJ
+Garcia:
+  firstname: ["Gabriel", "G.", "G. G.", "Gabriel Garcia"]
+  org: Zenseact
+  scholar: VjJ2FFQAAAAJ
+Tianyu:
+  firstname: ["Tianyu", "T.", "T. W.", "Tianyu Wu"]
+  org: [Zenseact, Chalmers University of Technology]
+Gustaf:
+  firstname: ["Gustaf", "G.", "G. H.", "Gustaf Hendeby"]
+  org: Linköping University
+  scholar: 7q6fhuMAAAAJ

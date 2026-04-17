@@ -134,3 +134,8 @@ TSE:
 DSNW20:
   name: 50th Annual IEEE/IFIP International Conference on Dependable Systems and Networks Workshops (DSN-W)
   series: DSN-W
+ICRA26:
+  name: IEEE International Conference on Robotics and Automation (ICRA), 2026
+  url: https://2026.ieee-icra.org
+  series: ICRA
+
