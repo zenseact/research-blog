@@ -149,4 +149,8 @@ ICRA26:
   name: IEEE International Conference on Robotics and Automation (ICRA), 2026
   url: https://2026.ieee-icra.org
   series: ICRA
+SIGGRAPH26:
+  name: SIGGRAPH Conference Papers, 2026
+  url: https://s2026.siggraph.org/
+  series: SIGGRAPH
 
