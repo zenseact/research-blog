@@ -1,0 +1,119 @@
+<div class="paragram-3d" id="paragram-3d">
+  <style>
+    .paragram-3d {
+      width: 100%;
+      max-width: 760px;
+      margin: 1.5em auto;
+      font-size: 0.95em;
+    }
+    .paragram-3d__canvas-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(180deg, #fafbfc 0%, #eef0f2 100%);
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      overflow: hidden;
+      touch-action: none;
+    }
+    .paragram-3d__canvas-wrap canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .paragram-3d__overlay {
+      position: absolute;
+      top: 8px; left: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.85em;
+      color: #444;
+      background: rgba(255,255,255,0.7);
+      padding: 0.2em 0.6em;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    .paragram-3d__warn {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(220,70,70,0.92);
+      color: #fff;
+      padding: 0.5em 1em;
+      border-radius: 6px;
+      font-size: 0.95em;
+      pointer-events: none;
+      display: none;
+    }
+    .paragram-3d__controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5em 0.9em;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.75em;
+    }
+    .paragram-3d__btn {
+      padding: 0.3em 0.9em;
+      border: 1px solid #c0c0c0;
+      border-radius: 999px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+    .paragram-3d__btn:hover { background: #f0f0f0; }
+    .paragram-3d__btn:disabled { opacity: 0.45; cursor: not-allowed; }
+    .paragram-3d__btn--primary { background: #d57000; color: #fff; border-color: #d57000; }
+    .paragram-3d__btn--primary:hover { background: #b85f00; }
+    .paragram-3d__controls label {
+      display: inline-flex; align-items: center; gap: 0.35em;
+      cursor: pointer; user-select: none;
+    }
+    .paragram-3d__playback {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.6em;
+      margin-top: 0.75em;
+      padding-top: 0.75em;
+      border-top: 1px dashed #e0e0e0;
+    }
+    .paragram-3d__playback input[type="range"] {
+      flex: 1; min-width: 140px;
+    }
+    .paragram-3d__playback-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.85em;
+      color: #555;
+      min-width: 90px;
+      text-align: right;
+    }
+    .paragram-3d__hint {
+      text-align: center; font-size: 0.85em; color: #777;
+      margin-top: 0.4em; font-style: italic;
+    }
+  </style>
+
+  <div class="paragram-3d__canvas-wrap" id="paragram-3d-wrap">
+    <div class="paragram-3d__overlay" id="paragram-3d-status">step 0 / 0</div>
+    <div class="paragram-3d__warn" id="paragram-3d-warn">cell vanished</div>
+  </div>
+
+  <div class="paragram-3d__playback">
+    <button class="paragram-3d__btn paragram-3d__btn--primary" id="paragram-3d-play">▶ play</button>
+    <input type="range" id="paragram-3d-step" min="0" max="0" step="1" value="0">
+    <span class="paragram-3d__playback-label" id="paragram-3d-step-val">step 0 / 0</span>
+    <button class="paragram-3d__btn" id="paragram-3d-camera">center camera</button>
+  </div>
+
+  <p class="paragram-3d__hint">Drag to orbit · scroll/pinch to zoom · step through neighbors in nearest-first order. <span style="color:#00bcd4;font-weight:600">cyan</span> = current clip, <span style="color:#4caf50;font-weight:600">green</span> = past binding clip (contributes a face), gray = past non-binding, <span style="color:#ab47bc;font-weight:600">purple</span> = pending.</p>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="cell-clipping-3d.js"></script>
