@@ -10,7 +10,7 @@ authors:
   - Hammarstrand
   - Oswald
   - Svensson
-code: 
+code: https://github.com/zenseact/idsplat
 date: 2026-04-15 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2511.19235
 n_equal_contrib: 2
@@ -54,7 +54,7 @@ To decompose the scene into object instances without any human annotations, IDSp
 
 # Trajectory smoothing
 
-Pose estimates from RANSAC are inevitably noisy as instance masks may be missing in some frames and lidar observations can be sparse or incomplete. To obtain reasonable trajectories, IDSplat refines the initial poses through a coordinated turn (CT) smoothing process. The final joint optimization further refines the trajectories using the rendering losses. 
+Pose estimates from RANSAC are inevitably noisy as instance masks may be missing in some frames and lidar observations can be sparse or incomplete. To obtain reasonable trajectories, IDSplat refines the initial poses through a coordinated turn (CT) smoothing process. The final joint optimization further refines the trajectories using the rendering losses.
 
 ---
 
@@ -63,9 +63,11 @@ Pose estimates from RANSAC are inevitably noisy as instance masks may be missing
 We evaluate IDSplat across four experimental settings, each following the setup of a prior work (DeSiRe-GS, AD-GS, CoDa-4DGS, and SplatFlow). Comparing against annotation-free methods, IDSplat achieves state-of-the-art performance across all settings, and even matches annotation-based baselines on several metrics.
 
 <style>
-.rank-1 { background: rgb(255, 179, 179); }
-.rank-2 { background: rgb(255, 217, 179); }
-.rank-3 { background: rgb(255, 255, 179); }
+.pub-table-wrap .rank-1 { background: rgb(255, 179, 179) !important; }
+.pub-table-wrap .rank-2 { background: rgb(255, 217, 179) !important; }
+.pub-table-wrap .rank-3 { background: rgb(255, 255, 179) !important; }
+.pub-table-wrap .sep-dashed td { border-top: 1px dashed #aaa !important; }
+.pub-table-wrap tbody td[rowspan] + td { text-align: left; }
 </style>
 
 <div class="pub-table-wrap">
@@ -82,15 +84,14 @@ We evaluate IDSplat across four experimental settings, each following the setup 
 </thead>
 <tbody>
 <tr>
-  <td rowspan="2"><div class="rotate">DeSiRe-GS setting</div></td>
-  <td>MARS</td><td>✗</td><td>26.61</td><td>—</td><td>—</td><td>22.21</td>
+  <td rowspan="7"><div class="rotate">DeSiRe-GS setting</div></td>
+  <td class="col-method">MARS</td><td>✗</td><td>26.61</td><td>—</td><td>—</td><td>22.21</td>
 </tr>
 <tr>
-  <td>SplatAD</td><td>✗</td><td>30.80</td><td>0.900</td><td>0.160</td><td>28.97</td>
+  <td class="col-method">SplatAD</td><td>✗</td><td>30.80</td><td>0.900</td><td>0.160</td><td>28.97</td>
 </tr>
-<tr class="sep-above">
-  <td rowspan="5"></td>
-  <td>PVG</td><td>✓</td><td class="rank-2">29.77</td><td>—</td><td>—</td><td class="rank-2">27.19</td>
+<tr class="sep-dashed">
+  <td class="col-method">PVG</td><td>✓</td><td class="rank-2">29.77</td><td>—</td><td>—</td><td class="rank-2">27.19</td>
 </tr>
 <tr>
   <td>EmerNeRF</td><td>✓</td><td>25.14</td><td>—</td><td>—</td><td>23.49</td>
@@ -106,21 +107,20 @@ We evaluate IDSplat across four experimental settings, each following the setup 
 </tr>
 
 <tr class="sep-above">
-  <td rowspan="4"><div class="rotate">AD-GS setting</div></td>
-  <td>StreetGS</td><td>✗</td><td>33.97</td><td>0.926</td><td>0.227</td><td>28.50</td>
+  <td rowspan="9"><div class="rotate">AD-GS setting</div></td>
+  <td class="col-method">StreetGS</td><td>✗</td><td>33.97</td><td>0.926</td><td>0.227</td><td>28.50</td>
 </tr>
 <tr>
-  <td>4DGS</td><td>✗</td><td>34.64</td><td>0.940</td><td>0.244</td><td>29.77</td>
+  <td class="col-method">4DGS</td><td>✗</td><td>34.64</td><td>0.940</td><td>0.244</td><td>29.77</td>
 </tr>
 <tr>
-  <td>SplatAD</td><td>✗</td><td>34.24</td><td>0.925</td><td>0.246</td><td>29.68</td>
+  <td class="col-method">SplatAD</td><td>✗</td><td>34.24</td><td>0.925</td><td>0.246</td><td>29.68</td>
 </tr>
 <tr>
-  <td>SplatAD (CasTrack)</td><td>✗</td><td>32.52</td><td>0.924</td><td>0.241</td><td>25.31</td>
+  <td class="col-method">SplatAD (CasTrack)</td><td>✗</td><td>32.52</td><td>0.924</td><td>0.241</td><td>25.31</td>
 </tr>
-<tr class="sep-above">
-  <td rowspan="5"></td>
-  <td>PVG</td><td>✓</td><td>29.54</td><td>0.895</td><td>0.266</td><td>21.56</td>
+<tr class="sep-dashed">
+  <td class="col-method">PVG</td><td>✓</td><td>29.54</td><td>0.895</td><td>0.266</td><td>21.56</td>
 </tr>
 <tr>
   <td>EmerNeRF</td><td>✓</td><td>31.32</td><td>0.881</td><td>0.301</td><td>21.80</td>
@@ -137,7 +137,7 @@ We evaluate IDSplat across four experimental settings, each following the setup 
 
 <tr class="sep-above">
   <td rowspan="2"><div class="rotate">CoDa</div></td>
-  <td>CoDa-4DGS</td><td>✓</td><td class="rank-2">28.66</td><td class="rank-2">0.900</td><td class="rank-1">0.058</td><td>—</td>
+  <td class="col-method">CoDa-4DGS</td><td>✓</td><td class="rank-2">28.66</td><td class="rank-2">0.900</td><td class="rank-1">0.058</td><td>—</td>
 </tr>
 <tr>
   <td><strong>IDSplat (ours)</strong></td><td>✓</td><td class="rank-1"><strong>30.50</strong></td><td class="rank-1"><strong>0.875</strong></td><td class="rank-2"><strong>0.090</strong></td><td>—</td>
@@ -145,7 +145,7 @@ We evaluate IDSplat across four experimental settings, each following the setup 
 
 <tr class="sep-above">
   <td rowspan="2"><div class="rotate">SplatFlow</div></td>
-  <td>SplatFlow</td><td>✓</td><td class="rank-2">28.71</td><td class="rank-2">0.874</td><td class="rank-2">0.239</td><td>—</td>
+  <td class="col-method">SplatFlow</td><td>✓</td><td class="rank-2">28.71</td><td class="rank-2">0.874</td><td class="rank-2">0.239</td><td>—</td>
 </tr>
 <tr>
   <td><strong>IDSplat (ours)</strong></td><td>✓</td><td class="rank-1"><strong>29.95</strong></td><td class="rank-1"><strong>0.879</strong></td><td class="rank-1"><strong>0.183</strong></td><td>—</td>
@@ -155,7 +155,26 @@ We evaluate IDSplat across four experimental settings, each following the setup 
 <p class="table-note">NVS results across multiple evaluation settings. Dashed lines separate annotation-based from annotation-free methods. <span style="background:rgb(255,179,179);padding:0 0.3em;">1st</span> <span style="background:rgb(255,217,179);padding:0 0.3em;">2nd</span> <span style="background:rgb(255,255,179);padding:0 0.3em;">3rd</span> among annotation-free methods.</p>
 </div>
 
-The figure below shows comparisons of novel view synthesis over different view densities (25%, 50%, and 75% of training frames) on the dynamic subset of the Waymo NOTR dataset. Our instance-decomposed representation enables high-quality rendering of dynamic objects even when trained with sparse viewpoints.
+
+The figure below shows a qualitative comparison of our method with DeSiRe-GS and AD-GS on the the dynamic NOTR subset of Waymo Open Dataset, where all methods were trained with 75% of frames (3 out of 4 views).
+
+<figure class="figure__background">
+  <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="images/suppmat_qualitatives.png"/>
+</figure>
+
+Pedestrians and cyclists are also rendered with high fidelity despite being modelled as rigid.
+
+<figure class="figure__background">
+  <img style="width: 70%; margin: 0 auto; mix-blend-mode: multiply;" src="images/limitations_fig_v2.png"/>
+</figure>
+
+To assess the robustness of our method to different training view densities, we present DPSNR (PSNR in dynamic regions) evaluated for dynamic NOTR. Even with sparse training frames, IDSplat achieves high DPSNR, which highlights the effectiveness of our instance-decomposed model of dynamic objects compared to the self-supervised 3DGS SOTA. 
+
+<figure class="figure__background">
+  <img style="width: 85%; margin: 0 auto; mix-blend-mode: multiply;" src="images/bar graphs (3).png"/>
+</figure>
+
+This is further illustrated with qualitative examples of novel view synthesis for different viewpoint densities.
 
 <figure class="figure__background">
   <img style="width: 100%; margin: 0 auto; mix-blend-mode: multiply;" src="images/qual_fig_1.jpg"/>
