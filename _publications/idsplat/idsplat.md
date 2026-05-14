@@ -68,6 +68,7 @@ We evaluate IDSplat across four experimental settings, each following the setup 
 .pub-table-wrap .rank-3 { background: rgb(255, 255, 179) !important; }
 .pub-table-wrap .sep-dashed td { border-top: 1px dashed #aaa !important; }
 .pub-table-wrap tbody td[rowspan] + td { text-align: left; }
+.pub-table-wrap { width: fit-content; margin-left: auto !important; margin-right: auto !important; }
 </style>
 
 <div class="pub-table-wrap">
@@ -136,7 +137,7 @@ We evaluate IDSplat across four experimental settings, each following the setup 
 </tr>
 
 <tr class="sep-above">
-  <td rowspan="2"><div class="rotate">CoDa</div></td>
+  <td rowspan="2"><div class="rotate">CoDa-4DGS Setting</div></td>
   <td class="col-method">CoDa-4DGS</td><td>✓</td><td class="rank-2">28.66</td><td class="rank-2">0.900</td><td class="rank-1">0.058</td><td>—</td>
 </tr>
 <tr>
@@ -144,7 +145,7 @@ We evaluate IDSplat across four experimental settings, each following the setup 
 </tr>
 
 <tr class="sep-above">
-  <td rowspan="2"><div class="rotate">SplatFlow</div></td>
+  <td rowspan="2"><div class="rotate">SplatFlow Setting</div></td>
   <td class="col-method">SplatFlow</td><td>✓</td><td class="rank-2">28.71</td><td class="rank-2">0.874</td><td class="rank-2">0.239</td><td>—</td>
 </tr>
 <tr>
@@ -152,7 +153,7 @@ We evaluate IDSplat across four experimental settings, each following the setup 
 </tr>
 </tbody>
 </table>
-<p class="table-note">NVS results across multiple evaluation settings. Dashed lines separate annotation-based from annotation-free methods. <span style="background:rgb(255,179,179);padding:0 0.3em;">1st</span> <span style="background:rgb(255,217,179);padding:0 0.3em;">2nd</span> <span style="background:rgb(255,255,179);padding:0 0.3em;">3rd</span> among annotation-free methods.</p>
+<p class="table-note">NVS results across multiple evaluation settings. <span style="background:rgb(255,179,179);padding:0 0.3em;">1st</span> <span style="background:rgb(255,217,179);padding:0 0.3em;">2nd</span> <span style="background:rgb(255,255,179);padding:0 0.3em;">3rd</span> among annotation-free methods.</p>
 </div>
 
 
