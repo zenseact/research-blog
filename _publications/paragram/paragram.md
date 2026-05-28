@@ -14,7 +14,7 @@ arxiv: https://arxiv.org/abs/2605.06408
 date: 2026-05-07 00:00:00 +0000
 usemathjax: true
 n_equal_contrib: 2
-thumbnail-video: thumbnail.mp4
+thumbnail-img: thumbnail.gif
 topics:
   - Simulation
   - Theory & foundations
