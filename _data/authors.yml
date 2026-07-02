@@ -227,7 +227,7 @@ Ljungbergh:
   title: PhD Student
   url: https://ljungbergh.com
 Liu:
-    firstname: ["Wangxin", "W.", "Wangxin Liu"]
+    firstname: ["Wangxin", "W.", "W. L.", "Wangxin Liu"]
     org: Zenseact
 Malik:
   firstname: ["Robi", "R.", "R. M.", "Robi Malik"]
@@ -476,5 +476,5 @@ Voloshyn:
     firstname: ["Sviatoslav", "D.", "S. D.", "Sviatoslav Voloshyn"]
     org: Zenseact
 Vinkas:
-    firstname: ["Jakob", "J.", "Jakob Vinkas"]
+    firstname: ["Jakob", "J.", "J. V.", "Jakob Vinkås"]
     org: Zenseact
