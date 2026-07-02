@@ -222,9 +222,16 @@ Ljungbergh:
   scholar: RXEPFo0AAAAJ
   title: PhD Student
   url: https://ljungbergh.com
+Liu:
+    firstname: ["Wangxin", "W.", "Wangxin Liu"]
+    org: Zenseact
 Malik:
   firstname: ["Robi", "R.", "R. M.", "Robi Malik"]
   org: The University of Waikato
+Martens:
+    firstname: ["Bruno", "B.", "K. W.", "Bruno Martens"]
+    org: Zenseact
+    scholar: zeG7mCYAAAAJ
 Meding:
   firstname: ["Isak", "I.", "I. M.", "Isak Meding"]
   org: Zenseact
@@ -457,3 +464,9 @@ Gustaf:
   firstname: ["Gustaf", "G.", "G. H.", "Gustaf Hendeby"]
   org: Linköping University
   scholar: 7q6fhuMAAAAJ
+Voloshyn:
+    firstname: ["Sviatoslav", "D.", "S. D.", "Sviatoslav Voloshyn"]
+    org: Zenseact
+Vinkas:
+    firstname: ["Jakob", "J.", "Jakob Vinkas"]
+    org: Zenseact
