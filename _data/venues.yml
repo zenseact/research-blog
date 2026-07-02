@@ -71,6 +71,10 @@ ICRA19:
   name: 2019 International Conference on Robotics and Automation (ICRA)
   url: https://ewh.ieee.org/soc/ras/conf/fullysponsored/icra/ICRA2019/www.icra2019.org/index.html
   series: ICRA
+IEEEF26:
+  name: 29th International Conference on Information Fusion
+  url: https://www.ntnu.edu/fusion2026
+  series: IEEEF
 JLAMP:
   name: Journal of Logical and Algebraic Methods in Programming
   url: https://www.sciencedirect.com/journal/journal-of-logical-and-algebraic-methods-in-programming
