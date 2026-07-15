@@ -9,12 +9,8 @@ authors:
   - Campos
   - Torngren
 thumbnail-img: ads_saw.png
-arxiv: https://maggyl.github.io/publications/sassur25/
-<<<<<<< HEAD
 topics:
   - Safety
-=======
->>>>>>> eb7457a (Adding new publications and associated updates to authors and venue files)
 ---
 
 # Abstract
