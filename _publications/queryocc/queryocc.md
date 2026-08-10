@@ -8,7 +8,7 @@ authors:
   - JiLan
   - Fu
   - Hammarstrand
-code: https://github.com/LiljaAdam/queryocc
+code: https://github.com/zenseact/queryocc
 date: 2026-03-08 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2511.17221
 n_equal_contrib: 1
