@@ -1,0 +1,154 @@
+<div class="voro-rw" id="voro-rw">
+  <style>
+    .voro-rw {
+      width: 100%;
+      max-width: 880px;
+      margin: 1.5em auto;
+      font-size: 0.95em;
+    }
+    .voro-rw__panels {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8em;
+    }
+    @media (max-width: 640px) {
+      .voro-rw__panels { grid-template-columns: 1fr; }
+    }
+    .voro-rw__panel {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .voro-rw__title {
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95em;
+      margin-bottom: 0.25em;
+      color: #1A1A2E;
+    }
+    .voro-rw__canvas-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #F7F6F3;
+      border: 1px solid #E4E0D9;
+      border-radius: 6px;
+      overflow: hidden;
+      touch-action: none;
+    }
+    .voro-rw__canvas-wrap canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+    .voro-rw__canvas-wrap canvas:active { cursor: grabbing; }
+    .voro-rw__badge {
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78em;
+      font-weight: 600;
+      pointer-events: none;
+      white-space: nowrap;
+      color: #fff;
+    }
+    .voro-rw__badge--foam { background: rgba(109, 139, 167, 0.95); }
+    .voro-rw__badge--ours { background: rgba(239, 65, 54, 0.95); }
+    .voro-rw__caption {
+      text-align: center;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78em;
+      color: #6B7280;
+      margin-top: 0.35em;
+      min-height: 1.4em;
+    }
+    .voro-rw__legend {
+      display: flex; flex-wrap: wrap; gap: 0.7em 1.2em;
+      justify-content: center; margin-top: 0.6em;
+      font-size: 0.78em; color: #6B7280;
+    }
+    .voro-rw__legend span::before {
+      content: ''; display: inline-block; width: 9px; height: 9px;
+      border-radius: 50%; margin-right: 0.35em; vertical-align: middle;
+    }
+    .voro-rw__legend .lg-opacity::before { background: rgba(26, 26, 46, 0.55); }
+    .voro-rw__legend .lg-weight::before  { background: #EF4136; }
+    .voro-rw__legend .lg-camera::before  { background: #356388; }
+    .voro-rw__legend .lg-hit::before     { background: #396353; }
+    .voro-rw__controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6em 1.2em;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.9em;
+      padding-top: 0.7em;
+      border-top: 1px dashed #E4E0D9;
+    }
+    .voro-rw__controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35em;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.9em;
+    }
+    .voro-rw__btn {
+      padding: 0.3em 0.9em;
+      border: 1px solid #CFC9BE;
+      border-radius: 999px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+    .voro-rw__btn:hover { background: #EFEDE7; }
+    .voro-rw__hint {
+      text-align: center;
+      font-size: 0.85em;
+      color: #6B7280;
+      margin-top: 0.4em;
+      font-style: italic;
+    }
+  </style>
+
+  <div class="voro-rw__panels">
+    <div class="voro-rw__panel">
+      <div class="voro-rw__title" style="color:#6D8BA7">opacity spread over a shell (Radiant Foam-style)</div>
+      <div class="voro-rw__canvas-wrap">
+        <canvas id="voro-rw-canvas-foam"></canvas>
+        <div class="voro-rw__badge voro-rw__badge--foam" id="voro-rw-foam-badge"></div>
+      </div>
+      <div class="voro-rw__caption" id="voro-rw-foam-cap"></div>
+    </div>
+
+    <div class="voro-rw__panel">
+      <div class="voro-rw__title">opacity concentrated near the surface <span style="color:#EF4136">(ours)</span></div>
+      <div class="voro-rw__canvas-wrap">
+        <canvas id="voro-rw-canvas-ours"></canvas>
+        <div class="voro-rw__badge voro-rw__badge--ours" id="voro-rw-ours-badge"></div>
+      </div>
+      <div class="voro-rw__caption" id="voro-rw-ours-cap"></div>
+    </div>
+  </div>
+
+  <div class="voro-rw__legend">
+    <span class="lg-opacity">cell opacity (darker = more opaque)</span>
+    <span class="lg-weight">compositing weight of traversed cell</span>
+    <span class="lg-camera">camera</span>
+    <span class="lg-hit">ray termination</span>
+  </div>
+
+  <div class="voro-rw__controls">
+    <button class="voro-rw__btn" id="voro-rw-play" type="button">&#9654; sweep rays</button>
+    <label><input type="checkbox" id="voro-rw-show-edges" checked> cell edges</label>
+    <button class="voro-rw__btn" id="voro-rw-reset" type="button">reset</button>
+  </div>
+
+  <p class="voro-rw__hint">Drag the camera or click anywhere to aim the ray. Both panels trace the same ray through the same diagram and share one continuous opacity field; the right one concentrates it into a thin surface band, so the ray saturates sooner. Illustrative 2D sketch, not a rendering of either method.</p>
+</div>
+
+<script src="ray-walk-demo-2d.js"></script>

@@ -1,0 +1,226 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #000;
+  color: #eee;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  overflow: hidden;
+}
+
+#view {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+}
+
+#view.grabbing {
+  cursor: grabbing;
+}
+
+#hud-status {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  pointer-events: none;
+  text-shadow: 0 1px 2px #000;
+  line-height: 1.5;
+  white-space: pre;
+}
+
+#landing {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+#landing[hidden] { display: none; }
+
+.landing-card {
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  padding: 32px 48px;
+  text-align: center;
+  min-width: 320px;
+  transition: border-color 0.12s, background 0.12s;
+}
+
+body.drag-over .landing-card {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.landing-title {
+  font-size: 18px;
+  letter-spacing: 0.08em;
+}
+
+.landing-sub {
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+.landing-sub code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+.landing-progress {
+  margin-top: 14px;
+  opacity: 0.85;
+  white-space: pre;
+}
+
+.landing-progress[hidden] { display: none; }
+
+#error {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  padding: 24px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#error[hidden] { display: none; }
+#error a { color: #6cf; }
+
+/* When the gallery is up, dim the live render behind the card so it reads. */
+#landing {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+#landing[hidden] { display: none; }
+
+/* The landing card is interactive (gallery clicks); the backdrop is not,
+   so drag-drop still falls through to the window listener. */
+.landing-card { pointer-events: auto; }
+
+/* Gallery grid of scene cards. */
+.gallery {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  max-width: 460px;
+}
+
+.gallery:empty { display: none; }
+
+.gallery-card {
+  appearance: none;
+  font: inherit;
+  color: #eee;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  padding: 18px 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.12s, background 0.12s, transform 0.06s;
+}
+
+.gallery-card:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.gallery-card:active { transform: translateY(1px); }
+
+.gallery-drop {
+  border-style: dashed;
+  opacity: 0.75;
+}
+
+.gallery-name { display: block; }
+
+.gallery-size {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+  opacity: 0.65;
+}
+
+/* "← gallery" button, top-right. */
+#back-to-gallery {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  appearance: none;
+  font: inherit;
+  color: #eee;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#back-to-gallery:hover { border-color: #fff; }
+#back-to-gallery[hidden] { display: none; }
+
+/* Settings panel (createTweaks), bottom-right. */
+#tweaks {
+  position: fixed;
+  right: 8px;
+  bottom: 8px;
+  min-width: 200px;
+  background: rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  padding: 8px 10px;
+  text-shadow: 0 1px 2px #000;
+}
+
+.tweak-section {
+  opacity: 0.6;
+  margin: 6px 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 10px;
+}
+.tweak-section:first-child { margin-top: 0; }
+
+.tweak-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 3px 0;
+}
+
+.tweak-label {
+  flex: 0 0 38px;
+  opacity: 0.85;
+}
+
+.tweak-row input[type="range"] { flex: 1; min-width: 80px; }
+.tweak-row select { flex: 1; }
+
+.tweak-row select,
+.tweak-row input[type="number"] {
+  font: inherit;
+  color: #eee;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.tweak-val {
+  flex: 0 0 28px;
+  text-align: right;
+  opacity: 0.85;
+}
