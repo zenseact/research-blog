@@ -1,0 +1,164 @@
+<div class="voro-oct" id="voro-oct">
+  <style>
+    .voro-oct {
+      width: 100%;
+      max-width: 880px;
+      margin: 1.5em auto;
+      font-size: 0.95em;
+    }
+    .voro-oct__panels {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8em;
+    }
+    @media (max-width: 640px) {
+      .voro-oct__panels { grid-template-columns: 1fr; }
+    }
+    .voro-oct__panel {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .voro-oct__title {
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.95em;
+      margin-bottom: 0.25em;
+      color: #1A1A2E;
+    }
+    .voro-oct__canvas-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #F7F6F3;
+      border: 1px solid #E4E0D9;
+      border-radius: 6px;
+      overflow: hidden;
+      touch-action: none;
+    }
+    .voro-oct__canvas-wrap canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+    }
+    .voro-oct__canvas-wrap canvas:active { cursor: grabbing; }
+    .voro-oct__caption {
+      text-align: center;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78em;
+      color: #6B7280;
+      margin-top: 0.35em;
+      min-height: 1.4em;
+    }
+    .voro-oct__sample {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7em;
+      margin-top: 0.7em;
+    }
+    .voro-oct__swatch {
+      width: 2.9em;
+      height: 2.9em;
+      flex: 0 0 auto;
+      border: 2px solid #fff;
+      border-radius: 6px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.28), 0 1px 4px rgba(0,0,0,0.14);
+    }
+    .voro-oct__sample-label {
+      text-align: left;
+      line-height: 1.35;
+    }
+    .voro-oct__sample-label b {
+      font-size: 0.9em;
+      color: #1A1A2E;
+    }
+    .voro-oct__sample-label span {
+      display: block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78em;
+      color: #6B7280;
+    }
+    .voro-oct__controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6em 1.2em;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.9em;
+      padding-top: 0.7em;
+      border-top: 1px dashed #E4E0D9;
+    }
+    .voro-oct__controls label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35em;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.9em;
+    }
+    .voro-oct__controls select {
+      font-size: 0.9em;
+      padding: 0.15em 0.3em;
+    }
+    .voro-oct__btn {
+      padding: 0.3em 0.9em;
+      border: 1px solid #CFC9BE;
+      border-radius: 999px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.9em;
+    }
+    .voro-oct__btn:hover { background: #EFEDE7; }
+    .voro-oct__hint {
+      text-align: center;
+      font-size: 0.85em;
+      color: #6B7280;
+      margin-top: 0.4em;
+      font-style: italic;
+    }
+  </style>
+
+  <div class="voro-oct__panels">
+    <div class="voro-oct__panel">
+      <div class="voro-oct__title">direction from the cell site</div>
+      <div class="voro-oct__canvas-wrap">
+        <canvas id="voro-oct-canvas-sphere"></canvas>
+      </div>
+      <div class="voro-oct__caption" id="voro-oct-sphere-cap"></div>
+    </div>
+
+    <div class="voro-oct__panel">
+      <div class="voro-oct__title">unfolded octahedral texture</div>
+      <div class="voro-oct__canvas-wrap">
+        <canvas id="voro-oct-canvas-tex"></canvas>
+      </div>
+      <div class="voro-oct__caption">8&times;8 RGB texels</div>
+    </div>
+  </div>
+
+  <div class="voro-oct__sample">
+    <div class="voro-oct__swatch" id="voro-oct-swatch"></div>
+    <div class="voro-oct__sample-label">
+      <b>sampled colour</b>
+      <span id="voro-oct-tex-cap"></span>
+    </div>
+  </div>
+
+  <div class="voro-oct__controls">
+    <button class="voro-oct__btn" id="voro-oct-play" type="button">&#9654; orbit direction</button>
+    <label>texture
+      <select id="voro-oct-texmode">
+        <option value="octant" selected>octant colors</option>
+        <option value="gradient">smooth gradient</option>
+        <option value="checker">checker</option>
+      </select>
+    </label>
+    <button class="voro-oct__btn" id="voro-oct-reset" type="button">reset</button>
+  </div>
+
+  <p class="voro-oct__hint">Drag the arrow tip to take over (drag elsewhere to rotate the view), or drag directly in the texture &mdash; the two panels stay in sync.</p>
+</div>
+
+<script src="octahedral-demo.js"></script>

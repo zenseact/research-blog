@@ -1,0 +1,136 @@
+<div class="voro-pareto" id="voro-pareto">
+  <style>
+    .voro-pareto {
+      width: 100%;
+      max-width: 900px;
+      margin: 1.7em auto;
+      font-size: 0.95em;
+    }
+    .voro-pareto__controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65em;
+      margin-bottom: 0.7em;
+    }
+    .voro-pareto__metric {
+      display: inline-flex;
+      border: 1px solid #E4E0D9;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .voro-pareto__metric button {
+      border: 0;
+      border-right: 1px solid #E4E0D9;
+      background: transparent;
+      color: #1A1A2E;
+      padding: 0.35em 0.8em;
+      font-size: 0.88em;
+      cursor: pointer;
+    }
+    .voro-pareto__metric button:last-child { border-right: 0; }
+    .voro-pareto__metric button[aria-pressed="true"] {
+      background: #1A1A2E;
+      color: #fff;
+    }
+    .voro-pareto__chart {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.95 / 1;
+      min-height: 320px;
+      background: #F7F6F3;
+      border: 1px solid #E4E0D9;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    @media (max-width: 620px) {
+      .voro-pareto__chart {
+        aspect-ratio: 1.15 / 1;
+        min-height: 420px;
+      }
+    }
+    .voro-pareto svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .voro-pareto__caption {
+      min-height: 1.6em;
+      margin-top: 0.45em;
+      text-align: center;
+      color: #6B7280;
+      font-size: 0.86em;
+    }
+    .voro-pareto__legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.65em 1.1em;
+      color: #6B7280;
+      font-size: 0.82em;
+      margin-top: 0.45em;
+    }
+    .voro-pareto__legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35em;
+    }
+    .voro-pareto__key {
+      width: 0.75em;
+      height: 0.75em;
+      display: inline-block;
+      background: var(--key-color);
+    }
+    .voro-pareto__key--square { border-radius: 2px; }
+    .voro-pareto__key--tri {
+      width: 0;
+      height: 0;
+      background: transparent;
+      border-left: 0.43em solid transparent;
+      border-right: 0.43em solid transparent;
+      border-bottom: 0.78em solid var(--key-color);
+    }
+    .voro-pareto__key--star {
+      background: transparent;
+      color: var(--key-color);
+      font-size: 1.1em;
+      line-height: 0.75em;
+    }
+    .voro-pareto__key--hollow {
+      background: transparent;
+      border: 2px solid var(--key-color);
+      border-radius: 2px;
+    }
+    .voro-pareto__hint {
+      text-align: center;
+      font-size: 0.82em;
+      color: #6B7280;
+      margin-top: 0.25em;
+      font-style: italic;
+    }
+  </style>
+
+  <div class="voro-pareto__controls" aria-label="quality metric">
+    <div class="voro-pareto__metric" role="group" aria-label="quality metric">
+      <button type="button" data-metric="psnr" aria-pressed="true">PSNR</button>
+      <button type="button" data-metric="ssim" aria-pressed="false">SSIM</button>
+      <button type="button" data-metric="lpips" aria-pressed="false">LPIPS</button>
+    </div>
+  </div>
+
+  <div class="voro-pareto__chart">
+    <svg id="voro-pareto-svg" role="img" aria-labelledby="voro-pareto-title voro-pareto-desc"></svg>
+  </div>
+  <div class="voro-pareto__caption" id="voro-pareto-caption"></div>
+  <div class="voro-pareto__legend">
+    <span><i class="voro-pareto__key voro-pareto__key--square" style="--key-color:#6D8BA7"></i>rasterized</span>
+    <span><i class="voro-pareto__key voro-pareto__key--tri" style="--key-color:#356388"></i>ray-traced</span>
+    <span><i class="voro-pareto__key voro-pareto__key--star" style="--key-color:#EF4136">*</i>VoroTracing</span>
+    <span><i class="voro-pareto__key voro-pareto__key--hollow" style="--key-color:#6D8BA7"></i>reported, not quality-matched</span>
+  </div>
+  <p class="voro-pareto__hint">Hover or tap a point. Higher is better for PSNR/SSIM; lower is better for LPIPS, but the axis is flipped so better methods are always higher.</p>
+</div>
+
+<script src="pareto-demo.js"></script>
