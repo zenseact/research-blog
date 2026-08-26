@@ -55,6 +55,10 @@ ECCV24:
   name: European Conference on Computer Vision (ECCV), 2024
   url: https://eccv.ecva.net/Conferences/2024
   series: ECCV
+ECCV26ARA:
+  name: European Conference on Computer Vision (ECCV) Workshop on Emerging Behaviors for Achieving Robust Autonomy, 2026
+  url: https://emerging-ad.github.io/
+  series: ECCV
 ECCV22W:
   name: What is Motion for? A ECCV Workshop, 2022
   url: https://what-is-motion-for.github.io/
