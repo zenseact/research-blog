@@ -40,6 +40,9 @@ Bodin:
   firstname: ["Alexander", "A.", "A. B.", "Alexander Bodin"]
   org: Zenseact
   title: Intern
+Brannlund:
+  firstname: ["Olle", "O.", "O. B.", "Olle Brännlund"]
+  org: Zenseact AB
 Brannstrom:
   firstname: ["Mattias", "M.", "M. B.", "Mattias Brännström"]
   org: Zenseact AB
@@ -48,7 +51,6 @@ Buening:
   firstname: ["Thomas", "T.", "T.B", "Thomas Buening"]
   org: Oslo University
   scholar: 1VT2sBgAAAAJ
-
 Caesar:
   firstname: ["Holger", "H.", "H. C.", "Holger Caesar"]
   org: TU Delft
@@ -237,6 +239,9 @@ Liu:
 Malik:
   firstname: ["Robi", "R.", "R. M.", "Robi Malik"]
   org: The University of Waikato
+Mardh:
+    firstname: ["Lars", "L.", "L. J. M.", "Lars Johannesson Mårdh"]
+    org: Zenseact
 Martens:
     firstname: ["Bruno", "B.", "K. W.", "Bruno Martens"]
     org: Zenseact
