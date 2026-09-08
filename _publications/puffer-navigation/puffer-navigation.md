@@ -10,6 +10,7 @@ authors:
   - Mardh
 n_equal_contrib: 1 # This can be used if you have several authors that contributed equally to the paper. In this case, the first n authors listed in the `authors` field will be marked as equal contributors.
 date: 2026-07-20 00:00:00 +0000 # This is the date of the paper submission
+arxiv: https://openreview.net/forum?id=BRVLSSS8Ay
 thumbnail-img: goals.png  # This is the thumbnail image that will be shown on the blog post. Next to the title.
 topics: # At least one research topic from `_data/research_topics.yml`. A paper can have multiple topics.
   - Planning & decision-making
@@ -43,7 +44,7 @@ feasibility measure described in the following sections.
 </div>
 <p style="text-align: center; font-size: 0.9em; opacity: 0.75; margin-top: -0.5em;">
 Click the viewer to focus it, then press <b>P</b> to start.
-Arrow keys steer and accelerate, <b>L</b> cycles lane feasibility.
+Arrow keys steer and accelerate,<b>CTRL</b> removes occlusion layer, <b>L</b> cycles lane feasibility.
 </p>
 
 # Efficient navigation construction
