@@ -73,6 +73,7 @@ EliasSvensson:
   title: Intern
 Eriksson:
   firstname: ["Hannes", "H.", "H. E.", "Hannes Eriksson"]
+  org: Zenseact
   scholar: KyX9dfEAAAAJ
 Fabian:
   firstname: ["Martin", "M.", "M. F.", "Martin Fabian"]
@@ -116,6 +117,10 @@ Grover:
   firstname: ["Divya", "D.", "D.G.", "Divya Grover"]
   org: Chalmers University
   scholar: gxlPOTcAAAAJ
+Gupta:
+  firstname: ["Ankit", "A.", "A. G.", "Ankit Gupta"]
+  org: Zenseact
+  scholar: HM3bxvkAAAAJ
 Gyllenhammar:
   firstname: ["Magnus", "M.", "M. G.", "Magnus Gyllenhammar"]
   org: [Zenseact, KTH Royal Institute of Technology]
@@ -190,6 +195,12 @@ Krook:
   org: Zenseact
   scholar: JHCD0BsAAAAJ
   orcid: 0000-0002-9810-4697
+Kumar:
+  firstname: ["Rajesh", "R.", "R. K.", "Rajesh Kumar"]
+  org: KTH Royal Institute of Technology
+Lacombe:
+  firstname: ["Rémi", "R.", "R. L.", "Rémi Lacombe"]
+  org: Zenseact
 LarsSvensson:
   firstname: ["Lars", "L.", "L. S.", "Lars Svensson"]
   org: KTH Royal Institute of Technology
@@ -267,6 +278,9 @@ Oswald:
   firstname: ["Martin R.", "M. R.", "M. R. O.", "Martin R. Oswald"]
   org: University of Amsterdam
   scholar: biytQP8AAAAJ
+Pal:
+  firstname: ["Arka", "A.", "A. P.", "Arka Pal"]
+  org: KTH Royal Institute of Technology
 Petersson:
   firstname: ["Christoffer", "C.", "C. P.", "Christoffer Petersson"]
   mail: christoffer.petersson@zenseact.com
@@ -388,6 +402,10 @@ Wotawa:
   firstname: ["Franz", "F.", "F. W.", "Franz Wotawa"]
   org: Graz University of Technology
   scholar: Z27gH2wAAAAJ
+Wozniak:
+  firstname: ["Maciej", "M.", "M. W.", "Maciej Wozniak"]
+  org: Zenseact
+  scholar: Vz7-KekAAAAJ
 Xintao:
   firstname: ["Xin", "X.", "X. T.", "Xin Tao"]
   org: KTH Royal Institute of Technology
