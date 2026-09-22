@@ -1,7 +1,7 @@
 ---
 layout: publication
 permalink: /publications/diffusion/
-title: One Diffusion Model, Two Roles: Guided Trajectory Planning and Safety-Critical Scenario Generation in Closed-Loop Simulation
+title: One Diffusion Model, Two Roles - Guided Trajectory Planning and Safety-Critical Scenario Generation in Closed-Loop Simulation
 venue: ECCV26ARA
 authors:
   - Pal
