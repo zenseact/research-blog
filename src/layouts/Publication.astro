@@ -1,5 +1,6 @@
 ---
 import Base from './Base.astro';
+import ThumbnailMedia from '../components/ThumbnailMedia.astro';
 import { authors, authorName, authorUrl, venues } from '../lib/data';
 import { getDescription, getThumbnail, publicationUrl, type Publication } from '../lib/publications';
 
@@ -12,6 +13,8 @@ const { data } = pub;
 const venue = venues[data.venue];
 const showVenue = venue && venue.name !== 'arXiv';
 const thumb = getThumbnail(pub);
+// Where the thumbnail goes on this page. It is still used for cards and link previews when hidden here.
+const thumbPosition = thumb ? data['thumbnail-position'] : 'none';
 const description = getDescription(pub);
 const equalContrib = (data.n_equal_contrib ?? 0) > 1 ? data.n_equal_contrib! : 0;
 
@@ -100,102 +103,112 @@ const jsonLd = {
     }
   </Fragment>
 
-  <article class="container" data-publication>
-    <header class="pub-header">
+  <article data-publication>
+    <header class:list={['pub-header', `pub-header--${thumbPosition}`]}>
       {
-        (showVenue || data.extras) && (
-          <div class="pub-header__badges">
-            {showVenue &&
-              (venue.url ? (
-                <a class="venue-badge" href={venue.url} target="_blank" rel="noopener noreferrer">
-                  {venue.name}
-                </a>
-              ) : (
-                <span class="venue-badge">{venue.name}</span>
-              ))}
-            {data.extras && <span class="venue-badge venue-badge--plain">{data.extras}</span>}
-          </div>
-        )
-      }
-      <h1>{data.title}</h1>
-
-      <ul class="pub-authors-list">
-        {
-          data.authors.map((key, index) => {
-            const href = authorUrl(key);
-            const marks = [...affiliationMarks(key), ...(index < equalContrib ? ['*'] : [])];
-            return (
-              <li>
-                {href ? (
-                  <a href={href} target="_blank" rel="noopener noreferrer">
-                    {authorName(key)}
-                  </a>
-                ) : (
-                  <span>{authorName(key)}</span>
-                )}
-                {marks.length > 0 && <sup>{marks.join(',')}</sup>}
-              </li>
-            );
-          })
-        }
-      </ul>
-      {
-        affiliations.length > 0 && (
-          <p class="pub-affiliations">
-            {affiliations.map((org, index) => (
-              <span>
-                {affiliations.length > 1 && <sup>{index + 1}</sup>}
-                {org}
-              </span>
-            ))}
-          </p>
-        )
-      }
-      {equalContrib > 0 && <p class="pub-header__note"><sup>*</sup>Equal contribution</p>}
-
-      <div class="btn-row">
-        {
-          links.map((link, index) => (
-            <a class:list={['btn', index > 0 && 'btn--ghost']} href={link.href} target="_blank" rel="noopener noreferrer">
-              <i class={link.icon} aria-hidden="true" />
-              {link.label}
-            </a>
+        thumb &&
+          thumbPosition === 'side' &&
+          (thumb.kind === 'video' ? (
+            <video class="pub-header__bg" src={thumb.src} poster={thumb.still} autoplay loop muted playsinline aria-hidden="true" tabindex="-1" />
+          ) : (
+            <div class="pub-header__bg" style={`background-image: url("${thumb.src}")`} aria-hidden="true" />
           ))
-        }
-        {
-          hasBibtex && (
-            <button class="btn btn--ghost" type="button" data-cite>
-              <i class="fas fa-quote-right" aria-hidden="true" />
-              Cite
+      }
+      <div class="container pub-header__inner">
+        <div class="pub-header__text">
+          {
+            (showVenue || data.extras) && (
+              <div class="pub-header__badges">
+                {showVenue &&
+                  (venue.url ? (
+                    <a class="venue-badge" href={venue.url} target="_blank" rel="noopener noreferrer">
+                      {venue.name}
+                    </a>
+                  ) : (
+                    <span class="venue-badge">{venue.name}</span>
+                  ))}
+                {data.extras && <span class="venue-badge venue-badge--plain">{data.extras}</span>}
+              </div>
+            )
+          }
+          <h1>{data.title}</h1>
+
+          <ul class="pub-authors-list">
+            {
+              data.authors.map((key, index) => {
+                const href = authorUrl(key);
+                const marks = [...affiliationMarks(key), ...(index < equalContrib ? ['*'] : [])];
+                return (
+                  <li>
+                    {href ? (
+                      <a href={href} target="_blank" rel="noopener noreferrer">
+                        {authorName(key)}
+                      </a>
+                    ) : (
+                      <span>{authorName(key)}</span>
+                    )}
+                    {marks.length > 0 && <sup>{marks.join(',')}</sup>}
+                  </li>
+                );
+              })
+            }
+          </ul>
+          {
+            affiliations.length > 0 && (
+              <p class="pub-affiliations">
+                {affiliations.map((org, index) => (
+                  <span>
+                    {affiliations.length > 1 && <sup>{index + 1}</sup>}
+                    {org}
+                  </span>
+                ))}
+              </p>
+            )
+          }
+          {equalContrib > 0 && <p class="pub-header__note"><sup>*</sup>Equal contribution</p>}
+
+          <div class="btn-row">
+            {
+              links.map((link, index) => (
+                <a class:list={['btn', index > 0 && 'btn--ghost']} href={link.href} target="_blank" rel="noopener noreferrer">
+                  <i class={link.icon} aria-hidden="true" />
+                  {link.label}
+                </a>
+              ))
+            }
+            {
+              hasBibtex && (
+                <button class="btn btn--ghost" type="button" data-cite>
+                  <i class="fas fa-quote-right" aria-hidden="true" />
+                  Cite
+                </button>
+              )
+            }
+            <button class="btn btn--ghost" type="button" data-copy-link>
+              <i class="fas fa-link" aria-hidden="true" />
+              <span>Copy link</span>
             </button>
+          </div>
+        </div>
+        {
+          thumb && thumbPosition !== 'none' && (
+            <div class="pub-header__media">
+              <ThumbnailMedia thumb={thumb} />
+            </div>
           )
         }
-        <button class="btn btn--ghost" type="button" data-copy-link>
-          <i class="fas fa-link" aria-hidden="true" />
-          <span>Copy link</span>
-        </button>
       </div>
     </header>
 
-    {
-      thumb && (
-        <div class="pub-hero">
-          {thumb.kind === 'video' ? (
-            <video src={thumb.src} poster={thumb.still} autoplay loop muted playsinline />
-          ) : (
-            <img src={thumb.src} alt="" />
-          )}
-        </div>
-      )
-    }
+    <div class="container">
+      <section class="prose">
+        <slot />
+      </section>
 
-    <section class="prose">
-      <slot />
-    </section>
-
-    <footer class="pub-footer">
-      <a href="/publications/">&larr; All publications</a>
-    </footer>
+      <footer class="pub-footer">
+        <a href="/publications/">&larr; All publications</a>
+      </footer>
+    </div>
   </article>
 </Base>
 
@@ -219,6 +232,15 @@ const jsonLd = {
         },
       );
     };
+
+    // Video thumbnail: keep the blurred background copy in step with it.
+    var backdrop = document.querySelector('video.pub-header__bg');
+    var foreground = document.querySelector('.pub-header__media video');
+    if (backdrop && foreground) {
+      foreground.addEventListener('timeupdate', function () {
+        if (Math.abs(backdrop.currentTime - foreground.currentTime) > 0.3) backdrop.currentTime = foreground.currentTime;
+      });
+    }
 
     var linkButton = document.querySelector('[data-copy-link]');
     if (linkButton) {

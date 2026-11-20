@@ -1,0 +1,16 @@
+---
+import type { Thumbnail } from '../lib/publications';
+
+interface Props {
+  thumb: Thumbnail;
+}
+const { thumb } = Astro.props;
+---
+
+{
+  thumb.kind === 'video' ? (
+    <video src={thumb.src} poster={thumb.still} autoplay loop muted playsinline />
+  ) : (
+    <img src={thumb.src} alt="" />
+  )
+}

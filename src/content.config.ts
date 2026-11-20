@@ -37,6 +37,8 @@ const publications = defineCollection({
     'thumbnail-video': z.string().optional(),
     // Still image for a video thumbnail: shown before the video plays and in link previews.
     'thumbnail-poster': z.string().optional(),
+    // Where the thumbnail appears on the publication page. `none` keeps it for cards and link previews only.
+    'thumbnail-position': z.enum(['side', 'below', 'none']).default('side'),
     // Short summary for link previews and search engines. Defaults to the start of the abstract.
     description: z.string().optional(),
     // Left over from the Jekyll site. Accepted so old files keep working; not used.

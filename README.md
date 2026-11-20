@@ -59,6 +59,7 @@ Required: `title`, `venue`, `authors`, `date`, `topics`. All other fields are op
 | `extras` | Short note shown next to the venue, e.g. `Oral presentation`. |
 | `thumbnail-img` | Image shown at the top of the page, on cards and in link previews. `thumbnail-gif` works the same way. |
 | `thumbnail-video` | Video shown instead of an image. Add `thumbnail-poster` (a still image) as well: it is what link previews and the publication list show. |
+| `thumbnail-position` | How the thumbnail appears on the publication page. `side` (the default): next to the title, on a dark band filled with a blurred copy of the thumbnail. `below`: large, under the title. `none`: not on the page; still used for cards and link previews. |
 | `description` | One or two sentences for search engines and link previews. Defaults to the start of the abstract. |
 
 The build fails with a message naming the problem if an author, venue or topic is not found in `data/`, or if a field is misspelled.
