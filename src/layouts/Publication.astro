@@ -1,0 +1,299 @@
+---
+import Base from './Base.astro';
+import { authors, authorName, authorUrl, venues } from '../lib/data';
+import { getDescription, getThumbnail, publicationUrl, type Publication } from '../lib/publications';
+
+interface Props {
+  pub: Publication;
+}
+const { pub } = Astro.props;
+const { data } = pub;
+
+const venue = venues[data.venue];
+const showVenue = venue && venue.name !== 'arXiv';
+const thumb = getThumbnail(pub);
+const description = getDescription(pub);
+const equalContrib = (data.n_equal_contrib ?? 0) > 1 ? data.n_equal_contrib! : 0;
+
+// Affiliations are only listed when every author has one, so the list is never partial.
+const orgsOf = (key: string) => [authors[key]?.org ?? []].flat();
+const showAffiliations = data.authors.every((key) => orgsOf(key).length > 0);
+const affiliations = showAffiliations ? [...new Set(data.authors.flatMap(orgsOf))] : [];
+const affiliationMarks = (key: string) =>
+  affiliations.length > 1 ? orgsOf(key).map((org) => affiliations.indexOf(org) + 1) : [];
+
+const arxivId = /arxiv\.org\/abs\/([^/?#]+)/.exec(data.arxiv ?? '')?.[1];
+const links = [
+  data.arxiv && {
+    href: data.arxiv,
+    label: arxivId ? 'arXiv' : 'Paper',
+    icon: 'fas fa-file-alt',
+  },
+  data.doi && { href: `https://doi.org/${data.doi}`, label: data.arxiv ? 'DOI' : 'Paper', icon: 'fas fa-book-open' },
+  data.code && { href: data.code, label: 'Code', icon: 'fab fa-github' },
+  data.website && { href: data.website, label: 'Project page', icon: 'fas fa-globe' },
+  data.video && { href: data.video, label: 'Video', icon: 'fas fa-play' },
+].filter((link) => !!link);
+
+const hasBibtex = /```\s*bibtex/i.test(pub.body ?? '');
+const usesSlider = /<two-image-slider/.test(pub.body ?? '');
+const usesInteractiveImage = /<interactive-image/.test(pub.body ?? '');
+
+const url = new URL(publicationUrl(pub), Astro.site);
+const isoDate = data.date.toISOString().slice(0, 10);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  headline: data.title,
+  description,
+  url: url.href,
+  datePublished: isoDate,
+  author: data.authors.map((key) => ({ '@type': 'Person', name: authorName(key), url: authorUrl(key) })),
+  publisher: { '@type': 'Organization', name: 'Zenseact', url: 'https://zenseact.com' },
+  ...(thumb?.still ? { image: new URL(thumb.still, Astro.site).href } : {}),
+  ...(data.doi ? { sameAs: `https://doi.org/${data.doi}` } : {}),
+};
+---
+
+<Base title={data.title} description={description} image={thumb?.still} type="article">
+  <Fragment slot="head">
+    <meta property="article:published_time" content={isoDate} />
+    <!-- Google Scholar -->
+    <meta name="citation_title" content={data.title} />
+    {data.authors.map((key) => <meta name="citation_author" content={authorName(key)} />)}
+    <meta name="citation_publication_date" content={isoDate.replaceAll('-', '/')} />
+    <meta name="citation_abstract_html_url" content={url.href} />
+    {arxivId && <meta name="citation_arxiv_id" content={arxivId} />}
+    {arxivId && <meta name="citation_pdf_url" content={`https://arxiv.org/pdf/${arxivId}`} />}
+    {data.doi && <meta name="citation_doi" content={data.doi} />}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    {
+      usesSlider && (
+        <script is:inline>
+          // Used by <two-image-slider>.
+          function moveDivisor(id, linkid) {
+            var input = document.getElementById('slider__input' + id);
+            if (linkid != null) {
+              var linked = document.getElementById('slider__input' + linkid);
+              if (linked) {
+                linked.value = input.value;
+                moveDivisor(linkid, null);
+              }
+            }
+            document.getElementById('slider__overlay' + id).style.width = input.value + '%';
+            document.getElementById('slider__button' + id).style.left = 'calc(' + input.value + '% - 15px)';
+          }
+          function adjustAspectRatio(imgDiv, widthVw) {
+            var img = new Image();
+            img.onload = function () {
+              var container = imgDiv.parentElement;
+              var aspectRatio = this.naturalHeight / this.naturalWidth;
+              container.style.height = widthVw * aspectRatio + 'vw';
+              var maxWidth = parseFloat(container.style.maxWidth);
+              if (maxWidth) container.style.maxHeight = maxWidth * aspectRatio + 'px';
+            };
+            img.src = imgDiv.style.backgroundImage.replace(/url\((['"])?(.*?)\1\)/gi, '$2').split(',')[0];
+          }
+        </script>
+      )
+    }
+  </Fragment>
+
+  <article class="container" data-publication>
+    <header class="pub-header">
+      {
+        (showVenue || data.extras) && (
+          <div class="pub-header__badges">
+            {showVenue &&
+              (venue.url ? (
+                <a class="venue-badge" href={venue.url} target="_blank" rel="noopener noreferrer">
+                  {venue.name}
+                </a>
+              ) : (
+                <span class="venue-badge">{venue.name}</span>
+              ))}
+            {data.extras && <span class="venue-badge venue-badge--plain">{data.extras}</span>}
+          </div>
+        )
+      }
+      <h1>{data.title}</h1>
+
+      <ul class="pub-authors-list">
+        {
+          data.authors.map((key, index) => {
+            const href = authorUrl(key);
+            const marks = [...affiliationMarks(key), ...(index < equalContrib ? ['*'] : [])];
+            return (
+              <li>
+                {href ? (
+                  <a href={href} target="_blank" rel="noopener noreferrer">
+                    {authorName(key)}
+                  </a>
+                ) : (
+                  <span>{authorName(key)}</span>
+                )}
+                {marks.length > 0 && <sup>{marks.join(',')}</sup>}
+              </li>
+            );
+          })
+        }
+      </ul>
+      {
+        affiliations.length > 0 && (
+          <p class="pub-affiliations">
+            {affiliations.map((org, index) => (
+              <span>
+                {affiliations.length > 1 && <sup>{index + 1}</sup>}
+                {org}
+              </span>
+            ))}
+          </p>
+        )
+      }
+      {equalContrib > 0 && <p class="pub-header__note"><sup>*</sup>Equal contribution</p>}
+
+      <div class="btn-row">
+        {
+          links.map((link, index) => (
+            <a class:list={['btn', index > 0 && 'btn--ghost']} href={link.href} target="_blank" rel="noopener noreferrer">
+              <i class={link.icon} aria-hidden="true" />
+              {link.label}
+            </a>
+          ))
+        }
+        {
+          hasBibtex && (
+            <button class="btn btn--ghost" type="button" data-cite>
+              <i class="fas fa-quote-right" aria-hidden="true" />
+              Cite
+            </button>
+          )
+        }
+        <button class="btn btn--ghost" type="button" data-copy-link>
+          <i class="fas fa-link" aria-hidden="true" />
+          <span>Copy link</span>
+        </button>
+      </div>
+    </header>
+
+    {
+      thumb && (
+        <div class="pub-hero">
+          {thumb.kind === 'video' ? (
+            <video src={thumb.src} poster={thumb.still} autoplay loop muted playsinline />
+          ) : (
+            <img src={thumb.src} alt="" />
+          )}
+        </div>
+      )
+    }
+
+    <section class="prose">
+      <slot />
+    </section>
+
+    <footer class="pub-footer">
+      <a href="/publications/">&larr; All publications</a>
+    </footer>
+  </article>
+</Base>
+
+<script is:inline define:vars={{ usesInteractiveImage }}>
+  (function () {
+    var flash = function (button, text) {
+      var label = button.querySelector('span') || button;
+      var original = label.textContent;
+      label.textContent = text;
+      setTimeout(function () {
+        label.textContent = original;
+      }, 1600);
+    };
+    var copy = function (text, button) {
+      navigator.clipboard.writeText(text).then(
+        function () {
+          flash(button, 'Copied');
+        },
+        function () {
+          flash(button, 'Copy failed');
+        },
+      );
+    };
+
+    var linkButton = document.querySelector('[data-copy-link]');
+    if (linkButton) {
+      linkButton.addEventListener('click', function () {
+        copy(window.location.href.split('#')[0], linkButton);
+      });
+    }
+
+    // Every BibTeX block gets a copy button; "Cite" scrolls to the first one.
+    var bibtexBlocks = document.querySelectorAll('.prose pre[data-language="bibtex"]');
+    bibtexBlocks.forEach(function (pre) {
+      var wrapper = document.createElement('div');
+      wrapper.className = 'code-block';
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-block__copy';
+      button.innerHTML = '<span>Copy</span>';
+      button.addEventListener('click', function () {
+        copy(pre.textContent.trim(), button);
+      });
+      wrapper.appendChild(button);
+    });
+    var citeButton = document.querySelector('[data-cite]');
+    if (citeButton) {
+      if (bibtexBlocks.length === 0) citeButton.hidden = true;
+      citeButton.addEventListener('click', function () {
+        var target = bibtexBlocks[0].parentNode;
+        var heading = target.previousElementSibling;
+        (heading && /^H[1-6]$/.test(heading.tagName) ? heading : target).scrollIntoView();
+      });
+    }
+
+    if (!usesInteractiveImage) return;
+    // Hover / press behaviour for <interactive-image>.
+    document.querySelectorAll('.interactive-image-container').forEach(function (container) {
+      var hoverImg = container.querySelector('.image-hover');
+      var clickImg = container.querySelector('.image-click');
+      var show = function (hover, click) {
+        if (hoverImg) hoverImg.style.opacity = hover ? '1' : '0';
+        if (clickImg) clickImg.style.opacity = click ? '1' : '0';
+      };
+      var pressed = false;
+      container.addEventListener('mouseenter', function () {
+        if (!pressed) show(true, false);
+      });
+      container.addEventListener('mouseleave', function () {
+        pressed = false;
+        show(false, false);
+      });
+      container.addEventListener('mousedown', function (event) {
+        event.preventDefault();
+        pressed = true;
+        show(false, true);
+      });
+      container.addEventListener('mouseup', function () {
+        pressed = false;
+        show(container.matches(':hover'), false);
+      });
+      container.addEventListener(
+        'touchstart',
+        function (event) {
+          event.preventDefault();
+          pressed = true;
+          show(true, false);
+        },
+        { passive: false },
+      );
+      ['touchend', 'touchcancel'].forEach(function (type) {
+        container.addEventListener(type, function () {
+          pressed = false;
+          show(false, false);
+        });
+      });
+    });
+  })();
+</script>

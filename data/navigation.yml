@@ -1,0 +1,8 @@
+---
+main:
+  - title: Topics
+    url: /research
+  - title: Publications
+    url: /publications
+  - title: Dataset
+    url: https://zod.zenseact.com

@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import PubCard from '../components/PubCard.astro';
+import { topics } from '../lib/data';
+import { getPublications, getThumbnail } from '../lib/publications';
+
+const publications = await getPublications();
+const latest = publications.filter((pub) => getThumbnail(pub)).slice(0, 6);
+const withCode = publications.filter((pub) => pub.data.code).length;
+---
+
+<Base>
+  <div class="container">
+    <section class="home-hero">
+      <img src="/assets/images/research_at_z.png" alt="Research at Zenseact" width="2000" height="832" />
+      <div>
+        <p>
+          Zenseact develops <strong>world-leading safety software</strong> for Volvo Cars. Together, we make roads
+          safer <strong>for everyone</strong>.
+        </p>
+        <p>Here we share the papers, code and datasets behind that work.</p>
+        <div class="btn-row">
+          <a class="btn" href="/publications/">Browse publications</a>
+          <a class="btn btn--ghost" href="https://zenseact.com" target="_blank" rel="noopener noreferrer">
+            About Zenseact and careers
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="In numbers">
+      <div class="stats__item">
+        <span class="stats__number">{publications.length}</span>
+        <span class="stats__label">Publications</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__number">{withCode}</span>
+        <span class="stats__label">With open-source code</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__number">{topics.length}</span>
+        <span class="stats__label">Research topics</span>
+      </div>
+    </section>
+
+    <div class="section-heading">
+      <h2>Latest publications</h2>
+      <a href="/publications/">All publications &rarr;</a>
+    </div>
+    <section class="pub-cards">
+      {latest.map((pub) => <PubCard pub={pub} />)}
+    </section>
+  </div>
+</Base>
+
+<script>
+  // Card videos play while hovered or focused instead of all autoplaying.
+  for (const video of document.querySelectorAll<HTMLVideoElement>('video[data-hover-play]')) {
+    const card = video.closest('a') ?? video;
+    const play = () => video.play().catch(() => {});
+    const stop = () => video.pause();
+    card.addEventListener('mouseenter', play);
+    card.addEventListener('focus', play);
+    card.addEventListener('mouseleave', stop);
+    card.addEventListener('blur', stop);
+  }
+</script>

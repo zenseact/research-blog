@@ -44,3 +44,8 @@ _site/
 _drafts
 klise-*.gem
 Gemfile.lock
+
+### Astro / Node ###
+node_modules/
+dist/
+.astro/

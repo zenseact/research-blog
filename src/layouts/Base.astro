@@ -1,0 +1,116 @@
+---
+import '../styles/global.css';
+import { navigation } from '../lib/data';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Site-relative or absolute URL of the image for link previews. */
+  image?: string;
+  type?: 'website' | 'article';
+  /** Error pages: keep out of search engines and skip the canonical URL. */
+  noindex?: boolean;
+}
+
+const SITE_NAME = 'Zenseact Research';
+const DEFAULT_DESCRIPTION =
+  'Publications, code and datasets from the research team at Zenseact, working on software for safe automated driving.';
+const {
+  title,
+  description = DEFAULT_DESCRIPTION,
+  image = '/assets/images/og-default.png',
+  type = 'website',
+  noindex = false,
+} = Astro.props;
+
+const pageTitle = title ? `${title} - ${SITE_NAME}` : SITE_NAME;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const imageUrl = new URL(image, Astro.site);
+const path = Astro.url.pathname;
+const withSlash = (url: string) => (url.endsWith('/') ? url : url + '/');
+const isExternal = (url: string) => /^https?:\/\//.test(url);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title ?? SITE_NAME} />
+    <meta property="og:description" content={description} />
+    {!noindex && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={imageUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title ?? SITE_NAME} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+    <meta name="theme-color" content="#f7f6f3" />
+
+    <!-- Google tag (gtag.js) -->
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-W2588ES8XP"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-W2588ES8XP');
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="site-header__logo" href="/" aria-label="Zenseact Research home">
+          <img src="/assets/images/horizontal_logo.png" alt="Zenseact" width="3334" height="834" />
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          {
+            navigation.map((link) =>
+              isExternal(link.url) ? (
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.title}
+                  <i class="fas fa-external-link-alt" aria-hidden="true" />
+                </a>
+              ) : (
+                <a
+                  href={withSlash(link.url)}
+                  aria-current={path.startsWith(withSlash(link.url)) ? 'page' : undefined}
+                >
+                  {link.title}
+                </a>
+              ),
+            )
+          }
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <span>&copy; {new Date().getFullYear()} Zenseact</span>
+        <nav aria-label="Footer">
+          <a href="https://zenseact.com" target="_blank" rel="noopener noreferrer">zenseact.com</a>
+          <a href="https://zod.zenseact.com" target="_blank" rel="noopener noreferrer">Zenseact Open Dataset</a>
+          <a href="https://github.com/zenseact" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

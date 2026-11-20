@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import { topics } from '../lib/data';
+import { getPublications } from '../lib/publications';
+
+const publications = await getPublications();
+const count = (slug: string) => publications.filter((pub) => pub.data.topics.includes(slug)).length;
+---
+
+<Base title="Research topics" description="The research areas Zenseact publishes in, from perception and simulation to safety and verification.">
+  <div class="container">
+    <h1 class="page-title">Research topics</h1>
+    <div class="research-areas">
+      {
+        topics.map((area) => {
+          const n = count(area.slug);
+          return (
+            <a class="research-areas__card" href={`/publications/?topic=${encodeURIComponent(area.slug)}`}>
+              <div class="research-areas__icon">
+                <i class={`fas ${area.icon}`} aria-hidden="true" />
+              </div>
+              <h2 class="research-areas__title">{area.name}</h2>
+              <p class="research-areas__description">{area.description}</p>
+              <span class="research-areas__count">
+                {n} publication{n === 1 ? '' : 's'} &rarr;
+              </span>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</Base>

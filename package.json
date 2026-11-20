@@ -1,0 +1,29 @@
+{
+  "name": "zenseact-research",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:assets": "node scripts/check-assets.mjs",
+    "check:size": "node scripts/check-size.mjs",
+    "check": "npm run build && npm run check:assets && npm run check:size"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.10",
+    "@astrojs/sitemap": "^3.7.6",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/montserrat": "^5.3.0",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "astro": "^7.4.13",
+    "js-yaml": "^5.5.0",
+    "katex": "^0.16.47",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "unist-util-visit": "^5.2.0"
+  },
+  "engines": {
+    "node": ">=22.23.4"
+  }
+}

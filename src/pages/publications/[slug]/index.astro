@@ -1,0 +1,17 @@
+---
+import { render } from 'astro:content';
+import Publication from '../../../layouts/Publication.astro';
+import { getPublications } from '../../../lib/publications';
+
+export async function getStaticPaths() {
+  const publications = await getPublications();
+  return publications.map((pub) => ({ params: { slug: pub.id }, props: { pub } }));
+}
+
+const { pub } = Astro.props;
+const { Content } = await render(pub);
+---
+
+<Publication pub={pub}>
+  <Content />
+</Publication>

@@ -1,0 +1,34 @@
+---
+import { authorNames, getThumbnail, publicationUrl, venueLabel, type Publication } from '../lib/publications';
+
+interface Props {
+  pub: Publication;
+}
+const { pub } = Astro.props;
+const thumb = getThumbnail(pub);
+---
+
+<a class="pub-card" href={publicationUrl(pub)}>
+  <div class="pub-card__media">
+    {
+      thumb?.kind === 'video' ? (
+        <video
+          src={thumb.src}
+          poster={thumb.still}
+          preload={thumb.still ? 'none' : 'metadata'}
+          muted
+          loop
+          playsinline
+          data-hover-play
+        />
+      ) : thumb ? (
+        <img src={thumb.src} alt="" loading="lazy" decoding="async" />
+      ) : null
+    }
+  </div>
+  <div class="pub-card__body">
+    <span class="venue-badge">{venueLabel(pub)}</span>
+    <h3 class="pub-card__title">{pub.data.title}</h3>
+    <p class="pub-card__authors">{authorNames(pub).join(', ')}</p>
+  </div>
+</a>
