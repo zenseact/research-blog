@@ -62,6 +62,15 @@
   vertical-align: middle;
 }
 
+@media (max-width: 37.5em) {
+  .prose table {
+    font-size: 0.75em;
+  }
+  .prose :is(th, td) {
+    padding: 0.35em 0.2em;
+  }
+}
+
 /* Centers a Markdown table: wrap it in <div class="table-center">. */
 .table-center {
   overflow-x: auto;
@@ -280,6 +289,7 @@
 
 .prose .interactive-image-container {
   position: relative;
+  margin: 0;
   display: inline-block;
   line-height: 0;
   cursor: pointer;
@@ -290,6 +300,7 @@
 .interactive-image-container .interactive-image {
   display: block;
   max-width: 100%;
+  margin-bottom: 0;
   height: auto;
   transition: opacity 0.1s ease-in-out;
 }
@@ -357,9 +368,11 @@
 }
 
 /* ---------- Result comparison tables ---------- */
+/* Shrinks to the table so that a .table-note below lines up with it. */
 .pub-table-wrap {
+  width: fit-content;
   max-width: 100%;
-  margin: 1.5em 0;
+  margin: 1.5em auto;
   overflow-x: auto;
 }
 
@@ -369,6 +382,15 @@
   margin: 0 auto;
   border-collapse: collapse;
   font-size: 0.82rem;
+}
+
+@media (max-width: 37.5em) {
+  .pub-table-wrap table {
+    font-size: 0.7rem;
+  }
+  .pub-table-wrap :is(th, td) {
+    padding: 0.2em 0.3em;
+  }
 }
 
 .pub-table-wrap thead {

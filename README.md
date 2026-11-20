@@ -99,7 +99,7 @@ Beyond that you can use anything Markdown and HTML offer:
 - **Figures and videos.** Put the files in the publication folder and refer to them with paths relative to it: `![Overview](figures/overview.png)` or `<video src="videos/demo.mp4" controls></video>`.
 - **Math.** `$$ ... $$` inline or as a block on its own lines, rendered with KaTeX.
 - **Citations.** Add a `references.bib` file to the folder and cite with `<d-cite key="he2016deep"></d-cite>`. Numbered citations and a reference list are generated for you.
-- **Custom HTML, CSS and JavaScript.** Raw HTML is passed through untouched, including `<style>` and `<script>`. Text is kept to a readable column; figures, videos, tables and any other HTML block you place at the top level can use the full page width.
+- **Custom HTML, CSS and JavaScript.** Raw HTML is passed through untouched, including `<style>` and `<script>`. Text is kept to a readable column. A figure, video, table or other HTML block placed at the top level uses the full page width, unless it mostly holds text.
 
 Three tags are expanded when the site is built:
 
@@ -178,7 +178,8 @@ For those maintaining the site itself:
 | `src/layouts/`, `src/pages/` | Page templates: home, publications list, research topics, publication page. |
 | `src/styles/` | `site.css` (design tokens, header, cards, lists), `prose.css` (publication text), `legacy.css` (classes older publication pages rely on). |
 | `src/plugins/remark-publication.mjs` | Expands the build-time tags and citations described above. |
+| `src/plugins/rehype-layout.mjs` | Decides which blocks of a publication page use the full page width. |
 | `src/integrations/publication-assets.mjs` | Serves and copies the media files in `publications/`. |
 | `scripts/` | Checks run by `npm run check` and in CI. |
 
-Astro caches rendered Markdown. After changing a file in `src/plugins/`, start the dev server once with `npm run dev -- --force` to see the effect on existing pages.
+Astro caches rendered Markdown. After changing a file in `src/plugins/`, delete `.astro/` and `node_modules/.astro/` and restart the dev server to see the effect on existing pages.

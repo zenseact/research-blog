@@ -1,25 +1,34 @@
 /* Typography for the body of a publication page.
  *
- * Text (paragraphs, lists, headings, code) is kept to a readable column.
- * Everything else a post puts at the top level (figures, videos, sliders,
- * tables, custom HTML) keeps the full page width.
+ * The body is a readable text column. Media blocks (figures, videos, sliders,
+ * tables, custom HTML) are wrapped in .prose__wide by the rehype-layout plugin
+ * and use the full page width.
  */
+.prose-frame {
+  container-type: inline-size;
+}
+
 .prose {
+  max-width: var(--text-width);
+  margin-inline: auto;
   font-size: 1.0625rem;
   line-height: 1.7;
   overflow-wrap: break-word;
 }
 
-.prose > :is(p, ul, ol, dl, h1, h2, h3, h4, h5, h6, blockquote, pre, hr, .astro-code, .code-block, .footnotes) {
-  max-width: var(--text-width);
-  margin-inline: auto;
+.prose > .prose__wide {
+  width: 100cqw;
+  margin-inline: calc((100% - 100cqw) / 2);
 }
 
-/* A paragraph that only holds an image is a figure: let it use the full width. */
-.prose > p:has(> img:only-child),
-.prose > p:has(> a:only-child > img:only-child) {
-  max-width: none;
+.prose__wide > p {
   text-align: center;
+}
+
+/* Captions keep to the text column even when their figure does not. */
+.prose__wide figcaption {
+  max-width: var(--text-width);
+  margin-inline: auto;
 }
 
 .prose p {
@@ -143,6 +152,13 @@
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
+}
+
+/* On narrow screens the button gets a row of its own above the code. */
+@media (max-width: 37.5em) {
+  .code-block pre {
+    padding-top: 3.2rem;
+  }
 }
 
 .code-block__copy:hover {

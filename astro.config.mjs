@@ -3,7 +3,9 @@ import sitemap from '@astrojs/sitemap';
 import { unified } from '@astrojs/markdown-remark';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import rehypeRaw from 'rehype-raw';
 import publicationAssets from './src/integrations/publication-assets.mjs';
+import rehypeLayout from './src/plugins/rehype-layout.mjs';
 import remarkPublication from './src/plugins/remark-publication.mjs';
 
 export default defineConfig({
@@ -18,7 +20,8 @@ export default defineConfig({
       // Same dash convention the Jekyll site used: -- is an en dash, --- an em dash.
       smartypants: { dashes: 'oldschool' },
       remarkPlugins: [remarkPublication, remarkMath],
-      rehypePlugins: [[rehypeKatex, { strict: false, throwOnError: false }]],
+      // rehypeRaw parses the HTML written in posts so that rehypeLayout can see it.
+      rehypePlugins: [rehypeRaw, [rehypeKatex, { strict: false, throwOnError: false }], rehypeLayout],
     }),
   },
 });

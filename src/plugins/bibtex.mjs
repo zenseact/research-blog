@@ -114,7 +114,9 @@ function formatAuthor(name) {
 
 export function formatAuthors(field = '') {
   const names = field.split(/\s+and\s+/i).map((name) => name.trim()).filter(Boolean);
-  const formatted = names.map((name) => (/^others$/i.test(name) ? 'et al.' : formatAuthor(name)));
+  const truncated = /^others$/i.test(names.at(-1) ?? '');
+  const formatted = (truncated ? names.slice(0, -1) : names).map(formatAuthor);
+  if (truncated) return `${formatted.join(', ')} et al.`;
   if (formatted.length <= 1) return formatted.join('');
   return `${formatted.slice(0, -1).join(', ')} and ${formatted.at(-1)}`;
 }

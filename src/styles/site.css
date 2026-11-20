@@ -77,6 +77,10 @@ video {
   padding-inline: var(--gutter);
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -843,6 +847,7 @@ a.venue-badge:hover {
   inset: -4rem;
   z-index: -1;
   width: calc(100% + 8rem);
+  max-width: none;
   height: calc(100% + 8rem);
   background-position: center;
   background-size: cover;
@@ -868,6 +873,11 @@ a.venue-badge:hover {
 
 .pub-header--side .pub-header__media :is(img, video) {
   box-shadow: 0 24px 60px rgb(0 0 0 / 0.5);
+}
+
+/* Diagrams with a transparent background are drawn for a light page. */
+.pub-header--side .pub-header__media img {
+  background: #fff;
 }
 
 .pub-header--side .venue-badge {

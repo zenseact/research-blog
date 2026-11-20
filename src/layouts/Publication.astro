@@ -25,6 +25,9 @@ const affiliations = showAffiliations ? [...new Set(data.authors.flatMap(orgsOf)
 const affiliationMarks = (key: string) =>
   affiliations.length > 1 ? orgsOf(key).map((org) => affiliations.indexOf(org) + 1) : [];
 
+// Short hyphenated words in the title ("Ego-lane") are kept on one line.
+const MAX_UNBROKEN_WORD = 18;
+
 const paperUrl = data.paper ?? data.arxiv;
 const arxivId = /arxiv\.org\/abs\/([^/?#]+)/.exec(paperUrl ?? '')?.[1];
 const links = [
@@ -128,7 +131,16 @@ const jsonLd = {
               </div>
             )
           }
-          <h1>{data.title}</h1>
+          <h1>
+            {
+              data.title.split(' ').map((word, index) => (
+                <Fragment>
+                  {index > 0 && ' '}
+                  {word.includes('-') && word.length <= MAX_UNBROKEN_WORD ? <span class="nowrap">{word}</span> : word}
+                </Fragment>
+              ))
+            }
+          </h1>
 
           <ul class="pub-authors-list">
             {
@@ -194,9 +206,11 @@ const jsonLd = {
     </header>
 
     <div class="container">
-      <section class="prose">
-        <slot />
-      </section>
+      <div class="prose-frame">
+        <section class="prose">
+          <slot />
+        </section>
+      </div>
 
       <footer class="pub-footer">
         <a href="/publications/">&larr; All publications</a>

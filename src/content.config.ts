@@ -16,7 +16,12 @@ const publications = defineCollection({
     generateId: ({ entry }) => entry.split('/')[0],
   }),
   schema: z.strictObject({
-    title: z.string(),
+    // Titles written for the Jekyll site may contain numeric HTML entities such as &#8212;.
+    title: z.string().transform((title) =>
+      title.replace(/&#(x[0-9a-f]+|\d+);/gi, (_, code) =>
+        String.fromCodePoint(code[0].toLowerCase() === 'x' ? parseInt(code.slice(1), 16) : Number(code)),
+      ),
+    ),
     date: z.coerce.date(),
     venue: oneOf(Object.keys(venues), 'venue', 'venues.yml'),
     authors: z.array(oneOf(Object.keys(authors), 'author', 'authors.yml')).min(1),
