@@ -506,3 +506,9 @@ Voloshyn:
 Vinkas:
     firstname: ["Jakob", "J.", "J. V.", "Jakob Vinkås"]
     org: Zenseact
+Nässlander:
+  firstname: ["Pauline", "P.", "P. N.", "Pauline Nässlander"]
+  org: Zenseact
+  github: PaulineNasslander
+  mail: pauline.nasslander@zenseact.com
+  url: https://www.linkedin.com/in/pauline-nasslander/

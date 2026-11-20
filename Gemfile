@@ -2,7 +2,8 @@ source "https://rubygems.org"
 
 gem "minimal-mistakes-jekyll"
 
-gem "github-pages", group: :jekyll_plugins
+# >= 232 pulls Jekyll 3.10, which runs `jekyll serve --watch` on Ruby 3
+gem "github-pages", ">= 232", group: :jekyll_plugins
 gem "jekyll-include-cache", group: :jekyll_plugins
 gem 'jekyll-scholar', group: :jekyll_plugins
 
