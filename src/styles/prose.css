@@ -29,7 +29,7 @@
 .prose :is(h1, h2, h3, h4) {
   margin-top: 2.2em;
   margin-bottom: 0.6em;
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 6rem;
 }
 
 .prose > :first-child {

@@ -26,6 +26,8 @@ const publications = defineCollection({
     n_equal_contrib: z.number().int().optional(),
     extras: z.string().optional(),
     // Links
+    paper: z.url().nullish(),
+    // Older name for `paper`. Still accepted.
     arxiv: z.url().nullish(),
     code: z.url().nullish(),
     website: z.url().nullish(),

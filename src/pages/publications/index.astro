@@ -75,7 +75,7 @@ const standaloneVenues = [...new Set(publications.filter((pub) => !venues[pub.da
           {
             publications.map((pub) => {
               const names = authorNames(pub);
-              const still = getThumbnail(pub)?.still;
+              const thumb = getThumbnail(pub);
               return (
                 <li
                   class="publications__item"
@@ -93,9 +93,13 @@ const standaloneVenues = [...new Set(publications.filter((pub) => !venues[pub.da
                       <span class="pub-venue">{venues[pub.data.venue]?.name ?? pub.data.venue}</span>
                       <span class="pub-topics">{pub.data.topics.join(' · ')}</span>
                     </div>
-                    {still && (
+                    {thumb && (
                       <div class="pub-thumbnail">
-                        <img src={still} alt="" loading="lazy" decoding="async" />
+                        {thumb.kind === 'video' ? (
+                          <video src={thumb.src} poster={thumb.still} preload="none" muted loop playsinline data-play-in-view />
+                        ) : (
+                          <img src={thumb.src} alt="" loading="lazy" decoding="async" />
+                        )}
                       </div>
                     )}
                   </a>
@@ -110,6 +114,21 @@ const standaloneVenues = [...new Set(publications.filter((pub) => !venues[pub.da
 </Base>
 
 <script>
+  // Video thumbnails load and play only while they are on screen. Visitors who ask for
+  // reduced motion or reduced data usage get the still image instead.
+  const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+  const wantsStills = window.matchMedia('(prefers-reduced-motion: reduce)').matches || connection?.saveData === true;
+  if (!wantsStills) {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      }
+    });
+    for (const video of document.querySelectorAll('video[data-play-in-view]')) observer.observe(video);
+  }
+
   const toggle = document.getElementById('filter-toggle');
   const sidebar = document.getElementById('publications-sidebar');
   toggle?.addEventListener('click', () => {

@@ -25,14 +25,11 @@ const affiliations = showAffiliations ? [...new Set(data.authors.flatMap(orgsOf)
 const affiliationMarks = (key: string) =>
   affiliations.length > 1 ? orgsOf(key).map((org) => affiliations.indexOf(org) + 1) : [];
 
-const arxivId = /arxiv\.org\/abs\/([^/?#]+)/.exec(data.arxiv ?? '')?.[1];
+const paperUrl = data.paper ?? data.arxiv;
+const arxivId = /arxiv\.org\/abs\/([^/?#]+)/.exec(paperUrl ?? '')?.[1];
 const links = [
-  data.arxiv && {
-    href: data.arxiv,
-    label: arxivId ? 'arXiv' : 'Paper',
-    icon: 'fas fa-file-alt',
-  },
-  data.doi && { href: `https://doi.org/${data.doi}`, label: data.arxiv ? 'DOI' : 'Paper', icon: 'fas fa-book-open' },
+  paperUrl && { href: paperUrl, label: 'Paper', icon: 'fas fa-file-alt' },
+  data.doi && { href: `https://doi.org/${data.doi}`, label: paperUrl ? 'DOI' : 'Paper', icon: 'fas fa-book-open' },
   data.code && { href: data.code, label: 'Code', icon: 'fab fa-github' },
   data.website && { href: data.website, label: 'Project page', icon: 'fas fa-globe' },
   data.video && { href: data.video, label: 'Video', icon: 'fas fa-play' },
@@ -184,10 +181,6 @@ const jsonLd = {
                 </button>
               )
             }
-            <button class="btn btn--ghost" type="button" data-copy-link>
-              <i class="fas fa-link" aria-hidden="true" />
-              <span>Copy link</span>
-            </button>
           </div>
         </div>
         {
@@ -239,13 +232,6 @@ const jsonLd = {
     if (backdrop && foreground) {
       foreground.addEventListener('timeupdate', function () {
         if (Math.abs(backdrop.currentTime - foreground.currentTime) > 0.3) backdrop.currentTime = foreground.currentTime;
-      });
-    }
-
-    var linkButton = document.querySelector('[data-copy-link]');
-    if (linkButton) {
-      linkButton.addEventListener('click', function () {
-        copy(window.location.href.split('#')[0], linkButton);
       });
     }
 

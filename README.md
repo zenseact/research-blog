@@ -41,7 +41,7 @@ authors: # Keys in data/authors.yml, in author order
 date: 2023-01-21 # Publication or submission date
 topics: # At least one slug from data/research_topics.yml
   - Perception & motion forecasting
-arxiv: https://arxiv.org/abs/2301.08965
+paper: https://arxiv.org/abs/2301.08965
 thumbnail-img: thumbnail.png # A file in this folder
 ---
 ```
@@ -50,7 +50,7 @@ Required: `title`, `venue`, `authors`, `date`, `topics`. All other fields are op
 
 | Field | What it does |
 |---|---|
-| `arxiv` | Link to the paper. Shown as an "arXiv" button (or "Paper" if it is not an arXiv link). |
+| `paper` | Link to the paper: arXiv, the publisher's page or a PDF. Shown as a "Paper" button. Older pages use `arxiv` for this, which still works. |
 | `doi` | DOI without the domain, e.g. `10.1016/j.automatica.2023.111394`. |
 | `code` | Link to the code. Shown as a "Code" button. |
 | `website` | Link to an external project page. |
