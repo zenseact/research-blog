@@ -1,4 +1,4 @@
-FROM ruby:3.1.0
+FROM ruby:3.1.7-bookworm
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
