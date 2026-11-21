@@ -2,6 +2,7 @@ import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { authors, venues, topics } from './lib/data';
+import { LINK_ICON_NAMES } from './lib/links';
 
 const oneOf = (values: string[], what: string, file: string) =>
   z.string().refine((value) => values.includes(value), {
@@ -38,6 +39,19 @@ const publications = defineCollection({
     website: z.url().nullish(),
     video: z.url().nullish(),
     doi: z.string().nullish(),
+    // Further buttons, e.g. a demo, a dataset or model weights.
+    links: z
+      .array(
+        z.strictObject({
+          label: z.string().min(1),
+          // A web address, or a path to a file or folder in the publication folder.
+          url: z.string().refine((url) => /^https?:\/\/\S+$/.test(url) || /^[^/\s:][^\s:]*$/.test(url), {
+            error: 'A link needs a web address (https://...) or a path inside the publication folder.',
+          }),
+          icon: z.enum(LINK_ICON_NAMES).optional(),
+        }),
+      )
+      .optional(),
     // Thumbnail: a file in the publication folder. Use exactly one.
     'thumbnail-img': z.string().optional(),
     'thumbnail-gif': z.string().optional(),

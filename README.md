@@ -55,12 +55,26 @@ Required: `title`, `venue`, `authors`, `date`, `topics`. All other fields are op
 | `code` | Link to the code. Shown as a "Code" button. |
 | `website` | Link to an external project page. |
 | `video` | Link to a video, e.g. on YouTube. |
+| `links` | Further buttons, e.g. a demo, a dataset or model weights. See below. |
 | `n_equal_contrib` | Marks the first *n* authors as equal contributors. |
 | `extras` | Short note shown next to the venue, e.g. `Oral presentation`. |
 | `thumbnail-img` | Image shown at the top of the page, on cards and in link previews. `thumbnail-gif` works the same way. |
 | `thumbnail-video` | Video shown instead of an image. Link previews and the publication list show a still image, taken from the video when the site is built. To choose the image yourself, add `thumbnail-poster` with a file in this folder. |
 | `thumbnail-position` | How the thumbnail appears on the publication page. `side` (the default): next to the title, on a dark band filled with a blurred copy of the thumbnail. `below`: large, under the title. `none`: not on the page; still used for cards and link previews. |
 | `description` | One or two sentences for search engines and link previews. Defaults to the start of the abstract. |
+
+To add more buttons next to Paper and Code, list them under `links`:
+
+```yaml
+links:
+  - label: Live viewer
+    url: viewer/ # A file or folder in this folder
+    icon: demo
+  - label: Models
+    url: https://huggingface.co/zenseact/my-model
+```
+
+Each button needs a `label` and a `url`. The icon follows the address (Hugging Face, GitHub, YouTube; a plain link icon otherwise). To choose it, set `icon` to one of `demo`, `dataset`, `model`, `slides`, `poster`, `video`, `code`, `paper`, `website`, `huggingface`, `link`.
 
 The build fails with a message naming the problem if an author, venue or topic is not found in `data/`, or if a field is misspelled.
 

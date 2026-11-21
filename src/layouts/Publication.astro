@@ -1,8 +1,9 @@
 ---
 import Base from './Base.astro';
+import LinkIcon from '../components/LinkIcon.astro';
 import ThumbnailMedia from '../components/ThumbnailMedia.astro';
 import { authors, authorName, authorUrl, venues } from '../lib/data';
-import { getDescription, getThumbnail, publicationUrl, type Publication } from '../lib/publications';
+import { getDescription, getLinkButtons, getThumbnail, publicationUrl, type Publication } from '../lib/publications';
 
 interface Props {
   pub: Publication;
@@ -28,15 +29,8 @@ const affiliationMarks = (key: string) =>
 // Short hyphenated words in the title ("Ego-lane") are kept on one line.
 const MAX_UNBROKEN_WORD = 18;
 
-const paperUrl = data.paper ?? data.arxiv;
-const arxivId = /arxiv\.org\/abs\/([^/?#]+)/.exec(paperUrl ?? '')?.[1];
-const links = [
-  paperUrl && { href: paperUrl, label: 'Paper', icon: 'fas fa-file-alt' },
-  data.doi && { href: `https://doi.org/${data.doi}`, label: paperUrl ? 'DOI' : 'Paper', icon: 'fas fa-book-open' },
-  data.code && { href: data.code, label: 'Code', icon: 'fab fa-github' },
-  data.website && { href: data.website, label: 'Project page', icon: 'fas fa-globe' },
-  data.video && { href: data.video, label: 'Video', icon: 'fas fa-play' },
-].filter((link) => !!link);
+const links = getLinkButtons(pub);
+const arxivId = /arxiv\.org\/abs\/([^/?#]+)/.exec(data.paper ?? data.arxiv ?? '')?.[1];
 
 const hasBibtex = /```\s*bibtex/i.test(pub.body ?? '');
 const usesSlider = /<two-image-slider/.test(pub.body ?? '');
@@ -180,7 +174,7 @@ const jsonLd = {
             {
               links.map((link, index) => (
                 <a class:list={['btn', index > 0 && 'btn--ghost']} href={link.href} target="_blank" rel="noopener noreferrer">
-                  <i class={link.icon} aria-hidden="true" />
+                  <LinkIcon name={link.icon} />
                   {link.label}
                 </a>
               ))

@@ -10,6 +10,10 @@ authors:
   - Kahl
 code: https://github.com/zenseact/VoroTracing
 arxiv: https://arxiv.org/abs/2608.17682
+links:
+  - label: Live viewer
+    url: viewer/
+    icon: demo
 date: 2026-08-18 00:00:00 +0000
 thumbnail-video: videos/teaser-loop.mp4
 topics:
