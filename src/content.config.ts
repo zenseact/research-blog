@@ -56,7 +56,7 @@ const publications = defineCollection({
     'thumbnail-img': z.string().optional(),
     'thumbnail-gif': z.string().optional(),
     'thumbnail-video': z.string().optional(),
-    // Still image for a video thumbnail: shown before the video plays and in link previews.
+    // Still image for a video thumbnail, for link previews and cards. Taken from the video when not given.
     'thumbnail-poster': z.string().optional(),
     // Where the thumbnail appears on the publication page. `none` keeps it for cards and link previews only.
     'thumbnail-position': z.enum(['side', 'below', 'none']).default('side'),
