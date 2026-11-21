@@ -2,9 +2,19 @@
 // (publications/<slug>/**) at /publications/<slug>/**, untouched.
 // Posts reference their figures, videos and demos with paths relative to
 // their own folder, so this is what keeps those references working.
+//
+// It also makes the still image of a video thumbnail (see posterPath): one frame
+// of the video, written to the build and to the cache, never to publications/.
+import { execFile } from 'node:child_process';
 import { createReadStream, promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { promisify } from 'node:util';
+import ffmpeg from 'ffmpeg-static';
+import { load as parseYaml } from 'js-yaml';
+import { POSTER_SUFFIX, posterPath } from '../lib/poster-path.mjs';
+
+const run = promisify(execFile);
 
 const SOURCE_EXT = new Set(['.md', '.mdx']);
 
@@ -37,8 +47,63 @@ async function* walk(dir) {
   }
 }
 
+const VIDEO_EXT = ['.mp4', '.webm', '.mov'];
+// The first frames of a video are often black or a fade-in.
+const POSTER_SECONDS = [1, 0];
+
+const exists = (file) => fs.access(file).then(() => true, () => false);
+const modified = (file) => fs.stat(file).then((stat) => stat.mtimeMs, () => 0);
+
+async function writePoster(video, poster) {
+  if ((await modified(poster)) > (await modified(video))) return;
+  await fs.mkdir(path.dirname(poster), { recursive: true });
+  for (const seconds of POSTER_SECONDS) {
+    // ffmpeg writes nothing, without an error, when the video is shorter than the seek time.
+    await fs.rm(poster, { force: true });
+    await run(ffmpeg, [
+      '-v', 'error', '-y', '-ss', String(seconds), '-i', video,
+      '-frames:v', '1', '-vf', "scale='min(1280,iw)':-2", '-q:v', '3', poster,
+    ]);
+    if (await exists(poster)) return;
+  }
+  throw new Error(`Could not take a still image from ${video}`);
+}
+
+// Video thumbnails that have no thumbnail-poster of their own, as paths relative to `sourceDir`.
+async function videoThumbnails(sourceDir) {
+  const videos = [];
+  for await (const file of walk(sourceDir)) {
+    if (!SOURCE_EXT.has(path.extname(file).toLowerCase())) continue;
+    const frontMatter = /^---\r?\n([\s\S]*?)\r?\n---/.exec(await fs.readFile(file, 'utf8'));
+    const data = frontMatter ? parseYaml(frontMatter[1]) : undefined;
+    if (!data?.['thumbnail-video'] || data['thumbnail-poster']) continue;
+    videos.push(path.join(path.relative(sourceDir, path.dirname(file)), data['thumbnail-video']));
+  }
+  return videos;
+}
+
 export default function publicationAssets({ dir = 'publications', route = '/publications/' } = {}) {
   let sourceDir;
+  let posterDir;
+  const pending = new Map();
+
+  // The cached poster for a request such as "neurad/clip.poster.jpg", made from "neurad/clip.mp4".
+  async function posterFor(relative) {
+    if (!relative.endsWith(POSTER_SUFFIX)) return undefined;
+    const stem = path.resolve(sourceDir, relative.slice(0, -POSTER_SUFFIX.length));
+    if (!stem.startsWith(sourceDir + path.sep)) return undefined;
+    for (const ext of VIDEO_EXT) {
+      if (!(await exists(stem + ext))) continue;
+      const poster = path.join(posterDir, relative);
+      // The page and its link preview can ask for the same poster at once.
+      if (!pending.has(poster)) {
+        pending.set(poster, writePoster(stem + ext, poster).finally(() => pending.delete(poster)));
+      }
+      await pending.get(poster);
+      return poster;
+    }
+    return undefined;
+  }
 
   function configureServer(server) {
     const serve = async (req, res, next) => {
@@ -46,11 +111,12 @@ export default function publicationAssets({ dir = 'publications', route = '/publ
       if (!pathname.startsWith(route)) return next();
       // A folder with an index.html is served like GitHub Pages serves it.
       const relative = pathname.slice(route.length) + (pathname.endsWith('/') ? 'index.html' : '');
-      const file = path.resolve(sourceDir, relative);
+      let file = path.resolve(sourceDir, relative);
       const ext = path.extname(file).toLowerCase();
       if (!file.startsWith(sourceDir + path.sep) || SOURCE_EXT.has(ext)) return next();
       let stat;
       try {
+        if (!(await exists(file))) file = (await posterFor(relative)) ?? file;
         stat = await fs.stat(file);
       } catch {
         return next();
@@ -90,6 +156,7 @@ export default function publicationAssets({ dir = 'publications', route = '/publ
     hooks: {
       'astro:config:setup': ({ config, updateConfig }) => {
         sourceDir = path.resolve(fileURLToPath(config.root), dir);
+        posterDir = path.join(fileURLToPath(config.cacheDir), 'posters');
         updateConfig({ vite: { plugins: [{ name: 'publication-assets', configureServer }] } });
       },
       'astro:build:done': async ({ dir: outDir, logger }) => {
@@ -105,6 +172,17 @@ export default function publicationAssets({ dir = 'publications', route = '/publ
           bytes += (await fs.stat(file)).size;
         }
         logger.info(`copied ${count} publication files (${(bytes / 1e6).toFixed(0)} MB)`);
+
+        const videos = await videoThumbnails(sourceDir);
+        for (const video of videos) {
+          const relative = posterPath(video);
+          const dest = path.join(outRoot, relative);
+          await fs.mkdir(path.dirname(dest), { recursive: true });
+          const poster = await posterFor(relative);
+          if (!poster) throw new Error(`thumbnail-video not found: ${path.join(dir, video)}`);
+          await fs.copyFile(poster, dest);
+        }
+        if (videos.length) logger.info(`made ${videos.length} still images from video thumbnails`);
       },
     },
   };

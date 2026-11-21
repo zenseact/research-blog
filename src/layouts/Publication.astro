@@ -53,7 +53,7 @@ const jsonLd = {
   datePublished: isoDate,
   author: data.authors.map((key) => ({ '@type': 'Person', name: authorName(key), url: authorUrl(key) })),
   publisher: { '@type': 'Organization', name: 'Zenseact', url: 'https://zenseact.com' },
-  ...(thumb?.still ? { image: new URL(thumb.still, Astro.site).href } : {}),
+  ...(thumb ? { image: new URL(thumb.still, Astro.site).href } : {}),
   ...(data.doi ? { sameAs: `https://doi.org/${data.doi}` } : {}),
 };
 ---

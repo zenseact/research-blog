@@ -15,7 +15,6 @@ date: 2023-11-26 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2311.15260
 n_equal_contrib: 3
 thumbnail-video: laneshift_compressed.mp4
-thumbnail-poster: thumbnail-poster.jpg
 topics:
   - Simulation
 ---

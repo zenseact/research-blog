@@ -1,13 +1,14 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { authorName, venues } from './data';
+import { posterPath } from './poster-path.mjs';
 
 export type Publication = CollectionEntry<'publications'>;
 
 export interface Thumbnail {
   kind: 'image' | 'video';
   src: string;
-  /** Still image: the image itself, or the poster of a video (if it has one). */
-  still?: string;
+  /** Still image: the image itself, or the poster of a video. */
+  still: string;
 }
 
 export const publicationUrl = (pub: Publication) => `/publications/${pub.id}/`;
@@ -24,7 +25,7 @@ export function getThumbnail(pub: Publication): Thumbnail | undefined {
   const video = pub.data['thumbnail-video'];
   if (video) {
     const poster = pub.data['thumbnail-poster'];
-    return { kind: 'video', src: base + video, still: poster ? base + poster : undefined };
+    return { kind: 'video', src: base + video, still: base + (poster ?? posterPath(video)) };
   }
   return undefined;
 }

@@ -15,7 +15,6 @@ date: 2026-04-15 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2511.19235
 n_equal_contrib: 2
 thumbnail-video: images/thumbnail_vid.mp4
-thumbnail-poster: thumbnail-poster.jpg
 topics:
   - Simulation
 ---

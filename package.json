@@ -26,5 +26,8 @@
   },
   "engines": {
     "node": ">=22.23.4"
+  },
+  "devDependencies": {
+    "ffmpeg-static": "^5.3.0"
   }
 }

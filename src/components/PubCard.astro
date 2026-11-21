@@ -15,7 +15,7 @@ const thumb = getThumbnail(pub);
         <video
           src={thumb.src}
           poster={thumb.still}
-          preload={thumb.still ? 'none' : 'metadata'}
+          preload="none"
           muted
           loop
           playsinline

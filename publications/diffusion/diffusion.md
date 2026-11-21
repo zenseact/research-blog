@@ -15,7 +15,6 @@ arxiv: https://arxiv.org/abs/2609.04921
 n_equal_contrib: 2 
 date: 2026-07-20 00:00:00 +0000
 thumbnail-video: videos/thumbnail.mp4
-thumbnail-poster: thumbnail-poster.jpg
 topics:
   - Planning & decision-making
   - Verification & validation

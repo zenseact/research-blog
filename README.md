@@ -58,7 +58,7 @@ Required: `title`, `venue`, `authors`, `date`, `topics`. All other fields are op
 | `n_equal_contrib` | Marks the first *n* authors as equal contributors. |
 | `extras` | Short note shown next to the venue, e.g. `Oral presentation`. |
 | `thumbnail-img` | Image shown at the top of the page, on cards and in link previews. `thumbnail-gif` works the same way. |
-| `thumbnail-video` | Video shown instead of an image. Add `thumbnail-poster` (a still image) as well: it is what link previews and the publication list show. |
+| `thumbnail-video` | Video shown instead of an image. Link previews and the publication list show a still image, taken from the video when the site is built. To choose the image yourself, add `thumbnail-poster` with a file in this folder. |
 | `thumbnail-position` | How the thumbnail appears on the publication page. `side` (the default): next to the title, on a dark band filled with a blurred copy of the thumbnail. `below`: large, under the title. `none`: not on the page; still used for cards and link previews. |
 | `description` | One or two sentences for search engines and link previews. Defaults to the start of the abstract. |
 
@@ -179,7 +179,7 @@ For those maintaining the site itself:
 | `src/styles/` | `site.css` (design tokens, header, cards, lists), `prose.css` (publication text), `legacy.css` (classes older publication pages rely on). |
 | `src/plugins/remark-publication.mjs` | Expands the build-time tags and citations described above. |
 | `src/plugins/rehype-layout.mjs` | Decides which blocks of a publication page use the full page width. |
-| `src/integrations/publication-assets.mjs` | Serves and copies the media files in `publications/`. |
+| `src/integrations/publication-assets.mjs` | Serves and copies the media files in `publications/`, and makes the still images of video thumbnails. |
 | `scripts/` | Checks run by `npm run check` and in CI. |
 
 Astro caches rendered Markdown. After changing a file in `src/plugins/`, delete `.astro/` and `node_modules/.astro/` and restart the dev server to see the effect on existing pages.

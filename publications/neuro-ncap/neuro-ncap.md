@@ -16,7 +16,6 @@ date: 2024-04-12 00:00:00 +00:00
 arxiv: https://arxiv.org/abs/2404.07762
 n_equal_contrib: 2
 thumbnail-video: assets/videos/stationary-103-compressed-run1.mp4
-thumbnail-poster: thumbnail-poster.jpg
 topics:
   - Simulation
   - Verification & validation

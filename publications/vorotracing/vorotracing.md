@@ -12,7 +12,6 @@ code: https://github.com/zenseact/VoroTracing
 arxiv: https://arxiv.org/abs/2608.17682
 date: 2026-08-18 00:00:00 +0000
 thumbnail-video: videos/teaser-loop.mp4
-thumbnail-poster: thumbnail-poster.jpg
 topics:
   - Simulation
 ---
