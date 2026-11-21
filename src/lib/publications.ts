@@ -66,13 +66,17 @@ export const authorNames = (pub: Publication) => pub.data.authors.map(authorName
 
 export function venueLabel(pub: Publication): string {
   const venue = venues[pub.data.venue];
-  const year = pub.data.date.getFullYear();
+  // The venue's own year: a paper is often dated the year before its conference.
+  const year = /\b(19|20)\d{2}\b/.exec(venue?.name ?? '')?.[0] ?? pub.data.date.getFullYear();
   // Short form for cards: "arXiv (preprint)" becomes "arXiv".
   const series = (venue?.series ?? venue?.name ?? pub.data.venue).replace(/\s*\(.*?\)\s*$/, '');
   const label = /\d{4}/.test(series) ? series : `${series} ${year}`;
   // A workshop paper should not read as a main-conference paper.
   return /workshop/i.test(venue?.name ?? '') && !/workshop/i.test(label) ? `${label} Workshop` : label;
 }
+
+// HTML entities that posts use in running text.
+const ENTITIES: Record<string, string> = { times: '×', mdash: '—', ndash: '–', rarr: '→', harr: '↔', amp: '&' };
 
 /** Plain-text summary for meta tags: the frontmatter description, or the start of the abstract. */
 export function getDescription(pub: Publication, maxLength = 220): string {
@@ -92,7 +96,7 @@ export function getDescription(pub: Publication, maxLength = 220): string {
     .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
     .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     .replace(/[*_`]/g, '')
-    .replace(/&[a-z]+;/gi, ' ')
+    .replace(/&([a-z]+);/gi, (_, name) => ENTITIES[name] ?? ' ')
     .replace(/\s+/g, ' ')
     .trim();
   if (text.length <= maxLength) return text;

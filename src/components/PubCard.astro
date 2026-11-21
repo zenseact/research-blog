@@ -6,10 +6,12 @@ interface Props {
 }
 const { pub } = Astro.props;
 const thumb = getThumbnail(pub);
+// A blurred copy of the thumbnail fills the space around it. Not for GIFs: blurring every frame is costly.
+const backdrop = thumb && !/\.gif$/i.test(thumb.still) ? `--thumb: url("${encodeURI(thumb.still)}")` : undefined;
 ---
 
 <a class="pub-card" href={publicationUrl(pub)}>
-  <div class="pub-card__media">
+  <div class="pub-card__media" style={backdrop}>
     {
       thumb?.kind === 'video' ? (
         <video

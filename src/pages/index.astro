@@ -1,54 +1,59 @@
 ---
 import Base from '../layouts/Base.astro';
 import PubCard from '../components/PubCard.astro';
+import PubTile from '../components/PubTile.astro';
 import { topics } from '../lib/data';
 import { getPublications, getThumbnail } from '../lib/publications';
 
+// The newest papers get large tiles, the ones after them cards.
+const TILES = 3;
+const CARDS = 6;
+
 const publications = await getPublications();
-const latest = publications.filter((pub) => getThumbnail(pub)).slice(0, 6);
-const withCode = publications.filter((pub) => pub.data.code).length;
+const latest = publications.filter((pub) => getThumbnail(pub)).slice(0, TILES + CARDS);
+const count = (slug: string) => publications.filter((pub) => pub.data.topics.includes(slug)).length;
 ---
 
 <Base>
   <div class="container">
-    <section class="home-hero">
-      <img src="/assets/images/research_at_z.png" alt="Research at Zenseact" width="2000" height="832" />
-      <div>
-        <p>
-          Zenseact develops <strong>world-leading safety software</strong> for Volvo Cars. Together, we make roads
-          safer <strong>for everyone</strong>.
-        </p>
-        <p>Here we share the papers, code and datasets behind that work.</p>
-        <div class="btn-row">
-          <a class="btn" href="/publications/">Browse publications</a>
-          <a class="btn btn--ghost" href="https://zenseact.com" target="_blank" rel="noopener noreferrer">
-            About Zenseact and careers
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section class="stats" aria-label="In numbers">
-      <div class="stats__item">
-        <span class="stats__number">{publications.length}</span>
-        <span class="stats__label">Publications</span>
-      </div>
-      <div class="stats__item">
-        <span class="stats__number">{withCode}</span>
-        <span class="stats__label">With open-source code</span>
-      </div>
-      <div class="stats__item">
-        <span class="stats__number">{topics.length}</span>
-        <span class="stats__label">Research topics</span>
+    <section class="home-intro">
+      <h1>Research at Zenseact</h1>
+      <p>
+        Zenseact develops <strong>world-leading safety software</strong> for Volvo Cars. Here we share the papers, code
+        and datasets behind that work.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="https://zenseact.com" target="_blank" rel="noopener noreferrer">About Zenseact</a>
+        <a class="btn btn--ghost" href="https://career.zenseact.com" target="_blank" rel="noopener noreferrer">
+          Careers
+        </a>
       </div>
     </section>
 
     <div class="section-heading">
       <h2>Latest publications</h2>
-      <a href="/publications/">All publications &rarr;</a>
+      <a href="/publications/">All {publications.length} publications &rarr;</a>
     </div>
+    <section class="pub-tiles">
+      {latest.slice(0, TILES).map((pub) => <PubTile pub={pub} />)}
+    </section>
     <section class="pub-cards">
-      {latest.map((pub) => <PubCard pub={pub} />)}
+      {latest.slice(TILES).map((pub) => <PubCard pub={pub} />)}
+    </section>
+
+    <div class="section-heading">
+      <h2>Research topics</h2>
+    </div>
+    <section class="topic-chips">
+      {
+        topics.map((topic) => (
+          <a class="topic-chip" href={`/publications/?topic=${encodeURIComponent(topic.slug)}`}>
+            <i class={`fas ${topic.icon}`} aria-hidden="true" />
+            {topic.name}
+            <span class="topic-chip__count">{count(topic.slug)}</span>
+          </a>
+        ))
+      }
     </section>
   </div>
 </Base>
