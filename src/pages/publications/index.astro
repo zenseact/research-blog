@@ -1,0 +1,189 @@
+---
+import Base from '../../layouts/Base.astro';
+import { topics as allTopics, venues } from '../../lib/data';
+import { authorNames, getPublications, getThumbnail, publicationUrl } from '../../lib/publications';
+
+const publications = await getPublications();
+
+const years = [...new Set(publications.map((pub) => String(pub.data.date.getFullYear())))].sort().reverse();
+const usedTopics = allTopics.map((topic) => topic.slug).filter((slug) => publications.some((pub) => pub.data.topics.includes(slug)));
+const series = [...new Set(publications.map((pub) => venues[pub.data.venue]?.series).filter(Boolean))].sort() as string[];
+const standaloneVenues = [...new Set(publications.filter((pub) => !venues[pub.data.venue]?.series).map((pub) => pub.data.venue))].sort();
+---
+
+<Base title="Publications" description="All papers published by the research team at Zenseact, searchable by topic, year and venue.">
+  <div class="container">
+    <h1 class="page-title">Publications</h1>
+    <div class="publications__layout">
+      <button class="publications__filter-toggle" id="filter-toggle" type="button" aria-expanded="false" aria-controls="publications-sidebar">
+        <i class="fas fa-sliders-h" aria-hidden="true"></i> Filters
+      </button>
+      <aside class="publications__sidebar" id="publications-sidebar">
+        <div class="publications__sidebar-section">
+          <label class="visually-hidden" for="pub-search">Search publications</label>
+          <input type="search" id="pub-search" class="publications__search-input" placeholder="Search by title or author" />
+        </div>
+
+        <fieldset class="publications__sidebar-section">
+          <legend class="publications__sidebar-heading">Topic</legend>
+          {
+            usedTopics.map((topic) => (
+              <label class="publications__checkbox-label">
+                <input type="checkbox" class="pub-filter-topic" value={topic} />
+                <span>{topic}</span>
+              </label>
+            ))
+          }
+        </fieldset>
+
+        <fieldset class="publications__sidebar-section">
+          <legend class="publications__sidebar-heading">Year</legend>
+          {
+            years.map((year) => (
+              <label class="publications__checkbox-label">
+                <input type="checkbox" class="pub-filter-year" value={year} />
+                <span>{year}</span>
+              </label>
+            ))
+          }
+        </fieldset>
+
+        <fieldset class="publications__sidebar-section">
+          <legend class="publications__sidebar-heading">Venue</legend>
+          {
+            series.map((name) => (
+              <label class="publications__checkbox-label">
+                <input type="checkbox" class="pub-filter-venue" value={`series:${name}`} />
+                <span>{name}</span>
+              </label>
+            ))
+          }
+          {
+            standaloneVenues.map((key) => (
+              <label class="publications__checkbox-label">
+                <input type="checkbox" class="pub-filter-venue" value={key} />
+                <span>{venues[key]?.name ?? key}</span>
+              </label>
+            ))
+          }
+        </fieldset>
+      </aside>
+
+      <div class="publications__content">
+        <div class="publications__result-count" id="publications-count" aria-live="polite"></div>
+        <ul class="publications__list" id="publications-list">
+          {
+            publications.map((pub) => {
+              const names = authorNames(pub);
+              const thumb = getThumbnail(pub);
+              return (
+                <li
+                  class="publications__item"
+                  data-venue={pub.data.venue}
+                  data-venue-series={venues[pub.data.venue]?.series ?? ''}
+                  data-year={pub.data.date.getFullYear()}
+                  data-topics={pub.data.topics.join(',')}
+                  data-title={pub.data.title.toLowerCase()}
+                  data-authors={names.join(' ').toLowerCase()}
+                >
+                  <a class="publications__item-link" href={publicationUrl(pub)}>
+                    <div class="pub-text">
+                      <span class="pub-title">{pub.data.title}</span>
+                      <span class="pub-authors">{names.join(', ')}</span>
+                      <span class="pub-venue">{venues[pub.data.venue]?.name ?? pub.data.venue}</span>
+                      <span class="pub-topics">{pub.data.topics.join(' · ')}</span>
+                    </div>
+                    {thumb && (
+                      <div class="pub-thumbnail">
+                        {thumb.kind === 'video' ? (
+                          <video src={thumb.src} poster={thumb.still} preload="none" muted loop playsinline data-play-in-view />
+                        ) : (
+                          <img src={thumb.src} alt="" loading="lazy" decoding="async" />
+                        )}
+                      </div>
+                    )}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  // Video thumbnails load and play only while they are on screen. Visitors who ask for
+  // reduced motion or reduced data usage get the still image instead.
+  const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+  const wantsStills = window.matchMedia('(prefers-reduced-motion: reduce)').matches || connection?.saveData === true;
+  if (!wantsStills) {
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      }
+    });
+    for (const video of document.querySelectorAll('video[data-play-in-view]')) observer.observe(video);
+  }
+
+  const toggle = document.getElementById('filter-toggle');
+  const sidebar = document.getElementById('publications-sidebar');
+  toggle?.addEventListener('click', () => {
+    const open = sidebar?.classList.toggle('is-open') ?? false;
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  const searchInput = document.getElementById('pub-search') as HTMLInputElement | null;
+  const countEl = document.getElementById('publications-count');
+  const items = [...document.querySelectorAll<HTMLElement>('#publications-list .publications__item')];
+  const boxes = (selector: string) => [...document.querySelectorAll<HTMLInputElement>(selector)];
+  const topicBoxes = boxes('.pub-filter-topic');
+  const yearBoxes = boxes('.pub-filter-year');
+  const venueBoxes = boxes('.pub-filter-venue');
+  const checked = (list: HTMLInputElement[]) => list.filter((box) => box.checked).map((box) => box.value);
+
+  // Deep link from the research topics page: /publications/?topic=<slug>
+  const topicParam = new URLSearchParams(window.location.search).get('topic');
+  if (topicParam) {
+    for (const box of topicBoxes) if (box.value === topicParam) box.checked = true;
+  }
+
+  function matches(item: HTMLElement, venues: string[], years: string[], topics: string[], query: string) {
+    if (venues.length > 0) {
+      const venue = item.dataset.venue ?? '';
+      const series = item.dataset.venueSeries ?? '';
+      if (!venues.some((v) => (v.startsWith('series:') ? series === v.slice(7) : venue === v))) return false;
+    }
+    if (years.length > 0 && !years.includes(item.dataset.year ?? '')) return false;
+    if (topics.length > 0) {
+      const itemTopics = (item.dataset.topics ?? '').split(',').map((topic) => topic.trim());
+      if (!topics.some((topic) => itemTopics.includes(topic))) return false;
+    }
+    if (query) {
+      const q = query.toLowerCase();
+      if (!(item.dataset.title ?? '').includes(q) && !(item.dataset.authors ?? '').includes(q)) return false;
+    }
+    return true;
+  }
+
+  function applyFilters() {
+    const venues = checked(venueBoxes);
+    const years = checked(yearBoxes);
+    const topics = checked(topicBoxes);
+    const query = searchInput?.value.trim() ?? '';
+    let visible = 0;
+    for (const item of items) {
+      const show = matches(item, venues, years, topics, query);
+      item.hidden = !show;
+      if (show) visible += 1;
+    }
+    if (countEl) countEl.textContent = `${visible} of ${items.length} publications`;
+  }
+
+  for (const box of [...topicBoxes, ...yearBoxes, ...venueBoxes]) box.addEventListener('change', applyFilters);
+  searchInput?.addEventListener('input', applyFilters);
+  applyFilters();
+</script>

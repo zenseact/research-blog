@@ -1,0 +1,9 @@
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/montserrat';
+@import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
+@import '@fortawesome/fontawesome-free/css/solid.min.css';
+@import '@fortawesome/fontawesome-free/css/brands.min.css';
+@import 'katex/dist/katex.min.css';
+@import './site.css';
+@import './prose.css';
+@import './legacy.css';

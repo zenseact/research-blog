@@ -1,0 +1,498 @@
+/* Classes and element styles that existing publication pages rely on.
+ * Carried over from the Jekyll / Minimal Mistakes site so that the custom
+ * HTML inside posts keeps rendering the way its authors laid it out.
+ */
+
+/* ---------- Figures and tables ---------- */
+.prose figure {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin: 2em 0;
+}
+
+.prose figure img {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.prose figure > a {
+  display: block;
+}
+
+.prose figcaption {
+  width: 100%;
+  margin-bottom: 0.5em;
+  color: var(--muted);
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.figure__background {
+  background-color: var(--bg);
+}
+
+.prose table {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.25em;
+  border-collapse: collapse;
+  font-size: 0.92em;
+  overflow-x: auto;
+}
+
+.prose thead {
+  background-color: var(--border);
+  border-bottom: 2px solid #aba8a3;
+}
+
+.prose th {
+  padding: 0.5em;
+  font-weight: 700;
+  text-align: left;
+}
+
+.prose td {
+  padding: 0.5em;
+  border-bottom: 1px solid #aba8a3;
+}
+
+.prose :is(tr, td, th) {
+  vertical-align: middle;
+}
+
+@media (max-width: 37.5em) {
+  .prose table {
+    font-size: 0.75em;
+  }
+  .prose :is(th, td) {
+    padding: 0.35em 0.2em;
+  }
+}
+
+/* Centers a Markdown table: wrap it in <div class="table-center">. */
+.table-center {
+  overflow-x: auto;
+}
+
+.table-center table {
+  display: table;
+  width: auto;
+  margin: 1.5em auto;
+}
+
+.btn--primary {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #3d4144;
+}
+
+.btn--primary:hover {
+  background-color: #e5a811;
+  border-color: #e5a811;
+}
+
+/* ---------- Two column block ---------- */
+.col-2 {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.col-2 .col-2__left,
+.col-2 .col-2__right {
+  width: 50%;
+}
+
+@media (max-width: 37.5em) {
+  .col-2 {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .col-2 .col-2__left,
+  .col-2 .col-2__right {
+    width: 100%;
+  }
+}
+
+/* ---------- Toggle buttons used by interactive posts ---------- */
+.button {
+  justify-content: center;
+  padding: calc(0.5em - 1px) 1em;
+  border: 1px solid #ffffff;
+  background-color: #e4e2e2;
+  color: #363636;
+  font: inherit;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.button.is-rounded {
+  padding-inline: 1.25em;
+  border-radius: 2px;
+}
+
+.button.is-medium {
+  font-size: 1.05rem;
+}
+
+.button:hover {
+  border-color: #b5b5b5;
+  color: #363636;
+}
+
+.button.active {
+  border-color: #000000;
+  color: #363636;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.buttons.is-centered {
+  justify-content: center;
+}
+
+/* ---------- Two image comparison slider ---------- */
+.slider__container {
+  width: auto;
+  max-width: 1123px;
+  height: 50vw;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.slider__container .slider__img__bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: none;
+  background-size: cover;
+}
+
+.slider__container .slider__img__bg__overlay {
+  position: absolute;
+  box-sizing: content-box;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  background-image: none;
+  background-size: cover;
+  border-style: hidden solid hidden hidden;
+  border-color: rgb(0 0 0);
+}
+
+.slider__container .slider__input {
+  position: absolute;
+  top: calc(50% - 13px);
+  left: -3px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  background: none;
+  box-shadow: none;
+}
+
+.slider__container .slider__input::-webkit-slider-thumb {
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.slider__container .slider__input::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.slider__container .slider__button {
+  position: relative;
+  top: calc(50% - 15px);
+  left: calc(50% - 15px);
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: rgb(0 0 0);
+  line-height: 30px;
+  pointer-events: none;
+}
+
+.slider__container .slider__button::after,
+.slider__container .slider__button::before {
+  content: '';
+  position: absolute;
+  top: calc(50% - 3px);
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border: solid #ffffff;
+  border-width: 0 3px 3px 0;
+}
+
+.slider__container .slider__button::after {
+  left: calc(50% - 1px);
+  transform: rotate(-45deg);
+}
+
+.slider__container .slider__button::before {
+  left: calc(50% - 6px);
+  transform: rotate(135deg);
+}
+
+.slider__caption {
+  margin: 0 auto;
+}
+
+/* ---------- Hover / click image ---------- */
+.interactive-images-grid {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.interactive-images-grid .interactive-image-container {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .interactive-images-grid {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .interactive-images-grid:is(.columns-3, .columns-4, .columns-5) {
+    flex-wrap: wrap;
+  }
+  .interactive-images-grid:is(.columns-3, .columns-4, .columns-5) .interactive-image-container {
+    flex-basis: calc(50% - 0.5rem);
+  }
+  .interactive-images-grid:is(.columns-3, .columns-4, .columns-5)
+    .interactive-image-container:nth-child(odd):last-child {
+    flex-basis: 100%;
+  }
+}
+
+.prose .interactive-image-container {
+  position: relative;
+  margin: 0;
+  display: inline-block;
+  line-height: 0;
+  cursor: pointer;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.interactive-image-container .interactive-image {
+  display: block;
+  max-width: 100%;
+  margin-bottom: 0;
+  height: auto;
+  transition: opacity 0.1s ease-in-out;
+}
+
+.interactive-image-container .interactive-image:is(.image-hover, .image-click) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.interactive-image-container .interactive-image.image-default {
+  position: relative;
+  opacity: 1;
+}
+
+.interactive-image-container figcaption {
+  padding-top: 0.5em;
+  color: #555;
+  font-size: 0.9em;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ---------- Hover-to-play video ---------- */
+.video-hover {
+  position: relative;
+  background: #e8e8e8;
+  cursor: pointer;
+}
+
+.video-hover video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.video-hover__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.video-hover__overlay span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  padding-left: 0.15em;
+  border-radius: 50%;
+  background: rgb(0 0 0 / 0.55);
+  color: white;
+  font-size: 1.4rem;
+}
+
+/* ---------- Result comparison tables ---------- */
+/* Shrinks to the table so that a .table-note below lines up with it. */
+.pub-table-wrap {
+  width: fit-content;
+  max-width: 100%;
+  margin: 1.5em auto;
+  overflow-x: auto;
+}
+
+.pub-table-wrap table {
+  display: table;
+  width: auto;
+  margin: 0 auto;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 37.5em) {
+  .pub-table-wrap table {
+    font-size: 0.7rem;
+  }
+  .pub-table-wrap :is(th, td) {
+    padding: 0.2em 0.3em;
+  }
+}
+
+.pub-table-wrap thead {
+  background: none;
+  border-bottom: 0;
+}
+
+.pub-table-wrap :is(th, td) {
+  padding: 0.25em 0.5em;
+  border-bottom: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.pub-table-wrap th {
+  font-weight: 600;
+}
+
+.pub-table-wrap :is(td, th):first-child {
+  text-align: left;
+}
+
+.pub-table-wrap thead tr:first-child th {
+  border-top: 2px solid #333;
+}
+
+.pub-table-wrap thead tr:last-child th {
+  border-bottom: 1px solid #aaa;
+}
+
+.pub-table-wrap tbody tr:last-child td {
+  border-bottom: 2px solid #333;
+}
+
+.pub-table-wrap .sep-above td {
+  border-top: 1px solid #aaa;
+}
+
+.pub-table-wrap .rank-1 {
+  background-color: #fde68a;
+}
+
+.pub-table-wrap .rank-2 {
+  background-color: #bfdbfe;
+}
+
+.pub-table-wrap .rank-3 {
+  background-color: #fed7aa;
+}
+
+.pub-table-wrap .th-rotate {
+  height: 6em;
+  padding: 0 0.3em 0.3em;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.pub-table-wrap .th-rotate > span {
+  display: inline-block;
+  transform: rotate(-55deg);
+  transform-origin: left bottom;
+  white-space: nowrap;
+}
+
+.pub-table-wrap .table-note {
+  margin-top: 0.4em;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+/* ---------- Citations (<d-cite>) and the reference list ---------- */
+.citation {
+  font-size: 0.72em;
+}
+
+.citation a {
+  text-decoration: none;
+}
+
+.citation a:hover {
+  text-decoration: underline;
+}
+
+.references {
+  max-width: var(--text-width);
+  margin: 3rem auto 0;
+  font-size: 0.92rem;
+}
+
+.references h3 {
+  margin-top: 0;
+}
+
+.references li {
+  margin-bottom: 0.7em;
+  scroll-margin-top: 6rem;
+}
+
+.references li:target {
+  background: rgb(253 185 19 / 0.2);
+}
+
+.references__title {
+  font-weight: 600;
+}

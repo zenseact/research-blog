@@ -1,99 +1,199 @@
 # Zenseact Research Blog
-This repository contains the source code for the Zenseact Research Blog, which is hosted at [research.zenseact.com](https://research.zenseact.com). We aim to share our research and development efforts with the community, and we hope that you will find our blog posts interesting and useful. We also aim to **atleast upload the abstract for each paper we publish.**
 
-We make use of [Jekyll](https://jekyllrb.com/) together with the theme [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/), which is a two-column responsive Jekyll theme perfect for powering your GitHub hosted blog.
+Source for [research.zenseact.com](https://research.zenseact.com), where we share our research with the community. We aim to publish **at least the abstract of every paper**; richer project pages with figures, videos and demos are very welcome.
 
+The site is built with [Astro](https://astro.build) and deployed to GitHub Pages when a pull request is merged to `main`.
 
-## Make a new blog post
-For each new paper that we submit, we should make a new blog post. To do this, follow these steps:
-### Step 1
-Create a new folder in `_publications` with the a name related to the paper. For example, if the paper is called "RAW or Cooked? Object detection using RAW images", then the folder could be called `raw-or-cooked`.
+## Preview the site locally
 
-### Step 2
-Create a new file in the folder called `raw-or-cooked.md`. This file could contain the following front matter (i.e, the metadata at the top of the markdown file):
+You need [Node.js](https://nodejs.org) 22 or newer.
+
+```
+npm install
+npm run dev
+```
+
+Then open [http://localhost:4321](http://localhost:4321). Pages reload as you edit.
+
+Before opening a pull request, run `npm run check`. It builds the site, checks that every image, video and link to a local file resolves, and reports the size of the build. The same checks run on every pull request.
+
+## Add a publication
+
+### Step 1: create a folder
+
+Create a folder in `publications/` named after the paper, for example `publications/raw-or-cooked/`. The folder name becomes the address: `research.zenseact.com/publications/raw-or-cooked/`.
+
+Everything that belongs to the paper (the Markdown file, figures, videos) goes in this folder.
+
+### Step 2: add a Markdown file with the metadata
+
+Create one `.md` file in the folder, for example `raw-or-cooked.md`, starting with this front matter:
+
 ```yaml
 ---
-layout: publication
-permalink: /publications/raw-or-cooked/ # This is the permalink to the blog post. It should be the same as the name of the folder.
-title: Raw or Cooked? Object detection on RAW images # This is the title of the paper
-venue: SCIA23 # This is the venue of the paper. It must have a corresponding entry in `_data/venues.yml`.
-authors:
+title: Raw or Cooked? Object detection on RAW images
+venue: SCIA23 # A key in data/venues.yml
+authors: # Keys in data/authors.yml, in author order
   - Ljungbergh
   - Johnander
   - Petersson
   - Felsberg
-code: <link-to-potential-github-code>
-doi: <digital object identifier> # This is the DOI, without protocol and domain, e.g., 10.1016/j.automatica.2023.111394
-arxiv: https://arxiv.org/abs/2301.08965 # This is the arXiv link to the paper.
-n_equal_contrib: 1 # This can be used if you have several authors that contributed equally to the paper. In this case, the first n authors listed in the `authors` field will be marked as equal contributors.
-date: 2023-01-21 00:00:00 +0000 # This is the date of the paper submission
-thumbnail-img: raw-or-cooked_thumbnail.png  # This is the thumbnail image that will be shown on the blog post. Next to the title.
-topics: # At least one research topic from `_data/research_topics.yml`. A paper can have multiple topics.
+date: 2023-01-21 # Publication or submission date
+topics: # At least one slug from data/research_topics.yml
   - Perception & motion forecasting
+paper: https://arxiv.org/abs/2301.08965
+thumbnail-img: thumbnail.png # A file in this folder
 ---
 ```
-Note here that you have to ensure three things:
-1. All authors listed in the `authors` field must have a corresponding entry in `_data/authors.yml`.
-2. The venue listed in the `venue` field must have a corresponding entry in `_data/venues.yml`.
-3. At least one topic listed in the `topics` field must match a `slug` in `_data/research_topics.yml`. The available topics are:
-   - `Perception & motion forecasting`
-   - `Localization & mapping`
-   - `Representation learning`
-   - `Simulation`
-   - `Planning & decision-making`
-   - `Safety`
-   - `Verification & validation`
-   - `Datasets & benchmarks`
-   - `Theory & foundations`
 
-   If your paper does not fit any existing topic, propose a new one by adding an entry to `_data/research_topics.yml` in your pull request.
+Required: `title`, `venue`, `authors`, `date`, `topics`. All other fields are optional:
 
-Follow the convention in each of these files to add new authors and venues.
+| Field | What it does |
+|---|---|
+| `paper` | Link to the paper: arXiv, the publisher's page or a PDF. Shown as a "Paper" button. Older pages use `arxiv` for this, which still works. |
+| `doi` | DOI without the domain, e.g. `10.1016/j.automatica.2023.111394`. |
+| `code` | Link to the code. Shown as a "Code" button. |
+| `website` | Link to an external project page. |
+| `video` | Link to a video, e.g. on YouTube. |
+| `links` | Further buttons, e.g. a demo, a dataset or model weights. See below. |
+| `n_equal_contrib` | Marks the first *n* authors as equal contributors. |
+| `extras` | Short note shown next to the venue, e.g. `Oral presentation`. |
+| `thumbnail-img` | Image shown at the top of the page, on cards and in link previews. `thumbnail-gif` works the same way. |
+| `thumbnail-video` | Video shown instead of an image. Link previews and the publication list show a still image, taken from the video when the site is built. To choose the image yourself, add `thumbnail-poster` with a file in this folder. |
+| `thumbnail-position` | How the thumbnail appears on the publication page. `side` (the default): next to the title, on a dark band filled with a blurred copy of the thumbnail. `below`: large, under the title. `none`: not on the page; still used for cards and link previews. |
+| `description` | One or two sentences for search engines and link previews. Defaults to the start of the abstract. |
 
-### Step 3
-Add the abstract of your paper to the `raw-or-cooked.md` file. **Note** that you are of course free to add more content to the blog post, such as figures, videos, etc. However, the abstract is the only thing that is required. **Note** that you can include LaTeX equations in the blog post by using the correct syntax. See [this link](https://singyuan.github.io/posts/mathjax/add_tex/) for more information. You can also include citations in the blog post by using the correct syntax. See the `raw-or-cooked.md` file for an example, where the corresponding bibtex entries should be placed in `_bibliography/references.bib`.
+To add more buttons next to Paper and Code, list them under `links`:
 
-### Step 4
-You can preview your changes by running the site locally. To do this, simply run the following to build the docker image and serve the site locally:
-```
-docker compose build
-docker compose up
-```
-Note that you only have to build the docker image once. After that, you can simply run `docker compose up` to serve the site locally. You can then preview the site at [http://0.0.0.0:8080/research-blog](http://0.0.0.0:8080/research-blog).
-
-### Step 5
-Make a pull-request to this repository. Once the pull-request is merged, the blog post will be automatically published at [research.zenseact.com](https://research.zenseact.com).
-
-
-## Add a new author
-To add a new author, add a new entry to `_data/authors.yml`. Follow the convention in the file to add new authors.
 ```yaml
----
-Ljungbergh: # this is the idientifier. should be unique.
-  firstname: ["William", "W.", "W. L.", "William Ljungbergh"] # these are the first names of the author. Note that the order is important.
-  github: wljungbergh # this is the authors github username (optional)
-  linkedin: william-ljungbergh # this is the authors linkedin username (optional)
-  mail: william.ljungbergh@zenseact.com # this is the authors email address (optional)
-  org: [Zenseact, Linköping University] # these are the organizations that the author is affiliated with. Note that this does not have to be an array.
-  picture: /assets/images/profiles/william_ljungbergh.jpg # This is a link to the authors profile picture. Should be a headshot. (optional)
-  scholar: RXEPFo0AAAAJ # This is the authors Google Scholar ID. (optional)
-  title: PhD Student # This is the authors title. [Phd Student, Researcher, Professor, Supervisor] (optional)
-  url: https://ljungbergh.com # This is the authors personal website (optional)
-  orcid: 0000-0002-0194-6346 # The Open Researcher and Contributor ID (optional)
+links:
+  - label: Live viewer
+    url: viewer/ # A file or folder in this folder
+    icon: demo
+  - label: Models
+    url: https://huggingface.co/zenseact/my-model
 ```
 
+Each button needs a `label` and a `url`. The icon follows the address (Hugging Face, GitHub, YouTube; a plain link icon otherwise). To choose it, set `icon` to one of `demo`, `dataset`, `model`, `slides`, `poster`, `video`, `code`, `paper`, `website`, `huggingface`, `link`.
 
-## Add a new venue
-To add a new venue, add a new entry to `_data/venues.yml`. Follow the convention in the file to add new venues.
+The build fails with a message naming the problem if an author, venue or topic is not found in `data/`, or if a field is misspelled.
+
+Topics currently available:
+
+- `Perception & motion forecasting`
+- `Localization & mapping`
+- `Representation learning`
+- `Simulation`
+- `Planning & decision-making`
+- `Safety`
+- `Verification & validation`
+- `Datasets & benchmarks`
+- `Theory & foundations`
+
+If none fits, add one to `data/research_topics.yml` in your pull request.
+
+### Step 3: write the page
+
+Below the front matter, write the page in Markdown. A good minimum is the abstract and a BibTeX entry:
+
+````markdown
+# Abstract
+Existing datasets for autonomous driving ...
+
+# BibTeX
+```bibtex
+@inproceedings{...}
+```
+````
+
+A `bibtex` code block automatically gets a copy button, and the page gets a "Cite" button that jumps to it.
+
+Beyond that you can use anything Markdown and HTML offer:
+
+- **Figures and videos.** Put the files in the publication folder and refer to them with paths relative to it: `![Overview](figures/overview.png)` or `<video src="videos/demo.mp4" controls></video>`.
+- **Math.** `$$ ... $$` inline or as a block on its own lines, rendered with KaTeX.
+- **Citations.** Add a `references.bib` file to the folder and cite with `<d-cite key="he2016deep"></d-cite>`. Numbered citations and a reference list are generated for you.
+- **Custom HTML, CSS and JavaScript.** Raw HTML is passed through untouched, including `<style>` and `<script>`. Text is kept to a readable column. A figure, video, table or other HTML block placed at the top level uses the full page width, unless it mostly holds text.
+
+Three tags are expanded when the site is built:
+
+```html
+<!-- Before/after comparison with a draggable divider. Give each slider on a page its own id. -->
+<two-image-slider
+  left-image="ours.jpg"
+  right-image="baseline.jpg"
+  width="50"
+  id="1"
+  caption="Ours vs. baseline."
+/>
+
+<!-- Image that changes on hover and on click. -->
+<interactive-image img-default="a.jpg" img-hover="b.jpg" img-click="c.jpg" caption="Hover and click." />
+
+<!-- Inserts another HTML file from the publication folder, e.g. a self-contained demo. -->
+<include-html src="demo.html" />
+```
+
+Optional attributes for `<two-image-slider>`: `max-width`, `max-height` (CSS lengths) and `linkid` (the `id` of another slider that should move together with this one). `<interactive-image>` also accepts `columns` together with `images="default,hover,click,alt,caption|..."` to lay out several in a row.
+
+Two things to know when mixing Markdown and HTML:
+
+- Leave a blank line between an HTML block and the Markdown that follows it. Without one, the Markdown is treated as part of the HTML and shown as plain text.
+- Markdown is not processed inside an HTML block unless it is separated from the tags by blank lines.
+
+### Step 4: mind the file sizes
+
+GitHub Pages limits the whole site to 1 GB, and media files are what fill it. `npm run check` prints the current size and lists files over 20 MB. Please compress videos before adding them (for example `ffmpeg -i in.mp4 -crf 28 -preset slow -an out.mp4`), prefer short MP4 loops over GIFs, and link to YouTube for long videos.
+
+### Step 5: open a pull request
+
+Once it is merged, the page is published automatically.
+
+## Add an author
+
+Add an entry to `data/authors.yml`:
+
 ```yaml
-ICCV23: # identifier, should be unique
-  # add the name of the conference/journal. This will be displayed on the blog post.
-  name: International Conference on Computer Vision (ICCV), 2023
-  # add the url to the conference (optional)
-  url: https://iccv2023.thecvf.com
-  # add the conference series short name. This is what shows up in the venue filter on the
-  # publications page, and groups all instances of the same conference together (e.g., ICCV23
-  # and a future ICCV25 would both appear under "ICCV"). For one-off venues, use a short
-  # acronym or name. Required.
-  series: ICCV
+Ljungbergh: # Unique key, used in the authors list of a publication
+  firstname: ["William", "W.", "W. L.", "William Ljungbergh"] # First name, initial, initials, full name
+  org: [Zenseact, Linköping University] # Affiliation(s); a single value also works
+  url: https://ljungbergh.com # Personal website (optional)
+  scholar: RXEPFo0AAAAJ # Google Scholar ID (optional)
+  orcid: 0000-0002-0194-6346 # (optional)
+  github: wljungbergh # (optional)
+  linkedin: william-ljungbergh # (optional)
+  mail: william.ljungbergh@zenseact.com # (optional)
+  title: PhD Student # (optional)
+  picture: /assets/images/profiles/william_ljungbergh.jpg # (optional)
 ```
+
+Only `firstname` is required. On a publication page, the author's name links to `url` if set, otherwise to their Google Scholar profile. Affiliations are listed on a publication page only when every author of that paper has an `org`.
+
+## Add a venue
+
+Add an entry to `data/venues.yml`:
+
+```yaml
+ICCV23: # Unique key, used in the venue field of a publication
+  name: International Conference on Computer Vision (ICCV), 2023 # Shown on the publication page
+  url: https://iccv2023.thecvf.com # (optional)
+  series: ICCV # Short name. Groups venues in the filter on the publications page (ICCV23, ICCV25, ... all appear as "ICCV")
+```
+
+## How the site is put together
+
+For those maintaining the site itself:
+
+| Path | Contents |
+|---|---|
+| `publications/` | One folder per paper: Markdown plus media. Media is copied to the site as-is, at the same relative paths. |
+| `data/` | Authors, venues, research topics, navigation. |
+| `src/content.config.ts` | Front matter schema and validation. |
+| `src/layouts/`, `src/pages/` | Page templates: home, publications list, research topics, publication page. |
+| `src/styles/` | `site.css` (design tokens, header, cards, lists), `prose.css` (publication text), `legacy.css` (classes older publication pages rely on). |
+| `src/plugins/remark-publication.mjs` | Expands the build-time tags and citations described above. |
+| `src/plugins/rehype-layout.mjs` | Decides which blocks of a publication page use the full page width. |
+| `src/integrations/publication-assets.mjs` | Serves and copies the media files in `publications/`, and makes the still images of video thumbnails. |
+| `scripts/` | Checks run by `npm run check` and in CI. |
+
+Astro caches rendered Markdown. After changing a file in `src/plugins/`, delete `.astro/` and `node_modules/.astro/` and restart the dev server to see the effect on existing pages.

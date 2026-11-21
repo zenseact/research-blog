@@ -1,0 +1,36 @@
+---
+import { authorNames, getThumbnail, publicationUrl, venueLabel, type Publication } from '../lib/publications';
+
+interface Props {
+  pub: Publication;
+}
+const { pub } = Astro.props;
+const thumb = getThumbnail(pub);
+// A blurred copy of the thumbnail fills the space around it. Not for GIFs: blurring every frame is costly.
+const backdrop = thumb && !/\.gif$/i.test(thumb.still) ? `--thumb: url("${encodeURI(thumb.still)}")` : undefined;
+---
+
+<a class="pub-card" href={publicationUrl(pub)}>
+  <div class="pub-card__media" style={backdrop}>
+    {
+      thumb?.kind === 'video' ? (
+        <video
+          src={thumb.src}
+          poster={thumb.still}
+          preload="none"
+          muted
+          loop
+          playsinline
+          data-hover-play
+        />
+      ) : thumb ? (
+        <img src={thumb.src} alt="" loading="lazy" decoding="async" />
+      ) : null
+    }
+  </div>
+  <div class="pub-card__body">
+    <span class="venue-badge">{venueLabel(pub)}</span>
+    <h3 class="pub-card__title">{pub.data.title}</h3>
+    <p class="pub-card__authors">{authorNames(pub).join(', ')}</p>
+  </div>
+</a>
