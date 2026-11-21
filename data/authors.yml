@@ -31,6 +31,7 @@ Basu:
   scholar: e26Maa4AAAAJ
 Batkovic:
   firstname: ["Ivo", "I.", "I. B.", "Ivo Batkovic"]
+  org: Zenseact
   scholar: 7X_8eVEAAAAJ
 Bergenhem:
   firstname: ["Carl", "C.", "C. B.", "Carl Bergenhem"]
@@ -42,10 +43,10 @@ Bodin:
   title: Intern
 Brannlund:
   firstname: ["Olle", "O.", "O. B.", "Olle Brännlund"]
-  org: Zenseact AB
+  org: Zenseact
 Brannstrom:
   firstname: ["Mattias", "M.", "M. B.", "Mattias Brännström"]
-  org: Zenseact AB
+  org: Zenseact
   scholar: rM9mOFAAAAAJ
 Buening:
   firstname: ["Thomas", "T.", "T.B", "Thomas Buening"]
@@ -57,7 +58,7 @@ Caesar:
   scholar: 373LKEYAAAAJ
 Campos:
   firstname: ["Gabriel", "G.", "G. C.", "Gabriel Rodrigues de Campos"]
-  org: Zenseact AB
+  org: Zenseact
   url: http://www.gabrieldecampos.com
   scholar: wK-DQL0AAAAJ
 Chen:
@@ -304,7 +305,7 @@ Rusyadi:
   scholar: 6toSX0YAAAAJ
 Sandblom:
   firstname: ["Fredrik", "F.", "F. S.", "Fredrik Sandblom"]
-  org: Zenseact AB
+  org: Zenseact
 Sanfridson:
   firstname: ["Martin", "M.", "M. S.", "Martin Sanfridson"]
   org: Volvo Technology AB
@@ -316,7 +317,7 @@ Selvaraj:
   orcid: 0000-0003-2184-3069
 Sivencrona:
   firstname: ["Håkan", "H.", "H. S.", "Håkan Sivencrona"]
-  org: Zenseact AB
+  org: Zenseact
 Sjoberg:
   firstname: ["Jonas", "J.", "J. S.", "Jonas Sjöberg"]
   scholar: s0Qakg77XTYC
@@ -464,9 +465,11 @@ Yuxuan:
   org: Zenseact
 Zheng:
   firstname: ["Zheng", "W.", "W. Z.", "Wenzhao Zheng"]
+  org: University of California, Berkeley
   url: https://wzzheng.net/
 Peng:
   firstname: ["Chensheng", "C.", "C. P.", "Chensheng Peng"]
+  org: University of California, Berkeley
   url: https://pengchensheng.com/
 Kahl:
   firstname: ["Fredrik", "F.", "F. K.", "Fredrik Kahl"]
@@ -483,6 +486,7 @@ Tomizuka:
   scholar: 8m8taGEAAAAJ
 Zhan:
   firstname: ["Wei", "W.", "W. Z.", "Wei Zhan"]
+  org: University of California, Berkeley
   url: https://zhanwei.site/
 Yiping:
   firstname: ["Yiping", "Y.", "Y. X.", "Yiping Xie"]

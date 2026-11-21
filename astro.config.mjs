@@ -15,7 +15,7 @@ export default defineConfig({
   integrations: [publicationAssets(), sitemap()],
   markdown: {
     syntaxHighlight: { type: 'shiki', excludeLangs: ['math'] },
-    shikiConfig: { theme: 'github-light', wrap: true },
+    shikiConfig: { theme: 'github-light' },
     processor: unified({
       // Same dash convention the Jekyll site used: -- is an en dash, --- an em dash.
       smartypants: { dashes: 'oldschool' },
