@@ -64,6 +64,9 @@ export function getLinkButtons(pub: Publication): LinkButton[] {
 
 export const authorNames = (pub: Publication) => pub.data.authors.map(authorName);
 
+// Tracks named in a venue that the short label must keep.
+const TRACKS = ['Workshop', 'Findings'];
+
 export function venueLabel(pub: Publication): string {
   const venue = venues[pub.data.venue];
   // The venue's own year: a paper is often dated the year before its conference.
@@ -71,8 +74,9 @@ export function venueLabel(pub: Publication): string {
   // Short form for cards: "arXiv (preprint)" becomes "arXiv".
   const series = (venue?.series ?? venue?.name ?? pub.data.venue).replace(/\s*\(.*?\)\s*$/, '');
   const label = /\d{4}/.test(series) ? series : `${series} ${year}`;
-  // A workshop paper should not read as a main-conference paper.
-  return /workshop/i.test(venue?.name ?? '') && !/workshop/i.test(label) ? `${label} Workshop` : label;
+  // A workshop or Findings paper should not read as a main-conference paper.
+  const track = TRACKS.find((name) => new RegExp(`\\b${name}`, 'i').test(venue?.name ?? ''));
+  return track && !new RegExp(`\\b${track}`, 'i').test(label) ? `${label} ${track}` : label;
 }
 
 // HTML entities that posts use in running text.

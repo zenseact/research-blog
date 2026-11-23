@@ -196,4 +196,4 @@ For those maintaining the site itself:
 | `src/integrations/publication-assets.mjs` | Serves and copies the media files in `publications/`, and makes the still images of video thumbnails. |
 | `scripts/` | Checks run by `npm run check` and in CI. |
 
-Astro caches rendered Markdown. After changing a file in `src/plugins/`, delete `.astro/` and `node_modules/.astro/` and restart the dev server to see the effect on existing pages.
+Astro caches rendered Markdown and renders a page again when its Markdown, `references.bib` or included HTML changes, or when anything in `data/` or `src/plugins/` changes. The dev server picks up the first three by itself; restart it after editing `data/` or `src/plugins/`.

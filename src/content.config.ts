@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
@@ -9,13 +10,30 @@ const oneOf = (values: string[], what: string, file: string) =>
     error: (issue) => `Unknown ${what} "${issue.input}". Add it to data/${file} or fix the spelling.`,
   });
 
+// One folder per paper: publications/<slug>/<anything>.md, served at /publications/<slug>/.
+const files = glob({
+  base: './publications',
+  pattern: '*/*.md',
+  generateId: ({ entry }) => entry.split('/')[0],
+});
+
+// Astro keeps a validated and rendered entry until its Markdown file changes. A page also
+// depends on the files below, so their contents are part of every entry's cache key: the
+// shared data checked by the schema, the Markdown plugins, and the references.bib and
+// <include-html> files of each publication. Changing any of them renders every page again.
+const DEPENDENCIES = ['data/*.yml', 'src/plugins/*.mjs', 'publications/**/*.bib', 'publications/**/*.html'];
+const dependencies = () =>
+  DEPENDENCIES.flatMap((pattern) => fs.globSync(pattern))
+    .sort()
+    .map((file) => `${file}\n${fs.readFileSync(file, 'utf8')}`)
+    .join('\n');
+
 const publications = defineCollection({
-  // One folder per paper: publications/<slug>/<anything>.md, served at /publications/<slug>/.
-  loader: glob({
-    base: './publications',
-    pattern: '*/*.md',
-    generateId: ({ entry }) => entry.split('/')[0],
-  }),
+  loader: {
+    ...files,
+    load: (context) =>
+      files.load({ ...context, generateDigest: (data) => context.generateDigest(`${dependencies()}\n${data}`) }),
+  },
   schema: z.strictObject({
     // Titles written for the Jekyll site may contain numeric HTML entities such as &#8212;.
     title: z.string().transform((title) =>

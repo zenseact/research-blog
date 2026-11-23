@@ -159,6 +159,13 @@ export default function publicationAssets({ dir = 'publications', route = '/publ
         posterDir = path.join(fileURLToPath(config.cacheDir), 'posters');
         updateConfig({ vite: { plugins: [{ name: 'publication-assets', configureServer }] } });
       },
+      // A publication page includes its references.bib and <include-html> files, which Astro does not
+      // watch. Reloading the collection picks up the change (see the cache key in content.config.ts).
+      'astro:server:setup': ({ server, refreshContent }) => {
+        server.watcher.on('change', (file) => {
+          if (file.startsWith(sourceDir + path.sep) && /\.(bib|html)$/i.test(file)) refreshContent?.({});
+        });
+      },
       'astro:build:done': async ({ dir: outDir, logger }) => {
         const outRoot = path.join(fileURLToPath(outDir), route);
         let count = 0;
