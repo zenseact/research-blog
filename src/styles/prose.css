@@ -1,0 +1,172 @@
+/* Typography for the body of a publication page.
+ *
+ * The body is a readable text column. Media blocks (figures, videos, sliders,
+ * tables, custom HTML) are wrapped in .prose__wide by the rehype-layout plugin
+ * and use the full page width.
+ */
+.prose-frame {
+  container-type: inline-size;
+}
+
+.prose {
+  max-width: var(--text-width);
+  margin-inline: auto;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  overflow-wrap: break-word;
+}
+
+.prose > .prose__wide {
+  width: 100cqw;
+  margin-inline: calc((100% - 100cqw) / 2);
+}
+
+.prose__wide > p {
+  text-align: center;
+}
+
+/* Captions keep to the text column even when their figure does not. */
+.prose__wide figcaption {
+  max-width: var(--text-width);
+  margin-inline: auto;
+}
+
+.prose p {
+  margin: 0 0 1.25em;
+}
+
+.prose :is(h1, h2, h3, h4) {
+  margin-top: 2.2em;
+  margin-bottom: 0.6em;
+  scroll-margin-top: 6rem;
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose h1 {
+  font-size: 1.65rem;
+}
+
+.prose h2 {
+  font-size: 1.3rem;
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid var(--border);
+}
+
+.prose h3 {
+  font-size: 1.12rem;
+}
+
+.prose h4 {
+  font-size: 1rem;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-decoration-color: rgb(26 26 46 / 0.35);
+  text-underline-offset: 0.15em;
+}
+
+.prose a:hover {
+  text-decoration-color: currentColor;
+}
+
+.prose :is(ul, ol) {
+  padding-left: 1.4em;
+  margin-top: 0;
+  margin-bottom: 1.25em;
+}
+
+.prose li {
+  margin-bottom: 0.4em;
+}
+
+.prose li :is(ul, ol) {
+  margin-top: 0.4em;
+  margin-bottom: 0;
+}
+
+.prose hr {
+  margin-block: 2.5rem;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
+
+.prose blockquote {
+  margin-block: 1.5em;
+  padding: 0.1em 1.25em;
+  border-left: 4px solid var(--accent);
+  color: #3c3c4d;
+}
+
+.prose img {
+  height: auto;
+  border-radius: 4px;
+}
+
+.prose :not(pre) > code {
+  padding: 0.12em 0.35em;
+  border-radius: 4px;
+  background: rgb(26 26 46 / 0.07);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+}
+
+.prose pre {
+  margin-block: 0 1.25em;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface) !important;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+
+.prose sup,
+.prose sub {
+  line-height: 0;
+}
+
+/* Code block with a copy button (added to BibTeX blocks by the page script). */
+.code-block {
+  position: relative;
+}
+
+.code-block__copy {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* On narrow screens the button gets a row of its own above the code. */
+@media (max-width: 37.5em) {
+  .code-block pre {
+    padding-top: 3.2rem;
+  }
+}
+
+.code-block__copy:hover {
+  border-color: var(--text);
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25em;
+}

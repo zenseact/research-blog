@@ -1,0 +1,72 @@
+---
+import Base from '../layouts/Base.astro';
+import PubCard from '../components/PubCard.astro';
+import PubTile from '../components/PubTile.astro';
+import { topics } from '../lib/data';
+import { getPublications, getThumbnail } from '../lib/publications';
+
+// The newest papers get large tiles, the ones after them cards.
+const TILES = 3;
+const CARDS = 6;
+
+const publications = await getPublications();
+const latest = publications.filter((pub) => getThumbnail(pub)).slice(0, TILES + CARDS);
+const count = (slug: string) => publications.filter((pub) => pub.data.topics.includes(slug)).length;
+---
+
+<Base>
+  <div class="container">
+    <section class="home-intro">
+      <h1>Research at Zenseact</h1>
+      <p>
+        Zenseact develops <strong>physical AI technology</strong> designed to operate in complex, changing environments.
+        Here we share the papers, code and datasets behind that work.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href="https://zenseact.com" target="_blank" rel="noopener noreferrer">About Zenseact</a>
+        <a class="btn btn--ghost" href="https://career.zenseact.com" target="_blank" rel="noopener noreferrer">
+          Careers
+        </a>
+      </div>
+    </section>
+
+    <div class="section-heading">
+      <h2>Latest publications</h2>
+      <a href="/publications/">All {publications.length} publications &rarr;</a>
+    </div>
+    <section class="pub-tiles">
+      {latest.slice(0, TILES).map((pub) => <PubTile pub={pub} />)}
+    </section>
+    <section class="pub-cards">
+      {latest.slice(TILES).map((pub) => <PubCard pub={pub} />)}
+    </section>
+
+    <div class="section-heading">
+      <h2>Research topics</h2>
+    </div>
+    <section class="topic-chips">
+      {
+        topics.map((topic) => (
+          <a class="topic-chip" href={`/publications/?topic=${encodeURIComponent(topic.slug)}`}>
+            <i class={`fas ${topic.icon}`} aria-hidden="true" />
+            {topic.name}
+            <span class="topic-chip__count">{count(topic.slug)}</span>
+          </a>
+        ))
+      }
+    </section>
+  </div>
+</Base>
+
+<script>
+  // Card videos play while hovered or focused instead of all autoplaying.
+  for (const video of document.querySelectorAll<HTMLVideoElement>('video[data-hover-play]')) {
+    const card = video.closest('a') ?? video;
+    const play = () => video.play().catch(() => {});
+    const stop = () => video.pause();
+    card.addEventListener('mouseenter', play);
+    card.addEventListener('focus', play);
+    card.addEventListener('mouseleave', stop);
+    card.addEventListener('blur', stop);
+  }
+</script>

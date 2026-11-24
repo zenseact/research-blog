@@ -1,0 +1,512 @@
+---
+Ahrendt:
+  firstname: ["Wolfgang", "W.", "W. A.", "Wolfgang Ahrendt"]
+  mail: ahrendt@chalmers.se
+  org: Chalmers University of Technology
+  title: Professor
+  scholar: rFuqP-8AAAAJ
+  orcid: 0000-0002-5671-2555
+Ali:
+  firstname: ["Mohammad", "M.", "M. A.", "Mohammad Ali"]
+Alibeigi:
+  firstname: ["Mina", "M.", "M. A.", "Mina Alibeigi"]
+  github: alibeigi
+  linkedin: mina-alibeigi-2b47739a
+  mail: mina.alibeigi@zenseact.com
+  org: Zenseact
+  picture: /assets/images/profiles/mina_alibeigi.jpg
+  scholar: gJA_rJYAAAAJ
+  title: Researcher
+Asljung:
+  firstname: ["Daniel", "D.", "D. Å.", "Daniel Åsljung"]
+  org: Zenseact
+  scholar: Gm_19aQAAAAJ
+Astrom:
+  firstname: ["Kalle", "K.", "K. Å.", "Kalle Åstrom"]
+  org: Lund University
+  scholar: YIzs6eoAAAAJ
+  title: Professor
+Basu:
+  firstname: ["Debabrota", "D.", "D. B.", "Debabrota Basu"]
+  scholar: e26Maa4AAAAJ
+Batkovic:
+  firstname: ["Ivo", "I.", "I. B.", "Ivo Batkovic"]
+  org: Zenseact
+  scholar: 7X_8eVEAAAAJ
+Bergenhem:
+  firstname: ["Carl", "C.", "C. B.", "Carl Bergenhem"]
+  org: Qamcom
+  scholar: JN3MbzYAAAAJ
+Bodin:
+  firstname: ["Alexander", "A.", "A. B.", "Alexander Bodin"]
+  org: Zenseact
+  title: Intern
+Brannlund:
+  firstname: ["Olle", "O.", "O. B.", "Olle Brännlund"]
+  org: Zenseact
+Brannstrom:
+  firstname: ["Mattias", "M.", "M. B.", "Mattias Brännström"]
+  org: Zenseact
+  scholar: rM9mOFAAAAAJ
+Buening:
+  firstname: ["Thomas", "T.", "T.B", "Thomas Buening"]
+  org: Oslo University
+  scholar: 1VT2sBgAAAAJ
+Caesar:
+  firstname: ["Holger", "H.", "H. C.", "Holger Caesar"]
+  org: TU Delft
+  scholar: 373LKEYAAAAJ
+Campos:
+  firstname: ["Gabriel", "G.", "G. C.", "Gabriel Rodrigues de Campos"]
+  org: Zenseact
+  url: http://www.gabrieldecampos.com
+  scholar: wK-DQL0AAAAJ
+Chen:
+   firstname: ["DeJiu", "D.", "D. C.", "DeJiu Chen"]
+   org: KTH Royal Institute of Technology
+   scholar: SE9ruMUAAAAJ
+Dimitrakakis:
+  firstname: ["Christos", "C.", "C. D.", "Christos Dimitrakakis"]
+  scholar: 9Kw4t_kAAAAJ
+EliasSvensson:
+  firstname: ["Elias", "E.", "E. S.", "Elias Svensson"]
+  org: Zenseact
+  title: Intern
+Eriksson:
+  firstname: ["Hannes", "H.", "H. E.", "Hannes Eriksson"]
+  org: Zenseact
+  scholar: KyX9dfEAAAAJ
+Fabian:
+  firstname: ["Martin", "M.", "M. F.", "Martin Fabian"]
+  org: Chalmers University of Technology
+Fatemi:
+  firstname: ["Maryam", "M.", "M. F.", "Maryam Fatemi"]
+  mail: maryam.fatemi@zenseact.com
+  org: Zenseact
+  scholar: GpcBXmoAAAAJ
+  title: Researcher
+Feilbinger:
+  firstname: ["Hermann", "H.", "H. F.", "Hermann Feilbinger"]
+  org: AVL List
+Felsberg:
+  firstname: ["Michael", "M.", "M. F.", "Michael Felsberg"]
+  org: Linköping University
+  scholar: lkWfR08AAAAJ
+  title: Professor
+Fredriksson:
+  firstname: ["Jonas", "J.", "J. F.", "Jonas Fredriksson"]
+  org: Chalmers University
+  scholar: fF0r2KAAAAAJ
+  title: Professor
+Fu:
+  firstname: ["Junsheng", "J.", "J. F.", "Junsheng Fu"]
+  github: JunshengFu
+  linkedin: junshengfu
+  mail: junsheng.fu@zenseact.com
+  org: Zenseact
+  picture: /assets/images/profiles/junsheng_fu.jpg
+  scholar: z3lud1UAAAAJ
+  title: Researcher
+  url: https://junshengfu.github.io
+Gaspar:
+  firstname: ["José Manuel Gaspar", "JMG.", "JMG. S.", "José Manuel Gaspar Sanchez"]
+  org: KTH Royal Institute of Technology
+  scholar: EEGDis0AAAAJ
+Gronberg:
+  firstname: ["Robin", "R.", "R. G.", "Robin Grönberg"]
+Grover:
+  firstname: ["Divya", "D.", "D.G.", "Divya Grover"]
+  org: Chalmers University
+  scholar: gxlPOTcAAAAJ
+Gupta:
+  firstname: ["Ankit", "A.", "A. G.", "Ankit Gupta"]
+  org: Zenseact
+  scholar: HM3bxvkAAAAJ
+Gyllenhammar:
+  firstname: ["Magnus", "M.", "M. G.", "Magnus Gyllenhammar"]
+  org: [Zenseact, KTH Royal Institute of Technology]
+  github: maggyl
+  linkedin: maggyl
+  picture: /assets/images/profiles/maggyl.jpg
+  title: PhD Student
+  url: https://maggyl.github.io
+  scholar: 2NAVPBMAAAAJ
+Hagerman:
+  firstname: ["David", "D.", "D. H.", "David Hagerman"]
+  org: Chalmers University of Technology
+  scholar: VRDfJPAAAAAJ
+Hammarstrand:
+  firstname: ["Lars", "L.", "L. H.", "Lars Hammarstrand"]
+  org: Chalmers University of Technology
+  scholar: 8fZalZUAAAAJ
+  title: Professor
+Hess:
+  firstname: ["Georg", "G.", "G. H.", "Georg Hess"]
+  github: georghess
+  linkedin: georghess
+  mail: georg.hess@zenseact.com
+  org: [Zenseact, Chalmers University of Technology]
+  picture: /assets/images/profiles/georg_hess.jpg
+  scholar: ZvUoV2EAAAAJ
+  title: PhD Student
+  url: https://georghess.github.io/
+Heyn:
+   firstname: ["Hans-Martin", "H.", "H. H.", "Hans-Martin Heyn"]
+   org: Volvo Technology AB
+   scholar: Pd5pmvQAAAAJ
+Hoel:
+  firstname: ["Carl-Johan", "C.", "C. H.", "Carl-Johan Hoel"]
+  scholar: f7ewwIsAAAAJ
+Jansson:
+  firstname: ["Anton", "A.", "A. J.", "Anton Jansson"]
+Jaxing:
+  firstname: ["Johan", "J.", "J. X.", "Johan Jaxing"]
+  org: Zenseact
+  title: Intern
+Jianbotao:
+  firstname: ["Jianbo", "J.", "J. T.", "Jianbo Tao"]
+  org: AVL List
+  scholar: UKUtWucAAAAJ
+JiLan:
+  github: jxl152
+  mail: ji.lan@zenseact.com
+  firstname: ["Ji", "J.", "J. L.", "Ji Lan"]
+  org: [Zenseact, Chalmers University of Technology]
+  title: PhD Student
+Johansson:
+  firstname: ["Rolf", "R.", "R. J.", "Rolf Johansson"]
+  org: Astus AB
+  scholar: qceJ6hwAAAAJ
+Johnander:
+  firstname: ["Joakim", "J.", "J. J.", "Joakim Johnander"]
+  mail: joakim.johnander@zenseact.com
+  org: Zenseact
+  scholar: 5sUDSxQAAAAJ
+  title: Researcher
+Jorge:
+  firstname: ["Emilio", "E.", "E.J.", "Emilio Jorge"]
+  org: Chalmers University
+  scholar: Tn0Mk_wAAAAJ
+Kianfar:
+  firstname: ["Roozbeh", "R.", "R. K.", "Roozbeh Kianfar"]
+  org: Zenseact
+Krook:
+  firstname: ["Jonas", "J.", "J. K.", "Jonas Krook"]
+  mail: jonas.krook@zenseact.com
+  org: Zenseact
+  scholar: JHCD0BsAAAAJ
+  orcid: 0000-0002-9810-4697
+Kumar:
+  firstname: ["Rajesh", "R.", "R. K.", "Rajesh Kumar"]
+  org: KTH Royal Institute of Technology
+Lacombe:
+  firstname: ["Rémi", "R.", "R. L.", "Rémi Lacombe"]
+  org: Zenseact
+LarsSvensson:
+  firstname: ["Lars", "L.", "L. S.", "Lars Svensson"]
+  org: KTH Royal Institute of Technology
+Laveno:
+  firstname: ["Arvid", "A.", "A. L. L.", "Arvid Laveno Ling"]
+  org: [Zenseact, Chalmers University of Technology]
+  github: Witdrew1917
+  scholar: BhAezqYAAAAJ
+  mail: arvid.laveno@zenseact.com
+  title: PhD Student
+LeiFeng:
+  firstname: ["Lei", "L.", "L. F.", "Lei Feng"]
+  org: KTH Royal Institute of Technology
+Lilja:
+  firstname: ["Adam", "A.", "A. L.", "Adam Lilja"]
+  github: LiljaAdam
+  linkedin: adamlilja
+  mail: adam.lilja@zenseact.com
+  org: [Zenseact, Chalmers University of Technology]
+  picture: /assets/images/profiles/adam_lilja.jpg
+  scholar: zYn4o0AAAAAJ
+  title: PhD Student
+  url: https://adamlilja.com/
+Lindstrom:
+  firstname: ["Carl", "C.", "C. L.", "Carl Lindström"]
+  github: carlinds
+  linkedin: carl-lindstr%C3%B6m-184b8a149
+  mail: carl.lindstrom@zenseact.com
+  org: [Zenseact, Chalmers University of Technology]
+  picture: /assets/images/profiles/carl_lindstrom.jpg
+  scholar: ufjSqs0AAAAJ
+  title: PhD Student
+  url: https://carlinds.github.io/
+Ljungbergh:
+  firstname: ["William", "W.", "W. L.", "William Ljungbergh"]
+  github: wljungbergh
+  linkedin: william-ljungbergh
+  mail: william.ljungbergh@zenseact.com
+  org: [Zenseact, Linköping University]
+  picture: /assets/images/profiles/william_ljungbergh.jpg
+  scholar: RXEPFo0AAAAJ
+  title: PhD Student
+  url: https://ljungbergh.com
+Liu:
+    firstname: ["Wangxin", "W.", "W. L.", "Wangxin Liu"]
+    org: Zenseact
+Malik:
+  firstname: ["Robi", "R.", "R. M.", "Robi Malik"]
+  org: The University of Waikato
+Mardh:
+    firstname: ["Lars", "L.", "L. J. M.", "Lars Johannesson Mårdh"]
+    org: Zenseact
+Martens:
+    firstname: ["Bruno", "B.", "K. W.", "Bruno Martens"]
+    org: Zenseact
+    scholar: zeG7mCYAAAAJ
+Meding:
+  firstname: ["Isak", "I.", "I. M.", "Isak Meding"]
+  org: Zenseact
+  title: Intern
+Mohajerani:
+  firstname: ["Sahar", "S.", "S. M.", "Sahar Mohajerani"]
+  org: Mathworks
+Mohan:
+  firstname: ["Naveen", "N.", "N. M.", "Naveen Mohan"]
+  org: KTH Royal Institute of Technology
+  scholar: bSJ8lQoAAAAJ
+Motorniuk:
+  firstname: ["Daria", "D.", "D. M.", "Daria Motorniuk"]
+  org: Zenseact
+Nica:
+  firstname: ["Mihai", "M.", "M. N.", "Mihai Nica"]
+  org: AVL List
+Oswald:
+  firstname: ["Martin R.", "M. R.", "M. R. O.", "Martin R. Oswald"]
+  org: University of Amsterdam
+  scholar: biytQP8AAAAJ
+Pal:
+  firstname: ["Arka", "A.", "A. P.", "Arka Pal"]
+  org: KTH Royal Institute of Technology
+Petersson:
+  firstname: ["Christoffer", "C.", "C. P.", "Christoffer Petersson"]
+  mail: christoffer.petersson@zenseact.com
+  org: [Zenseact, Chalmers University of Technology]
+  picture: /assets/images/profiles/christoffer_petersson.jpg
+  scholar: SeRMUJwAAAAJ
+  title: Researcher
+Rafidashti:
+  firstname: ["Mahan", "M.", "M. R.", "Mahan Rafidashti"]
+  linkedin: mahandokht-rafidashti-906785192
+  mail: mahan.rafidashti@zenseact.com
+  org: [Zenseact, Chalmers University of Technology]
+  title: PhD Student
+  scholar: Et4NaUoAAAAJ
+Ramezani:
+  firstname: ["Zahra", "Z.", "Z. R.", "Zahra Ramezani"]
+  org: Chalmers University of Technology
+Rusyadi:
+  firstname: ["Muhammad Rusyadi", "MR.", "MR. R.", "Muhammad Rusyadi Ramli"]
+  org: KTH Royal Institute of Technology
+  scholar: 6toSX0YAAAAJ
+Sandblom:
+  firstname: ["Fredrik", "F.", "F. S.", "Fredrik Sandblom"]
+  org: Zenseact
+Sanfridson:
+  firstname: ["Martin", "M.", "M. S.", "Martin Sanfridson"]
+  org: Volvo Technology AB
+Selvaraj:
+  firstname: ["Yuvaraj", "Y.", "Y. S.", "Yuvaraj Selvaraj"]
+  mail: yuvaraj.selvaraj@zenseact.com
+  org: Zenseact
+  scholar: 4H0B9HYAAAAJ
+  orcid: 0000-0003-2184-3069
+Sivencrona:
+  firstname: ["Håkan", "H.", "H. S.", "Håkan Sivencrona"]
+  org: Zenseact
+Sjoberg:
+  firstname: ["Jonas", "J.", "J. S.", "Jonas Sjöberg"]
+  scholar: s0Qakg77XTYC
+Skoglund:
+  firstname: ["Martin", "M.", "M. S.", "Martin Skoglund"]
+  org: RISE Research Institutes of Sweden
+Stenborg:
+  firstname: ["Erik", "E.", "E. S.", "Erik Stenborg"]
+  mail: erik.stenberg@zenseact.com
+  org: Zenseact
+  scholar: J5Kkp58AAAAJ
+  title: Researcher
+Svensson:
+  firstname: ["Lennart", "L.", "L. S.", "Lennart Svensson"]
+  org: Chalmers University of Technology
+  scholar: AMM9vE4AAAAJ
+  title: Professor
+Soderberg:
+   firstname: ["Jan", "J.", "J. S.", "Jan Söderberg"]
+   org: Systemite AB
+   url: https://www.researchgate.net/profile/Jan-Soderberg
+Tan:
+  firstname: ["Kaige", "K.", "K. T.", "Jianbo Tan"]
+  org: KTH Royal Institute of Technology
+  scholar: qA2Xb_MAAAAJ
+Taveira:
+  firstname: ["Bernardo", "B.", "B. T.", "Bernardo Taveira"]
+  github: bertaveira
+  linkedin: bernardo-taveira
+  mail: bernardo.taveira@zenseact.com
+  org: [Zenseact, Chalmers University of Technology]
+  picture: /assets/images/profiles/bernardo_taveira.jpg
+  scholar: bAeQFPsAAAAJ
+  title: PhD Student
+  url: https://bertaveira.github.io/
+Thorsen:
+  firstname: ["Anders", "A.", "A. T.", "Anders Thorsén"]
+  org: RISE Research Institutes of Sweden
+  url: https://www.ri.se/sv/person/anders-thorsen
+Tonderski:
+  firstname: ["Adam", "A.", "A. T.", "Adam Tonderski"]
+  github: atonderski
+  linkedin: adamtonderski
+  mail: adam.tonderski@zenseact.com
+  org: [Zenseact, Lund University]
+  picture: /assets/images/profiles/adam_tonderski.jpg
+  scholar: 2R5ZLp0AAAAJ
+  title: PhD Student
+  url: https://atonderski.github.io/
+Tram:
+  firstname: ["Tommy", "T.", "T. T.", "Tommy Tram"]
+  org: Zenseact
+  scholar: m_O_xjIAAAAJ
+  title: null
+Torngren:
+  firstname: ["Martin", "M.", "M. T.", "Martin Törngren"]
+  org: KTH Royal Institute of Technology
+  url: https://www.kth.se/profile/martint
+  scholar: -F-KArEAAAAJ
+Ursing:
+  firstname: ["Stig", "S.", "S. U.", "Stig Ursing"]
+  org: Semcon Sweden AB
+  url: https://www.researchgate.net/profile/Stig-Ursing
+Vakilzadeh:
+  firstname: ["Majid", "M.", "M. K. V.", "Majid Khorsand Vakilzadeh"]
+  org: Zenseact
+  scholar: z8ubwx8AAAAJ
+Verbeke:
+  firstname: ["Willem", "W.", "W. V.", "Willem Verbeke"]
+  org: Zenseact
+  github: wverbeke
+  mail: willem.verbeke@zenseact.com
+  url: https://www.linkedin.com/in/willem-verbeke-5a522a194/
+Warg:
+  firstname: ["Fredrik", "F.", "F. W.", "Fredrik Warg"]
+  org: RISE Research Institutes of Sweden
+  url: https://warg.org
+  scholar: H4hiOCMAAAAJ
+Widahl:
+  firstname: ["Jenny", "J.", "J.W.", "Jenny Widahl"]
+  org: Zenseact
+Wotawa:
+  firstname: ["Franz", "F.", "F. W.", "Franz Wotawa"]
+  org: Graz University of Technology
+  scholar: Z27gH2wAAAAJ
+Wozniak:
+  firstname: ["Maciej", "M.", "M. W.", "Maciej Wozniak"]
+  org: Zenseact
+  scholar: Vz7-KekAAAAJ
+Xintao:
+  firstname: ["Xin", "X.", "X. T.", "Xin Tao"]
+  org: KTH Royal Institute of Technology
+  scholar: h405hiwAAAAJ
+Xinhai:
+  firstname: ["Xinhai", "X.", "X. Z.", "Xinhai Zhang"]
+  org: KTH Royal Institute of Technology
+  scholar: hANonS0AAAAJ
+Yuchao:
+  firstname: ["Yuchao", "Y.", "Y. L.", "Yuchao Li"]
+  org: KTH Royal Institute of Technology
+Zanden:
+  firstname: ["Carl", "C.", "C. Z.", "Carl Zandén"]
+  org: Zenuity AB
+ZhennanFei:
+  firstname: ["Zhennan", "Z.", "Z. F.", "Zhennan Fei"]
+  org: Chalmers University of Technology
+Zita:
+  firstname: ["Anton", "A.", "A. Z.", "Anton Zita"]
+  org: Chalmers University of Technology
+Akesson:
+  firstname: ["Knut", "K.", "K. Å.", "Knut Åkesson"]
+  org: Chalmers University of Technology
+Carlsson:
+  firstname: ["Oscar", "O.", "O.C.", "Oscar Carlsson"]
+  org: Chalmers University of Technology
+Gerken:
+  firstname: ["Jan E.", "J.E.", "J.E.G.", "Jan E. Gerken"]
+  org: Chalmers University of Technology
+Linander:
+  firstname: ["Hampus", "H.", "H. L.", "Hampus Linander"]
+  org: Chalmers University of Technology
+Spiess:
+  firstname: ["Heiner", "H.", "H. S.", "Heiner Spieß"]
+  org: Technical University Berlin
+Ohlsson:
+  firstname: ["Fredrik", "F.", "F. O.", "Fredrik Ohlsson"]
+  org: Umeå University
+Persson:
+  firstname: ["Daniel", "D.", "D. P.", "Daniel Persson"]
+  org: Chalmers University of Technology
+Yuchuan:
+  firstname: ["Yuchuan", "Y.", "Y. J.", "Yuchuan Jin"]
+  org: Zenseact
+Theodor:
+  firstname: ["Theodor", "T.", "T. S.", "Theodor Stenhammar"]
+  org: Zenseact
+David:
+  firstname: ["David", "D.", "D. B.", "David Bejmer"]
+  org: Zenseact
+Axel:
+  firstname: ["Axel", "A.", "A. B.", "Axel Beauvisage"]
+  org: Zenseact
+Yuxuan:
+  firstname: ["Yuxuan", "Y.", "Y. X.", "Yuxuan Xia"]
+  org: Zenseact
+Zheng:
+  firstname: ["Zheng", "W.", "W. Z.", "Wenzhao Zheng"]
+  org: University of California, Berkeley
+  url: https://wzzheng.net/
+Peng:
+  firstname: ["Chensheng", "C.", "C. P.", "Chensheng Peng"]
+  org: University of California, Berkeley
+  url: https://pengchensheng.com/
+Kahl:
+  firstname: ["Fredrik", "F.", "F. K.", "Fredrik Kahl"]
+  org: Chalmers University of Technology
+  scholar: P_w6UgMAAAAJ
+Keutzer:
+  firstname: ["Kurt", "K.", "K. K.", "Kurt Keutzer"]
+  org: University of California, Berkeley
+  scholar: ID9QePIAAAAJ
+  title: Professor
+Tomizuka:
+  firstname: ["Masayoshi", "M.", "M. T.", "Masayoshi Tomizuka"]
+  org: University of California, Berkeley
+  scholar: 8m8taGEAAAAJ
+Zhan:
+  firstname: ["Wei", "W.", "W. Z.", "Wei Zhan"]
+  org: University of California, Berkeley
+  url: https://zhanwei.site/
+Yiping:
+  firstname: ["Yiping", "Y.", "Y. X.", "Yiping Xie"]
+  org: [Zenseact, Linköping University]
+  linkedin: yiping-xie
+  scholar: Dd8xb1IAAAAJ
+Garcia:
+  firstname: ["Gabriel", "G.", "G. G.", "Gabriel Garcia"]
+  org: Zenseact
+  scholar: VjJ2FFQAAAAJ
+Tianyu:
+  firstname: ["Tianyu", "T.", "T. W.", "Tianyu Wu"]
+  org: [Zenseact, Chalmers University of Technology]
+Gustaf:
+  firstname: ["Gustaf", "G.", "G. H.", "Gustaf Hendeby"]
+  org: Linköping University
+  scholar: 7q6fhuMAAAAJ
+Voloshyn:
+    firstname: ["Sviatoslav", "D.", "S. D.", "Sviatoslav Voloshyn"]
+    org: Zenseact
+Vinkas:
+    firstname: ["Jakob", "J.", "J. V.", "Jakob Vinkås"]
+    org: Zenseact

@@ -1,0 +1,28 @@
+---
+import { authorNames, getThumbnail, publicationUrl, venueLabel, type Publication } from '../lib/publications';
+
+interface Props {
+  pub: Publication;
+}
+const { pub } = Astro.props;
+const thumb = getThumbnail(pub);
+const names = authorNames(pub);
+const MAX_AUTHORS = 3;
+---
+
+<a class="pub-tile" href={publicationUrl(pub)}>
+  {
+    thumb?.kind === 'video' ? (
+      <video src={thumb.src} poster={thumb.still} autoplay loop muted playsinline />
+    ) : thumb ? (
+      <img src={thumb.src} alt="" />
+    ) : null
+  }
+  <div class="pub-tile__body">
+    <span class="pub-tile__venue">{venueLabel(pub)}</span>
+    <h3 class="pub-tile__title">{pub.data.title}</h3>
+    <p class="pub-tile__authors">
+      {names.slice(0, MAX_AUTHORS).join(', ')}{names.length > MAX_AUTHORS ? ' et al.' : ''}
+    </p>
+  </div>
+</a>
