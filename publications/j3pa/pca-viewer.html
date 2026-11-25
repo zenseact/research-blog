@@ -109,18 +109,11 @@
 .j3pa-pca-query::after { transform: rotate(-45deg); }
 </style>
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
-  }
-}
-</script>
-
 <script type="module">
-import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+// Full URLs rather than an import map: Firefox and Safari ignore import maps that appear after the page's first module
+// script. jsDelivr's +esm builds point OrbitControls at the same three URL, so only one copy of three is loaded.
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/+esm';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/controls/OrbitControls.js/+esm';
 
 // Same colouring as the videos: per PC the 1st/99th percentile over points inside PC_RANGE, PC1/2/3 -> green/red/blue.
 const PC_RANGE = [-50, 50, -50, 50, -10, 10];

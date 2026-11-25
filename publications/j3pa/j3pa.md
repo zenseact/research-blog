@@ -12,7 +12,7 @@ authors:
 # paper: <arxiv_link> # Link to the paper. TODO add arxive link https
 n_equal_contrib: 2 # This can be used if you have several authors that contributed equally to the paper. In this case, the first n authors listed in the `authors` field will be marked as equal contributors.
 date: 2026-11-17 00:00:00 +0000 # This is the date of the paper submission
-thumbnail-video: videos_map_web/000168_s3.mp4 # Shown next to the title. Cards and link previews use a still taken from it.
+thumbnail-video: thumbnail.mp4 # Shown next to the title. Cards and link previews use a still taken from it.
 topics: # At least one slug from data/research_topics.yml. A paper can have multiple topics.
   - Perception & motion forecasting
   - Representation learning
@@ -31,9 +31,9 @@ J3PA learns robust and descriptive representations from only raw unlabeled LiDAR
 
 # Robust and consistent features
 <!-- Videos are <data-dir>/<sequence>_s<stage>.mp4 with stage 0..data-stages-1 (shown as S1..Sn). Add sequences to data-sequences to get more arrow pages. data-variants (optional) adds top-left buttons for alternative video sets; "stages" lists which exist (omit when all do). -->
-<div class="j3pa-stage-player" data-variants='[{"name": "Aggregate", "dir": "videos_map_agg_web"}, {"name": "Fade", "dir": "videos_map_web"}]' data-sequences="000168" data-stages="5"></div>
+<div class="j3pa-stage-player" data-variants='[{"name": "Aggregate", "dir": "https://huggingface.co/datasets/paunas/j3pa-web/resolve/main/videos_map_agg_web"}, {"name": "Fade", "dir": "https://huggingface.co/datasets/paunas/j3pa-web/resolve/main/videos_map_web"}]' data-sequences="000168" data-stages="5"></div>
 
-<div class="j3pa-stage-player" data-dir="videos_front_web" data-sequences="001114,001096" data-stages="5"></div>
+<div class="j3pa-stage-player" data-dir="https://huggingface.co/datasets/paunas/j3pa-web/resolve/main/videos_front_web" data-sequences="001114,001096" data-stages="5"></div>
 
 <include-html src="stage-video.html" />
 
@@ -46,7 +46,7 @@ Without ever seeing a label, J3PA gives points on the same kind of object simila
 **Click** a point to show which points have similar feaures.
 
 <!-- Point clouds are <data-dir>/frame_<frame>_pcs.npz (uncompressed np.savez). data-queries is each frame's initial cosine-similarity point index (a point on the nearest car). Add frame ids to data-frames to get more arrow pages. -->
-<div class="j3pa-pca-viewer" data-dir="point_clouds" data-frames="003535,003582,004710,007331,007976,010240,016953,052384" data-queries="212889,213105,230433,176945,247206,238869,251747,160109" data-stages="5"></div>
+<div class="j3pa-pca-viewer" data-dir="https://huggingface.co/datasets/paunas/j3pa-web/resolve/main/point_clouds" data-frames="003535,003582,004710,007331,007976,010240,016953,052384" data-queries="212889,213105,230433,176945,247206,238869,251747,160109" data-stages="5"></div>
 
 <include-html src="pca-viewer.html" />
 
