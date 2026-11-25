@@ -8,8 +8,11 @@ authors:
   - Kahl
   - Hammarstrand
 # Must be real https:// URLs; the build fails on placeholders.
-# code: <link-to-potential-github-code> #TODO add once public i suppose
+code: https://github.com/PaulineNasslander/J3PA
 # paper: <arxiv_link> # Link to the paper. TODO add arxive link https
+links:
+  - label: Models
+    url: https://huggingface.co/collections/Zenseact/j3pa
 n_equal_contrib: 2 # This can be used if you have several authors that contributed equally to the paper. In this case, the first n authors listed in the `authors` field will be marked as equal contributors.
 date: 2026-11-17 00:00:00 +0000 # This is the date of the paper submission
 thumbnail-video: thumbnail.mp4 # Shown next to the title. Cards and link previews use a still taken from it.
@@ -123,5 +126,4 @@ Under linear probing, J3PA-1B clearly outperforms state-of-the-art self-supervis
 
 # BibTeX
 ```bibtex
- TODO add one
 ```
