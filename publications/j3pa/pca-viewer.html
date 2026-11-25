@@ -8,6 +8,8 @@
   margin: 1em 0;
   background: #fff;
   border: 1px solid #e5e3de;
+  border-radius: var(--radius);
+  overflow: hidden;
   touch-action: none;
 }
 .j3pa-pca-viewer canvas {
@@ -26,7 +28,7 @@
   align-items: center;
   gap: 0.5em;
   color: #6B7280;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 .j3pa-pca-size input {
   -webkit-appearance: none;
@@ -71,17 +73,17 @@
 }
 .j3pa-pca-reset {
   position: absolute;
-  right: 0.5em;
-  bottom: 0.5em;
+  right: 0.6em;
+  bottom: 0.6em;
   z-index: 2;
 }
 .j3pa-pca-modes {
   position: absolute;
-  top: 0.5em;
-  left: 0.5em;
+  top: 0.6em;
+  left: 0.6em;
   z-index: 2;
   display: flex;
-  gap: 0.3em;
+  gap: 0.4em;
 }
 .j3pa-pca-query {
   position: absolute;
@@ -459,7 +461,11 @@ function initViewer(root) {
   reset.type = 'button';
   reset.className = 'j3pa-stage-btn j3pa-pca-reset';
   reset.textContent = 'Reset view';
-  reset.addEventListener('click', resetView);
+  reset.addEventListener('click', () => {
+    slider.value = POINT_SIZE.initial;
+    material.size = POINT_SIZE.initial;
+    resetView();
+  });
   root.appendChild(reset);
 
   // Parsed lazily: positions once per frame, colours once per frame and stage.

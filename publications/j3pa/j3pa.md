@@ -12,27 +12,33 @@ authors:
 # paper: <arxiv_link> # Link to the paper. TODO add arxive link https
 n_equal_contrib: 2 # This can be used if you have several authors that contributed equally to the paper. In this case, the first n authors listed in the `authors` field will be marked as equal contributors.
 date: 2026-11-17 00:00:00 +0000 # This is the date of the paper submission
-thumbnail-img: J3PA_pointcloud_E2_F7F6F3.svg  # This is the thumbnail image that will be shown on the blog post. Next to the title.
+thumbnail-video: videos_map_web/000168_s3.mp4 # Shown next to the title. Cards and link previews use a still taken from it.
 topics: # At least one slug from data/research_topics.yml. A paper can have multiple topics.
   - Perception & motion forecasting
   - Representation learning
 ---
 
-<!-- flex values are the plots' widths at equal (110 pt) height, so both render at the same height. -->
-<div style="display: flex; gap: 1em; align-items: flex-start; margin-bottom: 1em;">
-  <img src="J3PA_segmentation_arrow_plot_F7F6F3.svg" alt="J3PA segmentation results" style="flex: 254.15; min-width: 0; width: 100%;" />
-  <img src="J3PA_speed_accuracy_plot_F7F6F3.svg" alt="J3PA speed versus accuracy" style="flex: 240.85; min-width: 0; width: 100%;" />
+<div style="text-align: center; margin-bottom: 1em;">
+<h1>TL;DR</h1>
+<p style="font-weight: 500; width: min(90%, 760px); margin: 0 auto;">
+J3PA learns robust and descriptive representations from only raw unlabeled LiDAR point clouds. Trained at scale J3PA-1B outperforms state-of-the-art self-supervised methods and a fully supervised PTv3 under linear probing. We distill J3PA-1B into Large (135M) and Small (42M) models that trade accuracy for speed by changing the voxel size.
+</p>
 </div>
 
-<!-- Videos are <data-dir>/<sequence>_s<stage>.mp4 with stage 0..data-stages-1 (shown as S1..Sn). Add sequences to data-sequences to get more arrow pages. data-variants (optional) adds top-left buttons for alternative video sets; "stages" lists which exist (omit when all do). -->
-<div class="j3pa-stage-player" data-variants='[{"name": "Fade", "dir": "videos_map_web"}, {"name": "Aggregate", "dir": "videos_map_agg_web"}]' data-sequences="000168" data-stages="5"></div>
+<div class="j3pa-plots"></div>
 
-# Abstract
-Learning versatile representations from unlabelled LiDAR point clouds is crucial for systems that perceive and interact with physical environments. While joint-embedding predictive architectures (JEPAs) have had great success in images and video, prior work on self-supervised learning (SSL) for point clouds has largely focused on invariance-based methods. We address positional information leakage when adapting JEPA for point clouds and introduce a sparse deformable attention layer to build a leakage-free predictor. To improve SSL at scale, we modify existing convolution-transformer hybrid encoder architectures into a pure transformer and train it on a combined corpus of outdoor point clouds. The resulting model, J3PA (Joint 3D-embedding Predictive Architecture), learns robust representations only from raw unlabeled point clouds without other modalities. Our largest model, J3PA-1B, is distilled into two variants, Large and Small with approximately 135M and 42M parameters respectively. Under linear probing, J3PA-1B markedly outperforms state of the art SSL methods and a fully supervised PTv3 across a large set of tasks and datasets, including a dataset unseen during training. We introduce a distillation procedure parametric in the voxel size to obtain models that are highly adaptable to different inference budgets and environments. Our models and training code are publicly released as LiDAR foundation models for autonomous driving. We believe our findings motivate predictive SSL as a viable path towards general foundation models for all point clouds.
+<include-html src="plots.html" />
+
+# Robust and consistent features
+<!-- Videos are <data-dir>/<sequence>_s<stage>.mp4 with stage 0..data-stages-1 (shown as S1..Sn). Add sequences to data-sequences to get more arrow pages. data-variants (optional) adds top-left buttons for alternative video sets; "stages" lists which exist (omit when all do). -->
+<div class="j3pa-stage-player" data-variants='[{"name": "Aggregate", "dir": "videos_map_agg_web"}, {"name": "Fade", "dir": "videos_map_web"}]' data-sequences="000168" data-stages="5"></div>
 
 <div class="j3pa-stage-player" data-dir="videos_front_web" data-sequences="001114,001096" data-stages="5"></div>
 
 <include-html src="stage-video.html" />
+
+# Abstract
+Learning versatile representations from unlabelled LiDAR point clouds is crucial for systems that perceive and interact with physical environments. While joint-embedding predictive architectures (JEPAs) have had great success in images and video, prior work on self-supervised learning (SSL) for point clouds has largely focused on invariance-based methods. We address positional information leakage when adapting JEPA for point clouds and introduce a sparse deformable attention layer to build a leakage-free predictor. To improve SSL at scale, we modify existing convolution-transformer hybrid encoder architectures into a pure transformer and train it on a combined corpus of outdoor point clouds. The resulting model, J3PA (Joint 3D-embedding Predictive Architecture), learns robust representations only from raw unlabeled point clouds without other modalities. Our largest model, J3PA-1B, is distilled into two variants, Large and Small with approximately 135M and 42M parameters respectively. Under linear probing, J3PA-1B markedly outperforms state of the art SSL methods and a fully supervised PTv3 across a large set of tasks and datasets, including a dataset unseen during training. We introduce a distillation procedure parametric in the voxel size to obtain models that are highly adaptable to different inference budgets and environments. Our models and training code are publicly released as LiDAR foundation models for autonomous driving. We believe our findings motivate predictive SSL as a viable path towards general foundation models for all point clouds.
 
 # Explore the features in 3D
 Without ever seeing a label, J3PA gives points on the same kind of object similar features: click a car and the other cars in the scene light up.
@@ -45,7 +51,7 @@ Without ever seeing a label, J3PA gives points on the same kind of object simila
 <include-html src="pca-viewer.html" />
 
 # J3PA Pipeline
-<div style="display: flex; justify-content: center; margin: 1em 0;">
+<div style="display: flex; justify-content: center; max-width: var(--text-width); margin: 1em auto;">
 <figure class="figure__background" style="margin: 0; width: 100%;">
   <img style="width: 100%;" src="fig_overview_A_vertical-2.svg" alt="J3PA pipeline: a teacher encoder sees the full point cloud, a student encoder sees a hierarchically masked one, and per-stage predictors predict the teacher's features at the masked locations."/>
   <!--<figcaption><b>Fig. 1:</b> The J3PA training setup. Per encoder stage, a predictor uses the student's features to predict the teacher's features at the masked locations.</figcaption> -->
@@ -58,9 +64,10 @@ J3PA learns by prediction rather than invariance. A teacher encoder processes th
 Under linear probing, J3PA-1B clearly outperforms state-of-the-art self-supervised methods and a fully supervised PTv3 across a large set of tasks and datasets, including a dataset not seen during training. J3PA-1B is distilled into a Large (~135M) and a Small (~42M) model. The distillation is parametric in the voxel size, so the same model can trade accuracy for speed to fit different inference budgets (top of the page, right).
 
 <style>
-.j3pa-table-wrap { overflow-x: auto; margin: 1em 0; }
+.prose .j3pa-table-wrap { overflow-x: auto; max-width: var(--text-width); margin: 1em auto; }
 .j3pa-table-wrap figcaption { margin-top: 0.6em; }
-.j3pa-table {
+/* .j3pa-table-wrap raises specificity above the site's `.prose table { display: block }`. */
+.j3pa-table-wrap .j3pa-table {
   display: table;
   width: 100%;
   margin: 0;
