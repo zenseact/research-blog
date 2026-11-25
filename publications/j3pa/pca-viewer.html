@@ -1,0 +1,539 @@
+<!-- Styles and script for the .j3pa-pca-viewer divs in j3pa.md; include after stage-video.html, whose buttons and download queue it reuses. -->
+
+<style>
+.j3pa-pca-viewer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 1em 0;
+  background: #fff;
+  border: 1px solid #e5e3de;
+  border-radius: var(--radius);
+  overflow: hidden;
+  touch-action: none;
+}
+.j3pa-pca-viewer canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+.j3pa-pca-viewer canvas:active { cursor: grabbing; }
+.j3pa-pca-size {
+  position: absolute;
+  left: 0.6em;
+  bottom: 0.5em;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  color: #6B7280;
+  font-size: 0.8rem;
+}
+.j3pa-pca-size input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10em;
+  height: 12px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 2px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+.j3pa-pca-size input:focus { outline: none; }
+.j3pa-pca-size input::-webkit-slider-runnable-track {
+  height: 1px;
+  background: #000;
+  border: none;
+}
+.j3pa-pca-size input::-moz-range-track {
+  height: 1px;
+  background: #000;
+  border: none;
+}
+.j3pa-pca-size input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 9px;
+  height: 9px;
+  margin-top: -4px;
+  border: none;
+  border-radius: 50%;
+  background: #000;
+}
+.j3pa-pca-size input::-moz-range-thumb {
+  width: 9px;
+  height: 9px;
+  border: none;
+  border-radius: 50%;
+  background: #000;
+}
+.j3pa-pca-reset {
+  position: absolute;
+  right: 0.6em;
+  bottom: 0.6em;
+  z-index: 2;
+}
+.j3pa-pca-modes {
+  position: absolute;
+  top: 0.6em;
+  left: 0.6em;
+  z-index: 2;
+  display: flex;
+  gap: 0.4em;
+}
+.j3pa-pca-query {
+  position: absolute;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.j3pa-pca-query::before,
+.j3pa-pca-query::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  margin-left: -1.5px;
+  background: #e00;
+  outline: 1px solid rgba(255, 255, 255, 0.8);
+  transform: rotate(45deg);
+}
+.j3pa-pca-query::after { transform: rotate(-45deg); }
+</style>
+
+<script type="module">
+// Full URLs rather than an import map: Firefox and Safari ignore import maps that appear after the page's first module
+// script. jsDelivr's +esm builds point OrbitControls at the same three URL, so only one copy of three is loaded.
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/+esm';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/controls/OrbitControls.js/+esm';
+
+// Same colouring as the videos: per PC the 1st/99th percentile over points inside PC_RANGE, PC1/2/3 -> green/red/blue.
+const PC_RANGE = [-50, 50, -50, 50, -10, 10];
+const CHANNEL_OF_PC = [1, 0, 2];
+// ZOD's lidar frame is z-up with +y forward.
+const DEFAULT_VIEW = { position: [-41, -80, 53], target: [0, 8, 0], fov: 50 };
+const POINT_SIZE = { min: 0.5, max: 2.5, step: 0.1, initial: 1.5 };
+// Clicks within this many CSS px of a point pick the nearest-to-camera one; else the closest within PICK_FALLBACK.
+const PICK_RADIUS = 5;
+const PICK_FALLBACK = 15;
+const CLICK_SLOP = 4;
+// Encoder stage index whose PCA coordinates the cosine similarity uses (S4).
+const COS_STAGE = 3;
+
+// Piecewise-linear LUT through [position in 0..1, '#rrggbb'] stops.
+function stopsLut(stops) {
+  const rgb = hex => [1, 3, 5].map(o => parseInt(hex.slice(o, o + 2), 16));
+  const lut = new Uint8Array(256 * 3);
+  for (let i = 0; i < 256; i++) {
+    const t = i / 255;
+    let k = 0;
+    while (k < stops.length - 2 && t > stops[k + 1][0]) k++;
+    const [t0, c0] = stops[k], [t1, c1] = stops[k + 1];
+    const a = Math.max(0, Math.min(1, (t - t0) / (t1 - t0 || 1)));
+    const [r0, g0, b0] = rgb(c0), [r1, g1, b1] = rgb(c1);
+    lut[3 * i] = Math.round(r0 + a * (r1 - r0));
+    lut[3 * i + 1] = Math.round(g0 + a * (g1 - g0));
+    lut[3 * i + 2] = Math.round(b0 + a * (b1 - b0));
+  }
+  return lut;
+}
+
+// Similarities map linearly from the SIM_RANGE percentiles (over points inside PC_RANGE) onto the LUT.
+const SIM_LUT = stopsLut([[0, '#dcdcdc'], [0.6, '#a0a0a0'], [0.7, '#fdae61'], [0.85, '#e34a33'], [1, '#7f0000']]);
+const SIM_RANGE = [0.5, 0.999];
+
+const HALF_TO_FLOAT = (() => {
+  const table = new Float32Array(65536);
+  for (let h = 0; h < 65536; h++) {
+    const sign = h & 0x8000 ? -1 : 1;
+    const exp = (h >> 10) & 0x1f;
+    const frac = h & 0x3ff;
+    if (exp === 0) table[h] = sign * 2 ** -14 * (frac / 1024);
+    else if (exp === 31) table[h] = frac ? NaN : sign * Infinity;
+    else table[h] = sign * 2 ** (exp - 15) * (1 + frac / 1024);
+  }
+  return table;
+})();
+
+// Entries of an uncompressed .npz (a zip of .npy files) as {name: {descr, shape, offset, length}} into `buffer`.
+function readNpz(buffer) {
+  const view = new DataView(buffer);
+  let eocd = buffer.byteLength - 22;
+  while (eocd >= 0 && view.getUint32(eocd, true) !== 0x06054b50) eocd--;
+  if (eocd < 0) throw new Error('not a zip file');
+  const count = view.getUint16(eocd + 10, true);
+  let p = view.getUint32(eocd + 16, true);
+  const decoder = new TextDecoder();
+  const entries = {};
+  for (let i = 0; i < count; i++) {
+    if (view.getUint16(p + 10, true) !== 0) throw new Error('compressed npz entries are not supported');
+    const nameLen = view.getUint16(p + 28, true);
+    const extraLen = view.getUint16(p + 30, true);
+    const commentLen = view.getUint16(p + 32, true);
+    const local = view.getUint32(p + 42, true);
+    const name = decoder.decode(new Uint8Array(buffer, p + 46, nameLen)).replace(/\.npy$/, '');
+    const start = local + 30 + view.getUint16(local + 26, true) + view.getUint16(local + 28, true);
+    const major = view.getUint8(start + 6);
+    const headerLen = major === 1 ? view.getUint16(start + 8, true) : view.getUint32(start + 8, true);
+    const headerStart = start + (major === 1 ? 10 : 12);
+    const header = decoder.decode(new Uint8Array(buffer, headerStart, headerLen));
+    const descr = header.match(/'descr':\s*'([^']+)'/)[1];
+    const shape = header.match(/'shape':\s*\(([^)]*)\)/)[1].split(',').filter(s => s.trim()).map(Number);
+    const offset = headerStart + headerLen;
+    const length = view.getUint32(p + 20, true) - (offset - start);
+    entries[name] = { descr, shape, offset, length };
+    p += 46 + nameLen + extraLen + commentLen;
+  }
+  return entries;
+}
+
+function float32(buffer, entry) {
+  return new Float32Array(buffer.slice(entry.offset, entry.offset + entry.length));
+}
+
+function float16(buffer, entry) {
+  const half = new Uint16Array(buffer.slice(entry.offset, entry.offset + entry.length));
+  const out = new Float32Array(half.length);
+  for (let i = 0; i < half.length; i++) out[i] = HALF_TO_FLOAT[half[i]];
+  return out;
+}
+
+function percentile(sorted, q) {
+  return sorted[Math.min(sorted.length - 1, Math.max(0, Math.round(q * (sorted.length - 1))))];
+}
+
+function insideRange(xyz) {
+  const n = xyz.length / 3;
+  const inside = [];
+  for (let i = 0; i < n; i++) {
+    const x = xyz[3 * i], y = xyz[3 * i + 1], z = xyz[3 * i + 2];
+    if (x >= PC_RANGE[0] && x <= PC_RANGE[1] && y >= PC_RANGE[2] && y <= PC_RANGE[3] && z >= PC_RANGE[4] && z <= PC_RANGE[5]) inside.push(i);
+  }
+  return inside;
+}
+
+function colours(xyz, pcs) {
+  const n = xyz.length / 3;
+  const inside = insideRange(xyz);
+  const rgb = new Uint8Array(n * 3);
+  const values = new Float32Array(inside.length);
+  for (let k = 0; k < 3; k++) {
+    inside.forEach((i, j) => { values[j] = pcs[3 * i + k]; });
+    values.sort();
+    const low = percentile(values, 0.01);
+    const scale = 255 / (percentile(values, 0.99) - low + 1e-8);
+    const c = CHANNEL_OF_PC[k];
+    for (let i = 0; i < n; i++) {
+      rgb[3 * i + c] = Math.max(0, Math.min(255, Math.round((pcs[3 * i + k] - low) * scale)));
+    }
+  }
+  return rgb;
+}
+
+// Cosine similarities between the points' 3 PCA coordinates of one stage (the same values the PCA view colours).
+function cosineColours(data, query, pcs) {
+  const n = data.count;
+  const qx = pcs[3 * query], qy = pcs[3 * query + 1], qz = pcs[3 * query + 2];
+  const qn = Math.hypot(qx, qy, qz) + 1e-8;
+  const sims = data.sims || (data.sims = new Float32Array(n));
+  for (let i = 0; i < n; i++) {
+    const x = pcs[3 * i], y = pcs[3 * i + 1], z = pcs[3 * i + 2];
+    sims[i] = (x * qx + y * qy + z * qz) / (qn * (Math.hypot(x, y, z) + 1e-8));
+  }
+  if (!data.inside) data.inside = insideRange(data.xyz);
+  const sample = new Float32Array(Math.ceil(data.inside.length / 4));
+  for (let j = 0; j < sample.length; j++) sample[j] = sims[data.inside[4 * j]];
+  sample.sort();
+  const low = percentile(sample, SIM_RANGE[0]);
+  const high = percentile(sample, SIM_RANGE[1]);
+  if (!data.cosColours) data.cosColours = new THREE.BufferAttribute(new Uint8Array(n * 3), 3, true);
+  const rgb = data.cosColours.array;
+  const lut = SIM_LUT;
+  const step = 255 / (high - low + 1e-8);
+  for (let i = 0; i < n; i++) {
+    const j = 3 * Math.max(0, Math.min(255, Math.round((sims[i] - low) * step)));
+    rgb[3 * i] = lut[j];
+    rgb[3 * i + 1] = lut[j + 1];
+    rgb[3 * i + 2] = lut[j + 2];
+  }
+  data.cosColours.needsUpdate = true;
+  data.query = query;
+}
+
+function initViewer(root) {
+  const downloader = window.j3paDownloader;
+  const dir = root.dataset.dir;
+  const frames = root.dataset.frames.split(',');
+  const defaultQueries = root.dataset.queries.split(',').map(Number);
+  const nStages = parseInt(root.dataset.stages, 10);
+  let frame = 0;
+  let stage = nStages - 2;
+  let mode = 'cos';
+  let target = null;
+  let current = null;
+  const loads = {};
+
+  const renderer = new THREE.WebGLRenderer({ antialias: false });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  root.appendChild(renderer.domElement);
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xffffff);
+  const camera = new THREE.PerspectiveCamera(DEFAULT_VIEW.fov, 16 / 9, 0.1, 2000);
+  camera.up.set(0, 0, 1);
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.screenSpacePanning = true;
+  controls.maxDistance = 600;
+
+  const material = new THREE.PointsMaterial({ size: POINT_SIZE.initial, vertexColors: true, sizeAttenuation: false });
+  const points = new THREE.Points(new THREE.BufferGeometry(), material);
+  points.frustumCulled = false;
+  scene.add(points);
+
+  const marker = document.createElement('div');
+  marker.className = 'j3pa-pca-query';
+  marker.style.display = 'none';
+  root.appendChild(marker);
+  const projected = new THREE.Vector3();
+
+  function placeMarker() {
+    const data = current;
+    if (mode !== 'cos' || !data || data.query === undefined) {
+      marker.style.display = 'none';
+      return;
+    }
+    const q = data.query;
+    projected.set(data.xyz[3 * q], data.xyz[3 * q + 1], data.xyz[3 * q + 2]).project(camera);
+    const visible = projected.z < 1 && Math.abs(projected.x) <= 1 && Math.abs(projected.y) <= 1;
+    marker.style.display = visible ? '' : 'none';
+    marker.style.left = `${(projected.x + 1) / 2 * root.clientWidth}px`;
+    marker.style.top = `${(1 - projected.y) / 2 * root.clientHeight}px`;
+  }
+
+  const render = () => {
+    renderer.render(scene, camera);
+    placeMarker();
+  };
+  controls.addEventListener('change', render);
+
+  function resetView() {
+    camera.position.fromArray(DEFAULT_VIEW.position);
+    controls.target.fromArray(DEFAULT_VIEW.target);
+    controls.update();
+    render();
+  }
+
+  new ResizeObserver(() => {
+    const w = root.clientWidth, h = root.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    render();
+  }).observe(root);
+
+  const loading = document.createElement('div');
+  loading.className = 'j3pa-stage-loading';
+  root.appendChild(loading);
+
+  const sizeControl = document.createElement('label');
+  sizeControl.className = 'j3pa-pca-size';
+  sizeControl.textContent = 'Point size';
+  const slider = document.createElement('input');
+  slider.type = 'range';
+  slider.min = POINT_SIZE.min;
+  slider.max = POINT_SIZE.max;
+  slider.step = POINT_SIZE.step;
+  slider.value = POINT_SIZE.initial;
+  slider.addEventListener('input', () => {
+    material.size = parseFloat(slider.value);
+    render();
+  });
+  sizeControl.appendChild(slider);
+  root.appendChild(sizeControl);
+
+  const modes = document.createElement('div');
+  modes.className = 'j3pa-pca-modes';
+  const modeButtons = {};
+  [['cos', 'Cosine similarity'], ['pca', 'PCA']].forEach(([m, label]) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'j3pa-stage-btn';
+    b.textContent = label;
+    b.addEventListener('click', () => {
+      mode = m;
+      show(frame, stage, downloader.urgent());
+    });
+    modes.appendChild(b);
+    modeButtons[m] = b;
+  });
+  root.appendChild(modes);
+
+  function setQuery(data, query) {
+    cosineColours(data, query, stagePcs(data, COS_STAGE));
+    data.geometry.setAttribute('color', data.cosColours);
+  }
+
+  // Front-most point within PICK_RADIUS px of (x, y), else the nearest on screen within PICK_FALLBACK px, else -1.
+  function pick(data, x, y, w, h) {
+    camera.updateMatrixWorld();
+    const m = new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse).elements;
+    const xyz = data.xyz;
+    let front = -1, frontDepth = Infinity, near = -1, nearDist = PICK_FALLBACK * PICK_FALLBACK;
+    for (let i = 0; i < data.count; i++) {
+      const px = xyz[3 * i], py = xyz[3 * i + 1], pz = xyz[3 * i + 2];
+      const cw = m[3] * px + m[7] * py + m[11] * pz + m[15];
+      if (cw <= camera.near) continue;
+      const sx = ((m[0] * px + m[4] * py + m[8] * pz + m[12]) / cw * 0.5 + 0.5) * w;
+      const sy = (0.5 - (m[1] * px + m[5] * py + m[9] * pz + m[13]) / cw * 0.5) * h;
+      const d2 = (sx - x) ** 2 + (sy - y) ** 2;
+      if (d2 < PICK_RADIUS * PICK_RADIUS && cw < frontDepth) {
+        front = i;
+        frontDepth = cw;
+      }
+      if (d2 < nearDist) {
+        near = i;
+        nearDist = d2;
+      }
+    }
+    return front >= 0 ? front : near;
+  }
+
+  // A click (not a drag) in cosine mode moves the query to the clicked point.
+  let pressed = null;
+  renderer.domElement.addEventListener('pointerdown', e => {
+    pressed = e.button === 0 ? [e.clientX, e.clientY] : null;
+  });
+  renderer.domElement.addEventListener('pointerup', e => {
+    const start = pressed;
+    pressed = null;
+    if (!start || mode !== 'cos' || !current) return;
+    if (Math.hypot(e.clientX - start[0], e.clientY - start[1]) > CLICK_SLOP) return;
+    const rect = renderer.domElement.getBoundingClientRect();
+    const q = pick(current, e.clientX - rect.left, e.clientY - rect.top, rect.width, rect.height);
+    if (q < 0) return;
+    setQuery(current, q);
+    render();
+  });
+
+  const bar = document.createElement('div');
+  bar.className = 'j3pa-stage-buttons';
+  const buttons = [];
+  for (let s = 0; s < nStages; s++) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'j3pa-stage-btn';
+    b.textContent = 'S' + (s + 1);
+    b.addEventListener('click', () => show(frame, s, downloader.urgent()));
+    bar.appendChild(b);
+    buttons.push(b);
+  }
+  root.appendChild(bar);
+
+  function arrow(cls, label, text, delta) {
+    const a = document.createElement('button');
+    a.type = 'button';
+    a.className = 'j3pa-stage-arrow ' + cls;
+    a.setAttribute('aria-label', label);
+    a.textContent = text;
+    a.addEventListener('click', () => show(frame + delta, stage, downloader.urgent()));
+    root.appendChild(a);
+    return a;
+  }
+  const prev = arrow('prev', 'Previous frame', '\u2039', -1);
+  const next = arrow('next', 'Next frame', '\u203A', 1);
+  const dots = window.j3paDots(root, frames.length, 'Frame', f => show(f, stage, downloader.urgent()));
+
+  const reset = document.createElement('button');
+  reset.type = 'button';
+  reset.className = 'j3pa-stage-btn j3pa-pca-reset';
+  reset.textContent = 'Reset view';
+  reset.addEventListener('click', () => {
+    slider.value = POINT_SIZE.initial;
+    material.size = POINT_SIZE.initial;
+    resetView();
+  });
+  root.appendChild(reset);
+
+  // Parsed lazily: positions once per frame, colours once per frame and stage.
+  function load(f, priority) {
+    const id = frames[f];
+    if (!loads[id]) {
+      const job = downloader.get(`${dir}/frame_${id}_pcs.npz`, priority);
+      job.onProgress = frac => {
+        if (target === id) loading.textContent = `Loading point cloud\u2026 ${Math.round(frac * 100)}%`;
+      };
+      loads[id] = { job, promise: job.promise.then(blob => blob.arrayBuffer()).then(buffer => {
+        const entries = readNpz(buffer);
+        const xyz = float32(buffer, entries.xyz_0);
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(xyz, 3));
+        return { buffer, entries, xyz, geometry, pcs: {}, colours: {}, count: xyz.length / 3 };
+      }) };
+    } else if (!loads[id].job.done) {
+      downloader.get(loads[id].job.url, priority);
+    }
+    return loads[id].promise;
+  }
+
+  function stagePcs(data, s) {
+    if (!data.pcs[s]) data.pcs[s] = float16(data.buffer, data.entries[`pcs_s${s}_0`]);
+    return data.pcs[s];
+  }
+
+  function stageColours(data, s) {
+    if (!data.colours[s]) {
+      data.colours[s] = new THREE.BufferAttribute(colours(data.xyz, stagePcs(data, s)), 3, true);
+    }
+    return data.colours[s];
+  }
+
+  function show(f, s, priority) {
+    if (f !== frame) resetView();
+    frame = f;
+    stage = s;
+    const m = mode;
+    const id = frames[f];
+    target = id;
+    buttons.forEach((b, i) => b.classList.toggle('active', i === s));
+    Object.entries(modeButtons).forEach(([k, b]) => b.classList.toggle('active', k === m));
+    bar.style.display = m === 'pca' ? '' : 'none';
+    renderer.domElement.title = m === 'cos' ? 'Click a point to compare all points with it' : '';
+    prev.style.display = f > 0 ? '' : 'none';
+    next.style.display = f < frames.length - 1 ? '' : 'none';
+    dots(f);
+    if (!loads[id] || !loads[id].job.done) {
+      loading.textContent = 'Loading point cloud\u2026';
+      loading.style.display = '';
+    }
+    load(f, priority).then(data => {
+      if (target !== id || frame !== f || stage !== s || mode !== m) return;
+      if (m === 'cos') {
+        setQuery(data, data.query === undefined ? defaultQueries[f] : data.query);
+      } else {
+        data.geometry.setAttribute('color', stageColours(data, s));
+      }
+      points.geometry = data.geometry;
+      current = data;
+      loading.style.display = 'none';
+      render();
+      [f + 1, f - 1].forEach(n => {
+        if (n >= 0 && n < frames.length) load(n, 4).catch(() => {});
+      });
+    }).catch(() => {
+      if (target === id) loading.textContent = 'Point cloud failed to load.';
+    });
+  }
+
+  resetView();
+  show(0, stage, 1.5);
+}
+
+document.querySelectorAll('.j3pa-pca-viewer').forEach(initViewer);
+</script>

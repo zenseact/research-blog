@@ -1,0 +1,426 @@
+<!-- Styles, data and script for the .j3pa-plots div in j3pa.md. The charts are drawn as SVG at the card's pixel width, so text stays the same size on every screen. -->
+
+<style>
+.j3pa-plots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: 1rem;
+  margin: 1.5em 0 2em;
+}
+.j3pa-plot {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  line-height: 1.4;
+}
+.j3pa-plot-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.j3pa-plot-sub {
+  margin-bottom: 0.6rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.j3pa-plot-body {
+  position: relative;
+}
+.j3pa-plot-body svg {
+  display: block;
+  overflow: visible;
+  font-family: var(--font-body);
+  user-select: none;
+}
+.j3pa-plot-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.1rem 0.1rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+.j3pa-plot-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding: 0.2em 0.3em;
+  font: inherit;
+  font-size: 0.75rem;
+  color: var(--text);
+  background: none;
+  border: none;
+  border-radius: 6px;
+}
+button.j3pa-plot-key { cursor: pointer; }
+button.j3pa-plot-key:hover { background: #f1eaf9; }
+button.j3pa-plot-key[aria-pressed="false"] {
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+.j3pa-plot-key small { color: var(--muted); font-size: 0.68rem; }
+.j3pa-plot-tip {
+  position: absolute;
+  z-index: 3;
+  padding: 0.35em 0.6em;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  white-space: nowrap;
+  color: #fff;
+  background: rgba(26, 26, 46, 0.92);
+  border-radius: 6px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, calc(-100% - 12px));
+  transition: opacity 0.12s;
+}
+.j3pa-plot-tip.show { opacity: 1; }
+.j3pa-plot-tip .gain { color: #f7a8cf; font-weight: 700; }
+.j3pa-plot-tip .muted { color: #c9c5d6; }
+</style>
+
+<script>
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var INK = '#2a1e33';
+  var MUTED = '#6b7280';
+  var BASE = '#5b2a8e';
+  var OURS = '#c2187a';
+  var ARROW = '#9b4dca';
+  var HEIGHT = 236;
+
+  // nuScenes validation, linear probing: best prior SSL method versus J3PA-1B (Table 1).
+  var GAINS = [
+    { group: 'Semantic', fill: '#f1eaf9', color: '#7b3fb0', rows: [
+      { metric: 'mIoU', base: 'Utonia', b: 75.5, o: 83.5 },
+      { metric: 'mAcc', base: 'Utonia', b: 84.8, o: 90.3 },
+      { metric: 'allAcc', base: 'DOS', b: 93.7, o: 95.6 },
+    ] },
+    { group: 'Panoptic', fill: '#fdeef5', color: OURS, rows: [
+      { metric: 'PQ', base: 'Utonia', b: 68.4, o: 80.7 },
+      { metric: 'RQ', base: 'Utonia', b: 78.6, o: 89.1 },
+      { metric: 'SQ', base: 'Utonia', b: 86.3, o: 90.2 },
+    ] },
+  ];
+
+  // [inference time in ms, mIoU] per voxel size, fastest (coarsest) first.
+  var VOXELS = ['20 cm', null, null, '8 cm', null, null, '4 cm'];
+  var SPEED = [
+    { name: 'J3PA-Small', params: '42M', color: '#e8559b', marker: 'diamond',
+      pts: [[68, 73.2], [76, 74.3], [90, 75.0], [118, 75.5], [142, 75.5], [160, 75.5], [183, 75.4]] },
+    { name: 'J3PA-Large', params: '135M', color: ARROW, marker: 'triangle',
+      pts: [[113, 76.0], [134, 77.1], [168, 78.0], [231, 78.8], [284, 78.9], [328, 78.8], [384, 78.9]] },
+    { name: 'J3PA-1B', params: '1.0B', color: OURS, marker: 'circle',
+      pts: [[252, 75.7], [317, 79.3], [422, 81.8], [623, 83.0], [808, 83.2], [949, 83.2], [1142, 83.2]] },
+    { name: 'Utonia', params: '137M', color: BASE, marker: 'square', dash: '5 3',
+      pts: [[222, 57.1], [267, 62.5], [335, 68.5], [470, 72.9], [588, 74.0], [679, 73.5], [784, 72.5]] },
+  ];
+
+  function el(tag, attrs, parent) {
+    var e = document.createElementNS(NS, tag);
+    for (var k in attrs) if (attrs[k] !== undefined && attrs[k] !== null) e.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(e);
+    return e;
+  }
+  function text(parent, x, y, str, attrs) {
+    var t = el('text', Object.assign({ x: x, y: y }, attrs || {}), parent);
+    t.textContent = str;
+    return t;
+  }
+  function ease(t) { return 1 - Math.pow(1 - t, 3); }
+  function clamp01(t) { return Math.max(0, Math.min(1, t)); }
+
+  function marker(parent, kind, x, y, s, color) {
+    var a = { fill: color, stroke: '#fff', 'stroke-width': 1.2 };
+    if (kind === 'circle') return el('circle', Object.assign({ cx: x, cy: y, r: s }, a), parent);
+    if (kind === 'square') return el('rect', Object.assign({ x: x - s * 0.85, y: y - s * 0.85, width: s * 1.7, height: s * 1.7 }, a), parent);
+    var pts = kind === 'diamond'
+      ? [[x, y - s * 1.2], [x + s * 1.2, y], [x, y + s * 1.2], [x - s * 1.2, y]]
+      : [[x, y - s * 1.2], [x + s * 1.1, y + s * 0.8], [x - s * 1.1, y + s * 0.8]];
+    return el('polygon', Object.assign({ points: pts.map(function (p) { return p.join(','); }).join(' ') }, a), parent);
+  }
+
+  function swatch(color, kind, dash) {
+    var svg = el('svg', { width: 22, height: 12, viewBox: '0 0 22 12', 'aria-hidden': 'true' });
+    el('line', { x1: 1, y1: 6, x2: 21, y2: 6, stroke: color, 'stroke-width': 2, 'stroke-dasharray': dash }, svg);
+    marker(svg, kind, 11, 6, 3.6, color);
+    return svg;
+  }
+
+  // Shared card behaviour: re-render on resize, animate in once visible, show a tooltip.
+  function setupCard(card, draw) {
+    var body = card.querySelector('.j3pa-plot-body');
+    var tip = document.createElement('div');
+    tip.className = 'j3pa-plot-tip';
+    body.appendChild(tip);
+    var state = { p: 0, hits: [] };
+    var svg = null;
+
+    function render() {
+      var W = Math.round(body.clientWidth);
+      if (!W) return;
+      var next = el('svg', { width: W, height: HEIGHT, viewBox: '0 0 ' + W + ' ' + HEIGHT });
+      state.hits = draw(next, W, state) || [];
+      if (svg) body.replaceChild(next, svg);
+      else body.insertBefore(next, tip);
+      svg = next;
+    }
+    state.render = render;
+    state.tip = function (x, y, html) {
+      if (!html) { tip.classList.remove('show'); return; }
+      tip.innerHTML = html;
+      var half = tip.offsetWidth / 2;
+      tip.style.left = Math.max(half, Math.min(body.clientWidth - half, x)) + 'px';
+      tip.style.top = y + 'px';
+      tip.classList.add('show');
+    };
+
+    new ResizeObserver(render).observe(body);
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function start() {
+      if (reduce) { state.p = 1; render(); return; }
+      var t0 = null;
+      function frame(t) {
+        if (t0 === null) t0 = t;
+        state.p = clamp01((t - t0) / 1100);
+        render();
+        if (state.p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+    var io = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) {
+        io.disconnect();
+        start();
+      }
+    }, { threshold: 0.35 });
+    io.observe(card);
+    return state;
+  }
+
+  function header(card, title, sub) {
+    var t = document.createElement('div');
+    t.className = 'j3pa-plot-title';
+    t.textContent = title;
+    var s = document.createElement('div');
+    s.className = 'j3pa-plot-sub';
+    s.textContent = sub;
+    card.appendChild(t);
+    card.appendChild(s);
+    var body = document.createElement('div');
+    body.className = 'j3pa-plot-body';
+    card.appendChild(body);
+    var legend = document.createElement('div');
+    legend.className = 'j3pa-plot-legend';
+    card.appendChild(legend);
+    return legend;
+  }
+
+  function gainsCard(card) {
+    var legend = header(card, 'J3PA-1B vs. the best prior method', 'nuScenes validation, linear probing');
+    [['Best prior method', BASE], ['J3PA-1B', OURS]].forEach(function (k) {
+      var span = document.createElement('span');
+      span.className = 'j3pa-plot-key';
+      var s = el('svg', { width: 12, height: 12, 'aria-hidden': 'true' });
+      el('circle', { cx: 6, cy: 6, r: 5, fill: k[1] }, s);
+      span.appendChild(s);
+      span.appendChild(document.createTextNode(k[0]));
+      legend.appendChild(span);
+    });
+
+    var hover = null;
+    var state = setupCard(card, function (svg, W, st) {
+      var narrow = W < 420;
+      var ml = narrow ? 72 : 82, mr = 50, mt = 2, gap = 8, axisH = 40;
+      var nRows = GAINS.reduce(function (n, g) { return n + g.rows.length; }, 0);
+      var rowH = (HEIGHT - mt - axisH - gap * (GAINS.length - 1)) / nRows;
+      // Extra room on the left on small screens so the baseline names clear the metric labels.
+      var x0 = narrow ? 55 : 60, x1 = 100;
+      var sx = function (v) { return ml + (v - x0) / (x1 - x0) * (W - ml - mr); };
+      var step = W - ml - mr > 300 ? 5 : 10;
+      var bottom = HEIGHT - axisH;
+      var hits = [];
+      svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', 'Arrows from the best prior method to J3PA-1B for six nuScenes metrics; J3PA-1B is higher on all of them.');
+
+      var y = mt;
+      GAINS.forEach(function (g) {
+        var h = g.rows.length * rowH;
+        el('rect', { x: 0, y: y, width: W, height: h, rx: 8, fill: g.fill }, svg);
+        text(svg, 0, 0, g.group, {
+          transform: 'translate(13,' + (y + h / 2) + ') rotate(-90)', 'text-anchor': 'middle', 'dominant-baseline': 'central',
+          fill: g.color, 'font-size': 11.5, 'font-weight': 700, 'letter-spacing': 0.3,
+        });
+        g.y = y;
+        y += h + gap;
+      });
+      for (var v = Math.ceil(x0 / step) * step; v <= x1; v += step) {
+        el('line', { x1: sx(v), x2: sx(v), y1: mt, y2: bottom, stroke: INK, 'stroke-opacity': 0.07 }, svg);
+        text(svg, sx(v), bottom + 15, v, { 'text-anchor': 'middle', fill: MUTED, 'font-size': 11.5 });
+      }
+      text(svg, (ml + W - mr) / 2, bottom + 33, 'Score (%)', { 'text-anchor': 'middle', fill: INK, 'font-size': 12 });
+
+      GAINS.forEach(function (g) {
+        g.rows.forEach(function (r, ri) {
+          var key = g.group + r.metric;
+          var on = hover === key;
+          var cy = g.y + (ri + 0.5) * rowH;
+          var p = ease(clamp01(st.p * 1.25 - ri * 0.06));
+          var xb = sx(r.b), xo = sx(r.o);
+          var head = xb + (xo - xb) * p;
+          if (on) el('rect', { x: ml - 4, y: cy - rowH / 2 + 2, width: W - ml - 2, height: rowH - 4, rx: 6, fill: '#fff', 'fill-opacity': 0.7 }, svg);
+          text(svg, ml - 12, cy, r.metric, {
+            'text-anchor': 'end', 'dominant-baseline': 'central', fill: INK, 'font-size': 12.5, 'font-weight': on ? 700 : 500,
+          });
+          text(svg, xb - 11, cy, r.base, { 'text-anchor': 'end', 'dominant-baseline': 'central', fill: MUTED, 'font-size': 11 });
+          if (head - xb > 16) {
+            el('line', { x1: xb + 6, y1: cy, x2: head - 13, y2: cy, stroke: ARROW, 'stroke-width': on ? 3 : 2.2, 'stroke-linecap': 'round' }, svg);
+            el('polygon', { points: [[head - 7, cy], [head - 14, cy - 4.5], [head - 14, cy + 4.5]].map(String).join(' '), fill: ARROW }, svg);
+          }
+          el('circle', { cx: xb, cy: cy, r: on ? 7 : 6, fill: BASE, stroke: '#fff', 'stroke-width': 1.2 }, svg);
+          el('circle', { cx: head, cy: cy, r: on ? 7 : 6, fill: OURS, stroke: '#fff', 'stroke-width': 1.2 }, svg);
+          text(svg, head + 11, cy, '+' + (r.o - r.b).toFixed(1), {
+            'dominant-baseline': 'central', fill: OURS, 'font-size': 12.5, 'font-weight': 700, opacity: clamp01((p - 0.7) / 0.3),
+          });
+          hits.push({ key: key, y0: cy - rowH / 2, y1: cy + rowH / 2, x: xo, y: cy - 6, r: r, group: g.group });
+        });
+      });
+      return hits;
+    });
+
+    var body = card.querySelector('.j3pa-plot-body');
+    body.addEventListener('pointermove', function (e) {
+      var box = body.getBoundingClientRect();
+      var y = e.clientY - box.top;
+      var hit = state.hits.filter(function (h) { return y >= h.y0 && y < h.y1; })[0];
+      var key = hit ? hit.key : null;
+      if (key !== hover) { hover = key; state.render(); }
+      if (!hit) return state.tip();
+      var r = hit.r;
+      state.tip(hit.x, hit.y, '<b>' + r.metric + '</b> <span class="muted">' + hit.group.toLowerCase() + ' seg.</span><br>' +
+        r.base + ' ' + r.b.toFixed(1) + ' &rarr; J3PA-1B ' + r.o.toFixed(1) + ' <span class="gain">+' + (r.o - r.b).toFixed(1) + '</span>');
+    });
+    body.addEventListener('pointerleave', function () { hover = null; state.render(); state.tip(); });
+  }
+
+  function speedCard(card) {
+    var legend = header(card, 'Accuracy vs. inference time', 'Each line runs from 20 cm voxels (fastest) to 4 cm (most accurate)');
+    var hidden = {};
+    var hoverSeries = null;
+    var hoverPoint = null;
+    var state;
+
+    SPEED.forEach(function (s) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'j3pa-plot-key';
+      b.setAttribute('aria-pressed', 'true');
+      b.appendChild(swatch(s.color, s.marker, s.dash));
+      b.appendChild(document.createTextNode(s.name + ' '));
+      var small = document.createElement('small');
+      small.textContent = '(' + s.params + ')';
+      b.appendChild(small);
+      b.addEventListener('click', function () {
+        hidden[s.name] = !hidden[s.name];
+        b.setAttribute('aria-pressed', String(!hidden[s.name]));
+        state.render();
+      });
+      b.addEventListener('mouseenter', function () { hoverSeries = s.name; state.render(); });
+      b.addEventListener('mouseleave', function () { hoverSeries = null; state.render(); });
+      legend.appendChild(b);
+    });
+
+    state = setupCard(card, function (svg, W, st) {
+      var ml = 46, mr = 14, mt = 6, mb = 40;
+      var lo = Math.log10(55), hi = Math.log10(1400);
+      var sx = function (v) { return ml + (Math.log10(v) - lo) / (hi - lo) * (W - ml - mr); };
+      var y0 = 55, y1 = 86;
+      var sy = function (v) { return mt + (y1 - v) / (y1 - y0) * (HEIGHT - mt - mb); };
+      var bottom = HEIGHT - mb;
+      var hits = [];
+      svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', 'mIoU against inference time for J3PA-Small, J3PA-Large, J3PA-1B and Utonia at several voxel sizes; the J3PA models are both faster and more accurate than Utonia.');
+
+      el('rect', { x: ml, y: mt, width: W - ml - mr, height: bottom - mt, rx: 8, fill: '#f6f1fb' }, svg);
+      var xt = W - ml - mr > 330 ? [60, 100, 200, 500, 1000] : [100, 300, 1000];
+      xt.forEach(function (v) {
+        el('line', { x1: sx(v), x2: sx(v), y1: mt, y2: bottom, stroke: '#fff', 'stroke-width': 1.5 }, svg);
+        text(svg, sx(v), bottom + 15, v, { 'text-anchor': 'middle', fill: MUTED, 'font-size': 11.5 });
+      });
+      for (var v = 60; v <= 85; v += 5) {
+        el('line', { x1: ml, x2: W - mr, y1: sy(v), y2: sy(v), stroke: '#fff', 'stroke-width': 1.5 }, svg);
+        text(svg, ml - 8, sy(v), v, { 'text-anchor': 'end', 'dominant-baseline': 'central', fill: MUTED, 'font-size': 11.5 });
+      }
+      text(svg, (ml + W - mr) / 2, bottom + 33, 'Inference time per frame, ~270k points (ms, log)', { 'text-anchor': 'middle', fill: INK, 'font-size': 12 });
+      text(svg, 0, 0, 'mIoU (%)', { transform: 'translate(11,' + (mt + bottom) / 2 + ') rotate(-90)', 'text-anchor': 'middle', 'dominant-baseline': 'central', fill: INK, 'font-size': 12 });
+
+      var clipId = 'j3pa-speed-clip';
+      var clip = el('clipPath', { id: clipId }, el('defs', {}, svg));
+      el('rect', { x: 0, y: 0, width: ml + (W - ml + 10) * ease(st.p), height: HEIGHT }, clip);
+      var plot = el('g', { 'clip-path': 'url(#' + clipId + ')' }, svg);
+
+      var focus = hoverPoint ? hoverPoint.s.name : hoverSeries;
+      SPEED.forEach(function (s) {
+        if (hidden[s.name]) return;
+        var g = el('g', { opacity: focus && focus !== s.name ? 0.2 : 1 }, plot);
+        var d = s.pts.map(function (p, i) { return (i ? 'L' : 'M') + sx(p[0]) + ',' + sy(p[1]); }).join('');
+        el('path', { d: d, fill: 'none', stroke: s.color, 'stroke-width': focus === s.name ? 2.8 : 2, 'stroke-dasharray': s.dash, 'stroke-linejoin': 'round' }, g);
+        s.pts.forEach(function (p, i) {
+          var big = hoverPoint && hoverPoint.s === s && hoverPoint.i === i;
+          marker(g, s.marker, sx(p[0]), sy(p[1]), big ? 6 : 4.2, s.color);
+          hits.push({ s: s, i: i, x: sx(p[0]), y: sy(p[1]) });
+        });
+      });
+      if (focus && !hidden[focus]) {
+        var s = SPEED.filter(function (x) { return x.name === focus; })[0];
+        s.pts.forEach(function (p, i) {
+          if (!VOXELS[i]) return;
+          text(plot, sx(p[0]), sy(p[1]) + (s.name === 'Utonia' ? 18 : -12), VOXELS[i], {
+            'text-anchor': 'middle', fill: s.color, 'font-size': 11, 'font-weight': 700,
+            stroke: '#fff', 'stroke-width': 3, 'paint-order': 'stroke',
+          });
+        });
+      }
+      return hits;
+    });
+
+    var body = card.querySelector('.j3pa-plot-body');
+    body.addEventListener('pointermove', function (e) {
+      var box = body.getBoundingClientRect();
+      var x = e.clientX - box.left, y = e.clientY - box.top;
+      var best = null, bestD = 22 * 22;
+      state.hits.forEach(function (h) {
+        var d = (h.x - x) * (h.x - x) + (h.y - y) * (h.y - y);
+        if (d < bestD) { bestD = d; best = h; }
+      });
+      var changed = (best && (!hoverPoint || best.s !== hoverPoint.s || best.i !== hoverPoint.i)) || (!best && hoverPoint);
+      hoverPoint = best;
+      if (changed) state.render();
+      if (!best) return state.tip();
+      var p = best.s.pts[best.i];
+      state.tip(best.x, best.y - 4, '<b>' + best.s.name + '</b> <span class="muted">(' + best.s.params + ')</span><br>' +
+        (VOXELS[best.i] ? VOXELS[best.i] + ' voxels &middot; ' : '') + p[1].toFixed(1) + ' mIoU &middot; ' + p[0] + ' ms');
+    });
+    body.addEventListener('pointerleave', function () {
+      hoverPoint = null;
+      state.render();
+      state.tip();
+    });
+  }
+
+  document.querySelectorAll('.j3pa-plots').forEach(function (root) {
+    ['gains', 'speed'].forEach(function (kind) {
+      var card = document.createElement('div');
+      card.className = 'j3pa-plot';
+      root.appendChild(card);
+      (kind === 'gains' ? gainsCard : speedCard)(card);
+    });
+  });
+})();
+</script>

@@ -1,0 +1,423 @@
+<!-- Styles and script for the .j3pa-stage-player divs in j3pa.md; include after the last player. -->
+
+<style>
+.j3pa-stage-player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 1em 0;
+  background: #fff;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.j3pa-stage-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+.j3pa-stage-video.is-visible { opacity: 1; }
+.j3pa-stage-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  padding: 0.3em 0.8em;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.85);
+  color: #6B7280;
+  font-size: 0.8rem;
+}
+.j3pa-stage-buttons {
+  position: absolute;
+  top: 0.6em;
+  right: 0.6em;
+  z-index: 2;
+  display: flex;
+  gap: 0.4em;
+}
+.j3pa-stage-btn,
+.j3pa-stage-arrow {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.j3pa-stage-btn {
+  padding: 0.4em 0.95em;
+  font-size: 0.9rem;
+}
+.j3pa-stage-btn:hover,
+.j3pa-stage-arrow:hover { background: rgba(0, 0, 0, 0.7); }
+.j3pa-stage-btn.active {
+  background: #000;
+  border-color: #000;
+}
+.j3pa-stage-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.j3pa-stage-btn:disabled:hover { background: rgba(0, 0, 0, 0.45); }
+.j3pa-stage-variants {
+  position: absolute;
+  top: 0.6em;
+  left: 0.6em;
+  z-index: 2;
+  display: flex;
+  gap: 0.4em;
+}
+.j3pa-stage-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  padding: 0 0.2em;
+  font-size: 3rem;
+  line-height: 1;
+  color: #000;
+  background: none;
+  border: none;
+  text-shadow: 0 0 4px #fff, 0 0 8px #fff, 0 0 12px #fff;
+  opacity: 0.85;
+}
+.j3pa-stage-arrow:hover {
+  background: none;
+  opacity: 1;
+}
+.j3pa-stage-arrow.prev { left: 0.3em; }
+.j3pa-stage-arrow.next { right: 0.3em; }
+.j3pa-stage-btn:focus,
+.j3pa-stage-arrow:focus,
+.j3pa-stage-dot:focus {
+  outline: none;
+  box-shadow: none;
+}
+.j3pa-stage-dots {
+  position: absolute;
+  bottom: 0.6em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  gap: 0.45em;
+}
+.j3pa-stage-dot {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border: 1px solid #000;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+}
+.j3pa-stage-dot.active { background: #000; }
+</style>
+
+<script>
+// Each video is downloaded whole into a blob so stage switches can seek instantly.
+// Downloads run one 4 MB range at a time, always for the highest-priority video, so a click preempts preloading.
+(function () {
+  function play(v) {
+    var p = v.play();
+    if (p && p.catch) p.catch(function () {});
+  }
+
+  var downloader = (function () {
+    var CHUNK = 4 << 20;
+    // The local Jekyll server answers cached range revalidations with an invalid 304.
+    var cacheMode = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? 'no-store' : 'default';
+    var jobs = {};
+    var order = 0;
+    var busy = false;
+
+    function pump() {
+      if (busy) return;
+      var job = null;
+      Object.keys(jobs).forEach(function (url) {
+        var j = jobs[url];
+        if (!job || j.priority < job.priority || (j.priority === job.priority && j.order < job.order)) job = j;
+      });
+      if (!job) return;
+      busy = true;
+      fetch(job.url, { headers: { Range: 'bytes=' + job.offset + '-' + (job.offset + CHUNK - 1) }, cache: cacheMode })
+        .then(function (r) {
+          if (r.status === 206) {
+            job.total = parseInt(r.headers.get('Content-Range').split('/')[1], 10);
+          } else if (r.ok) {
+            job.parts = [];
+            job.offset = 0;
+            job.total = null;
+          } else {
+            throw new Error('HTTP ' + r.status);
+          }
+          return r.arrayBuffer();
+        })
+        .then(function (buf) {
+          job.parts.push(buf);
+          job.offset += buf.byteLength;
+          if (job.total === null) job.total = job.offset;
+          if (job.onProgress) job.onProgress(job.offset / job.total);
+          if (job.offset >= job.total) {
+            delete jobs[job.url];
+            job.done = true;
+            job.resolve(new Blob(job.parts));
+          }
+        })
+        .catch(function (err) {
+          delete jobs[job.url];
+          job.done = true;
+          job.reject(err);
+        })
+        .then(function () {
+          busy = false;
+          pump();
+        });
+    }
+
+    // Lower priority value downloads first; calling again for the same URL can only raise its priority.
+    function get(url, priority) {
+      var job = jobs[url];
+      if (!job) {
+        job = jobs[url] = { url: url, priority: priority, order: order++, parts: [], offset: 0, total: null };
+        job.promise = new Promise(function (resolve, reject) {
+          job.resolve = resolve;
+          job.reject = reject;
+        });
+      } else if (priority < job.priority) {
+        job.priority = priority;
+      }
+      pump();
+      return job;
+    }
+
+    var clickPriority = 0;
+
+    // Clicks get ever lower values, so the latest click always downloads first.
+    function urgent() {
+      return --clickPriority;
+    }
+
+    return { get: get, urgent: urgent };
+  })();
+  window.j3paDownloader = downloader;
+
+  // Clickable position dots for players with several pages; returns a function that marks page i as current.
+  window.j3paDots = function (root, count, label, onSelect) {
+    if (count < 2) return function () {};
+    var wrap = document.createElement('div');
+    wrap.className = 'j3pa-stage-dots';
+    var dots = [];
+    for (var i = 0; i < count; i++) {
+      var d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'j3pa-stage-dot';
+      d.setAttribute('aria-label', label + ' ' + (i + 1));
+      d.addEventListener('click', onSelect.bind(null, i));
+      wrap.appendChild(d);
+      dots.push(d);
+    }
+    root.appendChild(wrap);
+    return function (current) {
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+    };
+  };
+
+  function initPlayer(player) {
+    // data-variants: [{name, dir, stages?}], stages listing the indices that exist (default: all); else one data-dir.
+    var variants = player.dataset.variants ? JSON.parse(player.dataset.variants) : [{ dir: player.dataset.dir }];
+    var sequences = player.dataset.sequences.split(',');
+    var nStages = parseInt(player.dataset.stages, 10);
+    var seq = 0;
+    var variant = 0;
+    var shownVariant = 0;
+    var stage = nStages - 2;
+    var targetKey = null;
+    var active = null;
+    var loads = {};
+    var jobsByKey = {};
+    var ready = {};
+
+    var loading = document.createElement('div');
+    loading.className = 'j3pa-stage-loading';
+    loading.textContent = 'Loading video\u2026';
+    player.appendChild(loading);
+
+    var bar = document.createElement('div');
+    bar.className = 'j3pa-stage-buttons';
+    var buttons = [];
+    for (var s = 0; s < nStages; s++) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'j3pa-stage-btn';
+      b.textContent = 'S' + (s + 1);
+      b.addEventListener('click', (function (s) {
+        return function () { show(seq, s, downloader.urgent()); };
+      })(s));
+      bar.appendChild(b);
+      buttons.push(b);
+    }
+    player.appendChild(bar);
+
+    function hasStage(vi, s) {
+      return !variants[vi].stages || variants[vi].stages.indexOf(s) >= 0;
+    }
+
+    var variantButtons = [];
+    if (variants.length > 1) {
+      var variantBar = document.createElement('div');
+      variantBar.className = 'j3pa-stage-variants';
+      variants.forEach(function (vr, vi) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'j3pa-stage-btn';
+        b.textContent = vr.name;
+        b.addEventListener('click', function () {
+          variant = vi;
+          var s = stage;
+          for (var d = 1; !hasStage(vi, s) && d < nStages; d++) {
+            if (hasStage(vi, stage + d)) s = stage + d;
+            else if (hasStage(vi, stage - d)) s = stage - d;
+          }
+          show(seq, s, downloader.urgent());
+        });
+        variantBar.appendChild(b);
+        variantButtons.push(b);
+      });
+      player.appendChild(variantBar);
+    }
+
+    function arrow(cls, label, text, delta) {
+      var a = document.createElement('button');
+      a.type = 'button';
+      a.className = 'j3pa-stage-arrow ' + cls;
+      a.setAttribute('aria-label', label);
+      a.textContent = text;
+      a.addEventListener('click', function () { show(seq + delta, stage, downloader.urgent()); });
+      player.appendChild(a);
+      return a;
+    }
+    var prev = arrow('prev', 'Previous sequence', '\u2039', -1);
+    var next = arrow('next', 'Next sequence', '\u203A', 1);
+    var dots = window.j3paDots(player, sequences.length, 'Sequence', function (q) {
+      show(q, stage, downloader.urgent());
+    });
+
+    function key(q, s, vi) {
+      return variants[vi === undefined ? variant : vi].dir + '/' + sequences[q] + '_s' + s;
+    }
+
+    function setLoadingText(k, frac) {
+      if (targetKey !== k || ready[k]) return;
+      loading.textContent = 'Loading video\u2026 ' + Math.round(frac * 100) + '%';
+    }
+
+    function load(k, priority) {
+      var job = jobsByKey[k];
+      if (!loads[k]) {
+        job = jobsByKey[k] = downloader.get(k + '.mp4', priority);
+        job.onProgress = setLoadingText.bind(null, k);
+        loads[k] = job.promise.then(function (blob) {
+          var v = document.createElement('video');
+          v.className = 'j3pa-stage-video';
+          v.dataset.key = k;
+          v.dataset.seq = k.split('/').pop().split('_s')[0];
+          v.muted = true;
+          v.loop = true;
+          v.playsInline = true;
+          v.disablePictureInPicture = true;
+          v.setAttribute('playsinline', '');
+          v.setAttribute('disableremoteplayback', '');
+          v.preload = 'auto';
+          v.src = URL.createObjectURL(new Blob([blob], { type: 'video/mp4' }));
+          v.addEventListener('pause', function () {
+            if (v === active && !document.hidden) play(v);
+          });
+          player.insertBefore(v, loading);
+          return new Promise(function (resolve, reject) {
+            v.addEventListener('loadeddata', function () {
+              ready[k] = true;
+              resolve(v);
+            }, { once: true });
+            v.addEventListener('error', reject, { once: true });
+          });
+        });
+      } else if (job && !job.done) {
+        downloader.get(job.url, priority);
+      }
+      return loads[k];
+    }
+
+    // Nearest stages of the current sequence and variant first, then the other variants' same stage, then the same
+    // stage of the neighbouring sequences.
+    function preload(q) {
+      for (var d = 1; d < nStages; d++) {
+        [stage + d, stage - d].forEach(function (s) {
+          if (s >= 0 && s < nStages && hasStage(variant, s)) load(key(q, s), 2 + d / 100).catch(function () {});
+        });
+      }
+      variants.forEach(function (vr, vi) {
+        if (vi !== variant && hasStage(vi, stage)) load(key(q, stage, vi), 2.5).catch(function () {});
+      });
+      [q + 1, q - 1].forEach(function (n) {
+        if (n >= 0 && n < sequences.length) load(key(n, stage), 3).catch(function () {});
+      });
+    }
+
+    function reveal(v) {
+      var old = active;
+      active = v;
+      play(v);
+      v.classList.add('is-visible');
+      if (old && old !== v) {
+        old.classList.remove('is-visible');
+        old.pause();
+      }
+      loading.style.display = 'none';
+    }
+
+    function show(q, s, priority) {
+      var sameSeq = active && active.dataset.seq === sequences[q];
+      var seqChanged = q !== seq || variant !== shownVariant;
+      shownVariant = variant;
+      seq = q;
+      stage = s;
+      var k = key(q, s);
+      targetKey = k;
+      buttons.forEach(function (b, i) {
+        b.classList.toggle('active', i === s);
+        b.disabled = !hasStage(variant, i);
+      });
+      variantButtons.forEach(function (b, vi) { b.classList.toggle('active', vi === variant); });
+      prev.style.display = q > 0 ? '' : 'none';
+      next.style.display = q < sequences.length - 1 ? '' : 'none';
+      dots(q);
+      if (!ready[k]) {
+        loading.textContent = 'Loading video\u2026';
+        loading.style.display = '';
+      }
+
+      load(k, priority).then(function (v) {
+        if (targetKey !== k || v === active) return;
+        v.addEventListener('seeked', function () {
+          if (targetKey === k) reveal(v);
+        }, { once: true });
+        v.currentTime = sameSeq ? active.currentTime : 0;
+      }).catch(function () {
+        if (targetKey === k) loading.textContent = 'Video failed to load.';
+      });
+      if (seqChanged || !active) preload(q);
+    }
+
+    show(0, stage, 1);
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden && active) play(active);
+    });
+  }
+
+  document.querySelectorAll('.j3pa-stage-player').forEach(initPlayer);
+})();
+</script>
