@@ -1,18 +1,11 @@
 <!-- Styles and script for the .j3pa-pca-viewer divs in j3pa.md; include after stage-video.html, whose buttons and download queue it reuses. -->
 
 <style>
-.j3pa-pca-viewer {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  margin: 1em 0;
-  background: #fff;
-  border: 1px solid #e5e3de;
-  border-radius: var(--radius);
-  overflow: hidden;
-  touch-action: none;
-}
+.j3pa-pca-viewer { border: 1px solid #e5e3de; }
+.j3pa-pca-viewer .j3pa-media { touch-action: none; }
 .j3pa-pca-viewer canvas {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -20,25 +13,20 @@
 }
 .j3pa-pca-viewer canvas:active { cursor: grabbing; }
 .j3pa-pca-size {
-  position: absolute;
-  left: 0.6em;
-  bottom: 0.5em;
-  z-index: 2;
   display: flex;
   align-items: center;
   gap: 0.5em;
   color: #6B7280;
   font-size: 0.8rem;
+  white-space: nowrap;
 }
 .j3pa-pca-size input {
   -webkit-appearance: none;
   appearance: none;
   width: 10em;
-  height: 12px;
+  height: 24px;
   margin: 0;
   padding: 0;
-  position: relative;
-  top: 2px;
   background: transparent;
   border: none;
   box-shadow: none;
@@ -71,19 +59,19 @@
   border-radius: 50%;
   background: #000;
 }
-.j3pa-pca-reset {
-  position: absolute;
-  right: 0.6em;
-  bottom: 0.6em;
-  z-index: 2;
+.j3pa-pca-expand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
-.j3pa-pca-modes {
-  position: absolute;
-  top: 0.6em;
-  left: 0.6em;
-  z-index: 2;
-  display: flex;
-  gap: 0.4em;
+.j3pa-pca-expand svg {
+  width: 1.2em;
+  height: 1.2em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .j3pa-pca-query {
   position: absolute;
@@ -107,6 +95,33 @@
   transform: rotate(45deg);
 }
 .j3pa-pca-query::after { transform: rotate(-45deg); }
+
+/* Enlarged: the viewer covers the whole window (and goes fullscreen where the browser allows it), with the 3D view
+   taking all the room the button bars leave. `html` outranks the site's `.prose > .prose__wide` sizing. */
+html .j3pa-pca-viewer.is-expanded {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  width: auto;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+.j3pa-pca-viewer.is-expanded .j3pa-media {
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+html.j3pa-no-scroll,
+html.j3pa-no-scroll body { overflow: hidden; }
+
+@container (max-width: 600px) {
+  .j3pa-pca-viewer .j3pa-bar { padding: 0.4em; }
+  .j3pa-pca-size input { width: 6.5em; }
+}
 </style>
 
 <script type="module">
@@ -281,9 +296,16 @@ function initViewer(root) {
   let current = null;
   const loads = {};
 
+  const layout = window.j3paLayout(root);
+  const media = layout.media;
+  const modes = layout.group('top');
+  const bar = layout.group('top', true);
+  const sizeControl = layout.group('bottom');
+  const actions = layout.group('bottom', true);
+
   const renderer = new THREE.WebGLRenderer({ antialias: false });
   renderer.setPixelRatio(window.devicePixelRatio);
-  root.appendChild(renderer.domElement);
+  media.appendChild(renderer.domElement);
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0xffffff);
   const camera = new THREE.PerspectiveCamera(DEFAULT_VIEW.fov, 16 / 9, 0.1, 2000);
@@ -300,7 +322,7 @@ function initViewer(root) {
   const marker = document.createElement('div');
   marker.className = 'j3pa-pca-query';
   marker.style.display = 'none';
-  root.appendChild(marker);
+  media.appendChild(marker);
   const projected = new THREE.Vector3();
 
   function placeMarker() {
@@ -313,8 +335,8 @@ function initViewer(root) {
     projected.set(data.xyz[3 * q], data.xyz[3 * q + 1], data.xyz[3 * q + 2]).project(camera);
     const visible = projected.z < 1 && Math.abs(projected.x) <= 1 && Math.abs(projected.y) <= 1;
     marker.style.display = visible ? '' : 'none';
-    marker.style.left = `${(projected.x + 1) / 2 * root.clientWidth}px`;
-    marker.style.top = `${(1 - projected.y) / 2 * root.clientHeight}px`;
+    marker.style.left = `${(projected.x + 1) / 2 * media.clientWidth}px`;
+    marker.style.top = `${(1 - projected.y) / 2 * media.clientHeight}px`;
   }
 
   const render = () => {
@@ -331,20 +353,21 @@ function initViewer(root) {
   }
 
   new ResizeObserver(() => {
-    const w = root.clientWidth, h = root.clientHeight;
+    const w = media.clientWidth, h = media.clientHeight;
+    if (!w || !h) return;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     render();
-  }).observe(root);
+  }).observe(media);
 
   const loading = document.createElement('div');
   loading.className = 'j3pa-stage-loading';
-  root.appendChild(loading);
+  media.appendChild(loading);
 
-  const sizeControl = document.createElement('label');
-  sizeControl.className = 'j3pa-pca-size';
-  sizeControl.textContent = 'Point size';
+  const sizeLabel = document.createElement('label');
+  sizeLabel.className = 'j3pa-pca-size';
+  sizeLabel.textContent = 'Point size';
   const slider = document.createElement('input');
   slider.type = 'range';
   slider.min = POINT_SIZE.min;
@@ -355,11 +378,9 @@ function initViewer(root) {
     material.size = parseFloat(slider.value);
     render();
   });
-  sizeControl.appendChild(slider);
-  root.appendChild(sizeControl);
+  sizeLabel.appendChild(slider);
+  sizeControl.appendChild(sizeLabel);
 
-  const modes = document.createElement('div');
-  modes.className = 'j3pa-pca-modes';
   const modeButtons = {};
   [['cos', 'Cosine similarity'], ['pca', 'PCA']].forEach(([m, label]) => {
     const b = document.createElement('button');
@@ -373,7 +394,6 @@ function initViewer(root) {
     modes.appendChild(b);
     modeButtons[m] = b;
   });
-  root.appendChild(modes);
 
   function setQuery(data, query) {
     cosineColours(data, query, stagePcs(data, COS_STAGE));
@@ -422,8 +442,6 @@ function initViewer(root) {
     render();
   });
 
-  const bar = document.createElement('div');
-  bar.className = 'j3pa-stage-buttons';
   const buttons = [];
   for (let s = 0; s < nStages; s++) {
     const b = document.createElement('button');
@@ -434,7 +452,6 @@ function initViewer(root) {
     bar.appendChild(b);
     buttons.push(b);
   }
-  root.appendChild(bar);
 
   function arrow(cls, label, text, delta) {
     const a = document.createElement('button');
@@ -443,23 +460,69 @@ function initViewer(root) {
     a.setAttribute('aria-label', label);
     a.textContent = text;
     a.addEventListener('click', () => show(frame + delta, stage, downloader.urgent()));
-    root.appendChild(a);
+    media.appendChild(a);
     return a;
   }
   const prev = arrow('prev', 'Previous frame', '\u2039', -1);
   const next = arrow('next', 'Next frame', '\u203A', 1);
-  const dots = window.j3paDots(root, frames.length, 'Frame', f => show(f, stage, downloader.urgent()));
+  const dots = window.j3paDots(media, frames.length, 'Frame', f => show(f, stage, downloader.urgent()));
 
   const reset = document.createElement('button');
   reset.type = 'button';
-  reset.className = 'j3pa-stage-btn j3pa-pca-reset';
+  reset.className = 'j3pa-stage-btn';
   reset.textContent = 'Reset view';
   reset.addEventListener('click', () => {
     slider.value = POINT_SIZE.initial;
     material.size = POINT_SIZE.initial;
     resetView();
   });
-  root.appendChild(reset);
+  actions.appendChild(reset);
+
+  // Enlarge: fill the window, and also go fullscreen where the browser supports it for elements (not iPhone Safari,
+  // where the CSS alone covers the page). The page column is a size container, which would confine position: fixed
+  // to the column, so the viewer moves to <body> while enlarged and a same-height placeholder keeps its place.
+  const placeholder = document.createElement('div');
+  let scrollY = 0;
+  const ICON_EXPAND = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>';
+  const ICON_SHRINK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>';
+  const expand = document.createElement('button');
+  expand.type = 'button';
+  expand.className = 'j3pa-stage-btn j3pa-pca-expand';
+  actions.appendChild(expand);
+  let expanded = false;
+
+  function setExpanded(on) {
+    const wasExpanded = expanded;
+    if (on && !expanded) {
+      scrollY = window.scrollY;
+      placeholder.style.height = `${root.offsetHeight}px`;
+      placeholder.style.margin = getComputedStyle(root).margin;
+      root.replaceWith(placeholder);
+      document.body.appendChild(root);
+    } else if (!on && expanded) {
+      placeholder.replaceWith(root);
+    }
+    expanded = on;
+    root.classList.toggle('is-expanded', on);
+    document.documentElement.classList.toggle('j3pa-no-scroll', on);
+    if (!on && wasExpanded) window.scrollTo(window.scrollX, scrollY);
+    expand.innerHTML = on ? ICON_SHRINK : ICON_EXPAND;
+    expand.setAttribute('aria-label', on ? 'Exit full screen' : 'Full screen');
+    expand.title = on ? 'Exit full screen' : 'Full screen';
+    if (on && root.requestFullscreen && !document.fullscreenElement) {
+      root.requestFullscreen({ navigationUI: 'hide' }).catch(() => {});
+    } else if (!on && document.fullscreenElement === root) {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+  setExpanded(false);
+  expand.addEventListener('click', () => setExpanded(!expanded));
+  document.addEventListener('fullscreenchange', () => {
+    if (expanded && !document.fullscreenElement) setExpanded(false);
+  });
+  document.addEventListener('keydown', e => {
+    if (expanded && e.key === 'Escape') setExpanded(false);
+  });
 
   // Parsed lazily: positions once per frame, colours once per frame and stage.
   function load(f, priority) {

@@ -24,7 +24,7 @@ topics: # At least one slug from data/research_topics.yml. A paper can have mult
 <div style="text-align: center; margin-bottom: 1em;">
 <h1>TL;DR</h1>
 <p style="font-weight: 500; width: min(90%, 760px); margin: 0 auto;">
-J3PA learns robust and descriptive representations from only raw unlabeled LiDAR point clouds. Trained at scale J3PA-1B outperforms state-of-the-art self-supervised methods and a fully supervised PTv3 under linear probing. We distill J3PA-1B into Large (135M) and Small (42M) models that trade accuracy for speed by changing the voxel size.
+J3PA learns robust and descriptive representations from only raw unlabeled LiDAR point clouds. Trained at scale, J3PA-1B outperforms state-of-the-art self-supervised methods and a fully supervised PTv3 under linear probing. We distill J3PA-1B into Large (135M) and Small (42M) models that trade accuracy for speed by changing the voxel size.
 </p>
 </div>
 

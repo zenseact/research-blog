@@ -1,14 +1,25 @@
 <!-- Styles and script for the .j3pa-stage-player divs in j3pa.md; include after the last player. -->
 
 <style>
-.j3pa-stage-player {
+/* Shared by stage-video.html and pca-viewer.html. The player is a size container: when wide, the button bars float
+   over the media; when narrow (phones), they become rows above and below it so buttons never overlap the content or
+   each other. */
+.j3pa-stage-player,
+.j3pa-pca-viewer {
+  container-type: inline-size;
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  aspect-ratio: 16 / 9;
   margin: 1em 0;
   background: #fff;
   border-radius: var(--radius);
   overflow: hidden;
+}
+.j3pa-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
 }
 .j3pa-stage-video {
   position: absolute;
@@ -26,19 +37,41 @@
   transform: translate(-50%, -50%);
   z-index: 2;
   padding: 0.3em 0.8em;
+  border: none;
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.85);
   color: #6B7280;
+  font: inherit;
   font-size: 0.8rem;
+  white-space: nowrap;
 }
-.j3pa-stage-buttons {
+.j3pa-stage-loading.is-action {
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+.j3pa-bar {
   position: absolute;
-  top: 0.6em;
-  right: 0.6em;
-  z-index: 2;
+  left: 0;
+  right: 0;
+  z-index: 3;
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 0.4em;
+  padding: 0.6em;
+  pointer-events: none;
 }
+.j3pa-bar.top { top: 0; }
+.j3pa-bar.bottom { bottom: 0; }
+.j3pa-bar:empty { display: none; }
+.j3pa-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  pointer-events: auto;
+}
+.j3pa-group.end { margin-left: auto; }
 .j3pa-stage-btn,
 .j3pa-stage-arrow {
   color: #fff;
@@ -46,10 +79,13 @@
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   cursor: pointer;
+  touch-action: manipulation;
 }
 .j3pa-stage-btn {
   padding: 0.4em 0.95em;
   font-size: 0.9rem;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 .j3pa-stage-btn:hover,
 .j3pa-stage-arrow:hover { background: rgba(0, 0, 0, 0.7); }
@@ -62,14 +98,6 @@
   cursor: default;
 }
 .j3pa-stage-btn:disabled:hover { background: rgba(0, 0, 0, 0.45); }
-.j3pa-stage-variants {
-  position: absolute;
-  top: 0.6em;
-  left: 0.6em;
-  z-index: 2;
-  display: flex;
-  gap: 0.4em;
-}
 .j3pa-stage-arrow {
   position: absolute;
   top: 50%;
@@ -96,6 +124,12 @@
   outline: none;
   box-shadow: none;
 }
+.j3pa-stage-btn:focus-visible,
+.j3pa-stage-arrow:focus-visible,
+.j3pa-stage-dot:focus-visible {
+  outline: 2px solid #E6007E;
+  outline-offset: 2px;
+}
 .j3pa-stage-dots {
   position: absolute;
   bottom: 0.6em;
@@ -115,15 +149,59 @@
   cursor: pointer;
 }
 .j3pa-stage-dot.active { background: #000; }
+
+@container (max-width: 600px) {
+  .j3pa-bar {
+    position: static;
+    gap: 0.3em;
+    padding: 0.4em 0;
+  }
+  .j3pa-group { gap: 0.3em; }
+  .j3pa-stage-btn {
+    min-height: 2.25rem;
+    padding: 0.3em 0.65em;
+    font-size: 0.8rem;
+  }
+  .j3pa-stage-arrow { font-size: 2.4rem; }
+  .j3pa-stage-dots { bottom: 0.4em; }
+  .j3pa-stage-dot {
+    width: 13px;
+    height: 13px;
+  }
+}
+@container (max-width: 340px) {
+  .j3pa-stage-btn {
+    padding: 0.3em 0.5em;
+    font-size: 0.72rem;
+  }
+}
 </style>
 
 <script>
 // Each video is downloaded whole into a blob so stage switches can seek instantly.
 // Downloads run one 4 MB range at a time, always for the highest-priority video, so a click preempts preloading.
 (function () {
-  function play(v) {
+  // onBlocked runs when the browser refuses to autoplay (e.g. iOS Low Power Mode) and needs a tap first.
+  function play(v, onBlocked) {
     var p = v.play();
-    if (p && p.catch) p.catch(function () {});
+    if (p && p.catch) {
+      p.catch(function (err) {
+        if (onBlocked && err && err.name === 'NotAllowedError') onBlocked(v);
+      });
+    }
+  }
+
+  // Calls cb once v has a decoded frame at its current position. iOS Safari only loads metadata for paused videos,
+  // so callers must play() the video first rather than wait for loadeddata.
+  function whenFrame(v, cb) {
+    var events = ['loadeddata', 'canplay', 'playing', 'seeked', 'timeupdate'];
+    function check() {
+      if (v.seeking || v.readyState < 2) return;
+      events.forEach(function (e) { v.removeEventListener(e, check); });
+      cb();
+    }
+    events.forEach(function (e) { v.addEventListener(e, check); });
+    check();
   }
 
   var downloader = (function () {
@@ -143,10 +221,16 @@
       });
       if (!job) return;
       busy = true;
-      fetch(job.url, { headers: { Range: 'bytes=' + job.offset + '-' + (job.offset + CHUNK - 1) }, cache: cacheMode })
+      var headers = job.whole ? {} : { Range: 'bytes=' + job.offset + '-' + (job.offset + CHUNK - 1) };
+      fetch(job.url, { headers: headers, cache: cacheMode })
         .then(function (r) {
-          if (r.status === 206) {
-            job.total = parseInt(r.headers.get('Content-Range').split('/')[1], 10);
+          var range = r.headers.get('Content-Range');
+          if (r.status === 206 && range) {
+            job.total = parseInt(range.split('/')[1], 10);
+          } else if (r.status === 206) {
+            // The total size is unreadable (header not exposed through the CDN redirect): fetch the whole file.
+            job.whole = true;
+            return null;
           } else if (r.ok) {
             job.parts = [];
             job.offset = 0;
@@ -157,6 +241,7 @@
           return r.arrayBuffer();
         })
         .then(function (buf) {
+          if (!buf) return;
           job.parts.push(buf);
           job.offset += buf.byteLength;
           if (job.total === null) job.total = job.offset;
@@ -226,6 +311,33 @@
     };
   };
 
+  // Splits a player into a top button bar, the media box and a bottom button bar; see the CSS above for how the bars
+  // float over the media on wide players and stack around it on narrow ones.
+  window.j3paLayout = function (root) {
+    function bar(cls) {
+      var b = document.createElement('div');
+      b.className = 'j3pa-bar ' + cls;
+      return b;
+    }
+    var top = bar('top');
+    var media = document.createElement('div');
+    media.className = 'j3pa-media';
+    var bottom = bar('bottom');
+    root.appendChild(top);
+    root.appendChild(media);
+    root.appendChild(bottom);
+    return {
+      media: media,
+      // Groups are laid out in creation order; `end` pushes a group (and those after it) to the right.
+      group: function (where, end) {
+        var g = document.createElement('div');
+        g.className = 'j3pa-group' + (end ? ' end' : '');
+        (where === 'bottom' ? bottom : top).appendChild(g);
+        return g;
+      }
+    };
+  };
+
   function initPlayer(player) {
     // data-variants: [{name, dir, stages?}], stages listing the indices that exist (default: all); else one data-dir.
     var variants = player.dataset.variants ? JSON.parse(player.dataset.variants) : [{ dir: player.dataset.dir }];
@@ -239,15 +351,32 @@
     var active = null;
     var loads = {};
     var jobsByKey = {};
-    var ready = {};
+    var videos = {};
+
+    var layout = window.j3paLayout(player);
+    var media = layout.media;
+    var variantGroup = variants.length > 1 ? layout.group('top') : null;
+    var stageGroup = layout.group('top', true);
 
     var loading = document.createElement('div');
     loading.className = 'j3pa-stage-loading';
     loading.textContent = 'Loading video\u2026';
-    player.appendChild(loading);
+    loading.addEventListener('click', function () {
+      if (!loading.classList.contains('is-action')) return;
+      loading.classList.remove('is-action');
+      loading.textContent = 'Loading video\u2026';
+      var v = videos[targetKey] || active;
+      if (v) play(v, blocked);
+    });
+    media.appendChild(loading);
 
-    var bar = document.createElement('div');
-    bar.className = 'j3pa-stage-buttons';
+    function blocked(v) {
+      if (v.dataset.key !== targetKey) return;
+      loading.textContent = '\u25B6 Tap to play';
+      loading.classList.add('is-action');
+      loading.style.display = '';
+    }
+
     var buttons = [];
     for (var s = 0; s < nStages; s++) {
       var b = document.createElement('button');
@@ -257,19 +386,16 @@
       b.addEventListener('click', (function (s) {
         return function () { show(seq, s, downloader.urgent()); };
       })(s));
-      bar.appendChild(b);
+      stageGroup.appendChild(b);
       buttons.push(b);
     }
-    player.appendChild(bar);
 
     function hasStage(vi, s) {
       return !variants[vi].stages || variants[vi].stages.indexOf(s) >= 0;
     }
 
     var variantButtons = [];
-    if (variants.length > 1) {
-      var variantBar = document.createElement('div');
-      variantBar.className = 'j3pa-stage-variants';
+    if (variantGroup) {
       variants.forEach(function (vr, vi) {
         var b = document.createElement('button');
         b.type = 'button';
@@ -284,10 +410,9 @@
           }
           show(seq, s, downloader.urgent());
         });
-        variantBar.appendChild(b);
+        variantGroup.appendChild(b);
         variantButtons.push(b);
       });
-      player.appendChild(variantBar);
     }
 
     function arrow(cls, label, text, delta) {
@@ -297,12 +422,12 @@
       a.setAttribute('aria-label', label);
       a.textContent = text;
       a.addEventListener('click', function () { show(seq + delta, stage, downloader.urgent()); });
-      player.appendChild(a);
+      media.appendChild(a);
       return a;
     }
     var prev = arrow('prev', 'Previous sequence', '\u2039', -1);
     var next = arrow('next', 'Next sequence', '\u203A', 1);
-    var dots = window.j3paDots(player, sequences.length, 'Sequence', function (q) {
+    var dots = window.j3paDots(media, sequences.length, 'Sequence', function (q) {
       show(q, stage, downloader.urgent());
     });
 
@@ -311,10 +436,13 @@
     }
 
     function setLoadingText(k, frac) {
-      if (targetKey !== k || ready[k]) return;
+      if (targetKey !== k || videos[k]) return;
       loading.textContent = 'Loading video\u2026 ' + Math.round(frac * 100) + '%';
     }
 
+    // Resolves with the video element as soon as its file is downloaded. Nothing waits for media events here: iOS
+    // Safari loads no media data (not even metadata) for a video until play() is called, so show() plays first and
+    // reveals the video once a frame is decoded.
     function load(k, priority) {
       var job = jobsByKey[k];
       if (!loads[k]) {
@@ -326,24 +454,36 @@
           v.dataset.key = k;
           v.dataset.seq = k.split('/').pop().split('_s')[0];
           v.muted = true;
+          v.defaultMuted = true;
           v.loop = true;
           v.playsInline = true;
           v.disablePictureInPicture = true;
+          v.setAttribute('muted', '');
           v.setAttribute('playsinline', '');
+          v.setAttribute('webkit-playsinline', '');
           v.setAttribute('disableremoteplayback', '');
           v.preload = 'auto';
-          v.src = URL.createObjectURL(new Blob([blob], { type: 'video/mp4' }));
           v.addEventListener('pause', function () {
-            if (v === active && !document.hidden) play(v);
+            if (v === active && !document.hidden) play(v, blocked);
           });
-          player.insertBefore(v, loading);
-          return new Promise(function (resolve, reject) {
-            v.addEventListener('loadeddata', function () {
-              ready[k] = true;
-              resolve(v);
-            }, { once: true });
-            v.addEventListener('error', reject, { once: true });
+          v.addEventListener('playing', function () {
+            if (v === active && v.dataset.key === targetKey) {
+              loading.classList.remove('is-action');
+              loading.style.display = 'none';
+            }
           });
+          v.addEventListener('error', function () {
+            v.dataset.failed = '1';
+            if (targetKey === k) {
+              loading.classList.remove('is-action');
+              loading.textContent = 'Video failed to load.';
+              loading.style.display = '';
+            }
+          });
+          v.src = URL.createObjectURL(new Blob([blob], { type: 'video/mp4' }));
+          media.insertBefore(v, loading);
+          videos[k] = v;
+          return v;
         });
       } else if (job && !job.done) {
         downloader.get(job.url, priority);
@@ -370,13 +510,13 @@
     function reveal(v) {
       var old = active;
       active = v;
-      play(v);
       v.classList.add('is-visible');
       if (old && old !== v) {
         old.classList.remove('is-visible');
         old.pause();
       }
-      loading.style.display = 'none';
+      if (!v.paused) loading.classList.remove('is-action');
+      if (!loading.classList.contains('is-action')) loading.style.display = 'none';
     }
 
     function show(q, s, priority) {
@@ -395,17 +535,33 @@
       prev.style.display = q > 0 ? '' : 'none';
       next.style.display = q < sequences.length - 1 ? '' : 'none';
       dots(q);
-      if (!ready[k]) {
+      loading.classList.remove('is-action');
+      if (!videos[k]) {
         loading.textContent = 'Loading video\u2026';
         loading.style.display = '';
+      } else if (videos[k] !== active) {
+        // Still inside the click, so browsers that require a gesture to start playback allow it.
+        play(videos[k], blocked);
       }
 
       load(k, priority).then(function (v) {
-        if (targetKey !== k || v === active) return;
-        v.addEventListener('seeked', function () {
-          if (targetKey === k) reveal(v);
-        }, { once: true });
-        v.currentTime = sameSeq ? active.currentTime : 0;
+        if (targetKey !== k || v === active || v.dataset.failed) return;
+        var t = sameSeq ? active.currentTime : 0;
+        play(v, blocked);
+        if (Math.abs(v.currentTime - t) > 0.05) v.currentTime = t;
+        whenFrame(v, function () {
+          if (targetKey === k) {
+            if (v !== active) reveal(v);
+          } else if (v !== active) {
+            v.pause();
+          }
+        });
+        // Fallback for browsers that hold playback without reporting it as blocked: a tap is always allowed to play.
+        setTimeout(function () {
+          if (targetKey === k && (v !== active || v.paused) && !v.dataset.failed && !loading.classList.contains('is-action')) {
+            blocked(v);
+          }
+        }, 6000);
       }).catch(function () {
         if (targetKey === k) loading.textContent = 'Video failed to load.';
       });
@@ -414,7 +570,7 @@
 
     show(0, stage, 1);
     document.addEventListener('visibilitychange', function () {
-      if (!document.hidden && active) play(active);
+      if (!document.hidden && active) play(active, blocked);
     });
   }
 
